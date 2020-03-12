@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\erika\\source\\repos\\Sunridge\\Sunridge\\Sunridge.csproj": {}
+    "C:\\Users\\erika\\source\\repos\\Sunridge\\SunRidge.Models\\SunRidge.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\erika\\source\\repos\\Sunridge\\Sunridge\\Sunridge.csproj": {
+    "C:\\Users\\erika\\source\\repos\\Sunridge\\SunRidge.Models\\SunRidge.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\erika\\source\\repos\\Sunridge\\Sunridge\\Sunridge.csproj",
-        "projectName": "Sunridge",
-        "projectPath": "C:\\Users\\erika\\source\\repos\\Sunridge\\Sunridge\\Sunridge.csproj",
+        "projectUniqueName": "C:\\Users\\erika\\source\\repos\\Sunridge\\SunRidge.Models\\SunRidge.Models.csproj",
+        "projectName": "SunRidge.Models",
+        "projectPath": "C:\\Users\\erika\\source\\repos\\Sunridge\\SunRidge.Models\\SunRidge.Models.csproj",
         "packagesPath": "C:\\Users\\erika\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\erika\\source\\repos\\Sunridge\\Sunridge\\obj\\",
+        "outputPath": "C:\\Users\\erika\\source\\repos\\Sunridge\\SunRidge.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\erika\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -37,28 +37,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "dependencies": {
-            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[3.1.1, )"
-            },
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[3.1.1, )"
-            },
-            "Microsoft.AspNetCore.Identity.UI": {
-              "target": "Package",
-              "version": "[3.1.1, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[3.1.1, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "target": "Package",
-              "version": "[3.1.1, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -70,9 +48,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
