@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\erika\\source\\repos\\Sunridge\\Sunridge\\Sunridge.csproj": {}
+    "C:\\Users\\plisk\\Source\\Repos\\Sunridge\\Sunridge\\Sunridge.csproj": {}
   },
   "projects": {
-    "C:\\Users\\erika\\source\\repos\\Sunridge\\Sunridge\\Sunridge.csproj": {
+    "C:\\Users\\plisk\\Source\\Repos\\Sunridge\\Sunridge\\Sunridge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\erika\\source\\repos\\Sunridge\\Sunridge\\Sunridge.csproj",
+        "projectUniqueName": "C:\\Users\\plisk\\Source\\Repos\\Sunridge\\Sunridge\\Sunridge.csproj",
         "projectName": "Sunridge",
-        "projectPath": "C:\\Users\\erika\\source\\repos\\Sunridge\\Sunridge\\Sunridge.csproj",
-        "packagesPath": "C:\\Users\\erika\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\erika\\source\\repos\\Sunridge\\Sunridge\\obj\\",
+        "projectPath": "C:\\Users\\plisk\\Source\\Repos\\Sunridge\\Sunridge\\Sunridge.csproj",
+        "packagesPath": "C:\\Users\\plisk\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\plisk\\Source\\Repos\\Sunridge\\Sunridge\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\erika\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\plisk\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -77,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
