@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lcooper2\\source\\repos\\Sunridge\\SunRidge.Utility\\Sunridge.Utility.csproj": {}
+    "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Utility\\Sunridge.Utility.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lcooper2\\source\\repos\\Sunridge\\SunRidge.Utility\\Sunridge.Utility.csproj": {
+    "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Utility\\Sunridge.Utility.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lcooper2\\source\\repos\\Sunridge\\SunRidge.Utility\\Sunridge.Utility.csproj",
+        "projectUniqueName": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Utility\\Sunridge.Utility.csproj",
         "projectName": "Sunridge.Utility",
-        "projectPath": "C:\\Users\\lcooper2\\source\\repos\\Sunridge\\SunRidge.Utility\\Sunridge.Utility.csproj",
-        "packagesPath": "C:\\Users\\lcooper2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lcooper2\\source\\repos\\Sunridge\\SunRidge.Utility\\obj\\",
+        "projectPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Utility\\Sunridge.Utility.csproj",
+        "packagesPath": "C:\\Users\\erika\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Utility\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\lcooper2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\erika\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

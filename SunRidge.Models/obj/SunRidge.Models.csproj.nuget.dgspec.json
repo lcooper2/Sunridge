@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lcooper2\\source\\repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj": {}
+    "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lcooper2\\source\\repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj": {
+    "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lcooper2\\source\\repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj",
+        "projectUniqueName": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj",
         "projectName": "Sunridge.Models",
-        "projectPath": "C:\\Users\\lcooper2\\source\\repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj",
-        "packagesPath": "C:\\Users\\lcooper2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lcooper2\\source\\repos\\Sunridge\\SunRidge.Models\\obj\\",
+        "projectPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj",
+        "packagesPath": "C:\\Users\\erika\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Models\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\lcooper2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\erika\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
