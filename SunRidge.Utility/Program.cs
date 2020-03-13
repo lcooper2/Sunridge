@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SunRidge.Utility
+namespace Sunridge.Utility
 {
     class Program
     {
