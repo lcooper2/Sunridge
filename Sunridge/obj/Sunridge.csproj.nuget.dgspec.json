@@ -1,23 +1,103 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\book9\\Source\\Repos\\Sunridge\\Sunridge\\Sunridge.csproj": {}
+    "C:\\Users\\erika\\Source\\Repos\\Sunridge\\Sunridge\\Sunridge.csproj": {}
   },
   "projects": {
-    "C:\\Users\\book9\\Source\\Repos\\Sunridge\\Sunridge\\Sunridge.csproj": {
+    "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.DataAccess\\Sunridge.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\book9\\Source\\Repos\\Sunridge\\Sunridge\\Sunridge.csproj",
-        "projectName": "Sunridge",
-        "projectPath": "C:\\Users\\book9\\Source\\Repos\\Sunridge\\Sunridge\\Sunridge.csproj",
-        "packagesPath": "C:\\Users\\book9\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\book9\\Source\\Repos\\Sunridge\\Sunridge\\obj\\",
+        "projectUniqueName": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.DataAccess\\Sunridge.DataAccess.csproj",
+        "projectName": "Sunridge.DataAccess",
+        "projectPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.DataAccess\\Sunridge.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\erika\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\book9\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\erika\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj": {
+                "projectPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj",
+        "projectName": "Sunridge.Models",
+        "projectPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Models\\Sunridge.Models.csproj",
+        "packagesPath": "C:\\Users\\erika\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\erika\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,21 +123,199 @@
           "dependencies": {
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.1, )"
+              "version": "[3.1.2, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.1, )"
+              "version": "[3.1.2, )"
             },
-            "Microsoft.AspNetCore.Identity.UI": {
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
-              "version": "[3.1.1, )"
+              "version": "[3.1.2, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.1.1, )"
+              "version": "[3.1.2, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Utility\\Sunridge.Utility.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Utility\\Sunridge.Utility.csproj",
+        "projectName": "Sunridge.Utility",
+        "projectPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Utility\\Sunridge.Utility.csproj",
+        "packagesPath": "C:\\Users\\erika\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\SunRidge.Utility\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\erika\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\erika\\Source\\Repos\\Sunridge\\Sunridge\\Sunridge.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\Sunridge\\Sunridge.csproj",
+        "projectName": "Sunridge",
+        "projectPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\Sunridge\\Sunridge.csproj",
+        "packagesPath": "C:\\Users\\erika\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\Sunridge\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\erika\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\erika\\Source\\Repos\\Sunridge\\Sunridge.DataAccess\\Sunridge.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\Sunridge.DataAccess\\Sunridge.DataAccess.csproj"
+              },
+              "C:\\Users\\erika\\Source\\Repos\\Sunridge\\Sunridge.Models\\Sunridge.Models.csproj": {
+                "projectPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\Sunridge.Models\\Sunridge.Models.csproj"
+              },
+              "C:\\Users\\erika\\Source\\Repos\\Sunridge\\Sunridge.Utility\\Sunridge.Utility.csproj": {
+                "projectPath": "C:\\Users\\erika\\Source\\Repos\\Sunridge\\Sunridge.Utility\\Sunridge.Utility.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.1, )"
             }
@@ -80,7 +338,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
