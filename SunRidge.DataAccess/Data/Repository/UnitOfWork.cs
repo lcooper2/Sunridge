@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Sunridge.DataAccess.Data.Repository
 {
-   public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         protected readonly ApplicationDbContext _db;
 
@@ -21,6 +21,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public IApplicationUserRepository ApplicationUser { get; private set; }
         public IBannerRepository Banner { get; private set; }
         public ILostAndFoundRepository LostAndFound { get; private set; }
+        public IAddressRepository Address { get; private set; }
 
 
         public void Dispose()
