@@ -8,6 +8,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
     {
         IApplicationUserRepository ApplicationUser { get; }
         IBannerRepository Banner { get; }
+        ILostAndFoundRepository LostAndFound { get; }
 
     }
 }
