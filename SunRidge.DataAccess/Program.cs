@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SunRidge.DataAccess
+namespace Sunridge.DataAccess
 {
     class Program
     {

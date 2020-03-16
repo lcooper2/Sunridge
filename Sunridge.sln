@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sunridge", "Sunridge\Sunridge.csproj", "{CF1FF797-5EAE-477A-98BF-4647A21A7888}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SunRidge.DataAccess", "SunRidge.DataAccess\SunRidge.DataAccess.csproj", "{84ED1170-CCFC-41C1-BBE0-C945F8A9CFB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sunridge.DataAccess", "SunRidge.DataAccess\Sunridge.DataAccess.csproj", "{84ED1170-CCFC-41C1-BBE0-C945F8A9CFB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SunRidge.Models", "SunRidge.Models\SunRidge.Models.csproj", "{51FE287F-155A-4F79-BF25-45576B349F18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sunridge.Models", "SunRidge.Models\Sunridge.Models.csproj", "{51FE287F-155A-4F79-BF25-45576B349F18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SunRidge.Utility", "SunRidge.Utility\SunRidge.Utility.csproj", "{A45331F9-C48B-481D-A337-ECEB88BC4BFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sunridge.Utility", "SunRidge.Utility\Sunridge.Utility.csproj", "{A45331F9-C48B-481D-A337-ECEB88BC4BFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
