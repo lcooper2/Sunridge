@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Sunridge.Models
@@ -63,6 +64,7 @@ namespace Sunridge.Models
         //public virtual ICollection<KeyHistory> KeyHistories { get; set; }
 
         // Calculated properties
+       // [NotMapped]
         [Display(Name = "Full Name")]
         public string FullName
         {
