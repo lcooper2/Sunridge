@@ -1,6 +1,5 @@
-﻿using Sunridge.DataAccess.Data.Repository.IRepository;
-using Microsoft.Ajax.Utilities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Sunridge.DataAccess.Data.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using System.Text;
 
 namespace Sunridge.DataAccess.Data.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
+   public class Repository<T> : IRepository<T> where T : class
     {
         protected readonly DbContext Context;
         internal DbSet<T> dbset;
@@ -19,28 +18,10 @@ namespace Sunridge.DataAccess.Data.Repository
             Context = context;
             this.dbset = context.Set<T>();
         }
+
         public void Add(T entity)
         {
             dbset.Add(entity);
-        }
-
-        public T GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null)
-        {
-            IQueryable<T> query = dbset;
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-            //included properties will be comma separated
-            if (includeProperties != null)
-            {
-                foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    query = query.Include(includeProperty);
-
-                }
-            }
-            return query.FirstOrDefault();
         }
 
         public T Get(int id)
@@ -48,41 +29,65 @@ namespace Sunridge.DataAccess.Data.Repository
             return dbset.Find(id);
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T,bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null)
         {
             IQueryable<T> query = dbset;
-            if (filter != null)
+
+            if(filter != null)
             {
                 query = query.Where(filter);
             }
-            //included properties will be comma separated
-            if (includeProperties != null)
-            {
-                foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    query = query.Include(includeProperty);
 
+            if(includeProperties != null)
+            {
+                foreach(var incluesProperty in includeProperties.Split(new char[] { ','}, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperties);
                 }
             }
-            if (orderBy != null)
+
+            if(orderBy != null)
             {
                 return orderBy(query).ToList();
             }
             return query.ToList();
         }
 
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperites = null)
+        {
+            IQueryable<T> query = dbset;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            // include properties will be comma separated
+            if (includeProperites != null)
+            {
+                foreach (var includeProperty in includeProperites.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+            // don't know why it is not working
+            return query.FirstOrDefault();
+        }
+
         public void Remove(int id)
         {
-            T entityToRemove = dbset.Find(id);
-            Remove(entityToRemove);
+            T enitityToRemove = dbset.Find(id);
+            Remove(enitityToRemove);
         }
+
         public void Remove(T entity)
         {
             dbset.Remove(entity);
         }
-        public void RemoveRange(IEnumerable<T> entity)
+        public void RemoveListOfObjects(IEnumerable<T> entity)
         {
             dbset.RemoveRange(entity);
         }
+
     }
 }

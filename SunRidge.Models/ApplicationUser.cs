@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Sunridge.Models
@@ -52,8 +53,14 @@ namespace Sunridge.Models
         public string LastModifiedBy { get; set; }
         public DateTime LastModifiedDate { get; set; }
 
-        //Navigation properties
+
+        //[Display(Name = "Address")]
+        //public int AddressId { get; set; }
+
+        //[ForeignKey("Address")]
         //public virtual Address Address { get; set; }
+
+        //Navigation properties
         //public virtual ICollection<OwnerLot> OwnerLots { get; set; }
 
         //public virtual ICollection<Transaction> Transactions { get; set; }
@@ -63,6 +70,8 @@ namespace Sunridge.Models
         //public virtual ICollection<KeyHistory> KeyHistories { get; set; }
 
         // Calculated properties
+
+        // [NotMapped]
         [Display(Name = "Full Name")]
         public string FullName
         {

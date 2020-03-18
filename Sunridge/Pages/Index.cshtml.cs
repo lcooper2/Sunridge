@@ -17,9 +17,9 @@ namespace Sunridge.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            return RedirectToPage("/Home/Index");
         }
     }
 }
