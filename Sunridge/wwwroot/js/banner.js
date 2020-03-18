@@ -13,7 +13,7 @@ function loadList() {
         },
         "columns": [
             { "data": "header", "width": "40%" },
-            { "data": "active", "width": "30%" },
+            { "data": "status", "width": "30%" },
             {
                 "data": "id",
                 "render": function (data) {

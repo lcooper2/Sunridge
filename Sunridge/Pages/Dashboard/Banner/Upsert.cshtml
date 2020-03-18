@@ -1,5 +1,6 @@
 ﻿@page
 @model Sunridge.Pages.Dashboard.Banner.UpsertModel
+@using Sunridge.Utility
 <form method="post" asp-action="Upsert">
 
     <div class="container">
@@ -57,14 +58,14 @@
 
                 <div class="form-group row">
                     <div class="col-3">
-                        <label asp-for="BannerObj.Active"></label>
+                        <label asp-for="BannerObj.Status"></label>
                     </div>
 
                     <div class="col-7">
-                        <input type="radio" class="form-control" asp-for="BannerObj.Active" value="true" /> ACTIVE
-                        <input type="radio" class="form-control" asp-for="BannerObj.Active" value="false" /> INACTIVE
+                        <input type="radio" class="form-control" asp-for="BannerObj.Status" value="@SD.StatusActive" /> @SD.StatusActive
+                        <input type="radio" class="form-control" asp-for="BannerObj.Status" value="@SD.StatusInactive" /> @SD.StatusInactive
                     </div>
-                    <span class="text-danger" asp-validation-for="BannerObj.Active"></span>
+                    <span class="text-danger" asp-validation-for="BannerObj.Status"></span>
 
                 </div>
 
