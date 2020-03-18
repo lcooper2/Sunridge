@@ -11,5 +11,6 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         ILostAndFoundRepository LostAndFound { get; }
         IAddressRepository Address { get; }
 
+        void Save();
     }
 }
