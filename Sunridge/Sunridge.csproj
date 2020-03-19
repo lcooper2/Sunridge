@@ -26,9 +26,4 @@
     <ProjectReference Include="..\Sunridge.Utility\Sunridge.Utility.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Pages\Dashboard\AdminDash\" />
-  </ItemGroup>
-
 </Project>
