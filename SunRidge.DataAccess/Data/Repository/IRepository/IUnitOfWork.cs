@@ -11,6 +11,8 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         ILostAndFoundRepository LostAndFound { get; }
         IAddressRepository Address { get; }
         IKeyRepository Key { get; }
+        IKeyHistoryRepository KeyHistory { get; }
+        ILotRepository Lot { get; }
 
         void Save();
 

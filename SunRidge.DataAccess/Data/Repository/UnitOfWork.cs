@@ -17,6 +17,8 @@ namespace Sunridge.DataAccess.Data.Repository
             Banner = new BannerRepository(_db);
             LostAndFound = new LostAndFoundRepository(_db);
             Key = new KeyRepository(_db);
+            KeyHistory = new KeyHistoryRepository(_db);
+            Lot = new LotRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -24,6 +26,8 @@ namespace Sunridge.DataAccess.Data.Repository
         public ILostAndFoundRepository LostAndFound { get; private set; }
         public IAddressRepository Address { get; private set; }
         public IKeyRepository Key { get; private set; }
+        public IKeyHistoryRepository KeyHistory { get; private set; }
+        public ILotRepository Lot { get; private set; }
 
         public void Dispose()
         {
