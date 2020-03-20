@@ -1,4 +1,5 @@
-﻿using Sunridge.DataAccess.Data.Repository.IRepository;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,14 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             _db = db;
         }
-
+        public IEnumerable<SelectListItem> GetLotListForDropDown()
+        {
+            return _db.Lot.Select(i => new SelectListItem()
+            {
+                Text = i.LotNumber,
+                Value = i.Id.ToString()
+            });
+        }
         public void Update(Lot lot)
         {
             var obJFromDb = _db.Lot.FirstOrDefault(s => s.Id == lot.Id);
