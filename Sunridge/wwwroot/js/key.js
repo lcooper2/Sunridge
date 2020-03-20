@@ -14,15 +14,15 @@ function loadList() {
         "columns": [
             { "data": "fullSerial", "width": "40%" },
             { "data": "year", "width": "20%" },
-            { "data": "serialNumber", "width": "40%" },
+            { "data": "serialNumber", "width": "30%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                        <a href= "/Pages/Dashboard/AdminDash/Key/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                        <a href= "/Dashboard/AdminDash/Key/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                             <i class="far fa edit"></i> Edit   
                                 </a>
-                        <a href= "/Pages/Dashboard/AdminDash/Key/history" class="btn btn-primary text-white" style="cursor:pointer; width:100px;">
+                        <a href= "/Dashboard/AdminDash/Key/History" class="btn btn-primary text-white" style="cursor:pointer; width:100px;">
                             <i class="fas fa-history"></i> History   
                                 </a>
                         <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/key/'+${data})>

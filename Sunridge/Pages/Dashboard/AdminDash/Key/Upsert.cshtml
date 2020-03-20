@@ -10,7 +10,7 @@
                 <input type="hidden" asp-for="KeyObj.Id" />
             }
             <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
-                <h2 class="text-primary">@(Model.KeyObj.Id != 0 ? "Update" : "Create")Serial</h2>
+                <h2 class="text-primary">@(Model.KeyObj.Id != 0 ? "Update" : "Create") Serial</h2>
             </div>
             <div class="col-8 pt-3">
                 <div class="form-group row">
@@ -41,7 +41,7 @@
                                 <button type="submit" class="btn btn-primary form-control">@(Model.KeyObj.Id != 0 ? "Update" : "Create")</button>
                             </div>
                             <div class="col-6">
-                                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+                                <a asp-page="/Dashboard/AdminDash/Key/Key" class="btn btn-success form-control">Back to List</a>
                             </div>
                         </div>
                     </div>
