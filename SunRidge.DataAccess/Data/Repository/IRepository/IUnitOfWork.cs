@@ -10,6 +10,11 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IBannerRepository Banner { get; }
         ILostAndFoundRepository LostAndFound { get; }
         IAddressRepository Address { get; }
+        IKeyRepository Key { get; }
+        IKeyHistoryRepository KeyHistory { get; }
+        ILotRepository Lot { get; }
+
+        void Save();
         IBoardRepository Board { get; }
 
         void Save();

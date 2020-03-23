@@ -1,0 +1,132 @@
+﻿@page
+@model Sunridge.Pages.Dashboard.AdminDash.Lots.UpsertModel
+<!--Lot/Upsert-->
+<form method="post" asp-action="Upsert">
+    <div class="container">
+        <div class="row px-2 mx-2 backgroundWhite border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.LotObj.Id != 0)
+            {
+                <input type="hidden" asp-for="LotObj.Id" />
+            }
+            <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
+                <h2 class="text-primary">@(Model.LotObj.Id != 0 ? "Update" : "Create") Serial</h2>
+            </div>
+            <div class="col-8 pt-3">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="LotObj.LotNumber"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="LotObj.LotNumber" />
+                        <span class="text-danger" asp-validation-for="LotObj.LotNumber"></span>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="LotObj.TaxId"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="LotObj.TaxId" />
+                        <span class="text-danger" asp-validation-for="LotObj.TaxId"></span>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="LotObj.IsArchive"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="LotObj.IsArchive" />
+                        <span class="text-danger" asp-validation-for="LotObj.IsArchive"></span>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="LotObj.LastModifiedBy"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="LotObj.LastModifiedBy" />
+                        <span class="text-danger" asp-validation-for="LotObj.LastModifiedBy"></span>
+
+                    </div>
+                </div>
+                <!--
+               // if (Model.AddressObj.Id != 0)
+                //{
+                    <input type="hidden" asp-for="AddressObj.Id" />
+                }
+                <div class="form-group row">
+
+                    <div class="col-3">
+                        <label asp-for="AddressObj.StreetAddress"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="AddressObj.StreetAddress" />
+                        <span class="text-danger" asp-validation-for="AddressObj.StreetAddress"></span>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="AddressObj.Apartment"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="AddressObj.Apartment" />
+                        <span class="text-danger" asp-validation-for="AddressObj.Apartment"></span>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="AddressObj.City"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="AddressObj.City" />
+                        <span class="text-danger" asp-validation-for="AddressObj.City"></span>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="AddressObj.State"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="AddressObj.State" />
+                        <span class="text-danger" asp-validation-for="AddressObj.State"></span>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="AddressObj.Zip"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="AddressObj.Zip" />
+                        <span class="text-danger" asp-validation-for="AddressObj.Zip"></span>
+
+                    </div>
+                </div>
+                -->
+                <div class="form-group row">
+                    <div class="col-9 offset-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary form-control">@(Model.LotObj.Id != 0 ? "Update" : "Create")</button>
+                            </div>
+                            <div class="col-6">
+                                <a asp-page="/Dashboard/AdminDash/Lots/Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

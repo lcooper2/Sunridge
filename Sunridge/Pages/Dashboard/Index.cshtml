@@ -4,5 +4,74 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Welcome To Your Dashboard</h1>
+<div class="container">
+    <div class="row">
+        <!--Owner Row-->
+        <a asp-page="/Dashboard/OwnerDash/Forms">
+            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white text-center">Your info</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-user"></i></p>
+
+                </div>
+            </div>
+        </a>
+        <a asp-page="/Dashboard/OwnerDash/Forms">
+            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white text-center">Forms</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-paperclip"></i></p>
+
+                </div>
+            </div>
+        </a>
+        <a asp-page="/Dashboard/OwnerDash/Forms">
+            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white text-center">Blog Post</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-thumbtack"></i></p>
+
+                </div>
+            </div>
+        </a>
+    </div>
+    <h2>Admin Tools</h2>
+    <div class="row pt-2">
+        <!--Admin Row-->
+        <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+            <div class="card-body">
+                <h5 class="card-title text-white text-center">Board Members</h5>
+                <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-users" style=""></i></p>
+
+            </div>
+        </div>
+        <a asp-page="/Dashboard/AdminDash/Key/Key">
+            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white text-center">Keys</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-key"></i></p>
+                </div>
+            </div>
+        </a>
+        <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+            <div class="card-body">
+                <h5 class="card-title text-white text-center">Resolve Forms</h5>
+                <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-clipboard-check"></i></p>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <!--Admin Row-->
+        <a asp-page="/Dashboard/AdminDash/Lots/Index">
+            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white text-center">Lots</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-tree"></i></p>
+
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 

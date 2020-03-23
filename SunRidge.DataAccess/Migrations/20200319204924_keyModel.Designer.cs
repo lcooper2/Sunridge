@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sunridge.DataAccess.Data;
 
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200319204924_keyModel")]
+    partial class keyModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,40 +305,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Key");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.KeyHistory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateIssued")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateReturned")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("KeyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LotId")
-                        .HasColumnType("int");
-
-                    b.Property<float>("PaidAmount")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("KeyId");
-
-                    b.HasIndex("LotId");
-
-                    b.ToTable("KeyHistory");
-                });
-
             modelBuilder.Entity("Sunridge.Models.LostAndFound", b =>
                 {
                     b.Property<int>("Id")
@@ -366,34 +334,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LostAndFound");
-                });
-
-            modelBuilder.Entity("Sunridge.Models.Lot", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsArchive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LotNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TaxId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Lot");
                 });
 
             modelBuilder.Entity("Sunridge.Models.ApplicationUser", b =>
@@ -485,21 +425,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Sunridge.Models.KeyHistory", b =>
-                {
-                    b.HasOne("Sunridge.Models.Key", "Key")
-                        .WithMany()
-                        .HasForeignKey("KeyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Sunridge.Models.Lot", "Lot")
-                        .WithMany()
-                        .HasForeignKey("LotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
