@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Sunridge</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -59,8 +60,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Blog/Index">Blog</a>
                         </li>
                         @*<li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-        </li>*@
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            </li>*@
                     </ul>
                 </div>
             </div>
@@ -74,13 +75,40 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - Sunridge - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-lg-4 col-xs-4 h-100 text-center text-lg-left my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item">
+                            <a href="mailto:Webmaster@sunridge.info" target="_top">Contact</a>
+                        </li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; Sunridge 2019. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-4 col-xs-4 h-100 text-center my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item">
+                            <a class="link" asp-area="" asp-controller="Home" asp-action="About">About this site</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-xs-4 h-100 text-center text-lg-right my-auto">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item mr-3">
+                            <a href="https://www.facebook.com/SunridgePropertyOwnersAssociation/" target="_blank">
+                                <i class="fab fa-facebook-square fa-2x"></i>
+                                <p>Visit / Like us on Facebook</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

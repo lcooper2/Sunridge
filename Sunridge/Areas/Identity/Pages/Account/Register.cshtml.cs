@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Sunridge.Models;
+using Sunridge.Utility;
 
 namespace Sunridge.Areas.Identity.Pages.Account
 {
@@ -78,7 +79,8 @@ namespace Sunridge.Areas.Identity.Pages.Account
             ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
             public DateTime? Birthday { get; set; }
 
-
+            [Display(Name = "User is an administrator")]
+            public bool IsAdmin { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -103,6 +105,21 @@ namespace Sunridge.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    //role creation
+                    if (!await _roleManager.RoleExistsAsync(SD.AdminRole))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.AdminRole));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.Owner))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Owner));
+                    }
+
+                    //add user to role
+                    if (Input.IsAdmin)
+                        await _userManager.AddToRoleAsync(user, SD.AdminRole);
+                    else
+                        await _userManager.AddToRoleAsync(user, SD.Owner);
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
