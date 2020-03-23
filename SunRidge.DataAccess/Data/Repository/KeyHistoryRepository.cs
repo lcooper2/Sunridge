@@ -24,10 +24,6 @@ namespace Sunridge.DataAccess.Data.Repository
             obJFromDb.DateIssued = keyHistory.DateIssued;
             obJFromDb.DateReturned = keyHistory.DateReturned;
             obJFromDb.PaidAmount = keyHistory.PaidAmount;
-            obJFromDb.KeyId = keyHistory.KeyId;
-            obJFromDb.Key = keyHistory.Key;
-            obJFromDb.LotId = keyHistory.LotId;
-            obJFromDb.Lot = keyHistory.Lot;
 
             _db.SaveChanges();
 

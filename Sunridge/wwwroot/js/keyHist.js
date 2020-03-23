@@ -7,25 +7,23 @@ $(document).ready(function () {
 function loadList() {
     dataTable = $('#DT_Load').DataTable({
         "ajax": {
-            "url": "/api/keyHist/",
+            "url": "/api/keyHistory/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "status", "width": "40%" },
+            { "data": "key.serialNumber", "width": "30%" },
+            { "data": "status", "width": "20%" },
             { "data": "dateIssued", "width": "20%" },
             { "data": "dateReturned", "width": "30%" },
             { "data": "paidAmount", "width": "30%" },
-            { "data": "key.serialNumber", "width": "30%" },
+            { "data": "lot.lotNumber", "width": "30%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
                         <a href= "/Dashboard/AdminDash/Key/History/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                             <i class="far fa edit"></i> Edit   
-                                </a>
-                        <a href= "/Dashboard/AdminDash/Key/History/History" class="btn btn-primary text-white" style="cursor:pointer; width:100px;">
-                            <i class="fas fa-history"></i> History   
                                 </a>
                         <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/key/'+${data})>
                             <i class="far fa-trash-alt"></i> Delete

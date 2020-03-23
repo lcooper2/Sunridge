@@ -1,4 +1,5 @@
-﻿using Sunridge.DataAccess.Data.Repository.IRepository;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,15 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             _db = db;
         }
+        public IEnumerable<SelectListItem> GetKeyListForDropDown()
+        {
+            return _db.Key.Select(i => new SelectListItem()
+            {
+                Text = i.FullSerial,
+                Value = i.Id.ToString()
+            });
+        }
 
- 
         public void Update(Key key)
         {
             var obJFromDb = _db.Key.FirstOrDefault(s => s.Id == key.Id);

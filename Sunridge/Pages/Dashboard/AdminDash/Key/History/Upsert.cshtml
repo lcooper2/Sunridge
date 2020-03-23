@@ -9,6 +9,7 @@
                 {
                     <input type="hidden" asp-for="KeyHistObj.KeyHistory.Id" />
                 }
+               
                 <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
                     <h2 class="text-primary">@(Model.KeyHistObj.KeyHistory.Id != 0 ? "Update" : "Create")Menu Item</h2>
                 </div>
@@ -40,6 +41,44 @@
                         <div class="col-9">
                             <input class="form-control" asp-for="KeyHistObj.KeyHistory.DateReturned" />
                             <span class="text-danger" asp-validation-for="KeyHistObj.KeyHistory.DateReturned"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="KeyHistObj.KeyHistory.PaidAmount"></label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" asp-for="KeyHistObj.KeyHistory.PaidAmount" />
+                            <span class="text-danger" asp-validation-for="KeyHistObj.KeyHistory.PaidAmount"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="KeyHistObj.KeyHistory.KeyId"></label>
+                        </div>
+                        <div class="col-9">
+                            @Html.DropDownListFor(m => m.KeyHistObj.KeyHistory.KeyId,
+                           Model.KeyHistObj.KeyList,
+                           "-Please select a Key",
+                           new { @class = "form=control" })
+
+
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="KeyHistObj.KeyHistory.LotId"></label>
+                        </div>
+                        <div class="col-9">
+                            @Html.DropDownListFor(m => m.KeyHistObj.KeyHistory.LotId,
+                           Model.KeyHistObj.LotList,
+                           "-Please select a Lot",
+                           new { @class = "form=control" })
+
+
 
                         </div>
                     </div>

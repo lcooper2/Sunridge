@@ -19,13 +19,14 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Key.History
             _unitOfWork = unitOfWork;
            
         }
-       [BindProperty]
+        [BindProperty]
         public KeyHistoryVM KeyHistObj { get; set; }
         public IActionResult OnGet(int? id)
         {
             KeyHistObj = new KeyHistoryVM
             {
                 LotList = _unitOfWork.Lot.GetLotListForDropDown(),
+                KeyList = _unitOfWork.Key.GetKeyListForDropDown(),
 
                 KeyHistory = new Models.KeyHistory()
             };
@@ -54,7 +55,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Key.History
                 _unitOfWork.KeyHistory.Update(KeyHistObj.KeyHistory);
             }
             _unitOfWork.Save();
-            return RedirectToPage("./Index");
+            return RedirectToPage("./History");
         }
     }
 }
