@@ -4,37 +4,49 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
+using Sunridge.Models.ViewModels;
+using Sunridge.Utility;
 
-
-namespace Sunridge.Pages.Dashboard.Banner
+namespace Sunridge.Pages.Dashboard.AdminDash.Board
 {
     public class UpsertModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public UpsertModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
+
+        public UpsertModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment, UserManager<IdentityUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;
+            _userManager = userManager;
         }
 
         [BindProperty]
-        public Models.Banner BannerObj { get; set; }
+        public BoardVM BoardObj { get; set; }
 
 
 
         public IActionResult OnGet(int? id)
         {
-            BannerObj = new Models.Banner();
+            BoardObj = new BoardVM
+            {
+                ApplicationUserList = _unitOfWork.ApplicationUser.GetUserListForDropDown(),
+
+                Board = new Models.Board()
+            };
+
+
 
             if (id != null)// allows edit to be used
             {
-                BannerObj = _unitOfWork.Banner.GetFirstOrDefault(s => s.Id == id);
-                if (BannerObj == null) // catches the exception if it can not find the banner object
+                BoardObj.Board = _unitOfWork.Board.GetFirstOrDefault(s => s.Id == id);
+                if (BoardObj == null) // catches the exception if it can not find the Board object
                 {
                     return NotFound();
                 }
@@ -42,7 +54,7 @@ namespace Sunridge.Pages.Dashboard.Banner
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             // Find the root path
             string webRootPath = _hostingEnvironment.WebRootPath;
@@ -54,13 +66,13 @@ namespace Sunridge.Pages.Dashboard.Banner
                 return Page();
             }
 
-            if (BannerObj.Id == 0) // checking to see if it is a new Banner
+            if (BoardObj.Board.Id == 0) // checking to see if it is a new Board
             {
                 // rename the file user submited
                 string fileName = Guid.NewGuid().ToString();
 
                 // upload to path
-                var uploads = Path.Combine(webRootPath, @"Images\BannerImages");
+                var uploads = Path.Combine(webRootPath, @"Images\BoardImages");
 
                 // preserve our extentions
                 var extension = Path.GetExtension(files[0].FileName);
@@ -71,18 +83,23 @@ namespace Sunridge.Pages.Dashboard.Banner
                     files[0].CopyTo(fileStream);
                 }
 
-                BannerObj.Image = @"Images\BannerImages\" + fileName + extension;
-                _unitOfWork.Banner.Add(BannerObj);
+                BoardObj.Board.Image = @"Images\BoardImages\" + fileName + extension;
+                _unitOfWork.Board.Add(BoardObj.Board);
+
+                await _userManager.AddToRoleAsync(BoardObj.Board.ApplicationUser, SD.AdminRole);
+
+
+
             }
-            else // if is not then it is an existing object that is being edit and updated
+            else // it is an existing object that is being edit and updated
             {
-                var objFromDb = _unitOfWork.Banner.Get(BannerObj.Id);
+                var objFromDb = _unitOfWork.Board.Get(BoardObj.Board.Id);
 
                 if (files.Count > 0)
                 {
                     string fileName = Guid.NewGuid().ToString();
 
-                    var uploads = Path.Combine(webRootPath, @"Images\BannerImages");
+                    var uploads = Path.Combine(webRootPath, @"Images\BoardImages");
 
                     var extension = Path.GetExtension(files[0].FileName);
 
@@ -98,15 +115,15 @@ namespace Sunridge.Pages.Dashboard.Banner
                         files[0].CopyTo(fileStream);
                     }
 
-                    BannerObj.Image = @"Images\BannerImages\" + fileName + extension;
+                    BoardObj.Board.Image = @"Images\BoardImages\" + fileName + extension;
 
                 }
                 else
                 {
-                    BannerObj.Image = objFromDb.Image;
+                    BoardObj.Board.Image = objFromDb.Image;
                 }
 
-                _unitOfWork.Banner.Update(BannerObj);
+                _unitOfWork.Board.Update(BoardObj.Board);
             }
 
             _unitOfWork.Save();

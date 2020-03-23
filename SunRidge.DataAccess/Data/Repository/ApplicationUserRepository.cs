@@ -1,4 +1,5 @@
-﻿using Sunridge.DataAccess.Data.Repository.IRepository;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,15 @@ namespace Sunridge.DataAccess.Data.Repository
         public ApplicationUserRepository(ApplicationDbContext db) :base(db)
         {
             _db = db;
+        }
+
+        public IEnumerable<SelectListItem> GetUserListForDropDown()
+        {
+            return _db.ApplicationUser.Select(i => new SelectListItem()
+            {
+                Text = i.FullName,
+                Value = i.Id.ToString(),
+            });
         }
 
         public void Update(ApplicationUser applicationUser)

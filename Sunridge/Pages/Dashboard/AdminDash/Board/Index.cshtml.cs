@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Sunridge.Pages.Dashboard.Banner
+namespace Sunridge.Pages.Dashboard.AdminDash.Board
 {
     public class IndexModel : PageModel
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sunridge.Models
 {
@@ -15,20 +16,15 @@ namespace Sunridge.Models
         public string Title { get; set; }
 
         [Required]
-        [Display(Name = "Name")]
-        public string Name { get; set; }
-
-        [Required]
-        [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
-
-        [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-
-        [Required]
         [Display(Name = "Image")]
         public string Image { get; set; }
+
+        // application user database conection
+        [Display(Name = "User")]
+        public int ApplicationUserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
     }
 }
