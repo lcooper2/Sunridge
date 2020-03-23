@@ -21,11 +21,14 @@ namespace Sunridge.DataAccess.Data.Repository
             var objFromDB = _db.Board.FirstOrDefault(s => s.Id == board.Id);
 
             objFromDB.Title = board.Title;
-            objFromDB.Name = board.Name;
-            objFromDB.Image = board.Image;
-            objFromDB.PhoneNumber = board.PhoneNumber;
-            objFromDB.Email = board.Email;
+            if (board.Image != null)
+            {
+                objFromDB.Image = board.Image;
+            }
+            objFromDB.ApplicationUserId = board.ApplicationUserId;
+
             _db.SaveChanges();
+           
         }
     }
 }
