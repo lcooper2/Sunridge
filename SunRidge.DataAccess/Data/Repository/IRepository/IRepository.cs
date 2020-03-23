@@ -6,9 +6,10 @@ using System.Text;
 
 namespace Sunridge.DataAccess.Data.Repository.IRepository
 {
-   public interface IRepository<T> where T : class
+    public interface IRepository<T> where T : class
     {
         // get by id
+        //get object by id
         T Get(int id);
 
         IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null,
@@ -19,13 +20,16 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
             Expression<Func<T, bool>> filter = null,
             string includeProperties = null);
 
+        //Add
         void Add(T entity);
 
+        //Remove(id)
         void Remove(int id);
 
+        //Remove(obj)
         void Remove(T entity);
 
-        public void RemoveListOfObjects(IEnumerable<T> entity);
+        public void RemoveRange(IEnumerable<T> entity);
 
     }
 }

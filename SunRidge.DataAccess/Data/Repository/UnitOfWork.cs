@@ -15,13 +15,14 @@ namespace Sunridge.DataAccess.Data.Repository
             ApplicationUser = new ApplicationUserRepository(_db);
             Banner = new BannerRepository(_db);
             LostAndFound = new LostAndFoundRepository(_db);
-
+            Board = new BoardRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
         public IBannerRepository Banner { get; private set; }
         public ILostAndFoundRepository LostAndFound { get; private set; }
         public IAddressRepository Address { get; private set; }
+        public IBoardRepository Board { get; private set; }
 
 
         public void Dispose()

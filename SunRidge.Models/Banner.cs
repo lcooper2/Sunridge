@@ -14,6 +14,8 @@ namespace Sunridge.Models
         public string Header { get; set; }
         public string Body { get; set; }
         public string Image { get; set; }
-        public bool Active { get; set; } // To make it so they can swap banner items
+        [Required]
+        [Display(Name = "Status")]
+        public string Status { get; set; } // To make it so they can swap banner items
     }
 }
