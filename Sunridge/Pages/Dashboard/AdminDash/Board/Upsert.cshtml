@@ -1,0 +1,106 @@
+﻿@page
+@model Sunridge.Pages.Dashboard.AdminDash.Board.UpsertModel
+@using Sunridge.Utility
+<form method="post" asp-action="Upsert">
+
+    <div class="container">
+        <div class="row px-2 mx-2 bg-white border ">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.BoardObj.Board.Id != 0)
+            {
+                <input type="hidden" asp-for="BoardObj.Board.Id" />
+            }
+
+            <div class="col-10 px-3" style="border-bottom: 2px solid; border-color: black">
+                <h2 class="text-primary">@(Model.BoardObj.Board.Id != 0 ? "Update" : "Create") Board Member </h2>
+            </div>
+
+            <div class="col-9 pt-3">
+
+                <div class="form-group rox">
+
+                    <div class="col-3">
+                        <label asp-for="BoardObj.Board.Title"></label>
+                    </div>
+
+                    <div class="col-7">
+                        <input class="form-control" asp-for="BoardObj.Board.Title" />
+                        <span class="text-danger" asp-validation-for="BoardObj.Board.Title"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group rox">
+                    <div class="col-3">
+                        <label asp-for="BoardObj.Board.ApplicationUserId"></label>
+                    </div>
+
+                    <div class="col-7">
+                        @Html.DropDownListFor(b => b.BoardObj.Board.ApplicationUserId,
+                       Model.BoardObj.ApplicationUserList,
+                       "-Please select an Owner",
+                       new { @class = "form=control" }
+                       )
+                        <span class="text-danger" asp-validation-for="BoardObj.Board.ApplicationUserId"></span>
+
+                    </div>
+
+
+                </div>
+
+                <div class="form-group row">
+
+                    <div class="col-3">
+                        <label asp-for="BoardObj.Board.Image"></label>
+                    </div>
+
+                    <div class="col-7">
+                        <input type="file" class="form-control" name="files" id="files" />
+                        <span class="text-danger" asp-validation-for="BoardObj.Board.Image"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+
+                    <div class="col-9 offset-3">
+
+                        <div class="row">
+
+                            <div class="col-6">
+                                @if (Model.BoardObj.Board.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                                }
+
+                            </div>
+
+                            <div class="col-6">
+                                <a asp-page="./Index" class="btn btn-success form-control">Back To List</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    @if (Model.BoardObj != null)
+                    {
+                        <div class="clo-4 p-4">
+                            <img src="\@Model.BoardObj.Board.Image" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
+
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+
+

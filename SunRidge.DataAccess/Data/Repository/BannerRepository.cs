@@ -23,7 +23,7 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDB.Header = banner.Header;
             objFromDB.Body = banner.Body;
             objFromDB.Image = banner.Image;
-            objFromDB.Active = banner.Active;
+            objFromDB.Status = banner.Status;
             _db.SaveChanges();
         }
     }
