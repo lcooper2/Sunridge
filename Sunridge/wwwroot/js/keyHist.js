@@ -7,12 +7,12 @@ $(document).ready(function () {
 function loadList() {
     dataTable = $('#DT_Load').DataTable({
         "ajax": {
-            "url": "/api/keyHistory/",
+            "url": "/api/keyhistory/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "key.serialNumber", "width": "30%" },
+            { "data": "key.serialnumber", "width": "30%" },
             { "data": "status", "width": "20%" },
             { "data": "dateIssued", "width": "20%" },
             { "data": "dateReturned", "width": "30%" },
@@ -25,7 +25,7 @@ function loadList() {
                         <a href= "/Dashboard/AdminDash/Key/History/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                             <i class="far fa edit"></i> Edit   
                                 </a>
-                        <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/key/'+${data})>
+                        <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/keyhistory/'+${data})>
                             <i class="far fa-trash-alt"></i> Delete
                         </a>
                             </div >`;
