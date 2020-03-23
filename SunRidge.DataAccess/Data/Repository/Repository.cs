@@ -25,8 +25,14 @@ namespace Sunridge.DataAccess.Data.Repository
 
         public T GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null)
         {
+            return dbset.Find(id);
+        }
+
+        public IEnumerable<T> GetAll(Expression<Func<T,bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null)
+        {
             IQueryable<T> query = dbset;
-            if (filter != null)
+
+            if(filter != null)
             {
                 query = query.Where(filter);
             }
@@ -35,16 +41,17 @@ namespace Sunridge.DataAccess.Data.Repository
             {
                 foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query = query.Include(includeProperty);
-
+                    query = query.Include(includeProperties);
                 }
             }
             return query.FirstOrDefault();
         }
 
-        public T Get(int id)
-        {
-            return dbset.Find(id);
+            if(orderBy != null)
+            {
+                return orderBy(query).ToList();
+            }
+            return query.ToList();
         }
 
         public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null)
