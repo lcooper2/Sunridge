@@ -40,13 +40,15 @@
     <h2>Admin Tools</h2>
     <div class="row pt-2">
         <!--Admin Row-->
-        <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-            <div class="card-body">
-                <h5 class="card-title text-white text-center">Board Members</h5>
-                <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-users" style=""></i></p>
+        <a asp-page="/Dashboard/AdminDash/Board/Index">
+            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white text-center">Board Members</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-users" style=""></i></p>
 
+                </div>
             </div>
-        </div>
+        </a>
         <a asp-page="/Dashboard/AdminDash/Key/Key">
             <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
                 <div class="card-body">
@@ -69,6 +71,15 @@
                 <div class="card-body">
                     <h5 class="card-title text-white text-center">Lots</h5>
                     <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-tree"></i></p>
+
+                </div>
+            </div>
+        </a>
+        <a asp-page="/Dashboard/AdminDash/Banner/Index">
+            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white text-center">Banner</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-users" style=""></i></p>
 
                 </div>
             </div>
