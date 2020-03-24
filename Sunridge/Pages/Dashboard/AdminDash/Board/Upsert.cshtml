@@ -1,6 +1,10 @@
 ﻿@page
 @model Sunridge.Pages.Dashboard.AdminDash.Board.UpsertModel
 @using Sunridge.Utility
+@{
+    ViewData["Title"] = "Board Members Upsert";
+    Layout = "_DashboardLayout";
+}
 <form method="post" asp-action="Upsert">
 
     <div class="container">
