@@ -1,5 +1,9 @@
 ﻿@page
 @model Sunridge.Pages.Dashboard.AdminDash.Lots.UpsertModel
+@{
+    ViewData["Title"] = "Lots Upsert";
+    Layout = "_DashboardLayout";
+}
 <!--Lot/Upsert-->
 <form method="post" asp-action="Upsert">
     <div class="container">
@@ -54,62 +58,62 @@
                     </div>
                 </div>
                 <!--
-               // if (Model.AddressObj.Id != 0)
-                //{
-                    <input type="hidden" asp-for="AddressObj.Id" />
-                }
-                <div class="form-group row">
+                // if (Model.AddressObj.Id != 0)
+                 //{
+                     <input type="hidden" asp-for="AddressObj.Id" />
+                 }
+                 <div class="form-group row">
 
-                    <div class="col-3">
-                        <label asp-for="AddressObj.StreetAddress"></label>
-                    </div>
-                    <div class="col-9">
-                        <input class="form-control" asp-for="AddressObj.StreetAddress" />
-                        <span class="text-danger" asp-validation-for="AddressObj.StreetAddress"></span>
+                     <div class="col-3">
+                         <label asp-for="AddressObj.StreetAddress"></label>
+                     </div>
+                     <div class="col-9">
+                         <input class="form-control" asp-for="AddressObj.StreetAddress" />
+                         <span class="text-danger" asp-validation-for="AddressObj.StreetAddress"></span>
 
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="AddressObj.Apartment"></label>
-                    </div>
-                    <div class="col-9">
-                        <input class="form-control" asp-for="AddressObj.Apartment" />
-                        <span class="text-danger" asp-validation-for="AddressObj.Apartment"></span>
+                     </div>
+                 </div>
+                 <div class="form-group row">
+                     <div class="col-3">
+                         <label asp-for="AddressObj.Apartment"></label>
+                     </div>
+                     <div class="col-9">
+                         <input class="form-control" asp-for="AddressObj.Apartment" />
+                         <span class="text-danger" asp-validation-for="AddressObj.Apartment"></span>
 
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="AddressObj.City"></label>
-                    </div>
-                    <div class="col-9">
-                        <input class="form-control" asp-for="AddressObj.City" />
-                        <span class="text-danger" asp-validation-for="AddressObj.City"></span>
+                     </div>
+                 </div>
+                 <div class="form-group row">
+                     <div class="col-3">
+                         <label asp-for="AddressObj.City"></label>
+                     </div>
+                     <div class="col-9">
+                         <input class="form-control" asp-for="AddressObj.City" />
+                         <span class="text-danger" asp-validation-for="AddressObj.City"></span>
 
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="AddressObj.State"></label>
-                    </div>
-                    <div class="col-9">
-                        <input class="form-control" asp-for="AddressObj.State" />
-                        <span class="text-danger" asp-validation-for="AddressObj.State"></span>
+                     </div>
+                 </div>
+                 <div class="form-group row">
+                     <div class="col-3">
+                         <label asp-for="AddressObj.State"></label>
+                     </div>
+                     <div class="col-9">
+                         <input class="form-control" asp-for="AddressObj.State" />
+                         <span class="text-danger" asp-validation-for="AddressObj.State"></span>
 
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="AddressObj.Zip"></label>
-                    </div>
-                    <div class="col-9">
-                        <input class="form-control" asp-for="AddressObj.Zip" />
-                        <span class="text-danger" asp-validation-for="AddressObj.Zip"></span>
+                     </div>
+                 </div>
+                 <div class="form-group row">
+                     <div class="col-3">
+                         <label asp-for="AddressObj.Zip"></label>
+                     </div>
+                     <div class="col-9">
+                         <input class="form-control" asp-for="AddressObj.Zip" />
+                         <span class="text-danger" asp-validation-for="AddressObj.Zip"></span>
 
-                    </div>
-                </div>
-                -->
+                     </div>
+                 </div>
+                 -->
                 <div class="form-group row">
                     <div class="col-9 offset-3">
                         <div class="row">

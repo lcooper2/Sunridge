@@ -2,6 +2,7 @@
 @model Sunridge.Pages.Dashboard.IndexModel
 @{
     ViewData["Title"] = "Index";
+    Layout = "_DashboardLayout";
 }
 
 <h1>Welcome To Your Dashboard</h1>
@@ -48,20 +49,20 @@
                 </div>
             </div>
         </a>
-            <a asp-page="/Dashboard/AdminDash/Key/Key">
-                <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                    <div class="card-body">
-                        <h5 class="card-title text-white text-center">Keys</h5>
-                        <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-key"></i></p>
-                    </div>
-                </div>
-            </a>
+        <a asp-page="/Dashboard/AdminDash/Key/Key">
             <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
                 <div class="card-body">
-                    <h5 class="card-title text-white text-center">Resolve Forms</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-clipboard-check"></i></p>
+                    <h5 class="card-title text-white text-center">Keys</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-key"></i></p>
                 </div>
             </div>
+        </a>
+        <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+            <div class="card-body">
+                <h5 class="card-title text-white text-center">Resolve Forms</h5>
+                <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-clipboard-check"></i></p>
+            </div>
+        </div>
     </div>
     <div class="row pt-2">
         <!--Admin Row-->
@@ -78,7 +79,8 @@
             <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
                 <div class="card-body">
                     <h5 class="card-title text-white text-center">Banner</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-images"></i></p>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-users" style=""></i></p>
+
                 </div>
             </div>
         </a>
