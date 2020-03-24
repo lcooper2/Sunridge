@@ -22,7 +22,7 @@ namespace Sunridge.DataAccess.Data.Repository
             return _db.ApplicationUser.Select(i => new SelectListItem()
             {
                 Text = i.FullName,
-                Value = i.Id.ToString(),
+                Value = i.Id,
             });
         }
 

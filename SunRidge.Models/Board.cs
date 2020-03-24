@@ -21,9 +21,9 @@ namespace Sunridge.Models
 
         // application user database conection
         [Display(Name = "User")]
-        public int ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
 
-        [ForeignKey("UserId")]
+        [ForeignKey("ApplicationUserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
     }

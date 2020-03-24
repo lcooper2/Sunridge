@@ -25,7 +25,7 @@ namespace Sunridge.DataAccess.Data.Repository
             {
                 objFromDB.Image = board.Image;
             }
-            objFromDB.ApplicationUserId = board.ApplicationUserId;
+            objFromDB.ApplicationUserId = board.ApplicationUser.Id;
 
             _db.SaveChanges();
            

@@ -13,7 +13,7 @@ function loadList() {
         },
         "columns": [
             { "data": "title", "width": "40%" },
-            { "data": "name", "width": "30%" },
+            { "data": "applicationUser.FullName", "width": "30%" },
             {
                 "data": "id",
                 "render": function (data) {

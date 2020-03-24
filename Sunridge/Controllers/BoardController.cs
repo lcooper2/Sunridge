@@ -34,7 +34,7 @@ namespace Sunridge.Controllers
 
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace Sunridge.Controllers
                     System.IO.File.Delete(imagePath);
                 }
 
-                await _userManager.RemoveFromRoleAsync(ObjFromDb.ApplicationUser, SD.AdminRole);
+                _userManager.RemoveFromRoleAsync(ObjFromDb.ApplicationUser, SD.AdminRole);
                 _unitOfWork.Board.Remove(ObjFromDb);
 
                 _unitOfWork.Save();

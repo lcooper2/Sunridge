@@ -41,8 +41,6 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Board
                 Board = new Models.Board()
             };
 
-
-
             if (id != null)// allows edit to be used
             {
                 BoardObj.Board = _unitOfWork.Board.GetFirstOrDefault(s => s.Id == id);
@@ -54,7 +52,8 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Board
             return Page();
         }
 
-        public async Task<IActionResult> OnPost()
+        //public async Task<IActionResult> OnPost()
+        public IActionResult OnPost()
         {
             // Find the root path
             string webRootPath = _hostingEnvironment.WebRootPath;
@@ -86,7 +85,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Board
                 BoardObj.Board.Image = @"Images\BoardImages\" + fileName + extension;
                 _unitOfWork.Board.Add(BoardObj.Board);
 
-                await _userManager.AddToRoleAsync(BoardObj.Board.ApplicationUser, SD.AdminRole);
+               // await _userManager.AddToRoleAsync(BoardObj.Board.ApplicationUser, SD.AdminRole);
 
 
 

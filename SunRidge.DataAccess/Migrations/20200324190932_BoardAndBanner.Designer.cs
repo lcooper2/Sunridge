@@ -10,8 +10,8 @@ using Sunridge.DataAccess.Data;
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200324001750_banner")]
-    partial class banner
+    [Migration("20200324190932_BoardAndBanner")]
+    partial class BoardAndBanner
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -293,8 +293,8 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -304,12 +304,9 @@ namespace Sunridge.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Board");
                 });
@@ -524,7 +521,7 @@ namespace Sunridge.DataAccess.Migrations
                 {
                     b.HasOne("Sunridge.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.KeyHistory", b =>
