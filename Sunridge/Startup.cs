@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sunridge.DataAccess.Data;
+using Sunridge.DataAccess.Data.Repository.IRepository;
+using Sunridge.DataAccess.Data.Repository;
 
 namespace Sunridge
 {
@@ -31,6 +33,7 @@ namespace Sunridge
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMvc(options => options.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
 
@@ -40,6 +43,8 @@ namespace Sunridge
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddRazorPages();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

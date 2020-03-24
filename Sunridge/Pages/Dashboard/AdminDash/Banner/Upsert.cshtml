@@ -1,7 +1,11 @@
 ﻿@page
 @model Sunridge.Pages.Dashboard.AdminDash.Banner.UpsertModel
 @using Sunridge.Utility
-<form method="post" asp-action="Upsert">
+@{
+    ViewData["Title"] = "Banner Upsert";
+    Layout = "_DashboardLayout";
+}
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
 
     <div class="container">
         <div class="row px-2 mx-2 bg-white border ">
@@ -39,7 +43,7 @@
 
                     <div class="col-7">
                         <textarea class="form-control" asp-for="BannerObj.Body" id="txtDesc" style="height:200px;"></textarea>
-                        <span class="text-danger" asp-validation-for="BannerObj.Body"></span>
+                  
                     </div>
                 </div>
 
