@@ -11,18 +11,18 @@ namespace Sunridge.Pages.Home
 {
     public class IndexModel : PageModel
     {
-        //private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        //public IndexModel(IUnitOfWork unitOfWork)
-        //{
-        //    _unitOfWork = unitOfWork;
-        //}
+        public IndexModel(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         [BindProperty]
         public List<Banner> BannerList { get; set; }
         public void OnGet()
         {
-            //BannerList = _unitOfWork.Banner.GetAll().ToList();
+            BannerList = _unitOfWork.Banner.GetAll().ToList();
         }
     }
 }
