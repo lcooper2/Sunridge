@@ -1,4 +1,5 @@
 ﻿using Sunridge.DataAccess.Data.Repository.IRepository;
+using Sunridge.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,9 @@ namespace Sunridge.DataAccess.Data.Repository
             ApplicationUser = new ApplicationUserRepository(_db);
             Banner = new BannerRepository(_db);
             LostAndFound = new LostAndFoundRepository(_db);
+            Key = new KeyRepository(_db);
+            KeyHistory = new KeyHistoryRepository(_db);
+            Lot = new LotRepository(_db);
             Board = new BoardRepository(_db);
         }
 
@@ -24,6 +28,9 @@ namespace Sunridge.DataAccess.Data.Repository
         public IAddressRepository Address { get; private set; }
         public IBoardRepository Board { get; private set; }
 
+        public IKeyRepository Key { get; private set; }
+        public IKeyHistoryRepository KeyHistory { get; private set; }
+        public ILotRepository Lot { get; private set; }
 
         public void Dispose()
         {
