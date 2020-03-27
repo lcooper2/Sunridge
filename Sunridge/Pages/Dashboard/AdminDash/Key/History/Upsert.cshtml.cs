@@ -55,7 +55,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Key.History
                 _unitOfWork.KeyHistory.Update(KeyHistObj.KeyHistory);
             }
             _unitOfWork.Save();
-            return RedirectToPage("./History");
+            return RedirectToPage("/History");
         }
     }
 }
