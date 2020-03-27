@@ -1,10 +1,10 @@
 ﻿@page
 @model Sunridge.Pages.Dashboard.AdminDash.Board.UpsertModel
-@using Sunridge.Utility
+@*@using Sunridge.Utility
 @{
     ViewData["Title"] = "Board Members Upsert";
     Layout = "_DashboardLayout";
-}
+}*@
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
 
     <div class="container">
@@ -67,7 +67,7 @@
 
                     <div class="col-7">
                         <input type="file" class="form-control" name="files" id="files" />
-                        <span class="text-danger" asp-validation-for="BoardObj.Image"></span>
+                        @*<span class="text-danger" asp-validation-for="BoardObj.Image"></span>*@
                     </div>
 
                 </div>
@@ -121,7 +121,7 @@
                             </div>
 
                             <div class="col-6">
-                                <a asp-page="./Index" class="btn btn-success form-control">Back To List</a>
+                                <a asp-page="./Index" class="btn btn-success form-control">BackToList</a>
                             </div>
                         </div>
 
@@ -138,7 +138,7 @@
             </div>
 
         </div>
-    </div>
+    
 
 </form>
 

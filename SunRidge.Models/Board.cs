@@ -33,7 +33,7 @@ namespace Sunridge.Models
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
         public string Email { get; set; }
 
-        [Required]
+        
         [Display(Name = "Image")]
         public string Image { get; set; }
 

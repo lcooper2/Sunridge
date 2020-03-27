@@ -48,6 +48,12 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Board
             string webRootPath = _hostingEnvironment.WebRootPath;
             // grab the file(s)
             var files = HttpContext.Request.Form.Files;
+            string image = BoardObj.Image;
+            string Fname = BoardObj.FirstName;
+            string Lname = BoardObj.LastName;
+            string Title = BoardObj.Title;
+            string email = BoardObj.Email;
+            string phone = BoardObj.Phone;
 
             if (!ModelState.IsValid)
             {

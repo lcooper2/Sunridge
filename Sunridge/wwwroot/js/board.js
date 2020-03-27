@@ -12,8 +12,8 @@ function loadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "title", "width": "40%" },
-            { "data": "FullName", "width": "30%" },
+            { "data": "title", "width": "35%" },
+            { "data": "fullName", "width": "35%" },
             {
                 "data": "id",
                 "render": function (data) {
