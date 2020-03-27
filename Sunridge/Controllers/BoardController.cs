@@ -18,18 +18,18 @@ namespace Sunridge.Controllers
     {
         public readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
-        private readonly UserManager<IdentityUser> _userManager;
+        //private readonly UserManager<IdentityUser> _userManager;
 
-        public BoardController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment, UserManager<IdentityUser> userManager)
+        public BoardController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
         {
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;
-            _userManager = userManager;
+            //_userManager = userManager;
         }
 
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.Board.GetAll(null, null, "ApplicationUser") });
+            return Json(new { data = _unitOfWork.Board.GetAll() });
         }
 
 
@@ -52,7 +52,7 @@ namespace Sunridge.Controllers
                     System.IO.File.Delete(imagePath);
                 }
 
-                _userManager.RemoveFromRoleAsync(ObjFromDb.ApplicationUser, SD.AdminRole);
+               // _userManager.RemoveFromRoleAsync(ObjFromDb.ApplicationUser, SD.AdminRole);
                 _unitOfWork.Board.Remove(ObjFromDb);
 
                 _unitOfWork.Save();

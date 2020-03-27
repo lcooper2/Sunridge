@@ -4,12 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
-using Sunridge.Models.ViewModels;
-using Sunridge.Utility;
+
 
 namespace Sunridge.Pages.Dashboard.AdminDash.Board
 {
@@ -17,33 +15,25 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Board
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
-        private readonly UserManager<IdentityUser> _userManager;
 
-
-        public UpsertModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment, UserManager<IdentityUser> userManager)
+        public UpsertModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
         {
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;
-            _userManager = userManager;
         }
 
         [BindProperty]
-        public BoardVM BoardObj { get; set; }
+        public Models.Board BoardObj { get; set; }
 
 
 
         public IActionResult OnGet(int? id)
         {
-            BoardObj = new BoardVM
-            {
-                ApplicationUserList = _unitOfWork.ApplicationUser.GetUserListForDropDown(),
-
-                Board = new Models.Board()
-            };
+            BoardObj = new Models.Board();
 
             if (id != null)// allows edit to be used
             {
-                BoardObj.Board = _unitOfWork.Board.GetFirstOrDefault(s => s.Id == id);
+                BoardObj = _unitOfWork.Board.GetFirstOrDefault(s => s.Id == id);
                 if (BoardObj == null) // catches the exception if it can not find the Board object
                 {
                     return NotFound();
@@ -52,7 +42,6 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Board
             return Page();
         }
 
-        //public async Task<IActionResult> OnPost()
         public IActionResult OnPost()
         {
             // Find the root path
@@ -64,8 +53,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Board
             {
                 return Page();
             }
-
-            if (BoardObj.Board.Id == 0) // checking to see if it is a new Board
+            if (BoardObj.Id == 0) // checking to see if it is a new Board member
             {
                 // rename the file user submited
                 string fileName = Guid.NewGuid().ToString();
@@ -82,17 +70,12 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Board
                     files[0].CopyTo(fileStream);
                 }
 
-                BoardObj.Board.Image = @"Images\BoardImages\" + fileName + extension;
-                _unitOfWork.Board.Add(BoardObj.Board);
-
-               // await _userManager.AddToRoleAsync(BoardObj.Board.ApplicationUser, SD.AdminRole);
-
-
-
+                BoardObj.Image = @"Images\BoardImages\" + fileName + extension;
+                _unitOfWork.Board.Add(BoardObj);
             }
-            else // it is an existing object that is being edit and updated
+            else // if is not then it is an existing object that is being edit and updated
             {
-                var objFromDb = _unitOfWork.Board.Get(BoardObj.Board.Id);
+                var objFromDb = _unitOfWork.Board.Get(BoardObj.Id);
 
                 if (files.Count > 0)
                 {
@@ -114,15 +97,15 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Board
                         files[0].CopyTo(fileStream);
                     }
 
-                    BoardObj.Board.Image = @"Images\BoardImages\" + fileName + extension;
+                    BoardObj.Image = @"Images\BoardImages\" + fileName + extension;
 
                 }
                 else
                 {
-                    BoardObj.Board.Image = objFromDb.Image;
+                    BoardObj.Image = objFromDb.Image;
                 }
 
-                _unitOfWork.Board.Update(BoardObj.Board);
+                _unitOfWork.Board.Update(BoardObj);
             }
 
             _unitOfWork.Save();
