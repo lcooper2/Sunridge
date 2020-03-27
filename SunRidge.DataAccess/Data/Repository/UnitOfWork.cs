@@ -20,6 +20,7 @@ namespace Sunridge.DataAccess.Data.Repository
             KeyHistory = new KeyHistoryRepository(_db);
             Lot = new LotRepository(_db);
             Board = new BoardRepository(_db);
+            InKindWorkHours = new InKindWorkHoursRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -31,6 +32,8 @@ namespace Sunridge.DataAccess.Data.Repository
         public IKeyRepository Key { get; private set; }
         public IKeyHistoryRepository KeyHistory { get; private set; }
         public ILotRepository Lot { get; private set; }
+
+        public IInKindWorkHoursRepository InKindWorkHours { get; private set; }
 
         public void Dispose()
         {
