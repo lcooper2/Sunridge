@@ -312,30 +312,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Board");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.InKindWorkHours", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FormResponseId")
-                        .HasColumnType("int");
-
-                    b.Property<double?>("Hours")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("InKindWorkHours");
-                });
-
             modelBuilder.Entity("Sunridge.Models.Key", b =>
                 {
                     b.Property<int>("Id")
