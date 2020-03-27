@@ -19,6 +19,5 @@ namespace Sunridge.DataAccess.Data
         public DbSet<KeyHistory> KeyHistory { get; set; }
         public DbSet<Lot> Lot { get; set; }
         public DbSet<Board> Board { get; set; }
-        public DbSet<InKindWorkHours> InKindWorkHours { get; set; }
     }
 }
