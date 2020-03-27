@@ -31,6 +31,11 @@ namespace Sunridge.DataAccess.Data.Repository
         public IKeyRepository Key { get; private set; }
         public IKeyHistoryRepository KeyHistory { get; private set; }
         public ILotRepository Lot { get; private set; }
+        public IThreadRepository Thread { get; private set; }
+        public ICommentRepository Comment { get; private set; }
+        public IBlogImageRepository BlogImage { get; private set; }
+        public ILikeRepository Like { get; private set; }
+        public IReplyRepository Reply { get; private set; }
 
         public void Dispose()
         {

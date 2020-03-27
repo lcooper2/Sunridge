@@ -19,5 +19,10 @@ namespace Sunridge.DataAccess.Data
         public DbSet<KeyHistory> KeyHistory { get; set; }
         public DbSet<Lot> Lot { get; set; }
         public DbSet<Board> Board { get; set; }
+        public DbSet<Thread> Thread { get; set; }
+        public DbSet<Comment> Comment { get; set; }
+        public DbSet<BlogImage> BlogImage { get; set; }
+        public DbSet<Like> Like { get; set; }
+        public DbSet<Reply> Reply { get; set; }
     }
 }
