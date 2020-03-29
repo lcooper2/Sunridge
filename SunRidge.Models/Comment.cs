@@ -17,7 +17,7 @@ namespace Sunridge.Models
         public virtual List<BlogImage> Images { get; set; } // Images uploaded with comment
         public virtual List<Like> Likes { get; set; } // List of like objects representing somebody liking the post
         public virtual List<Reply> Replies { get; set; } // List of replies to a comment
-        
+
 
         [ForeignKey("ApplicationUserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }

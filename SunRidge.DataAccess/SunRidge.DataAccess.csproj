@@ -8,12 +8,22 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200313005957_LoginRegister.cs" />
     <Compile Remove="Migrations\20200313005957_LoginRegister.Designer.cs" />
-    <Compile Remove="Migrations\20200327044252_BlogModels2.cs" />
-    <Compile Remove="Migrations\20200327044252_BlogModels2.Designer.cs" />
-    <Compile Remove="Migrations\20200327051007_Sync.cs" />
-    <Compile Remove="Migrations\20200327051007_Sync.Designer.cs" />
-    <Compile Remove="Migrations\20200327052334_BlogModels2.cs" />
-    <Compile Remove="Migrations\20200327052334_BlogModels2.Designer.cs" />
+    <Compile Remove="Migrations\20200327160006_BoardAndBanner.cs" />
+    <Compile Remove="Migrations\20200327160006_BoardAndBanner.Designer.cs" />
+    <Compile Remove="Migrations\20200327161353_BoardAndBanner.cs" />
+    <Compile Remove="Migrations\20200327161353_BoardAndBanner.Designer.cs" />
+    <Compile Remove="Migrations\20200327161633_BoardAndBanner.cs" />
+    <Compile Remove="Migrations\20200327161633_BoardAndBanner.Designer.cs" />
+    <Compile Remove="Migrations\20200327162507_BoardAndBanner.cs" />
+    <Compile Remove="Migrations\20200327162507_BoardAndBanner.Designer.cs" />
+    <Compile Remove="Migrations\20200327163213_BoardAndBanner.cs" />
+    <Compile Remove="Migrations\20200327163213_BoardAndBanner.Designer.cs" />
+    <Compile Remove="Migrations\20200327172226_BoardAndBanner.cs" />
+    <Compile Remove="Migrations\20200327172226_BoardAndBanner.Designer.cs" />
+    <Compile Remove="Migrations\20200327172405_BoardAndBanner.cs" />
+    <Compile Remove="Migrations\20200327172405_BoardAndBanner.Designer.cs" />
+    <Compile Remove="Migrations\20200327172650_Banner.cs" />
+    <Compile Remove="Migrations\20200327172650_Banner.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +40,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SunRidge.Models\Sunridge.Models.csproj" />
+    <ProjectReference Include="..\SunRidge.Utility\Sunridge.Utility.csproj" />
   </ItemGroup>
 
 </Project>

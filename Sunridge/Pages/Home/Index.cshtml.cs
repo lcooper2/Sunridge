@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
+using Sunridge.Utility;
 
 namespace Sunridge.Pages.Home
 {
@@ -22,7 +23,18 @@ namespace Sunridge.Pages.Home
         public List<Banner> BannerList { get; set; }
         public void OnGet()
         {
-            BannerList = _unitOfWork.Banner.GetAll().ToList();
+            BannerList = new List<Banner>();
+            List<Banner> FullList = _unitOfWork.Banner.GetAll().ToList();
+
+            foreach(Banner banner in FullList)
+            {
+                if(banner.Status == SD.StatusActive)
+                {
+                    BannerList.Add(banner);
+                }
+            }
+
+            
         }
     }
 }

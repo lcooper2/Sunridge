@@ -18,4 +18,3 @@ namespace Sunridge.Models
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }
-
