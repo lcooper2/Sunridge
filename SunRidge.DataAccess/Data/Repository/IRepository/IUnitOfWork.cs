@@ -15,6 +15,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         ILotRepository Lot { get; }
         IBoardRepository Board { get; }
         IInKindWorkHoursRepository InKindWorkHours { get; }
+       /// IFormResponseRepository FormResponse { get ;}
 
         void Save();
     }

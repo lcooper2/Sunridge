@@ -15,7 +15,7 @@ namespace Sunridge.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -312,6 +312,52 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Board");
                 });
 
+            modelBuilder.Entity("Sunridge.Models.FormResponse", b =>
+                {
+                    b.Property<int>("FormResponseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FormType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(3)")
+                        .HasMaxLength(3);
+
+                    b.Property<int?>("LotId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PrivacyLevel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ResolveDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResolveUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Resolved")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("SubmitDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Suggestion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("FormResponseId");
+
+                    b.HasIndex("LotId");
+
+                    b.ToTable("FormResponse");
+                });
+
             modelBuilder.Entity("Sunridge.Models.InKindWorkHours", b =>
                 {
                     b.Property<int>("Id")
@@ -332,6 +378,8 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FormResponseId");
 
                     b.ToTable("InKindWorkHours");
                 });
@@ -547,6 +595,22 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasOne("Sunridge.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.FormResponse", b =>
+                {
+                    b.HasOne("Sunridge.Models.Lot", "Lot")
+                        .WithMany()
+                        .HasForeignKey("LotId");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.InKindWorkHours", b =>
+                {
+                    b.HasOne("Sunridge.Models.FormResponse", null)
+                        .WithMany("InKindWorkHours")
+                        .HasForeignKey("FormResponseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Sunridge.Models.KeyHistory", b =>

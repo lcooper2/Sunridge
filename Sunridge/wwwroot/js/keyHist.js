@@ -17,7 +17,7 @@ function loadList() {
             { "data": "dateIssued", "width": "20%" },
             { "data": "dateReturned", "width": "30%" },
             { "data": "paidAmount", "width": "30%" },
-            { "data": "lot.lotNumber", "width": "30%" },
+            { "data": "lotId", "width": "30%" },
             {
                 "data": "id",
                 "render": function (data) {
