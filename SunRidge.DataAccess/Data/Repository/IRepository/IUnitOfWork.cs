@@ -18,6 +18,8 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         
         IFormResponseRepository FormResponse { get ;}
 
+        ILotHistoryRepository LotHistory { get; }
+
         void Save();
     }
 }
