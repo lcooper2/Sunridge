@@ -23,16 +23,18 @@ namespace Sunridge.Pages.Home
         public List<Banner> BannerList { get; set; }
         public void OnGet()
         {
-            BannerList = new List<Banner>();
-            List<Banner> FullList = _unitOfWork.Banner.GetAll().ToList();
 
-            foreach(Banner banner in FullList)
-            {
-                if(banner.Status == SD.StatusActive)
-                {
-                    BannerList.Add(banner);
-                }
-            }
+            BannerList = _unitOfWork.Banner.GetAll(c => c.Status == SD.StatusActive).ToList();
+            //BannerList = new List<Banner>();
+            //List<Banner> FullList = _unitOfWork.Banner.GetAll().ToList();
+
+            //foreach(Banner banner in FullList)
+            //{
+            //    if(banner.Status == SD.StatusActive)
+            //    {
+            //        BannerList.Add(banner);
+            //    }
+            //}
 
             
         }
