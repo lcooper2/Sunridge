@@ -2,7 +2,7 @@
 @model Sunridge.Pages.Home.IndexModel
 @{
     ViewData["Title"] = "Home";
-} 
+}
 @if (Model.BannerList.Count() > 0)
 {
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="7000">
@@ -47,6 +47,24 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
+    </div>
+}
+else
+{
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="7000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="masthead9 bg-primary" src="~/img/bg-masthead9.png" />
+                <header class="text-white text-center" id="bannerHeader">
+                    <div id="carouselTextBox" class="container w-4 p-4">
+                        <h1>Welcome to Sunridge!</h1>
+                        <p style="font-size: 18pt;">
+                            Located in Weber County, Utah, Sunridge is a home away from home for owners seeking the solitude and scenery of the Wasatch mountains. Tucked away behind Powder Mountain Ski Resort, Sunridge is just the place for those hoping to "get away from it all" and get close to nature!
+                        </p>
+                    </div>
+                </header>
+            </div>
+        </div>
     </div>
 }
 
