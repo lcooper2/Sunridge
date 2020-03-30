@@ -53,7 +53,6 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Banner
             {
                 return Page();
             }
-
             if (BannerObj.Id == 0) // checking to see if it is a new Banner
             {
                 // rename the file user submited

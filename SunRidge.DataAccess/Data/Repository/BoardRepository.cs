@@ -25,8 +25,11 @@ namespace Sunridge.DataAccess.Data.Repository
             {
                 objFromDB.Image = board.Image;
             }
-            objFromDB.ApplicationUserId = board.ApplicationUserId;
-
+            objFromDB.Phone = board.Phone;
+            objFromDB.Email = board.Email;
+            objFromDB.FirstName = board.FirstName;
+            objFromDB.LastName = board.LastName;
+            
             _db.SaveChanges();
            
         }
