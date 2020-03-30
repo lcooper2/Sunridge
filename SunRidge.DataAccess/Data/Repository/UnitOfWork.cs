@@ -21,7 +21,7 @@ namespace Sunridge.DataAccess.Data.Repository
             Lot = new LotRepository(_db);
             Board = new BoardRepository(_db);
             InKindWorkHours = new InKindWorkHoursRepository(_db);
-            //FormResponse = new FormResponseRepository(_db);
+            FormResponse = new FormResponseRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -35,7 +35,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public ILotRepository Lot { get; private set; }
 
         public IInKindWorkHoursRepository InKindWorkHours { get; private set; }
-       /// public IFormResponseRepository FormResponse {get; private set; }
+        public IFormResponseRepository FormResponse {get; private set; }
 
         public void Dispose()
         {

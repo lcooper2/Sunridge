@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Sunridge.Models
 {
     public class FormResponse
     {
-        public int FormResponseId { get; set; }
-        public int OwnerId { get; set; }
+        [Key]
+        public int Id { get; set; }
 
+        //was ownerID
+        public string ApplicationUserId { get; set; }
 
+        [NotMapped]
+        [ForeignKey("ApplicationUserId")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
         /*
          * SC: Suggestions and complaints
          * WIK: Work in kind
@@ -21,7 +27,7 @@ namespace Sunridge.Models
         [StringLength(3, MinimumLength = 1)]
         public string FormType { get; set; }
 
-        public int? LotId { get; set; } // work in kind
+        //public int? LotId { get; set; } // work in kind
 
         [Display(Name = "Listing Date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
