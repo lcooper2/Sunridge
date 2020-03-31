@@ -12,6 +12,7 @@ namespace Sunridge.Models
         public int Id { get; set; }
 
         //was ownerID
+        //public Owner Owner { get; set; }
         public string ApplicationUserId { get; set; }
 
         [NotMapped]
@@ -27,7 +28,7 @@ namespace Sunridge.Models
         [StringLength(3, MinimumLength = 1)]
         public string FormType { get; set; }
 
-        //public int? LotId { get; set; } // work in kind
+        public int? LotId { get; set; } // work in kind
 
         [Display(Name = "Listing Date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
@@ -54,9 +55,9 @@ namespace Sunridge.Models
 
 
         // Nav properties
-        //public Owner Owner { get; set; }
+       
         //public virtual ICollection<Comment> Comments { get; set; }
-        //public virtual ICollection<File> Files { get; set; }
+        public virtual ICollection<File> Files { get; set; }
         public virtual Lot Lot { get; set; }
         public virtual List<InKindWorkHours> InKindWorkHours { get; set; }
 

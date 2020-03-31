@@ -22,6 +22,10 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
 
         IFileRepository File { get; }
 
+        ICommentRepository Comment { get; }
+
+        IOwnerLotRepository OwnerLot { get; }
+
         void Save();
     }
 }
