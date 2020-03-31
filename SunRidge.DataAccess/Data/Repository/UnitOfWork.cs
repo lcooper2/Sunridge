@@ -23,6 +23,7 @@ namespace Sunridge.DataAccess.Data.Repository
             Board = new BoardRepository(_db);
             InKindWorkHours = new InKindWorkHoursRepository(_db);
             FormResponse = new FormResponseRepository(_db);
+            File = new FileRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -38,6 +39,7 @@ namespace Sunridge.DataAccess.Data.Repository
 
         public IInKindWorkHoursRepository InKindWorkHours { get; private set; }
         public IFormResponseRepository FormResponse {get; private set; }
+        public IFileRepository File { get; private set; }
 
         public void Dispose()
         {

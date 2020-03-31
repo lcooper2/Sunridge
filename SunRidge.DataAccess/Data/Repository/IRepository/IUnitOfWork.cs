@@ -20,6 +20,8 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
 
         ILotHistoryRepository LotHistory { get; }
 
+        IFileRepository File { get; }
+
         void Save();
     }
 }

@@ -22,6 +22,7 @@ namespace Sunridge.DataAccess.Data
         public DbSet<Board> Board { get; set; }
         public DbSet<InKindWorkHours> InKindWorkHours { get; set; }
         public DbSet<FormResponse> FormResponse { get; set; }
+        public DbSet<File> File { get; set; }
 
 
     }
