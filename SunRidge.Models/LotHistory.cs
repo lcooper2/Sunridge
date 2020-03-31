@@ -20,6 +20,7 @@ namespace Sunridge.Models
         public int LotId { get; set; }
         [ForeignKey("LotId")]
         public virtual Lot Lot { get; set; }
+
         //public virtual ICollection<File> Files { get; set; }
         //public ICollection<Comment> Comments { get; set; }
 
