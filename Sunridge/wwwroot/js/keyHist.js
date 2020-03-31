@@ -12,12 +12,12 @@ function loadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "key.serialnumber", "width": "30%" },
+            { "data": "keyId", "width": "30%" },
             { "data": "status", "width": "20%" },
             { "data": "dateIssued", "width": "20%" },
             { "data": "dateReturned", "width": "30%" },
             { "data": "paidAmount", "width": "30%" },
-            { "data": "lot.lotNumber", "width": "30%" },
+            { "data": "lotId", "width": "30%" },
             {
                 "data": "id",
                 "render": function (data) {

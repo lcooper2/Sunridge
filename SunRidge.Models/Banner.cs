@@ -17,5 +17,6 @@ namespace Sunridge.Models
         [Required]
         [Display(Name = "Status")]
         public string Status { get; set; } // To make it so they can swap banner items
+        
     }
 }
