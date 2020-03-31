@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Sunridge
+namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
 {
-    public class FormsModel : PageModel
+    public class IndexModel : PageModel
     {
         public void OnGet()
         {
