@@ -25,20 +25,14 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Lots
                 {
                     LotObj = _unitOfWork.Lot.GetFirstOrDefault(u => u.Id == id);
                     LotObj.LastModifiedDate = DateTime.Now;
+                    LotObj.Address = _unitOfWork.Address.GetFirstOrDefault(u => u.Id == id);
+                    LotObj.Address.LastModifiedDate = DateTime.Now;
                     if (LotObj == null)
-                    {
-                        return NotFound();
+                        {
+                            return NotFound();
+                        }
                     }
-                }
-                //AddressObj = new Models.Address();
-                //if (id != null)
-                //{
-                  //  AddressObj = _unitOfWork.Address.GetFirstOrDefault(u => u.Id == id);
-                    //if (AddressObj == null)
-                    //{
-                      //  return NotFound();
-                    //}
-                //}
+         
                  return Page();
             }
             public IActionResult OnPost()
