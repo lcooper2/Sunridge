@@ -29,6 +29,8 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IClassifiedListingRepository ClassifiedListing { get; }
         IClassifiedImageRepository ClassifiedImage { get; }
 
+        IClaimLossRepository ClaimLoss { get; }
+
         void Save();
     }
 }

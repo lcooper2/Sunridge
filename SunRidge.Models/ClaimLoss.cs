@@ -37,7 +37,5 @@ namespace Sunridge.Models
         public int LotId { get; set; }
         [ForeignKey("LotId")]
         public virtual Lot Lot { get; set; }
-
-
     }
 }

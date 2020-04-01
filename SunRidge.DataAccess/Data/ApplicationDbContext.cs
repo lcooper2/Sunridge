@@ -29,5 +29,7 @@ namespace Sunridge.DataAccess.Data
         public DbSet<ClassifiedCategory> ClassifiedCategory { get; set; }
         public DbSet<ClassifiedImage> ClassifiedImage { get; set; }
 
+        public DbSet<ClaimLoss> ClaimLoss { get; set; }
+
     }
 }

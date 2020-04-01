@@ -29,6 +29,7 @@ namespace Sunridge.DataAccess.Data.Repository
             ClassifiedCategory = new ClassifiedCategoryRepository(_db);
             ClassifiedListing = new ClassifiedListingRepository(_db);
             ClassifiedImage = new ClassifiedImageRepository(_db);
+            ClaimLoss = new ClaimLossRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -50,6 +51,8 @@ namespace Sunridge.DataAccess.Data.Repository
         public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
         public IClassifiedListingRepository ClassifiedListing { get; private set; }
         public IClassifiedImageRepository ClassifiedImage { get; private set; }
+
+        public IClaimLossRepository ClaimLoss { get; private set; }
 
 
         public void Dispose()
