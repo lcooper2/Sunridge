@@ -8,8 +8,12 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
 {
     public interface IRepository<T> where T : class
     {
-        //get object by id
+        //get object by int id
         T Get(int id);
+
+        //get object by string id
+        T Get(string id);
+
         // get all objects as Ienumerable
         IEnumerable<T> GetAll(
             Expression<Func<T, bool>> filter = null,

@@ -20,6 +20,11 @@ namespace Sunridge.DataAccess.Data.Repository
             KeyHistory = new KeyHistoryRepository(_db);
             Lot = new LotRepository(_db);
             Board = new BoardRepository(_db);
+            Thread = new ThreadRepository(_db);
+            Comment = new CommentRepository(_db);
+            BlogImage = new BlogImageRepository(_db);
+            Like = new LikeRepository(_db);
+            Reply = new ReplyRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
