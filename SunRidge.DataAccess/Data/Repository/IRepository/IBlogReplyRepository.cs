@@ -2,7 +2,7 @@
 
 namespace Sunridge.DataAccess.Data.Repository.IRepository
 {
-    public interface ICommentRepository : IRepository<Comment>
+    public interface IBlogReplyRepository : IRepository<BlogReply>
     {
 
     }

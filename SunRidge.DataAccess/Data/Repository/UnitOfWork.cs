@@ -20,11 +20,11 @@ namespace Sunridge.DataAccess.Data.Repository
             KeyHistory = new KeyHistoryRepository(_db);
             Lot = new LotRepository(_db);
             Board = new BoardRepository(_db);
-            Thread = new ThreadRepository(_db);
-            Comment = new CommentRepository(_db);
+            BlogThread = new BlogThreadRepository(_db);
+            BlogComment = new BlogCommentRepository(_db);
             BlogImage = new BlogImageRepository(_db);
-            Like = new LikeRepository(_db);
-            Reply = new ReplyRepository(_db);
+            BlogLike = new BlogLikeRepository(_db);
+            BlogReply = new BlogReplyRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -36,11 +36,11 @@ namespace Sunridge.DataAccess.Data.Repository
         public IKeyRepository Key { get; private set; }
         public IKeyHistoryRepository KeyHistory { get; private set; }
         public ILotRepository Lot { get; private set; }
-        public IThreadRepository Thread { get; private set; }
-        public ICommentRepository Comment { get; private set; }
+        public IBlogThreadRepository BlogThread { get; private set; }
+        public IBlogCommentRepository BlogComment { get; private set; }
         public IBlogImageRepository BlogImage { get; private set; }
-        public ILikeRepository Like { get; private set; }
-        public IReplyRepository Reply { get; private set; }
+        public IBlogLikeRepository BlogLike { get; private set; }
+        public IBlogReplyRepository BlogReply { get; private set; }
 
         public void Dispose()
         {

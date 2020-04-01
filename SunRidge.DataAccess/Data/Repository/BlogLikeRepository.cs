@@ -3,10 +3,10 @@ using Sunridge.Models;
 
 namespace Sunridge.DataAccess.Data.Repository
 {
-    public class ReplyRepository : Repository<Reply>, IReplyRepository
+    public class BlogLikeRepository : Repository<BlogLike>, IBlogLikeRepository
     {
         private readonly ApplicationDbContext _db;
-        public ReplyRepository(ApplicationDbContext db) : base(db)
+        public BlogLikeRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }

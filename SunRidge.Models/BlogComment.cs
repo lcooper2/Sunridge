@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sunridge.Models
 {
-    public class Comment
+    public class BlogComment
     {
         public int Id { get; set; } // Comment Id
         [Required]
@@ -15,13 +15,13 @@ namespace Sunridge.Models
         public DateTime WhenPosted { get; set; } // When the comment was made
         public string CommentText { get; set; } // What was said
         public virtual List<BlogImage> Images { get; set; } // Images uploaded with comment
-        public virtual List<Like> Likes { get; set; } // List of like objects representing somebody liking the post
-        public virtual List<Reply> Replies { get; set; } // List of replies to a comment
+        public virtual List<BlogLike> Likes { get; set; } // List of like objects representing somebody liking the post
+        public virtual List<BlogReply> Replies { get; set; } // List of replies to a comment
 
 
         [ForeignKey("ApplicationUserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
         [ForeignKey("ThreadId")]
-        public virtual Thread Thread { get; set; }
+        public virtual BlogThread Thread { get; set; }
     }
 }

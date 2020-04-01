@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Sunridge.Models
 {
     // An object that represents liking a post
-    public class Like
+    public class BlogLike
     {
         public int Id { get; set; }
         [Required]
@@ -16,6 +16,6 @@ namespace Sunridge.Models
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         [ForeignKey("CommentId")]
-        public virtual Comment Comment { get; set; }
+        public virtual BlogComment Comment { get; set; }
     }
 }

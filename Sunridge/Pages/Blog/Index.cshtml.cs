@@ -15,46 +15,46 @@ namespace Sunridge.Pages.Blog
         public IndexModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            Threads = new List<Thread>();
+            Threads = new List<BlogThread>();
         }
 
         [BindProperty]
-        public IEnumerable<Thread> Threads { get; set; }
+        public IEnumerable<BlogThread> Threads { get; set; }
         public void OnGet()
         {
-            Threads = new List<Thread>();
+            Threads = new List<BlogThread>();
             ApplicationUser user = _unitOfWork.ApplicationUser.Get("da7e33e7-b1c5-464d-b52c-a0b6e8da5188");
-            Thread thread1 = new Thread();
+            BlogThread thread1 = new BlogThread();
             thread1.ApplicationUserId = user.Id;
             thread1.ApplicationUser = user;
             thread1.WhenPosted = DateTime.Now;
-            thread1.Comments = new List<Comment>();
+            thread1.Comments = new List<BlogComment>();
 
-            Thread thread2 = new Thread();
+            BlogThread thread2 = new BlogThread();
             thread2.ApplicationUserId = user.Id;
             thread2.ApplicationUser = user;
             thread2.WhenPosted = DateTime.Now;
-            thread2.Comments = new List<Comment>();
+            thread2.Comments = new List<BlogComment>();
 
-            Thread thread3 = new Thread();
+            BlogThread thread3 = new BlogThread();
             thread3.ApplicationUserId = user.Id;
             thread3.ApplicationUser = user;
             thread3.WhenPosted = DateTime.Now;
-            thread3.Comments = new List<Comment>();
+            thread3.Comments = new List<BlogComment>();
 
-            Comment comment1 = new Comment();
+            BlogComment comment1 = new BlogComment();
             comment1.ThreadId = thread1.Id;
             comment1.CommentText = "This is a test of the emergency broadcast system";
             comment1.WhenPosted = thread1.WhenPosted.AddSeconds(30);
             comment1.ApplicationUserId = user.Id;
 
-            Comment comment2 = new Comment();
+            BlogComment comment2 = new BlogComment();
             comment2.ThreadId = thread2.Id;
             comment2.CommentText = "This is a test of the emergency broadcast system";
             comment2.WhenPosted = thread2.WhenPosted.AddSeconds(30);
             comment2.ApplicationUserId = user.Id;
 
-            Comment comment3 = new Comment();
+            BlogComment comment3 = new BlogComment();
             comment3.ThreadId = thread3.Id;
             comment3.CommentText = "This is a test of the emergency broadcast system";
             comment3.WhenPosted = thread3.WhenPosted.AddSeconds(30);

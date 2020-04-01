@@ -2,7 +2,7 @@
 
 namespace Sunridge.DataAccess.Data.Repository.IRepository
 {
-    public interface ILikeRepository : IRepository<Like>
+    public interface IBlogThreadRepository : IRepository<BlogThread>
     {
 
     }

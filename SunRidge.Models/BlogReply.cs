@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sunridge.Models
 {
-    public class Reply
+    public class BlogReply
     {
         public int Id { get; set; }
         [Required]

@@ -19,11 +19,11 @@ namespace Sunridge.DataAccess.Data
         public DbSet<KeyHistory> KeyHistory { get; set; }
         public DbSet<Lot> Lot { get; set; }
         public DbSet<Board> Board { get; set; }
-        public DbSet<Thread> Thread { get; set; }
-        public DbSet<Comment> Comment { get; set; }
+        public DbSet<BlogThread> BlogThread { get; set; }
+        public DbSet<BlogComment> BlogComment { get; set; }
         public DbSet<BlogImage> BlogImage { get; set; }
-        public DbSet<Like> Like { get; set; }
-        public DbSet<Reply> Reply { get; set; }
+        public DbSet<BlogLike> BlogLike { get; set; }
+        public DbSet<BlogReply> BlogReply { get; set; }
         //public DbSet<InKindWorkHours> InKindWorkHours { get; set; }
         //public DbSet<CommonAreaAsset> CommonAreaAsset { get; set; }
     }

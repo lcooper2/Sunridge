@@ -28,7 +28,7 @@ namespace Sunridge.Controllers
         // chronologically first comment in a thread, which is the users.
         public void OnPostLikeThread(string applicationUserId, int commentId)
         {
-            Like like = new Like()
+            BlogLike like = new BlogLike()
             {
                 ApplicationUserId = applicationUserId,
                 CommentId = commentId

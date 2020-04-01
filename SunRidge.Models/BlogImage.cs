@@ -12,6 +12,6 @@ namespace Sunridge.Models
         public int CommentId { get; set; }  // comment id optional as image may be associated with thread id
 
         [ForeignKey("CommentId")]
-        public virtual Comment Comment { get; set; }
+        public virtual BlogComment Comment { get; set; }
     }
 }
