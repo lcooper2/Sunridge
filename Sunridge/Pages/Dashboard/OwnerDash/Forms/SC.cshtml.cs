@@ -23,23 +23,21 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
         public IActionResult OnGet(int? id)
         {
             FormResObj = new Models.FormResponse();
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            if (claim != null)
+            if (id != null)
             {
-               
-                if (id != null)
+                FormResObj = _unitOfWork.FormResponse.GetFirstOrDefault(u => u.Id == id);
+                FormResObj.FormType = "SC";
+                FormResObj.SubmitDate = DateTime.Now;
+                FormResObj.Resolved = false;
+                FormResObj.ResolveUser = "N/A";
+                FormResObj.PrivacyLevel = "None";
+                //FormResObj.ApplicationUserId = claim.Value;
+                if (FormResObj == null)
                 {
-                    FormResObj = _unitOfWork.FormResponse.GetFirstOrDefault(u => u.Id == id);
-                    FormResObj.FormType = "SC";
-                    FormResObj.SubmitDate = DateTime.Now;
-                    //FormResObj.ApplicationUserId = claim.Value;
-                    if (FormResObj == null)
-                    {
-                        return NotFound();
-                    }
-                }  
-            }
+                    return NotFound();
+                }
+            }  
+        
             return Page();
         }
         
