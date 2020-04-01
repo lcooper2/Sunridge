@@ -28,7 +28,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Pages\Dashboard\AdminDash\Forms\" />
     <Folder Include="wwwroot\Images\BannerImages\" />
   </ItemGroup>
 

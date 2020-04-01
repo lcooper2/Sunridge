@@ -13,11 +13,7 @@ namespace Sunridge.Models
 
         //was ownerID
         //public Owner Owner { get; set; }
-        public string ApplicationUserId { get; set; }
-
-        [NotMapped]
-        [ForeignKey("ApplicationUserId")]
-        public virtual ApplicationUser ApplicationUser { get; set; }
+       
         /*
          * SC: Suggestions and complaints
          * WIK: Work in kind
@@ -28,7 +24,7 @@ namespace Sunridge.Models
         [StringLength(3, MinimumLength = 1)]
         public string FormType { get; set; }
 
-        public int? LotId { get; set; } // work in kind
+        //public int? LotId { get; set; } // work in kind
 
         [Display(Name = "Listing Date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
@@ -57,9 +53,9 @@ namespace Sunridge.Models
         // Nav properties
        
         //public virtual ICollection<Comment> Comments { get; set; }
-        public virtual ICollection<File> Files { get; set; }
-        public virtual Lot Lot { get; set; }
-        public virtual List<InKindWorkHours> InKindWorkHours { get; set; }
+        //public virtual ICollection<File> Files { get; set; }
+        //public virtual Lot Lot { get; set; }
+        //public virtual List<InKindWorkHours> InKindWorkHours { get; set; }
 
         // Calculated properties
         [Display(Name = "Form Type")]

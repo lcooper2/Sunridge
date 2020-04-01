@@ -20,11 +20,12 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             var obJFromDb = _db.InKindWorkHours.FirstOrDefault(s => s.Id == inKindWorkHours.Id);
 
-            obJFromDb.Description = inKindWorkHours.Description;
+            obJFromDb.Activity = inKindWorkHours.Activity;
+            obJFromDb.Equipment = inKindWorkHours.Equipment;
             obJFromDb.Hours = inKindWorkHours.Hours;
             obJFromDb.Type = inKindWorkHours.Type;
-            obJFromDb.FormResponseId = inKindWorkHours.FormResponseId;
-
+            obJFromDb.ApplicationUserId = inKindWorkHours.ApplicationUserId;
+            obJFromDb.ApplicationUser = inKindWorkHours.ApplicationUser;
             _db.SaveChanges();
 
 
