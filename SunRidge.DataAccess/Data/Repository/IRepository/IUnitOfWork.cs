@@ -25,6 +25,9 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         ICommentRepository Comment { get; }
 
         IOwnerLotRepository OwnerLot { get; }
+        IClassifiedCategoryRepository ClassifiedCategory { get; }
+        IClassifiedListingRepository ClassifiedListing { get; }
+        IClassifiedImageRepository ClassifiedImage { get; }
 
         void Save();
     }

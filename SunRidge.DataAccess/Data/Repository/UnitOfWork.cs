@@ -26,6 +26,9 @@ namespace Sunridge.DataAccess.Data.Repository
             File = new FileRepository(_db);
             Comment = new CommentRepository(_db);
             OwnerLot = new OwnerLotRepository(_db);
+            ClassifiedCategory = new ClassifiedCategoryRepository(_db);
+            ClassifiedListing = new ClassifiedListingRepository(_db);
+            ClassifiedImage = new ClassifiedImageRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -44,6 +47,9 @@ namespace Sunridge.DataAccess.Data.Repository
         public IFileRepository File { get; private set; }
         public ICommentRepository Comment { get; private set; }
         public IOwnerLotRepository OwnerLot { get; private set; }
+        public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
+        public IClassifiedListingRepository ClassifiedListing { get; private set; }
+        public IClassifiedImageRepository ClassifiedImage { get; private set; }
 
 
         public void Dispose()
