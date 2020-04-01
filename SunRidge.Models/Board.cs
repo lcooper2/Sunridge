@@ -16,15 +16,29 @@ namespace Sunridge.Models
         public string Title { get; set; }
 
         [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
+        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
+        public string Phone { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email Address")]
+        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
+        public string Email { get; set; }
+
+        
         [Display(Name = "Image")]
         public string Image { get; set; }
 
-        // application user database conection
-        [Display(Name = "User")]
-        public int ApplicationUserId { get; set; }
-
-        [ForeignKey("UserId")]
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        [NotMapped]
+        public string FullName { get { return FirstName + " " + LastName; } }
 
     }
 }

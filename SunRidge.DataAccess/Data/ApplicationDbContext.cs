@@ -24,9 +24,10 @@ namespace Sunridge.DataAccess.Data
         public DbSet<FormResponse> FormResponse { get; set; }
         public DbSet<File> File { get; set; }
         public DbSet<Comment> Comment { get; set; }
-
         public DbSet<OwnerLot> OwnerLot { get; set; }
-
+        public DbSet<ClassifiedListing> ClassifiedListing { get; set; }
+        public DbSet<ClassifiedCategory> ClassifiedCategory { get; set; }
+        public DbSet<ClassifiedImage> ClassifiedImage { get; set; }
 
     }
 }
