@@ -7,27 +7,25 @@ $(document).ready(function () {
 function loadList() {
     dataTable = $('#DT_Load').DataTable({
         "ajax": {
-            "url": "/api/lot/",
+            "url": "/api/lothistory/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "lotNumber", "width": "35%" },
-            { "data": "taxId", "width": "20%" },
-            { "data": "isArchive", "width": "10%" },
-            { "data": "lastModifiedBy", "width": "10%" },
-            { "data": "lastModifiedDate", "width": "10%" },
+            { "data": "lot.lotNumber", "width": "30%" },
+            { "data": "privacyLevel", "width": "20%" },
+            { "data": "isArchive", "width": "20%" },
+            { "data": "lastModifiedBy", "width": "30%" },
+            { "data": "lastModifiedDate", "width": "30%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                        <a href= "/Dashboard/AdminDash/Lots/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                        <a href= "/Dashboard/AdminDash/Lots/History/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                             <i class="far fa edit"></i> Edit   
-                        </a>
-                        <a href= "/Dashboard/AdminDash/Lots/History/History" class="btn btn-primary text-white" style="cursor:pointer; width:100px;">
-                            <i class="fas fa-history"></i> History   
-                         </a>
-                        <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/lot/'+${data})>
+                                </a>
+                        
+                        <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/lothistory/'+${data})>
                             <i class="far fa-trash-alt"></i> Delete
                         </a>
                             </div >`;
@@ -66,3 +64,4 @@ function Delete(url) {
         }
     });
 }
+

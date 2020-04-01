@@ -2,7 +2,7 @@
 
 namespace Sunridge.DataAccess.Migrations
 {
-    public partial class lotrepoupdate : Migration
+    public partial class lotplscomebackfix1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

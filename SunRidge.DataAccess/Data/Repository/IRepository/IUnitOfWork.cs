@@ -14,6 +14,17 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IKeyHistoryRepository KeyHistory { get; }
         ILotRepository Lot { get; }
         IBoardRepository Board { get; }
+        IInKindWorkHoursRepository InKindWorkHours { get; }
+        
+        IFormResponseRepository FormResponse { get ;}
+
+        ILotHistoryRepository LotHistory { get; }
+
+        IFileRepository File { get; }
+
+        ICommentRepository Comment { get; }
+
+        IOwnerLotRepository OwnerLot { get; }
 
         void Save();
     }
