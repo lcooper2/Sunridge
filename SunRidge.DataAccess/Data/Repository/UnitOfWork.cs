@@ -19,7 +19,16 @@ namespace Sunridge.DataAccess.Data.Repository
             Key = new KeyRepository(_db);
             KeyHistory = new KeyHistoryRepository(_db);
             Lot = new LotRepository(_db);
+            LotHistory = new LotHistoryRepository(_db);
             Board = new BoardRepository(_db);
+            InKindWorkHours = new InKindWorkHoursRepository(_db);
+            FormResponse = new FormResponseRepository(_db);
+            File = new FileRepository(_db);
+            Comment = new CommentRepository(_db);
+            OwnerLot = new OwnerLotRepository(_db);
+            ClassifiedCategory = new ClassifiedCategoryRepository(_db);
+            ClassifiedListing = new ClassifiedListingRepository(_db);
+            ClassifiedImage = new ClassifiedImageRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -31,6 +40,17 @@ namespace Sunridge.DataAccess.Data.Repository
         public IKeyRepository Key { get; private set; }
         public IKeyHistoryRepository KeyHistory { get; private set; }
         public ILotRepository Lot { get; private set; }
+        public ILotHistoryRepository LotHistory { get; private set; }
+
+        public IInKindWorkHoursRepository InKindWorkHours { get; private set; }
+        public IFormResponseRepository FormResponse {get; private set; }
+        public IFileRepository File { get; private set; }
+        public ICommentRepository Comment { get; private set; }
+        public IOwnerLotRepository OwnerLot { get; private set; }
+        public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
+        public IClassifiedListingRepository ClassifiedListing { get; private set; }
+        public IClassifiedImageRepository ClassifiedImage { get; private set; }
+
 
         public void Dispose()
         {

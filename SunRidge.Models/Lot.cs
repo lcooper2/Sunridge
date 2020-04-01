@@ -27,15 +27,15 @@ namespace Sunridge.Models
         public DateTime LastModifiedDate { get; set; }
 
         //NavigationalProperties
-        //[Display(Name = "Address")]
-        //public int AddressId { get; set; }
-        //[ForeignKey("AddressId")]
+        [Display(Name = "Address")]
+        public int AddressId { get; set; }
+        [ForeignKey("AddressId")]
+        public virtual Address Address { get; set; }
         //public int OwnerId { get; set; }
-        //public virtual Address Address { get; set; }
         //public virtual Owner Owner { get; set; }
         //public virtual ICollection<OwnerLot> OwnerLots { get; set; }
         //public virtual ICollection<LotInventory> LotInventories { get; set; }
-        //public virtual ICollection<LotHistory> LotHistories { get; set; }
+        public virtual ICollection<LotHistory> LotHistories { get; set; }
         //public virtual ICollection<Transaction> Transactions { get; set; }
 
         public int CompareTo(Lot lot)

@@ -2,26 +2,35 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace Sunridge.Models
 {
     public class Comment
     {
-        public int Id { get; set; } // Comment Id
-        [Required]
-        public string ApplicationUserId { get; set; } // Person who made the comment
-        [Required]
-        public int ThreadId { get; set; } // The thread that the comment belongs to
-        public DateTime WhenPosted { get; set; } // When the comment was made
-        public string CommentText { get; set; } // What was said
-        public virtual List<BlogImage> Images { get; set; } // Images uploaded with comment
-        public virtual List<Like> Likes { get; set; } // List of like objects representing somebody liking the post
-        public virtual List<Reply> Replies { get; set; } // List of replies to a comment
+        [Key]
+        public int Id { get; set; }
+       
+       // public int OwnerId { get; set; }
 
+        public string Content { get; set; }
+        public DateTime Date { get; set; }
+        public bool Private { get; set; }
+
+        [Display(Name = "Lot History")]
+        public int? LotHistoryId { get; set; }
+        [ForeignKey("LotHistoryId")]
+        public LotHistory LotHistory { get; set; }
+        [Display(Name = "Form Response")]
+        public int? FormResponseId { get; set; }
+        [ForeignKey("FormResponseId")]
+        public FormResponse FormResponse { get; set; }
+
+        [Display(Name = "Application User")]
+        public string ApplicationUserId { get; set; }
 
         [ForeignKey("ApplicationUserId")]
-        public virtual ApplicationUser ApplicationUser { get; set; }
-        [ForeignKey("ThreadId")]
-        public virtual Thread Thread { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+
     }
 }

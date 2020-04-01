@@ -1,0 +1,56 @@
+﻿@page
+@model Sunridge.Pages.Dashboard.OwnerDash.Forms.SCModel
+@{
+    ViewData["Title"] = "SC";
+    Layout = "_DashboardLayout";
+}
+
+<h1>Suggestion / Complaint</h1>
+
+<form method="post" asp-action="Upsert">
+    <div class="container">
+        <div class="row px-2 mx-2 backgroundWhite border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.FormResObj.Id != 0)
+            {
+                <input type="hidden" asp-for="FormResObj.Id" />
+            }
+            <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
+                <h2 class="text-primary">@(Model.FormResObj.Id != 0 ? "Update" : "Create") Form</h2>
+            </div>
+            <div class="col-8 pt-3">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="FormResObj.Description"></label>
+                    </div>
+                    <div class="col-9">
+                        <textarea class="form-control" asp-for="FormResObj.Description" id="txtDesc" style="height:200px;"></textarea>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="FormResObj.Suggestion"></label>
+                    </div>
+                    <div class="col-9">
+                        <textarea class="form-control" asp-for="FormResObj.Suggestion" id="txtDesc" style="height:200px;"></textarea>
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-9 offset-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary form-control">@(Model.FormResObj.Id != 0 ? "Update" : "Create")</button>
+                            </div>
+                            <div class="col-6">
+                                <a asp-page="/OwnerDash/Forms/Index" class="btn btn-success form-control">Back to Forms</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
