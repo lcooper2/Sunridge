@@ -29,6 +29,11 @@ namespace Sunridge.DataAccess.Data.Repository
             ClassifiedCategory = new ClassifiedCategoryRepository(_db);
             ClassifiedListing = new ClassifiedListingRepository(_db);
             ClassifiedImage = new ClassifiedImageRepository(_db);
+            BlogThread = new BlogThreadRepository(_db);
+            BlogComment = new BlogCommentRepository(_db);
+            BlogImage = new BlogImageRepository(_db);
+            BlogLike = new BlogLikeRepository(_db);
+            BlogReply = new BlogReplyRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -50,6 +55,11 @@ namespace Sunridge.DataAccess.Data.Repository
         public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
         public IClassifiedListingRepository ClassifiedListing { get; private set; }
         public IClassifiedImageRepository ClassifiedImage { get; private set; }
+        public IBlogThreadRepository BlogThread { get; private set; }
+        public IBlogCommentRepository BlogComment { get; private set; }
+        public IBlogImageRepository BlogImage { get; private set; }
+        public IBlogLikeRepository BlogLike { get; private set; }
+        public IBlogReplyRepository BlogReply { get; private set; }
 
 
         public void Dispose()

@@ -9,9 +9,9 @@ namespace Sunridge.Models
         [Required]
         public string ImgPath { get; set; }
         [Required]
-        public int CommentId { get; set; }  // comment id optional as image may be associated with thread id
+        public int BlogCommentId { get; set; }  // comment id optional as image may be associated with thread id
 
-        [ForeignKey("CommentId")]
-        public virtual Comment Comment { get; set; }
+        [ForeignKey("BlogCommentId")]
+        public virtual BlogComment BlogComment { get; set; }
     }
 }

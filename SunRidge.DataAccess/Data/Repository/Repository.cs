@@ -48,6 +48,11 @@ namespace Sunridge.DataAccess.Data.Repository
             return dbset.Find(id);
         }
 
+        public T Get(string id)
+        {
+            return dbset.Find(id);
+        }
+
         public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null)
         {
             IQueryable<T> query = dbset;
