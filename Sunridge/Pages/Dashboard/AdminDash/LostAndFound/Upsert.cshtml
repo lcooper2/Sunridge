@@ -48,29 +48,50 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+
+                    <div class="col-3">
+                        <label asp-for="LAFObj.Images"></label>
+                    </div>
+
+                    <div class="col-7">
+                        <input type="file" class="form-control" name="files" id="files" multiple/>
+                        
+                    </div>
+
+                </div>
+
                 <div class="form-group row border">
                     <div class="col-3">
                         <label asp-for="LAFObj.Claimed"></label>
                     </div>
                     <div class="col-7">
-                        True <input type="radio" class="form-control" asp-for="LAFObj.Claimed" value="True" onclick="unhide()">
-                        False <input type="radio" class="form-control" asp-for="LAFObj.Claimed" value="False" onclick="hide()" />
+                        <table>
+                            <tr>
+                                <td>True</td>
+                                <td> <input type="radio" class="form-control" asp-for="LAFObj.Claimed" value="True" onclick="unhide()"></td>
+                            </tr>
+                            <tr>
+                                <td>False</td>
+                                <td><input type="radio" class="form-control" asp-for="LAFObj.Claimed" value="False" onclick="hide()" /></td>
+                            </tr>
+                        </table>
                         <span class="text-danger" asp-validation-for="LAFObj.Claimed"></span>
                     </div>
 
                 </div>
-               
-                    <div class="form-group row" id="Claimed" style="display:none">
-                        <div class="col-3">
-                            <label asp-for="LAFObj.ClaimedBy"></label>
-                        </div>
 
-                        <div class="col-7">
-                            <input class="form-control" asp-for="LAFObj.ClaimedBy" />
-
-                        </div>
+                <div class="form-group row" id="Claimed" style="display:none">
+                    <div class="col-3">
+                        <label asp-for="LAFObj.ClaimedBy"></label>
                     </div>
-                
+
+                    <div class="col-7">
+                        <input class="form-control" asp-for="LAFObj.ClaimedBy" />
+
+                    </div>
+                </div>
+
                 <div class="form-group row">
 
                     <div class="col-9 offset-3">
@@ -99,17 +120,6 @@
 
                 </div>
 
-
-
-
-
-                @*@if (Model.BoardObj != null)
-                    {
-                        <div class="clo-4 p-4">
-                            <img src="\@Model.BoardObj.Image" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
-
-                        </div>
-                    }*@
             </div>
         </div>
 
