@@ -9,6 +9,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IApplicationUserRepository ApplicationUser { get; }
         IBannerRepository Banner { get; }
         ILostAndFoundRepository LostAndFound { get; }
+        ILostAndFoundImageRepository LostAndFoundImage { get; }
         IAddressRepository Address { get; }
         IKeyRepository Key { get; }
         IKeyHistoryRepository KeyHistory { get; }
@@ -28,6 +29,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IClassifiedCategoryRepository ClassifiedCategory { get; }
         IClassifiedListingRepository ClassifiedListing { get; }
         IClassifiedImageRepository ClassifiedImage { get; }
+
 
         void Save();
     }
