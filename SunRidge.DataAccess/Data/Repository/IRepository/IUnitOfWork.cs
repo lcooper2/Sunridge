@@ -16,21 +16,19 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         ILotRepository Lot { get; }
         IBoardRepository Board { get; }
         IInKindWorkHoursRepository InKindWorkHours { get; }
-        
         IFormResponseRepository FormResponse { get ;}
-
         ILotHistoryRepository LotHistory { get; }
-
         IFileRepository File { get; }
-
         ICommentRepository Comment { get; }
-
         IOwnerLotRepository OwnerLot { get; }
         IClassifiedCategoryRepository ClassifiedCategory { get; }
         IClassifiedListingRepository ClassifiedListing { get; }
         IClassifiedImageRepository ClassifiedImage { get; }
-
-
+        IBlogThreadRepository BlogThread { get; }
+        IBlogCommentRepository BlogComment { get; }
+        IBlogImageRepository BlogImage { get; }
+        IBlogLikeRepository BlogLike { get; }
+        IBlogReplyRepository BlogReply { get; }
         void Save();
     }
 }

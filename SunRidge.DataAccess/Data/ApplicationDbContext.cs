@@ -29,7 +29,10 @@ namespace Sunridge.DataAccess.Data
         public DbSet<ClassifiedListing> ClassifiedListing { get; set; }
         public DbSet<ClassifiedCategory> ClassifiedCategory { get; set; }
         public DbSet<ClassifiedImage> ClassifiedImage { get; set; }
-        
-
+        public DbSet<BlogThread> BlogThread { get; set; }
+        public DbSet<BlogComment> BlogComment { get; set; }
+        public DbSet<BlogImage> BlogImage { get; set; }
+        public DbSet<BlogLike> BlogLike { get; set; }
+        public DbSet<BlogReply> BlogReply { get; set; }
     }
 }

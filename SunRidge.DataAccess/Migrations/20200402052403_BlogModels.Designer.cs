@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sunridge.DataAccess.Data;
 
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200402052403_BlogModels")]
+    partial class BlogModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -725,29 +727,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("LostAndFound");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.LostAndFoundImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ImageURL")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsMainImage")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LostAndFoundId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LostAndFoundId");
-
-                    b.ToTable("LostAndFoundImage");
-                });
-
             modelBuilder.Entity("Sunridge.Models.Lot", b =>
                 {
                     b.Property<int>("Id")
@@ -1048,15 +1027,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasOne("Sunridge.Models.Lot", "Lot")
                         .WithMany()
                         .HasForeignKey("LotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Sunridge.Models.LostAndFoundImage", b =>
-                {
-                    b.HasOne("Sunridge.Models.LostAndFound", "LostAndFound")
-                        .WithMany()
-                        .HasForeignKey("LostAndFoundId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
