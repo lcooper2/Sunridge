@@ -96,7 +96,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
                 // upload to path
                 var uploads = Path.Combine(webRootPath, @"Images\LostAndFoundImages");
 
-                int i = 0;
+                
 
                 foreach (var file in files)
 
