@@ -26,12 +26,13 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IClassifiedImageRepository ClassifiedImage { get; }
 
         IClaimLossRepository ClaimLoss { get; }
-
-        IBlogThreadRepository BlogThread { get; }
+        ICommonAreaAssetRepository CommonAreaAsset { get; }
+    IBlogThreadRepository BlogThread { get; }
         IBlogCommentRepository BlogComment { get; }
         IBlogImageRepository BlogImage { get; }
         IBlogLikeRepository BlogLike { get; }
         IBlogReplyRepository BlogReply { get; }
+        IMaintenanceRepository Maintenance { get; }
         void Save();
     }
 }

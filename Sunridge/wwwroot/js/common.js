@@ -7,29 +7,31 @@ $(document).ready(function () {
 function loadList() {
     dataTable = $('#DT_Load').DataTable({
         "ajax": {
-            "url": "/api/key/",
+            "url": "/api/common/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "fullSerial", "width": "40%" },
-            { "data": "year", "width": "20%" },
-            { "data": "serialNumber", "width": "30%" },
+            { "data": "assetName", "width": "30%" },
+            { "data": "purchasePrice", "width": "10%" },
+            { "data": "description", "width": "30%" },
+            { "data": "status", "width": "30%" },
+            { "data": "date", "width": "30%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                        <a href= "/Dashboard/AdminDash/Key/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                        <a href= "/Dashboard/AdminDash/CommonArea/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                             <i class="far fa edit"></i> Edit   
                                 </a>
-                        <a href= "/Dashboard/AdminDash/Key/History/History?id=${data}" class="btn btn-primary text-white" style="cursor:pointer; width:100px;">
-                            <i class="fas fa-history"></i> History   
+                        <a href= "/Dashboard/AdminDash/CommonArea/Maintenance/Maintenance" class="btn btn-primary text-white" style="cursor:pointer; width:100px;">
+                            <i class="fas fa-tools"></i> Maintenance
                                 </a>
                         <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/key/'+${data})>
                             <i class="far fa-trash-alt"></i> Delete
                         </a>
                             </div >`;
-                }, "width": "40%"
+                }, "width": "50%"
             }
         ],
         "language": {
@@ -64,4 +66,3 @@ function Delete(url) {
         }
     });
 }
-

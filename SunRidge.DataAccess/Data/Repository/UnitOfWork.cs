@@ -36,6 +36,8 @@ namespace Sunridge.DataAccess.Data.Repository
             BlogLike = new BlogLikeRepository(_db);
             BlogReply = new BlogReplyRepository(_db);
             ClaimLoss = new ClaimLossRepository(_db);
+            CommonAreaAsset = new CommonAreaAssetRepository(_db);
+            Maintenance = new MaintenanceRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -58,6 +60,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
         public IClassifiedListingRepository ClassifiedListing { get; private set; }
         public IClassifiedImageRepository ClassifiedImage { get; private set; }
+        public ICommonAreaAssetRepository CommonAreaAsset { get; private set; }
         public IBlogThreadRepository BlogThread { get; private set; }
         public IBlogCommentRepository BlogComment { get; private set; }
         public IBlogImageRepository BlogImage { get; private set; }
@@ -66,6 +69,7 @@ namespace Sunridge.DataAccess.Data.Repository
 
         public IClaimLossRepository ClaimLoss { get; private set; }
 
+        public IMaintenanceRepository Maintenance { get; private set; }
 
         public void Dispose()
         {

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sunridge.DataAccess.Data;
 
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200403184206_commonarearepo")]
+    partial class commonarearepo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -857,29 +859,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("LotHistory");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.Maintenance", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CommonAreaAssetId")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Cost")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("DateCompleted")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommonAreaAssetId");
-
-                    b.ToTable("Maintenance");
-                });
-
             modelBuilder.Entity("Sunridge.Models.OwnerLot", b =>
                 {
                     b.Property<int>("Id")
@@ -1137,15 +1116,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasOne("Sunridge.Models.Lot", "Lot")
                         .WithMany("LotHistories")
                         .HasForeignKey("LotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Sunridge.Models.Maintenance", b =>
-                {
-                    b.HasOne("Sunridge.Models.CommonAreaAsset", "CommonAreaAsset")
-                        .WithMany()
-                        .HasForeignKey("CommonAreaAssetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -1,12 +1,10 @@
 ﻿@page
-@model Sunridge.Pages.Dashboard.AdminDash.Key.HistoryModel
+@model Sunridge.Pages.Dashboard.AdminDash.CommonArea.Maintenance.MaintenanceModel
 @{
-    ViewData["Title"] = "History";
-    Layout = "_DashboardLayout";
+    ViewData["Title"] = "Maintenance";
 }
 
-
-    <h3>Key History for @Html.DisplayNameFor(model => model.KeyHistObj.Key.FullSerial)</h3>
+<h1>Maintenance</h1>
 
 <div class="border backgroundWhite container">
     <div class="row">
@@ -32,5 +30,5 @@
 
 </div>
 @section Scripts{
-    <script src="~/js/keyHist.js"></script>
+    <script src="~/js/maint.js"></script>
 }
