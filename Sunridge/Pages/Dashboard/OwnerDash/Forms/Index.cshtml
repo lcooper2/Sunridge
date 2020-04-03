@@ -1,0 +1,41 @@
+﻿@page
+@model Sunridge.Pages.Dashboard.OwnerDash.Forms.IndexModel
+@{
+    ViewData["Title"] = "Form";
+    Layout = "_DashboardLayout";
+}
+<h1>Which Form would you like to fill out?</h1>
+<div class="container">
+    <div class="row">
+        <!--FORM TYPES-->
+        <a asp-page="/Dashboard/OwnerDash/Forms/SC">
+            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white text-center">Suggestion / Complaint</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-clipboard-list"></i></p>
+
+                </div>
+            </div>
+        </a>
+        <a asp-page="/Dashboard/OwnerDash/Forms/WIK">
+            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white text-center">Work In Kind Hours</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-hands-helping"></i></p>
+
+                </div>
+            </div>
+        </a>
+        <a asp-page="/Forms/CL">
+            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white text-center">Loss claim</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-exclamation-triangle"></i></p>
+
+                </div>
+            </div>
+        </a>
+    </div>
+   
+</div>
+

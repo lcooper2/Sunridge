@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="~/css/jquery-ui.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/css/toastr.css" />
-    <link rel="stylesheet" type="text/css" href="~/css/toaster.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" />
 </head>
 <body>
     <header>
@@ -45,7 +44,7 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item text-black" asp-page="/Documents/Rules">Rules</a>
                                 <a class="dropdown-item text-black" asp-page="/Documents/Maps">Maps</a>
-                                <a class="dropdown-item text-black" asp-page="/Documents/Bylaws">Bylaws</a>
+                                <a class="dropdown-item text-black" href="~/docs/Sunridge By-laws.doc">Bylaws</a>
                             </div>
                         </li>
                         <li>
@@ -91,7 +90,7 @@
                 <div class="col-lg-4 col-xs-4 h-100 text-center my-auto">
                     <ul class="list-inline mb-2">
                         <li class="list-inline-item">
-                            <a class="link" asp-area="" asp-controller="Home" asp-action="About">About this site</a>
+                            <a class="link" asp-page="About">About this site</a>
                         </li>
                     </ul>
                 </div>
@@ -113,7 +112,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/64cmedbz0kjehxdfz62fr8zri5cycgitcs7xuhok3ti9vd2i/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 

@@ -13,6 +13,7 @@ function loadList() {
         },
         "columns": [
             { "data": "lotNumber", "width": "35%" },
+            { "data": "address.FullAddress", "width": "20%" },
             { "data": "taxId", "width": "20%" },
             { "data": "isArchive", "width": "10%" },
             { "data": "lastModifiedBy", "width": "10%" },
@@ -23,7 +24,10 @@ function loadList() {
                     return `<div class="text-center">
                         <a href= "/Dashboard/AdminDash/Lots/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                             <i class="far fa edit"></i> Edit   
-                                </a>
+                        </a>
+                        <a href= "/Dashboard/AdminDash/Lots/History/History" class="btn btn-primary text-white" style="cursor:pointer; width:100px;">
+                            <i class="fas fa-history"></i> History   
+                         </a>
                         <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/lot/'+${data})>
                             <i class="far fa-trash-alt"></i> Delete
                         </a>

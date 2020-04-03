@@ -22,7 +22,7 @@ namespace Sunridge.DataAccess.Data.Repository
 
             objFromDb.ItemName = lostAndFound.ItemName;
             objFromDb.Discription = lostAndFound.Discription;
-            objFromDb.ListedDate = lostAndFound.ListedDate;
+            
             objFromDb.Claimed = lostAndFound.Claimed;
             objFromDb.ClaimedBy = lostAndFound.ClaimedBy;
             objFromDb.ClaimedDate = lostAndFound.ClaimedDate;
