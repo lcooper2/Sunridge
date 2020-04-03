@@ -205,10 +205,10 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
                     {
                         LAFObj.ClaimedDate = DateTime.Now;
                     }
-                    _unitOfWork.LostAndFound.Update(LAFObj);
+                    
 
                 }
-
+                _unitOfWork.LostAndFound.Update(LAFObj);
             }
 
             _unitOfWork.Save();
