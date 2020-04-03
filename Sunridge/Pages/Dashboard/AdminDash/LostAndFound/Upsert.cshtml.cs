@@ -74,7 +74,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
 
         //}
 
-        public async Task<IActionResult> OnPost()
+        public IActionResult OnPost()
         {
             // Find the root path
             string webRootPath = _hostingEnvironment.WebRootPath;
@@ -101,12 +101,12 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
                 foreach (var file in files)
 
                 {
-
-                    i++;
+                    string fileName = Guid.NewGuid().ToString() + LAFObj.Id.ToString();
+                    
 
                     var extension = Path.GetExtension(file.FileName);
 
-                    using (var filestream = new FileStream(Path.Combine(uploads, LAFObj.Id + @"_" + i + extension), FileMode.Create))
+                    using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
 
                     {
 
@@ -124,17 +124,17 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
 
 
 
-                        ImageURL = @"\" + @"Images\LostAndFoundImages" + @"\" + LAFObj.Id + @"_" + i + extension
+                        ImageURL = @"Images\LostAndFoundImages\" + fileName + extension
 
                     };
 
-                    
 
-                   
+
+
                     _unitOfWork.LostAndFoundImage.Add(image);
                 }
 
-               
+
             }
 
             else // if is not then it is an existing object that is being edit and updated
@@ -170,12 +170,12 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
                     foreach (var file in files)
 
                     {
-
+                         fileName = Guid.NewGuid().ToString() + LAFObj.Id.ToString();
                         i++;
 
                         var extension = Path.GetExtension(file.FileName);
 
-                        using (var filestream = new FileStream(Path.Combine(uploads, LAFObj.Id + @"_" + i + extension), FileMode.Create))
+                        using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
 
                         {
 
@@ -191,7 +191,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
 
                             IsMainImage = (file == files.First()),
 
-                            ImageURL = @"\" + @"Images\LostAndFoundImages" + @"\" + LAFObj.Id + @"_" + i + extension
+                            ImageURL = @"Images\LostAndFoundImages\" + fileName + extension
 
                         };
                         _unitOfWork.LostAndFoundImage.Add(image);

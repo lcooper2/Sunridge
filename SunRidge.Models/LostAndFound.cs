@@ -29,7 +29,7 @@ namespace Sunridge.Models
         public DateTime? ClaimedDate { get; set; }
 
         [NotMapped]
-        public List<ClassifiedImage> Images { get; set; }
+        public List<LostAndFoundImage> Images { get; set; }
 
     }
 }
