@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sunridge.DataAccess.Data;
 
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200402225808_claimlossupdate")]
+    partial class claimlossupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -333,6 +335,9 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<DateTime>("DateofIncident")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("LotId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("TimeofIncident")
                         .HasColumnType("datetime2");
 
@@ -343,6 +348,8 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LotId");
 
                     b.ToTable("ClaimLoss");
                 });
@@ -430,6 +437,9 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -439,12 +449,19 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int?>("FormResponseId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("LotHistoryId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Private")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationUserId");
+
                     b.HasIndex("FormResponseId");
+
+                    b.HasIndex("LotHistoryId");
 
                     b.ToTable("Comment");
                 });
@@ -811,6 +828,15 @@ namespace Sunridge.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Sunridge.Models.ClaimLoss", b =>
+                {
+                    b.HasOne("Sunridge.Models.Lot", "Lot")
+                        .WithMany()
+                        .HasForeignKey("LotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Sunridge.Models.ClassifiedImage", b =>
                 {
                     b.HasOne("Sunridge.Models.ClassifiedListing", "ClassifiedListing")
@@ -835,9 +861,17 @@ namespace Sunridge.DataAccess.Migrations
 
             modelBuilder.Entity("Sunridge.Models.Comment", b =>
                 {
+                    b.HasOne("Sunridge.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("Sunridge.Models.FormResponse", "FormResponse")
                         .WithMany()
                         .HasForeignKey("FormResponseId");
+
+                    b.HasOne("Sunridge.Models.LotHistory", "LotHistory")
+                        .WithMany("Comments")
+                        .HasForeignKey("LotHistoryId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.File", b =>

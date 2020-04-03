@@ -14,6 +14,8 @@ namespace Sunridge.Models
         //is attorney is filling
         public bool isAttorney { get; set; }
 
+        public string Type { get; set; }
+
         public DateTime DateofIncident { get; set; }
 
         public DateTime TimeofIncident { get; set; }
@@ -27,15 +29,9 @@ namespace Sunridge.Models
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         /*To fill in address of claimant and/ or address of attorney*/
-        [Display(Name = "Address")]
-        public int AddressId { get; set; }
-        [ForeignKey("AddressId")]
-        public virtual Address Address { get; set; }
+        public string ClaimAddress { get; set; }
 
         /*To pull their lot info*/
-        [Display(Name = "Lot")]
-        public int LotId { get; set; }
-        [ForeignKey("LotId")]
-        public virtual Lot Lot { get; set; }
+        
     }
 }

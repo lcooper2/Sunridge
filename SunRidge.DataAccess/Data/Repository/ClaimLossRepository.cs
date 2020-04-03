@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Sunridge.Models;
 using Sunridge.DataAccess.Data.Repository.IRepository;
+using System.Linq;
 
 namespace Sunridge.DataAccess.Data.Repository
 {
@@ -19,12 +20,13 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             var obJFromDb = _db.ClaimLoss.FirstOrDefault(s => s.Id == claimLoss.Id);
 
-            obJFromDb.Activity = inKindWorkHours.Activity;
-            obJFromDb.Equipment = inKindWorkHours.Equipment;
-            obJFromDb.Hours = inKindWorkHours.Hours;
-            obJFromDb.Type = inKindWorkHours.Type;
-            obJFromDb.ApplicationUserId = inKindWorkHours.ApplicationUserId;
-            obJFromDb.ApplicationUser = inKindWorkHours.ApplicationUser;
+            obJFromDb.isAttorney = claimLoss.isAttorney;
+            obJFromDb.DateofIncident = claimLoss.DateofIncident;
+            obJFromDb.TimeofIncident = claimLoss.TimeofIncident;
+            obJFromDb.Type = claimLoss.Type;
+            obJFromDb.ApplicationUserId = claimLoss.ApplicationUserId;
+            obJFromDb.ApplicationUser = claimLoss.ApplicationUser;
+            obJFromDb.ClaimAddress = claimLoss.ClaimAddress;
             _db.SaveChanges();
 
 
