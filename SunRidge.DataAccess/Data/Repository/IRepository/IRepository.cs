@@ -10,6 +10,10 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
     {
         //get object by id
         T Get(int id);
+
+        //get object by string id
+        T Get(string id);
+
         // get all objects as Ienumerable
         IEnumerable<T> GetAll(
             Expression<Func<T, bool>> filter = null,
