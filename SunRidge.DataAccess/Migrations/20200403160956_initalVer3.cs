@@ -532,17 +532,17 @@ namespace Sunridge.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_BlogComment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BlogComment_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    name: "FK_BlogComment_AspNetUsers_ApplicationUserId",
+                    column: x => x.ApplicationUserId,
+                    principalTable: "AspNetUsers",
+                    principalColumn: "Id",
+                    onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_BlogComment_BlogThread_BlogThreadId",
-                        column: x => x.BlogThreadId,
-                        principalTable: "BlogThread",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    name: "FK_BlogComment_BlogThread_BlogThreadId",
+                    column: x => x.BlogThreadId,
+                    principalTable: "BlogThread",
+                    principalColumn: "Id",
+                    onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
