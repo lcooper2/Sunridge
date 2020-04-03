@@ -24,11 +24,15 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IClassifiedCategoryRepository ClassifiedCategory { get; }
         IClassifiedListingRepository ClassifiedListing { get; }
         IClassifiedImageRepository ClassifiedImage { get; }
-        IBlogThreadRepository BlogThread { get; }
+
+        IClaimLossRepository ClaimLoss { get; }
+        ICommonAreaAssetRepository CommonAreaAsset { get; }
+    IBlogThreadRepository BlogThread { get; }
         IBlogCommentRepository BlogComment { get; }
         IBlogImageRepository BlogImage { get; }
         IBlogLikeRepository BlogLike { get; }
         IBlogReplyRepository BlogReply { get; }
+        IMaintenanceRepository Maintenance { get; }
         void Save();
     }
 }

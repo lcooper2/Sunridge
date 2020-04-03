@@ -437,6 +437,36 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Board");
                 });
 
+            modelBuilder.Entity("Sunridge.Models.ClaimLoss", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateofIncident")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TimeofIncident")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isAttorney")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClaimLoss");
+                });
+
             modelBuilder.Entity("Sunridge.Models.ClassifiedCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -520,9 +550,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -532,21 +559,41 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int?>("FormResponseId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LotHistoryId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Private")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("FormResponseId");
 
-                    b.HasIndex("LotHistoryId");
-
                     b.ToTable("Comment");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.CommonAreaAsset", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AssetName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("PurchasePrice")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CommonAreaAssets");
                 });
 
             modelBuilder.Entity("Sunridge.Models.File", b =>
@@ -810,6 +857,29 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("LotHistory");
                 });
 
+            modelBuilder.Entity("Sunridge.Models.Maintenance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CommonAreaAssetId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Cost")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("DateCompleted")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommonAreaAssetId");
+
+                    b.ToTable("Maintenance");
+                });
+
             modelBuilder.Entity("Sunridge.Models.OwnerLot", b =>
                 {
                     b.Property<int>("Id")
@@ -1015,17 +1085,9 @@ namespace Sunridge.DataAccess.Migrations
 
             modelBuilder.Entity("Sunridge.Models.Comment", b =>
                 {
-                    b.HasOne("Sunridge.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("Sunridge.Models.FormResponse", "FormResponse")
                         .WithMany()
                         .HasForeignKey("FormResponseId");
-
-                    b.HasOne("Sunridge.Models.LotHistory", "LotHistory")
-                        .WithMany("Comments")
-                        .HasForeignKey("LotHistoryId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.File", b =>
@@ -1075,6 +1137,15 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasOne("Sunridge.Models.Lot", "Lot")
                         .WithMany("LotHistories")
                         .HasForeignKey("LotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Sunridge.Models.Maintenance", b =>
+                {
+                    b.HasOne("Sunridge.Models.CommonAreaAsset", "CommonAreaAsset")
+                        .WithMany()
+                        .HasForeignKey("CommonAreaAssetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
