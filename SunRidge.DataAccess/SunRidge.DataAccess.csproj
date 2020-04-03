@@ -6,17 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200402222222_claimlossmodel.cs" />
-    <Compile Remove="Migrations\20200402222222_claimlossmodel.Designer.cs" />
-    <Compile Remove="Migrations\20200402222539_claimlossmodelfix.cs" />
-    <Compile Remove="Migrations\20200402222539_claimlossmodelfix.Designer.cs" />
-    <Compile Remove="Migrations\20200402225647_claimlossmodelfix3.cs" />
-    <Compile Remove="Migrations\20200402225647_claimlossmodelfix3.Designer.cs" />
-    <Compile Remove="Migrations\20200402231926_findtherror.cs" />
-    <Compile Remove="Migrations\20200402231926_findtherror.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.3" />
