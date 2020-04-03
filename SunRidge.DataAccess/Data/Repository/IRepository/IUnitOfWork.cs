@@ -32,6 +32,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IBlogImageRepository BlogImage { get; }
         IBlogLikeRepository BlogLike { get; }
         IBlogReplyRepository BlogReply { get; }
+        IMaintenanceRepository Maintenance { get; }
         void Save();
     }
 }
