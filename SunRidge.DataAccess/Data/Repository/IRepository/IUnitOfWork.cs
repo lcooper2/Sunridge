@@ -24,6 +24,9 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IClassifiedCategoryRepository ClassifiedCategory { get; }
         IClassifiedListingRepository ClassifiedListing { get; }
         IClassifiedImageRepository ClassifiedImage { get; }
+
+        IClaimLossRepository ClaimLoss { get; }
+
         IBlogThreadRepository BlogThread { get; }
         IBlogCommentRepository BlogComment { get; }
         IBlogImageRepository BlogImage { get; }

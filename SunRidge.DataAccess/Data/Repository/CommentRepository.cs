@@ -21,8 +21,8 @@ namespace Sunridge.DataAccess.Data.Repository
             obJFromDb.Content = comment.Content;
             obJFromDb.Date = comment.Date;
             obJFromDb.Private = comment.Private;
-            obJFromDb.LotHistory = comment.LotHistory;
-            obJFromDb.LotHistoryId = comment.LotHistoryId;
+            //obJFromDb.LotHistory = comment.LotHistory;
+            //obJFromDb.LotHistoryId = comment.LotHistoryId;
             obJFromDb.FormResponse = comment.FormResponse;
             obJFromDb.FormResponseId = comment.FormResponseId;
 

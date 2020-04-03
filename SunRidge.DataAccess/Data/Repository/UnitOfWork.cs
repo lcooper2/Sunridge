@@ -35,6 +35,7 @@ namespace Sunridge.DataAccess.Data.Repository
             BlogImage = new BlogImageRepository(_db);
             BlogLike = new BlogLikeRepository(_db);
             BlogReply = new BlogReplyRepository(_db);
+            ClaimLoss = new ClaimLossRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -63,7 +64,9 @@ namespace Sunridge.DataAccess.Data.Repository
         public IBlogLikeRepository BlogLike { get; private set; }
         public IBlogReplyRepository BlogReply { get; private set; }
 
-       
+        public IClaimLossRepository ClaimLoss { get; private set; }
+
+
         public void Dispose()
         {
             //throw new NotImplementedException();
