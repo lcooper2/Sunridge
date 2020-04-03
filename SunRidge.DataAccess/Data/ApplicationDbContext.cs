@@ -14,6 +14,7 @@ namespace Sunridge.DataAccess.Data
         public DbSet<ApplicationUser> ApplicationUser {get; set;}
         public DbSet<Banner> Banner { get; set; }
         public DbSet<LostAndFound> LostAndFound { get; set; }
+        public DbSet<LostAndFoundImage> LostAndFoundImage { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<Key> Key { get; set; }
         public DbSet<KeyHistory> KeyHistory { get; set; }
