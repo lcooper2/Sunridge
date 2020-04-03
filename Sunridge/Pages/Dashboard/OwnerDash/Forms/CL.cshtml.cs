@@ -58,10 +58,12 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             }
             if (FormResObj.ClaimLoss.Id == 0)
             {
+                FormResObj.ClaimLoss.Type = "CL";
                 _unitOfWork.ClaimLoss.Add(FormResObj.ClaimLoss);
             }
             else
             {
+                FormResObj.ClaimLoss.Type = "CL";
                 _unitOfWork.ClaimLoss.Update(FormResObj.ClaimLoss);
             }
             _unitOfWork.Save();

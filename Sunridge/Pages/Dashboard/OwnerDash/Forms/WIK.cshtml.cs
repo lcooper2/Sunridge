@@ -26,7 +26,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             if (claim != null)
             {
-                //FormResObj.InKindWorkHours = _unitOfWork.InKindWorkHours.GetFirstOrDefault(u => u.ApplicationUserId == claim.Value);
+                FormResObj.ApplicationUser = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value);
                 if (id != null)
                 {
                     FormResObj = _unitOfWork.InKindWorkHours.GetFirstOrDefault(u => u.Id == id);
@@ -51,10 +51,12 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             }
             if (FormResObj.Id == 0)
             {
+                FormResObj.Type = "WIK";
                 _unitOfWork.InKindWorkHours.Add(FormResObj);
             }
             else
             {
+                FormResObj.Type = "WIK";
                 _unitOfWork.InKindWorkHours.Update(FormResObj);
             }
             _unitOfWork.Save();
