@@ -19,7 +19,7 @@
                 <p class="card-text"><i class="far fa-clock pr-2"></i>@thread.WhenPosted.ToShortTimeString()</p>
             </div>
         </div>
-
+        
         <div class="view overlay">
             <p class="card-text p-1 m-1">Recently, we added several exotic new dishes to our restaurant menu. They come from countries such as Mexico, Argentina, and Spain. Come to us, have some delicious wine and enjoy our juicy meals from around the world.</p>
 
@@ -37,14 +37,31 @@
                         <button class="btn text-info" onclick="LikeThread(@thread.BlogComments[0].Id)"><i class="far fa-thumbs-up text-info p-1 my-1">&nbsp;Like&nbsp;</i></button>
                     </div>
                     <div class="col-6 text-center">
-                        <button class="btn text-info"><i class="far fa-comment text-info p-1 my-1 mr-3">&nbsp;Comment</i></button>
+                        <button class="btn text-info comment" onclick="showCommentBox(@thread.Id)"><i class="far fa-comment text-info p-1 my-1 mr-3">&nbsp;Comment</i></button>
                     </div>
                 </div>
                 <hr />
+                @if (thread.BlogComments != null) {
+                @foreach (var comment in thread.BlogComments)
+                {
+                    <div class="btn btn-info rounded">
+                        <p><strong>@thread.ApplicationUser.FullName</strong><br />@comment.BlogCommentText</p>
+                    </div>
+                }
+                    }
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-12">
+                        <div id="box(@thread.Id)"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <br />
 }
-
-<script src="~/js/blog.js"></script>
+@section Scripts {
+    <script src="~/js/blog.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+}

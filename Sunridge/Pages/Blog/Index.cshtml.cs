@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
@@ -9,6 +9,7 @@ using Sunridge.Models;
 
 namespace Sunridge.Pages.Blog
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -23,7 +24,7 @@ namespace Sunridge.Pages.Blog
         public void OnGet()
         {
             //BlogThreads = new List<BlogThread>();
-            //ApplicationUser user = _unitOfWork.ApplicationUser.Get("da7e33e7-b1c5-464d-b52c-a0b6e8da5188");
+            //ApplicationUser user = _unitOfWork.ApplicationUser.Get("15857644-50f9-4a4f-98f1-7b868c59c95a");
             //BlogThread thread1 = new BlogThread();
             //thread1.ApplicationUserId = user.Id;
             //thread1.ApplicationUser = user;

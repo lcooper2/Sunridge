@@ -25,21 +25,44 @@ namespace Sunridge.Controllers
         }
 
         [HttpPost]
-        // Method is called OnPostLikeThread, but it really just likes the
-        // chronologically first comment in a thread, which is the users.
         public void OnPostLikeThread(int id)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
             if(claim == null){ return; }
+
+            var userHasAlreadyLiked = _unitOfWork.BlogLike.GetFirstOrDefault
+                (bl => bl.BlogCommentId == id && bl.ApplicationUserId == claim.Value) != null ? true : false;
+
+            // Prevent a post from being liked multiple times
+            if(userHasAlreadyLiked) { return; }
 
             BlogLike like = new BlogLike()
             {
                 ApplicationUserId = claim.Value,
                 BlogCommentId = id
             };
+
             _unitOfWork.BlogLike.Add(like);
+            _unitOfWork.Save();
+        }
+
+        [HttpPost]
+        public void OnPostComment(string comment, int threadId)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            if (claim == null) { return; }
+
+            BlogComment blogComment = new BlogComment()
+            {
+                ApplicationUserId = claim.Value,
+                BlogThreadId = threadId,
+                BlogCommentText = comment,
+                WhenPosted = DateTime.Now
+            };
+
+            _unitOfWork.BlogComment.Add(blogComment);
             _unitOfWork.Save();
         }
     }
