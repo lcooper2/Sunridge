@@ -9,6 +9,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IApplicationUserRepository ApplicationUser { get; }
         IBannerRepository Banner { get; }
         ILostAndFoundRepository LostAndFound { get; }
+        ILostAndFoundImageRepository LostAndFoundImage { get; }
         IAddressRepository Address { get; }
         IKeyRepository Key { get; }
         IKeyHistoryRepository KeyHistory { get; }
@@ -23,11 +24,15 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IClassifiedCategoryRepository ClassifiedCategory { get; }
         IClassifiedListingRepository ClassifiedListing { get; }
         IClassifiedImageRepository ClassifiedImage { get; }
-        IBlogThreadRepository BlogThread { get; }
+
+        IClaimLossRepository ClaimLoss { get; }
+        ICommonAreaAssetRepository CommonAreaAsset { get; }
+    IBlogThreadRepository BlogThread { get; }
         IBlogCommentRepository BlogComment { get; }
         IBlogImageRepository BlogImage { get; }
         IBlogLikeRepository BlogLike { get; }
         IBlogReplyRepository BlogReply { get; }
+        IMaintenanceRepository Maintenance { get; }
         void Save();
     }
 }

@@ -16,6 +16,7 @@ namespace Sunridge.DataAccess.Data.Repository
             ApplicationUser = new ApplicationUserRepository(_db);
             Banner = new BannerRepository(_db);
             LostAndFound = new LostAndFoundRepository(_db);
+            LostAndFoundImage = new LostAndFoundImageRepository(_db);
             Key = new KeyRepository(_db);
             KeyHistory = new KeyHistoryRepository(_db);
             Lot = new LotRepository(_db);
@@ -34,11 +35,15 @@ namespace Sunridge.DataAccess.Data.Repository
             BlogImage = new BlogImageRepository(_db);
             BlogLike = new BlogLikeRepository(_db);
             BlogReply = new BlogReplyRepository(_db);
+            ClaimLoss = new ClaimLossRepository(_db);
+            CommonAreaAsset = new CommonAreaAssetRepository(_db);
+            Maintenance = new MaintenanceRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
         public IBannerRepository Banner { get; private set; }
         public ILostAndFoundRepository LostAndFound { get; private set; }
+        public ILostAndFoundImageRepository LostAndFoundImage { get; private set; }
         public IAddressRepository Address { get; private set; }
         public IBoardRepository Board { get; private set; }
 
@@ -55,12 +60,16 @@ namespace Sunridge.DataAccess.Data.Repository
         public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
         public IClassifiedListingRepository ClassifiedListing { get; private set; }
         public IClassifiedImageRepository ClassifiedImage { get; private set; }
+        public ICommonAreaAssetRepository CommonAreaAsset { get; private set; }
         public IBlogThreadRepository BlogThread { get; private set; }
         public IBlogCommentRepository BlogComment { get; private set; }
         public IBlogImageRepository BlogImage { get; private set; }
         public IBlogLikeRepository BlogLike { get; private set; }
         public IBlogReplyRepository BlogReply { get; private set; }
 
+        public IClaimLossRepository ClaimLoss { get; private set; }
+
+        public IMaintenanceRepository Maintenance { get; private set; }
 
         public void Dispose()
         {
