@@ -18,26 +18,7 @@
             <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
                 <h2 class="text-primary">@(Model.FormResObj.Id != 0 ? "Update" : "Create") Form</h2>
             </div>
-            <div class="col-8 pt-3">
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="FormResObj.Description"></label>
-                    </div>
-                    <div class="col-9">
-                        <textarea class="form-control" asp-for="FormResObj.Description" id="txtDesc" style="height:200px;"></textarea>
-
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="FormResObj.Suggestion"></label>
-                    </div>
-                    <div class="col-9">
-                        <textarea class="form-control" asp-for="FormResObj.Suggestion" id="txtDesc" style="height:200px;"></textarea>
-
-                    </div>
-                </div>
-
+            
                 <div class="form-group row">
                     <div class="col-9 offset-3">
                         <div class="row">

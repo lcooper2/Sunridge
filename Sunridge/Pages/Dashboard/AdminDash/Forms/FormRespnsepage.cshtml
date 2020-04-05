@@ -5,39 +5,40 @@
 }
 
 <h1>Form Response page</h1>
-@foreach (var response in Model.FormList)
+<!--
+foreach (var response in //Models.FormResObj.FormResponse)
 {
     <h2 class="text-success pl-1"><b>Unresolved Forms</b></h2>
-    @if (Model.FormList.Where(c => c.Resolved == false).Count() > 0)
+    if (///Model.FormResObj.FormResponse.Where(c => c.Resolved == false).Count() > 0)
     {
         <div class="row container pb-3 backgroundWhite">
             <div class="col-12">
                 <div class="row">
-                    <h2 class="text-success pl-1"><b>@response.FormType</b></h2>
+                    <h2 class="text-success pl-1"><b>response.FormType</b></h2>
                 </div>
                 <div class="col-12">
                     <div class="row my-3">
-                      
+
                     </div>
                 </div>
 
             </div>
         </div>
     }
-    @if (Model.FormList.Where(c => c.Resolved == true).Count() > 0)
+    //if //(Model.FormResObj.Where(c => c.Resolved == true).Count() > 0)
     {
         <div class="row container pb-3 backgroundWhite">
             <div class="col-12">
                 <div class="row">
-                    <h2 class="text-success pl-1"><b>@response.FormType</b></h2>
+                    <h2 class="text-success pl-1"><b>response.FormType</b></h2>
                 </div>
                 <div class="col-12">
                     <div class="row my-3">
-                       
+
                     </div>
                 </div>
 
             </div>
         </div>
     }
-}
+}-->
