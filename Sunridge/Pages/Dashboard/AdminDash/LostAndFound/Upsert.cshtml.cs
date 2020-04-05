@@ -96,7 +96,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
                 // upload to path
                 var uploads = Path.Combine(webRootPath, @"Images\LostAndFoundImages");
 
-                int i = 0;
+                
 
                 foreach (var file in files)
 
@@ -205,10 +205,10 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
                     {
                         LAFObj.ClaimedDate = DateTime.Now;
                     }
-                    _unitOfWork.LostAndFound.Update(LAFObj);
+                    
 
                 }
-
+                _unitOfWork.LostAndFound.Update(LAFObj);
             }
 
             _unitOfWork.Save();
