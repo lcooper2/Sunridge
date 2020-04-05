@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Sunridge.Models
@@ -27,6 +28,8 @@ namespace Sunridge.Models
             ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
         public DateTime? ClaimedDate { get; set; }
 
+        [NotMapped]
+        public List<LostAndFoundImage> Images { get; set; }
 
     }
 }

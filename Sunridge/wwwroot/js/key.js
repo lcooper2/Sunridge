@@ -22,7 +22,7 @@ function loadList() {
                         <a href= "/Dashboard/AdminDash/Key/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                             <i class="far fa edit"></i> Edit   
                                 </a>
-                        <a href= "/Dashboard/AdminDash/Key/History/History" class="btn btn-primary text-white" style="cursor:pointer; width:100px;">
+                        <a href= "/Dashboard/AdminDash/Key/History/History?id=${data}" class="btn btn-primary text-white" style="cursor:pointer; width:100px;">
                             <i class="fas fa-history"></i> History   
                                 </a>
                         <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/key/'+${data})>

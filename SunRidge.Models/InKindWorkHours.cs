@@ -10,14 +10,17 @@ namespace Sunridge.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Description { get; set; }
+        public string Activity { get; set; }
+
+        public string Equipment { get; set; }
         public double? Hours { get; set; }
         public string Type { get; set; }
-       
-        //Nav properties
-        [Display(Name = "Form Response")]
-        public int FormResponseId { get; set; }
-        [ForeignKey("FormResponseId")]
-        public FormResponse FormResponse { get; set; }
+
+        [Display(Name = "Application User")]
+        public string ApplicationUserId { get; set; }
+        
+        [NotMapped]
+        [ForeignKey("ApplicationUserId")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

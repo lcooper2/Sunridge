@@ -13,6 +13,7 @@ function loadList() {
         },
         "columns": [
             { "data": "lotNumber", "width": "35%" },
+            { "data": "address.FullAddress", "width": "20%" },
             { "data": "taxId", "width": "20%" },
             { "data": "isArchive", "width": "10%" },
             { "data": "lastModifiedBy", "width": "10%" },

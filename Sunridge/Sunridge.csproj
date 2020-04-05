@@ -28,9 +28,9 @@
 
 
   <ItemGroup>
-    <Folder Include="Pages\Dashboard\AdminDash\Forms\" />
     <Folder Include="wwwroot\Images\BannerImages\" />
     <Folder Include="wwwroot\Images\BoardImages\" />
+    <Folder Include="wwwroot\Images\LostAndFoundImages\" />
   </ItemGroup>
 
 </Project>

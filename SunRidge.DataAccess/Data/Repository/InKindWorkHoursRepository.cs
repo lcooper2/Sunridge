@@ -15,16 +15,29 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             _db = db;
         }
-
+        public IEnumerable<InKindWorkHours> GetWikListForDropDown()
+        {
+            return _db.InKindWorkHours.Select(i => new InKindWorkHours()
+            {
+                Activity = i.Activity,
+                Id = i.Id,
+                Equipment = i.Equipment,
+                Hours = i.Hours,
+                Type = i.Type,
+                ApplicationUserId = i.ApplicationUserId,
+                ApplicationUser = i.ApplicationUser,
+            });
+        }
         public void Update(InKindWorkHours inKindWorkHours)
         {
             var obJFromDb = _db.InKindWorkHours.FirstOrDefault(s => s.Id == inKindWorkHours.Id);
 
-            obJFromDb.Description = inKindWorkHours.Description;
+            obJFromDb.Activity = inKindWorkHours.Activity;
+            obJFromDb.Equipment = inKindWorkHours.Equipment;
             obJFromDb.Hours = inKindWorkHours.Hours;
             obJFromDb.Type = inKindWorkHours.Type;
-            obJFromDb.FormResponseId = inKindWorkHours.FormResponseId;
-
+            obJFromDb.ApplicationUserId = inKindWorkHours.ApplicationUserId;
+            obJFromDb.ApplicationUser = inKindWorkHours.ApplicationUser;
             _db.SaveChanges();
 
 
