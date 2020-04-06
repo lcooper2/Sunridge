@@ -21,17 +21,17 @@ namespace Sunridge.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.LotHistory.GetAll(null, null, "Lot") });
+            return Json(new { data = _unitOfWork.OwnerLot.GetAll(null, null, "ApplicationUser,Lot") });
         }
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var objFromDb = _unitOfWork.LotHistory.GetFirstOrDefault(u => u.Id == id);
+            var objFromDb = _unitOfWork.OwnerLot.GetFirstOrDefault(u => u.Id == id);
             if (objFromDb == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }
-            _unitOfWork.LotHistory.Remove(objFromDb);
+            _unitOfWork.OwnerLot.Remove(objFromDb);
             _unitOfWork.Save();
             return Json(new { success = true, message = "Delete Successful" });
         }

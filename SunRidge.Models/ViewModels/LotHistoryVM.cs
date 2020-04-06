@@ -7,7 +7,7 @@ namespace Sunridge.Models.ViewModels
 {
     public class LotHistoryVM
     {
-        public LotHistory LotHistory { get; set; }
+        public OwnerLot OwnerLot { get; set; }
         public IEnumerable<SelectListItem> LotList { get; set; }
 
         public IEnumerable<SelectListItem> UserList { get; set; }

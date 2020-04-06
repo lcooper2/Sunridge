@@ -30,12 +30,12 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Lots.History
                 LotList = _unitOfWork.Lot.GetLotListForDropDown(),
                 UserList = _unitOfWork.ApplicationUser.GetUserListForDropDown(),
 
-                LotHistory = new Models.LotHistory()
+                OwnerLot = new Models.OwnerLot()
             };
             if (id != null)
             {
-                LotHistObj.LotHistory = _unitOfWork.LotHistory.GetFirstOrDefault(u => u.Id == id);
-                LotHistObj.LotHistory.LastModifiedDate = DateTime.Now;
+                LotHistObj.OwnerLot = _unitOfWork.OwnerLot.GetFirstOrDefault(u => u.Id == id);
+                //LotHistObj.OwnerLot.LastModifiedDate = DateTime.Now;
                 if (LotHistObj == null)
                 {
                     return NotFound();
@@ -49,13 +49,13 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Lots.History
             {
                 return Page();
             }
-            if (LotHistObj.LotHistory.Id == 0)
+            if (LotHistObj.OwnerLot.Id == 0)
             {
-                _unitOfWork.LotHistory.Add(LotHistObj.LotHistory);
+                _unitOfWork.OwnerLot.Add(LotHistObj.OwnerLot);
             }
             else
             {
-                _unitOfWork.LotHistory.Update(LotHistObj.LotHistory);
+                _unitOfWork.OwnerLot.Update(LotHistObj.OwnerLot);
             }
             _unitOfWork.Save();
             return RedirectToPage("./History");
