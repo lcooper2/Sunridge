@@ -21,7 +21,7 @@ namespace Sunridge.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.KeyHistory.GetAll() });
+            return Json(new { data = _unitOfWork.KeyHistory.GetAll(null, null, "Key,Lot") });
         }
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
