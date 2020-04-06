@@ -37,6 +37,7 @@ namespace Sunridge.DataAccess.Data
         public DbSet<BlogReply> BlogReply { get; set; }
         public DbSet<Maintenance> Maintenance { get; set; }
         public DbSet<ClaimLoss> ClaimLoss { get; set; }
+        public DbSet<ScheduledEvent> ScheduledEvent { get; set; }
 
     }
 }
