@@ -1,0 +1,252 @@
+﻿@page
+@model Sunridge.Pages.Dashboard.OwnerDash.Owner.ProfileModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h4>@ViewData["Title"]</h4>
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" asp-action="Profile" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ApplicationUser.Id" />
+            <div id="nonEdited" style="display:block">
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div style="display:block">
+                            <label asp-for="ApplicationUser.FullName"></label>
+                            <b>: @Model.ApplicationUser.FullName</b>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+                            <label asp-for="ApplicationUser.UserName"></label>
+                            <b>: @Model.ApplicationUser.UserName</b>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+                            <label asp-for="ApplicationUser.PhoneNumber"></label>
+                            @if (Model.ApplicationUser.PhoneNumber != null)
+                            {
+                                <b>: @Model.ApplicationUser.PhoneNumber</b>
+                            }
+                            else
+                            {
+                                <b class="text-danger">: No Phone Number Listed</b>
+                            }
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+                            <label asp-for="ApplicationUser.Birthday"></label>
+                            <b>: @Model.ApplicationUser.Birthday</b>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+
+                            <label asp-for="ApplicationUser.EmergencyContactName"></label>
+                            @if (Model.ApplicationUser.EmergencyContactName != null)
+                            {
+                                <b>: @Model.ApplicationUser.EmergencyContactName</b>
+                            }
+                            else
+                            {
+                                <b class="text-danger">: No Emergency Contact Listed</b>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+                            <label asp-for="ApplicationUser.EmergencyContactPhone"></label>
+                            @if (Model.ApplicationUser.EmergencyContactPhone != null)
+                            {
+                                <b>: @Model.ApplicationUser.EmergencyContactPhone</b>
+                            }
+                            else
+                            {
+                                <b class="text-danger">: No Emergency Contact Listed</b>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+                            <label asp-for="ApplicationUser.ReceiveEmails"></label>
+                            @if (Model.ApplicationUser.ReceiveEmails != null)
+                            {
+                                <b>: @Model.ApplicationUser.ReceiveEmails</b>
+                            }
+                            else
+                            {
+                                <b class="text-danger">: Not Selected</b>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+                
+                <div class="form-group row">
+
+                    <div class="col-7 offset-3">
+
+                        <div class="row">
+
+                            <div class="col-6">
+                                <b onclick="Edit();" class="btn btn-warning ">Edit</b>
+                            </div>
+
+                            @*<div class="col-6">
+                                <a asp-page="./Index" class="btn btn-success form-control">Back To List</a>
+                            </div>*@
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            @* Edited display *@
+            <div id="Edit" style="display:none">
+                <div class="form-group row border">
+                    <div class="col-9">
+
+                        <div style="display:block">
+                            <label asp-for="ApplicationUser.FirstName"></label>
+                            <input class="text-info" asp-for="ApplicationUser.FirstName" /><br />
+                            <label asp-for="ApplicationUser.LastName"></label>
+                            <input class="text-info" asp-for="ApplicationUser.LastName" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+
+                            <label asp-for="ApplicationUser.UserName"></label>
+                            <input class="text-info" asp-for="ApplicationUser.UserName" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+
+                            <label asp-for="ApplicationUser.PhoneNumber"></label>
+                            <input class="text-info" asp-for="ApplicationUser.PhoneNumber" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+
+                            <label asp-for="ApplicationUser.Birthday"></label>
+                            <input class="text-info" asp-for="ApplicationUser.Birthday" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+
+
+                            <label asp-for="ApplicationUser.EmergencyContactName"></label>
+                            <input class="text-info" asp-for="ApplicationUser.EmergencyContactName" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+
+                            <label asp-for="ApplicationUser.EmergencyContactPhone"></label>
+                            <input class="text-info" asp-for="ApplicationUser.EmergencyContactPhone" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+
+                            <label asp-for="ApplicationUser.ReceiveEmails"></label>
+                            <table>
+                                <tr>
+                                    <td>yes</td>
+                                    <td> <input type="radio" class="form-control" asp-for="ApplicationUser.ReceiveEmails" value="true"></td>
+                                </tr>
+                                <tr>
+                                    <td>no </td>
+                                    <td><input type="radio" class="form-control" asp-for="ApplicationUser.ReceiveEmails" value="false" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+               
+                <br />
+                <div class="form-group row">
+
+                    <div class="col-7 offset-3">
+
+                        <div class="row">
+
+                            @*<div class="col-6">
+                                <button type="submit" class="btn btn-primary form-control">Update</button>
+                            </div>*@
+
+                            @*<div class="col-6">
+                                <a asp-page="./Index" class="btn btn-success form-control">Back To List</a>
+                            </div>*@
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    function Edit() {
+        var x = document.getElementById("nonEdited")
+        x.style.display = "none";
+        var y = document.getElementById("Edit")
+        y.style.display = "block";
+    }
+</script>

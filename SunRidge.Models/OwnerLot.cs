@@ -25,6 +25,7 @@ namespace Sunridge.Models
 
         [Display(Name = "Lot")]
         public int LotId { get; set; }
+
         [ForeignKey("LotId")]
         public Lot Lot { get; set; }
     }
