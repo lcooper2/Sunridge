@@ -12,9 +12,8 @@ function loadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "fullName", "width": "25%" },
-            { "data": "email", "width": "25%" },
-            { "data": "phoneNumber", "width": "25%" },
+            { "data": "fullName", "width": "30%" },
+            { "data": "userName", "width": "30%" },
             {
                 "data": {
                     id: "id", lockoutEnd: "lockoutEnd"
@@ -28,40 +27,45 @@ function loadList() {
                         return ` <div class="text-center">
                         <a class="btn btn-danger text-white"onclick = "LockUnlock('${data.id}')"  style="cursor:pointer; width:100px;">
                             <i class="fas fa-lock-open" ></i> Unlock
+                        </a>
+                        <a href= "/Dashboard/AdminDash/User/Profile?id=${data.id}" class="btn btn-primary text-white" style="cursor:pointer; width:75px;">
+                            <i class="fas fa-history"></i>Info   
                         </a></div>`;
                     }
-                    else
-                    {
+                    else {
                         return ` <div class="text-center">
                         <a class="btn btn-success text-white"onclick = "LockUnlock('${data.id}')"  style="cursor:pointer; width:100px;">
                             <i class="fas fa-lock" ></i> Lock
+                        </a>
+                        <a href= "/Dashboard/AdminDash/User/Profile?id=${data.id}" class="btn btn-primary text-white" style="cursor:pointer; width:75px;">
+                            <i class="fas fa-history"></i>Info   
                         </a></div>`;
                     }
-            },"width": "25%"
+                }, "width": "40%"
             }
         ],
         "language": {
-        "emptyTable": "no data found."
-    },
+            "emptyTable": "no data found."
+        },
         "width": "100%"
     });
 }
 
 function LockUnlock(id) // called LockUnlock function passes provided URL
 {// opening function brace 
-            $.ajax({// opening ajax brace
-                type: 'POST', // sending delete type to the database
-                url: '/api/User', // sends the hard coded api 
-                data: JSON.stringify(id),
-                contentType: "application/json",
-                success: function (data) {// opening function brace // on finising it will send back notification if it worked
-                    if (data.success) {//opening inner if brace  // checks to see if the deletion was successful
-                        toastr.success(data.message); // uses toastr to pop up success message
-                        dataTable.ajax.reload(); // reloads the page
-                    }// closing inner if brace
-                    else {// opening else brace
-                        toastr.error(data.message); // uses toastr to pop up error message
-                    }// closing else brace
-                } // closing function brace
-            });// closing ajax brace
+    $.ajax({// opening ajax brace
+        type: 'POST', // sending delete type to the database
+        url: '/api/User', // sends the hard coded api 
+        data: JSON.stringify(id),
+        contentType: "application/json",
+        success: function (data) {// opening function brace // on finising it will send back notification if it worked
+            if (data.success) {//opening inner if brace  // checks to see if the deletion was successful
+                toastr.success(data.message); // uses toastr to pop up success message
+                dataTable.ajax.reload(); // reloads the page
+            }// closing inner if brace
+            else {// opening else brace
+                toastr.error(data.message); // uses toastr to pop up error message
+            }// closing else brace
+        } // closing function brace
+    });// closing ajax brace
 }// closing function brace
