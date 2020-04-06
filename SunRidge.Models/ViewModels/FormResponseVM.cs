@@ -9,7 +9,7 @@ namespace Sunridge.Models.ViewModels
     {
         public FormResponse FormResponse { get; set; }
 
-        public IEnumerable<InKindWorkHours> WIKList { get; set; }
+        public IEnumerable<FormSubmissions> FSList { get; set; }
 
     }
 }

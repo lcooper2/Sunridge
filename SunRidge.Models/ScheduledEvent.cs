@@ -20,5 +20,7 @@ namespace Sunridge.Models
         [Required]
         [Display(Name = "Full day?")]
         public bool IsFullDay { get; set; }
+
+        
     }
 }

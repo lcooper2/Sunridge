@@ -15,7 +15,6 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             _db = db;
         }
-
         public void Update(FormResponse FormResponse)
         {
             var obJFromDb = _db.FormResponse.FirstOrDefault(s => s.Id == FormResponse.Id);

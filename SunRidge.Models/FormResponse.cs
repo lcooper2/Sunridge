@@ -48,10 +48,15 @@ namespace Sunridge.Models
         [Display(Name = "Resolved by")]
         public string ResolveUser { get; set; }
 
+        [Display(Name = "FormSubmissions")]
+        public int FormSubmissionsId { get; set; }
+        [ForeignKey("FormSubmissionsId")]
+        public virtual FormSubmissions FormSubmissions { get; set; }
+
 
 
         // Nav properties
-       
+
         //public virtual ICollection<Comment> Comments { get; set; }
         //public virtual ICollection<File> Files { get; set; }
         //public virtual Lot Lot { get; set; }
