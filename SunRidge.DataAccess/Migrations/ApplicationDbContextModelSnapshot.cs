@@ -520,6 +520,9 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ItemName")
                         .IsRequired()
                         .HasColumnType("nvarchar(75)")
@@ -527,6 +530,9 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.Property<DateTime>("ListingDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
@@ -629,9 +635,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FormType")
                         .IsRequired()
                         .HasColumnType("nvarchar(3)")
@@ -651,9 +654,6 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.Property<DateTime>("SubmitDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Suggestion")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -909,6 +909,49 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasIndex("LotId");
 
                     b.ToTable("OwnerLot");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.SuggestionComplaint", b =>
+            modelBuilder.Entity("Sunridge.Models.ScheduledEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Complaint")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Suggestion")
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("End")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsFullDay")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SuggestionComplaint");
+                    b.ToTable("ScheduledEvent");
                 });
 
             modelBuilder.Entity("Sunridge.Models.ApplicationUser", b =>

@@ -14,6 +14,7 @@ namespace Sunridge.Models
         //is attorney is filling
         public bool isAttorney { get; set; }
 
+        //public string? AttorneyInfo { get; set; }
         public string Type { get; set; }
 
         public DateTime DateofIncident { get; set; }

@@ -28,6 +28,16 @@ namespace Sunridge.Models
         [StringLength(1000, MinimumLength = 25)]
         public string Description { get; set; }
 
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email Address")]
+        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
+        public string Email { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
+        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
+        public string Phone { get; set; }
+
         [Display(Name = "Listing Date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime ListingDate { get; set; }

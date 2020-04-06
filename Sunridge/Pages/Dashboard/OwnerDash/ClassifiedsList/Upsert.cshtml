@@ -1,0 +1,166 @@
+﻿@page
+@model Sunridge.Pages.Dashboard.OwnerDash.ClassifiedsList.UpsertModel
+@using Sunridge.Utility
+@{
+    ViewData["Title"] = "Classifieds";
+    Layout = "_DashboardLayout";
+}
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
+    <div class="container">
+        <div class="row backgroundWhite border ">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.Listing.Id != 0)
+            {
+                <input type="hidden" asp-for="Listing.Id" />
+            }
+
+            <div class="col-12 px-3" style="border-bottom: 2px solid; border-color: black">
+                <h2 class="text-primary">@(Model.Listing.Id != 0 ? "Update" : "Create") Listing </h2>
+            </div>
+
+
+
+            <div class="col-8 pt-3">
+
+                <div class="form-group row">
+
+                    <div class="col-3">
+                        <label asp-for="Listing.ItemName"></label>
+                    </div>
+
+                    <div class="col-9">
+                        <input class="form-control" asp-for="Listing.ItemName" />
+                        <span class="text-danger" asp-validation-for="Listing.ItemName"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Listing.ClassifiedCategoryId">Listing Category</label>
+                    </div>
+
+                    <div class="col-9">
+                        @Html.DropDownListFor(m => m.Listing.ClassifiedCategoryId,
+                        Model.CategoryList,
+                        new { @class = "form-control" })
+                        <span class="text-danger" asp-validation-for="Listing.ClassifiedCategoryId"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Listing.Price"></label>
+                    </div>
+
+                    <div class="col-9">
+                        <input class="form-control" asp-for="Listing.Price" />
+                        <span class="text-danger" asp-validation-for="Listing.Price"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Listing.Description"></label>
+                    </div>
+                    <div class="col-9">
+                        <textarea class="form-control" asp-for="Listing.Description" id="txtDesc" style="height:200px;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Listing.Phone"></label>
+                    </div>
+
+                    <div class="col-9">
+                        <input class="form-control" asp-for="Listing.Phone" />
+                        <span class="text-danger" asp-validation-for="Listing.Phone"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Listing.Email"></label>
+                    </div>
+
+                    <div class="col-9">
+                        <input class="form-control" asp-for="Listing.Email" />
+                        <span class="text-danger" asp-validation-for="Listing.Email"></span>
+                    </div>
+                </div>
+
+                @if (Model.Listing.Id == 0)
+                {
+                    <div class="form-group row">
+
+                        <div class="col-3">
+                            <label asp-for="Image.ImageURL">Add Image</label>
+                        </div>
+
+                        <div class="col-9">
+                            <input type="file" class="form-control" name="files" id="files" />
+                        </div>
+
+                    </div>
+                }
+
+
+                <div class="form-group row">
+
+                    <div class="col-9 offset-3">
+
+                        <div class="row">
+
+                            <div class="col-6">
+                                @if (Model.Listing.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                                }
+
+                            </div>
+
+                            <div class="col-6">
+                                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            @if (Model.Listing.Id != 0)
+            {
+                <div class="col-md-4 text-right">
+                    <img src="~/@Model.Image.ImageURL" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
+
+                </div>
+            }
+
+        </div>
+        
+
+    </div>
+
+
+</form>
+
+
+@section Scripts {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+    </script>
+}
