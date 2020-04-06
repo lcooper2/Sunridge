@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
+using Sunridge.Models;
 using Sunridge.Models.ViewModels;
 
 namespace Sunridge.Pages.Dashboard.AdminDash.Forms
@@ -13,8 +14,8 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Forms
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        //public IEnumerable<FormResponse> FormList { get; set; }
-
+        public IEnumerable<FormResponse> FormList { get; set; }
+        public IEnumerable<FormSubmissions> SubList { get; set; }
         public FormRespnsepageModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -25,9 +26,11 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Forms
             //FormList = _unitOfWork.FormResponse.GetAll(null, q => q.OrderBy(c => c.Resolved), null);
         public IActionResult OnGet(int? id)
         {
+            SubList = _unitOfWork.FormSubmissions.GetAll(null, q => q.OrderBy(c => c.FormType), null);
+            FormList = _unitOfWork.FormResponse.GetAll(null, null, "FormSubmissions");
             FormResObj = new FormResponseVM
             {
-               // WIKList = _unitOfWork.InKindWorkHours.GetWikListForDropDown(),
+               FSList = _unitOfWork.FormSubmissions.GetFormSubmissionsListForDropDown(),
                 
 
                 FormResponse = new Models.FormResponse()
