@@ -1,0 +1,46 @@
+﻿@page
+@model Sunridge.ImagesModel
+
+<h4>Edit Images for Listing</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @foreach (var item in Model.ClassifiedListing.Images)
+            {
+                <input type="hidden" asp-for="@item.Id" />
+                <div class="form-group">
+                    <img src="~/@item.ImageURL" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger" asp-page-handler="Remove" asp-route-id="@item.ClassifiedListingId">Remove Image</button>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="@item.IsMainImage" /> Primary Image
+                    </label>
+                </div>
+
+                <br />
+            }
+            <div class="form-group card">
+                <div class="font-weight-bold">Add another image: </div>
+                <div class="col-9">
+                    <input type="file" class="form-control-file" name="files" id="files" />
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
