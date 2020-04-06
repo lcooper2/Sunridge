@@ -7,25 +7,22 @@ $(document).ready(function () {
 function loadList() {
     dataTable = $('#DT_Load').DataTable({
         "ajax": {
-            "url": "/api/keyhistory/",
+            "url": "/api/maintenance/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "key.fullSerial", "width": "30%" },
-            { "data": "status", "width": "20%" },
-            { "data": "dateIssued", "width": "20%" },
-            { "data": "dateReturned", "width": "30%" },
-            { "data": "paidAmount", "width": "30%" },
-            { "data": "lot.lotNumber", "width": "30%" },
+            { "data": "commonAreaAsset.assetName", "width": "30%" },
+            { "data": "cost", "width": "20%" },
+            { "data": "dateCompleted", "width": "20%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                        <a href= "/Dashboard/AdminDash/Key/History/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                        <a href= "/Dashboard/AdminDash/CommonArea/Maintenance/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                             <i class="far fa edit"></i> Edit   
                                 </a>
-                        <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/keyhistory/'+${data})>
+                        <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/maintenance/'+${data})>
                             <i class="far fa-trash-alt"></i> Delete
                         </a>
                             </div >`;

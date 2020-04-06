@@ -1,5 +1,7 @@
-﻿using Sunridge.DataAccess.Data.Repository.IRepository;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Sunridge.DataAccess.Data.Repository
@@ -12,7 +14,14 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             _db = db;
         }
-
+        public IEnumerable<SelectListItem> GetCommonAssetListForDropDown()
+        {
+            return _db.CommonAreaAssets.Select(i => new SelectListItem()
+            {
+                Text = i.AssetName,
+                Value = i.Id.ToString()
+            });
+        }
         public void Update(CommonAreaAsset commonAreaAsset)
         {
             var obJFromDb = _db.CommonAreaAssets.FirstOrDefault(s => s.Id == commonAreaAsset.Id);
