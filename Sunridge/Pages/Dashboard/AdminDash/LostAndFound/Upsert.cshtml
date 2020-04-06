@@ -55,8 +55,8 @@
                     </div>
 
                     <div class="col-7">
-                        <input type="file" class="form-control" name="files" id="files" multiple/>
-                        
+                        <input type="file" class="form-control" name="files" id="files" multiple />
+
                     </div>
 
                 </div>
@@ -76,7 +76,7 @@
                                 <td><input type="radio" class="form-control" asp-for="LAFObj.Claimed" value="False" onclick="hide()" /></td>
                             </tr>
                         </table>
-                        
+
                     </div>
 
                 </div>
@@ -129,17 +129,29 @@
 </form>
 
 
+<script>
+    function hide() {
+        var x = document.getElementById("Claimed");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        }
+    }
+    function unhide() {
+        var x = document.getElementById("Claimed");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        }
+    }
+</script>
+
+@section Scripts {
     <script>
-        function hide() {
-            var x = document.getElementById("Claimed");
-            if (x.style.display === "block") {
-                x.style.display = "none";
-            } 
-        }
-            function unhide() {
-            var x = document.getElementById("Claimed");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } 
-        }
+        tinymce.init(
+            {
+                selector: 'textarea',
+                plugins: 'lists',
+                menubar: 'file edit format'
+            });
+
     </script>
+}

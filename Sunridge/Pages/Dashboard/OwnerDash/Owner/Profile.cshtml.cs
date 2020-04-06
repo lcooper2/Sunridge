@@ -44,15 +44,9 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Owner
         private async Task LoadAsync(IdentityUser user)
         {
             var applicationUser = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Id == user.Id);
-            //var userName = await _userManager.GetUserNameAsync(user);
-            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
-            //Username = userName;
-            //ApplicationUser = applicationUser;
-            //Input = new InputModel
-            //{
-            //    PhoneNumber = phoneNumber
-            //};
+            ApplicationUser = applicationUser;
+
         }
 
         public async Task<IActionResult> OnGetAsync()
