@@ -940,7 +940,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<string>("Complaint")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Suggestion")
+                    b.Property<string>("Suggestion");
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
