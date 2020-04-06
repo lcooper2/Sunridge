@@ -27,13 +27,14 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
 
         IClaimLossRepository ClaimLoss { get; }
         ICommonAreaAssetRepository CommonAreaAsset { get; }
-    IBlogThreadRepository BlogThread { get; }
+        IBlogThreadRepository BlogThread { get; }
         IBlogCommentRepository BlogComment { get; }
         IBlogImageRepository BlogImage { get; }
         IBlogLikeRepository BlogLike { get; }
         IBlogReplyRepository BlogReply { get; }
         IMaintenanceRepository Maintenance { get; }
         ISuggestionComplaintRepository SuggestionComplaint { get; }
-    void Save();
+        IScheduledEventRepository ScheduledEvent { get; }
+        void Save();
     }
 }
