@@ -13,6 +13,8 @@ namespace Sunridge.Models
 
         public DateTime SubmitDate { get; set;}
 
+        public string FormType { get; set; }
+
         /*To port info of person who is filling */
         [Display(Name = "FormId")]
         public string FormId { get; set; }

@@ -19,19 +19,17 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
 
         }
         [BindProperty]
-        public Models.FormResponse FormResObj { get; set; }
+        public Models.SuggestionComplaint FormResObj { get; set; }
         public IActionResult OnGet(int? id)
         {
-            FormResObj = new Models.FormResponse();
+            FormResObj = new Models.SuggestionComplaint();
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             if (id != null)
             {
-                FormResObj = _unitOfWork.FormResponse.GetFirstOrDefault(u => u.Id == id);
-                FormResObj.FormType = "SC";
-                FormResObj.SubmitDate = DateTime.Now;
-                FormResObj.Resolved = false;
-                FormResObj.ResolveUser = "N/A";
-                FormResObj.PrivacyLevel = "None";
-                //FormResObj.ApplicationUserId = claim.Value;
+                FormResObj = _unitOfWork.SuggestionComplaint.GetFirstOrDefault(u => u.Id == id);
+              
+                FormResObj.ApplicationUserId = claim.Value;
                 if (FormResObj == null)
                 {
                     return NotFound();
@@ -49,11 +47,11 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             }
             if (FormResObj.Id == 0)
             {
-                _unitOfWork.FormResponse.Add(FormResObj);
+                _unitOfWork.SuggestionComplaint.Add(FormResObj);
             }
             else
             {
-                _unitOfWork.FormResponse.Update(FormResObj);
+                _unitOfWork.SuggestionComplaint.Update(FormResObj);
             }
             _unitOfWork.Save();
             return RedirectToPage("./Index");
