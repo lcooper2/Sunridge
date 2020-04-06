@@ -1,4 +1,5 @@
-﻿using Sunridge.DataAccess.Data.Repository.IRepository;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,15 @@ namespace Sunridge.DataAccess.Data.Repository
         public ClassifiedImageRepository (ApplicationDbContext db) : base(db)
         {
             _db = db;
+        }
+
+        public IEnumerable<SelectListItem> GetImageListForDropDown(int? id)
+        {
+            return _db.ClassifiedImage.Where(c => c.ClassifiedListingId == id).Select(m => new SelectListItem()
+            {
+                Text = m.ImageURL,
+                Value = m.Id.ToString()
+            });
         }
 
         public void Update(ClassifiedImage classifiedImage)

@@ -41,6 +41,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.ClassifiedsList
                 UserId = _userManager.GetUserId(User)
             };
             CategoryList = _unitOfWork.ClassifiedCategory.GetCategoryListForDropDown();
+            Image = new ClassifiedImage();
 
             if (id != null)
             {
@@ -50,7 +51,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.ClassifiedsList
                     return NotFound();
                 }
 
-                Image = _unitOfWork.ClassifiedImage.GetFirstOrDefault(u => u.ClassifiedListingId == Listing.Id);
+                Image = _unitOfWork.ClassifiedImage.GetAll(u => u.IsMainImage == true).FirstOrDefault(c => c.ClassifiedListingId == Listing.Id);
 
             }
             return Page();
@@ -110,35 +111,6 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.ClassifiedsList
             else
             {
                 _unitOfWork.ClassifiedListing.Update(Listing);
-                _unitOfWork.Save();
-                //Now that the listing is in the DB, we can get its Id to match to a new
-                //classifiedimage obj
-                if (files.Count > 0)
-                {
-                    var objFromDb = _unitOfWork.ClassifiedListing.Get(Listing.Id);
-                    string fileName = Guid.NewGuid().ToString();
-
-                    var uploads = Path.Combine(webRootPath, @"Images\ClassifiedsImages\");
-
-                    var extension = Path.GetExtension(files[0].FileName);
-
-                    Image = _unitOfWork.ClassifiedImage.GetFirstOrDefault(u => u.ClassifiedListingId == Listing.Id);
-
-                    var imagePath = Path.Combine(webRootPath, Image.ImageURL.TrimStart('\\'));
-
-                    if (System.IO.File.Exists(imagePath))
-                    {
-                        System.IO.File.Delete(imagePath);
-                    }
-
-                    using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                    {
-                        files[0].CopyTo(fileStream);
-                    }
-
-                    Image.ImageURL = @"Images\ClassifiedsImages\" + fileName + extension;
-                    _unitOfWork.ClassifiedImage.Update(Image);
-                }
             }
 
             _unitOfWork.Save();

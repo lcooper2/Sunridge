@@ -56,7 +56,7 @@ namespace Sunridge
             _unitOfWork.Save();
             return RedirectToPage("Images", new { id = ClassifiedListing.Id });
         }
-        public IActionResult OnPost()
+        public IActionResult OnPost(int? Id)
         {
             string webRootPath = _hostingEnvironment.WebRootPath;
             var files = HttpContext.Request.Form.Files;
@@ -82,8 +82,12 @@ namespace Sunridge
                 _unitOfWork.ClassifiedImage.Add(Image);
             }
 
+            foreach (var item in ClassifiedListing.Images)
+            {
+                _unitOfWork.ClassifiedImage.Update(item);
+            }
             _unitOfWork.Save();
-            return RedirectToPage("Images", new { id = ClassifiedListing.Id });
+            return RedirectToPage("Images", new { id = Id });
         }
 
         private bool ClassifiedImageExists(int id)

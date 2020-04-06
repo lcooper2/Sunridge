@@ -4,22 +4,26 @@
 <h4>Edit Images for Listing</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @foreach (var item in Model.ClassifiedListing.Images)
+            @for (int i = 0; i < Model.ClassifiedListing.Images.Count; i++)
             {
-                <input type="hidden" asp-for="@item.Id" />
+                <input type="hidden" asp-for="@Model.ClassifiedListing.Images[i].Id" />
+                <input type="hidden" asp-for="@Model.ClassifiedListing.Images[i].ClassifiedListingId" />
+                <input type="hidden" asp-for="@Model.ClassifiedListing.Images[i].ImageURL" />
                 <div class="form-group">
-                    <img src="~/@item.ImageURL" />
+                    <img src="~/@Model.ClassifiedListing.Images[i].ImageURL" />
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-danger" asp-page-handler="Remove" asp-route-id="@item.ClassifiedListingId">Remove Image</button>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="@item.IsMainImage" /> Primary Image
-                    </label>
+                <div class="row">
+                    <div class="form-group form-check pl-5">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="@Model.ClassifiedListing.Images[i].IsMainImage" /> Primary Image
+                        </label>
+                    </div>
+                    <div class="col-md-5 text-right">
+                        <button type="submit" class="btn btn-danger" asp-page-handler="Remove" asp-route-id="@Model.ClassifiedListing.Images[i].ClassifiedListingId">Remove Image</button>
+                    </div>
                 </div>
 
                 <br />
@@ -31,7 +35,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" asp-route-Id="@Model.ClassifiedListing.Images.FirstOrDefault().ClassifiedListingId" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
