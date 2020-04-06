@@ -912,20 +912,37 @@ namespace Sunridge.DataAccess.Migrations
                 });
 
             modelBuilder.Entity("Sunridge.Models.SuggestionComplaint", b =>
+            {
+                b.Property<int>("Id")
+                           .ValueGeneratedOnAdd()
+                           .HasColumnType("int")
+                           .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<string>("ApplicationUserId")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Complaint")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Suggestion")
+                        .HasColumnType("nvarchar(max)");
+
+                b.HasKey("Id");
+
+                b.HasIndex("ApplicationUserId");
+
+                b.ToTable("SuggestionComplaint");
+
+            });
+
+
             modelBuilder.Entity("Sunridge.Models.ScheduledEvent", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Complaint")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Suggestion")
+                    
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -950,7 +967,7 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SuggestionComplaint");
+                    
                     b.ToTable("ScheduledEvent");
                 });
 
