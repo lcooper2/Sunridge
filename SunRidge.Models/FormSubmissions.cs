@@ -11,9 +11,12 @@ namespace Sunridge.Models
         [Key]
         public int Id { get; set; }
 
+        public DateTime SubmitDate { get; set;}
+
         /*To port info of person who is filling */
         [Display(Name = "FormId")]
         public string FormId { get; set; }
+
 
         [NotMapped]
         [ForeignKey("ClaimLossId")]

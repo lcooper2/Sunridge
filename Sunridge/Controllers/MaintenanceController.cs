@@ -10,10 +10,10 @@ namespace Sunridge.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LotController : Controller
+    public class MaintenanceController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public LotController(IUnitOfWork unitOfWork)
+        public MaintenanceController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
 
@@ -21,17 +21,17 @@ namespace Sunridge.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.Lot.GetAll(null, null, "Address") });
+            return Json(new { data = _unitOfWork.Maintenance.GetAll(null, null, "CommonAreaAsset") });
         }
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var objFromDb = _unitOfWork.Lot.GetFirstOrDefault(u => u.Id == id);
+            var objFromDb = _unitOfWork.Maintenance.GetFirstOrDefault(u => u.Id == id);
             if (objFromDb == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }
-            _unitOfWork.Lot.Remove(objFromDb);
+            _unitOfWork.Maintenance.Remove(objFromDb);
             _unitOfWork.Save();
             return Json(new { success = true, message = "Delete Successful" });
         }

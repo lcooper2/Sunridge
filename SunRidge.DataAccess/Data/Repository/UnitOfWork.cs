@@ -38,6 +38,7 @@ namespace Sunridge.DataAccess.Data.Repository
             ClaimLoss = new ClaimLossRepository(_db);
             CommonAreaAsset = new CommonAreaAssetRepository(_db);
             Maintenance = new MaintenanceRepository(_db);
+            SuggestionComplaint = new SuggestionComplaintRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -70,6 +71,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public IClaimLossRepository ClaimLoss { get; private set; }
 
         public IMaintenanceRepository Maintenance { get; private set; }
+        public ISuggestionComplaintRepository SuggestionComplaint { get; private set; }
 
         public void Dispose()
         {
