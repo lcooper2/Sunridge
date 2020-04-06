@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Sunridge.Utility;
 using Microsoft.AspNetCore.Identity;
+using Sunridge.Models;
 
 namespace Sunridge.Controllers
 {
@@ -27,6 +28,16 @@ namespace Sunridge.Controllers
 
         public IActionResult Get()
         {
+            List<ApplicationUser> AU = _unitOfWork.ApplicationUser.GetAll().ToList();
+            List<ClassifiedListing> CL = _unitOfWork.ClassifiedListing.GetAll().ToList();
+            List<ClassifiedCategory> CC = _unitOfWork.ClassifiedCategory.GetAll().ToList();
+            foreach (var item in CL)
+            {
+                //item.UserId = AU.FirstOrDefault(c => c.Id == item.UserId).FullName;
+                //item.ClassifiedCategoryId = CC.FirstOrDefault(c => c.Id == item.ClassifiedCategoryId).Description;
+                item.ApplicationUser = AU.FirstOrDefault(c => c.Id == item.UserId);
+                item.ClassifiedCategory = CC.FirstOrDefault(c => c.Id == item.ClassifiedCategoryId);
+            }
             return Json(new { data = _unitOfWork.ClassifiedListing.GetAll() });
         }
 
