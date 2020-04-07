@@ -24,18 +24,22 @@ namespace Sunridge.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        [HttpPost]
-        public void OnPostLikeThread(int id)
+        [HttpPost("{id}")]
+        public bool OnPostToggleLike(int id)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            if(claim == null){ return; }
 
             var userHasAlreadyLiked = _unitOfWork.BlogLike.GetFirstOrDefault
-                (bl => bl.BlogCommentId == id && bl.ApplicationUserId == claim.Value) != null ? true : false;
+                (bl => bl.BlogCommentId == id && bl.ApplicationUserId == claim.Value);
 
             // Prevent a post from being liked multiple times
-            if(userHasAlreadyLiked) { return; }
+            if (userHasAlreadyLiked != null) 
+            {
+                _unitOfWork.BlogLike.Remove(userHasAlreadyLiked);
+                _unitOfWork.Save();
+                return false;
+            }
 
             BlogLike like = new BlogLike()
             {
@@ -45,25 +49,13 @@ namespace Sunridge.Controllers
 
             _unitOfWork.BlogLike.Add(like);
             _unitOfWork.Save();
+            return true; // Post was liked
         }
 
-        [HttpPost]
-        public void OnPostComment(string comment, int threadId)
-        {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            if (claim == null) { return; }
-
-            BlogComment blogComment = new BlogComment()
-            {
-                ApplicationUserId = claim.Value,
-                BlogThreadId = threadId,
-                BlogCommentText = comment,
-                WhenPosted = DateTime.Now
-            };
-
-            _unitOfWork.BlogComment.Add(blogComment);
-            _unitOfWork.Save();
-        }
+        //[HttpPost]
+        //public IActionResult OnPostComment(string comment, int threadId)
+        //{
+            
+        //}
     }
 }

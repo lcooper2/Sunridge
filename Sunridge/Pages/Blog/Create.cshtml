@@ -1,0 +1,39 @@
+﻿@page
+@model Sunridge.Pages.Blog.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Post</h1>
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="BlogComment.ApplicationUserId" value="@Model.BlogComment.ApplicationUserId"/>
+            <div class="form-group">
+                <h5><i class="fas fa-pencil-alt"></i> Write a comment...</h5>
+                <textarea asp-for="BlogComment.BlogCommentText" class="form-control"></textarea>
+                <span asp-validation-for="BlogComment.BlogCommentText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <br />
+                <h5><i class="fas fa-camera-retro"></i> Upload a photo</h5>
+                <input type="file" id="userPhotos" name="userPhotos" multiple="multiple" class="btn btn-light rounded" />
+            </div>
+            <div class="form-group">
+                <br />
+                <button type="submit" class="btn btn-info btn-sm"><i class='fas fa-sticky-note'></i> Post</button>
+                <a class="btn btn-danger btn-sm" asp-page="Index"><i class='far fa-trash-alt'></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
@@ -13,9 +16,14 @@ namespace Sunridge.Pages.Blog
     public class IndexModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;
-        public IndexModel(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public string CurrentAppUserId;
+        public int numDays = -7; // Default number of days back to load posts
+
+        public IndexModel(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
             BlogThreads = new List<BlogThread>();
         }
 
@@ -23,66 +31,88 @@ namespace Sunridge.Pages.Blog
         public IEnumerable<BlogThread> BlogThreads { get; set; }
         public void OnGet()
         {
-            //BlogThreads = new List<BlogThread>();
-            //ApplicationUser user = _unitOfWork.ApplicationUser.Get("15857644-50f9-4a4f-98f1-7b868c59c95a");
-            //BlogThread thread1 = new BlogThread();
-            //thread1.ApplicationUserId = user.Id;
-            //thread1.ApplicationUser = user;
-            //thread1.WhenPosted = DateTime.Now;
-            //thread1.BlogComments = new List<BlogComment>();
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            CurrentAppUserId = claim.Value;
 
-            //BlogThread thread2 = new BlogThread();
-            //thread2.ApplicationUserId = user.Id;
-            //thread2.ApplicationUser = user;
-            //thread2.WhenPosted = DateTime.Now;
-            //thread2.BlogComments = new List<BlogComment>();
-
-            //BlogThread thread3 = new BlogThread();
-            //thread3.ApplicationUserId = user.Id;
-            //thread3.ApplicationUser = user;
-            //thread3.WhenPosted = DateTime.Now;
-            //thread3.BlogComments = new List<BlogComment>();
-
-            //BlogComment comment1 = new BlogComment();
-            //comment1.BlogThreadId = thread1.Id;
-            //comment1.BlogCommentText = "This is a test of the emergency broadcast system";
-            //comment1.WhenPosted = thread1.WhenPosted.AddSeconds(30);
-            //comment1.ApplicationUserId = user.Id;
-
-            //BlogComment comment2 = new BlogComment();
-            //comment2.BlogThreadId = thread2.Id;
-            //comment2.BlogCommentText = "This is a test of the emergency broadcast system";
-            //comment2.WhenPosted = thread2.WhenPosted.AddSeconds(30);
-            //comment2.ApplicationUserId = user.Id;
-
-            //BlogComment comment3 = new BlogComment();
-            //comment3.BlogThreadId = thread3.Id;
-            //comment3.BlogCommentText = "This is a test of the emergency broadcast system";
-            //comment3.WhenPosted = thread3.WhenPosted.AddSeconds(30);
-            //comment3.ApplicationUserId = user.Id;
-
-            //thread1.BlogComments.Add(comment1);
-            //thread2.BlogComments.Add(comment2);
-            //thread3.BlogComments.Add(comment3);
-
-            //_unitOfWork.BlogThread.Add(thread1);
-            //_unitOfWork.BlogThread.Add(thread2);
-            //_unitOfWork.BlogThread.Add(thread3);
-
-            //_unitOfWork.Save();
-            BlogThreads = _unitOfWork.BlogThread.GetAll(t => t.WhenPosted > DateTime.Now.AddDays(-7), t => t.OrderBy(t => t.WhenPosted), "ApplicationUser");
-            foreach (var thread in BlogThreads)
+            BlogThreads = _unitOfWork.BlogThread.LoadAll(numDays);
+            foreach(var thread in BlogThreads)
             {
-                thread.BlogComments = _unitOfWork.BlogComment.GetAll
-                                (
-                                  c => (c.BlogThreadId == thread.Id) && (c.WhenPosted > DateTime.Now.AddDays(-7)),
-                                  orderBy: t => t.OrderByDescending(t => t.WhenPosted),
-                                  "Images"
-                                 )
-                                 .ToList();
-
+                for(int i = 0; i < thread.BlogComments.Count; i++)
+                {
+                    thread.BlogComments[i].Images = _unitOfWork.BlogImage.GetAll(j => j.BlogCommentId == thread.BlogComments[i].Id).ToList();
+                } 
             }
+        }
 
+        public IActionResult OnPostComment(int threadId)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            if (claim == null) { return RedirectToPage("Blog"); }
+            var selector = "textarea(" + threadId.ToString() + ")";
+            var comment = Request.Form[selector];
+
+            BlogComment blogComment = new BlogComment()
+            {
+                ApplicationUserId = claim.Value,
+                BlogThreadId = threadId,
+                BlogCommentText = comment,
+                WhenPosted = DateTime.Now,
+                Images = new List<BlogImage>()
+            };
+
+            string webRootPath = _webHostEnvironment.WebRootPath;
+            var uploadPath = Path.Combine(webRootPath, @"Images\BlogImages");
+            List<string> acceptableExtensions = new List<string>() { ".jpg", ".jpeg", ".png", ".gif" };
+
+            var files = HttpContext.Request.Form.Files;
+            for (int i = 0; i < files.Count; i++)
+            {
+                string fileName = Guid.NewGuid().ToString();
+                var extension = Path.GetExtension(files[i].FileName);
+                if (!acceptableExtensions.Contains(extension.ToLower())) { continue; } // Rudimentary security
+                using (var filestream = new FileStream(Path.Combine(uploadPath, fileName + extension), FileMode.Create))
+                {
+                    files[i].CopyTo(filestream);
+                }
+                BlogImage image = new BlogImage()
+                {
+                    BlogCommentId = blogComment.Id,
+                    ImgPath = @"\Images\BlogImages\" + fileName + extension
+                };
+                blogComment.Images.Add(image);
+            }            
+
+            _unitOfWork.BlogComment.Add(blogComment);
+            _unitOfWork.Save();
+
+            return RedirectToPage("./Index");
+        }
+
+        public IActionResult OnPostDelete(int id)
+        {
+            _unitOfWork.BlogThread.DeleteThread(id);
+            _unitOfWork.Save();
+            return RedirectToPage("./Index");
+        }
+
+        public IActionResult OnPostReply(int id)
+        {
+            var selector = "reply(" + id.ToString() + ")";
+            var comment = Request.Form[selector];
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            BlogReply reply = new BlogReply()
+            {
+                BlogCommentId = id,
+                ReplyText = comment,
+                WhenPosted = DateTime.Now,
+            };
+            _unitOfWork.BlogReply.Add(reply);
+            _unitOfWork.Save();
+            return RedirectToPage("./Index");
         }
     }
 }

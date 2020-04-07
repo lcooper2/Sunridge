@@ -1,18 +1,17 @@
-﻿using Sunridge.DataAccess.Data.Repository.IRepository;
-using Sunridge.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.AspNetCore.Hosting;
+using Sunridge.DataAccess.Data.Repository.IRepository;
 
 namespace Sunridge.DataAccess.Data.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
         protected readonly ApplicationDbContext _db;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public UnitOfWork(ApplicationDbContext db)
+        public UnitOfWork(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
+            _webHostEnvironment = webHostEnvironment;
             ApplicationUser = new ApplicationUserRepository(_db);
             Banner = new BannerRepository(_db);
             LostAndFound = new LostAndFoundRepository(_db);
@@ -30,7 +29,7 @@ namespace Sunridge.DataAccess.Data.Repository
             ClassifiedCategory = new ClassifiedCategoryRepository(_db);
             ClassifiedListing = new ClassifiedListingRepository(_db);
             ClassifiedImage = new ClassifiedImageRepository(_db);
-            BlogThread = new BlogThreadRepository(_db);
+            BlogThread = new BlogThreadRepository(_db, _webHostEnvironment);
             BlogComment = new BlogCommentRepository(_db);
             BlogImage = new BlogImageRepository(_db);
             BlogLike = new BlogLikeRepository(_db);
