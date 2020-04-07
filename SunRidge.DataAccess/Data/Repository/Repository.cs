@@ -93,4 +93,3 @@ namespace Sunridge.DataAccess.Data.Repository
     }
 
 }
-

@@ -29,10 +29,12 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\Images\BannerImages\" />
+    <Folder Include="wwwroot\Images\BlogImages\ProfilePictures\" />
+    <Folder Include="wwwroot\Images\BlogImages\Uploads\" />
     <Folder Include="wwwroot\Images\BoardImages\" />
     <Folder Include="wwwroot\Images\LostAndFoundImages\" />
     <Folder Include="wwwroot\Images\ClassifiedsImages\" />
+    <Folder Include="wwwroot\Images\BannerImages\" />
   </ItemGroup>
 
 </Project>
