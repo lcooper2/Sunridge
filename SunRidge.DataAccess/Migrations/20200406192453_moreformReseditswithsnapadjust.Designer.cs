@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sunridge.DataAccess.Data;
 
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200406192453_moreformReseditswithsnapadjust")]
+    partial class moreformReseditswithsnapadjust
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -870,7 +872,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OwnerLotId")
+                    b.Property<int>("LotId")
                         .HasColumnType("int");
 
                     b.Property<string>("PrivacyLevel")
@@ -878,7 +880,7 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerLotId");
+                    b.HasIndex("LotId");
 
                     b.ToTable("LotHistory");
                 });
@@ -1174,7 +1176,7 @@ namespace Sunridge.DataAccess.Migrations
             modelBuilder.Entity("Sunridge.Models.File", b =>
                 {
                     b.HasOne("Sunridge.Models.LotHistory", "LotHistory")
-                        .WithMany()
+                        .WithMany("Files")
                         .HasForeignKey("LotHistoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1224,9 +1226,9 @@ namespace Sunridge.DataAccess.Migrations
 
             modelBuilder.Entity("Sunridge.Models.LotHistory", b =>
                 {
-                    b.HasOne("Sunridge.Models.OwnerLot", "OwnerLot")
-                        .WithMany()
-                        .HasForeignKey("OwnerLotId")
+                    b.HasOne("Sunridge.Models.Lot", "Lot")
+                        .WithMany("LotHistories")
+                        .HasForeignKey("LotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

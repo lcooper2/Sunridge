@@ -13,10 +13,10 @@ function loadList() {
         },
         "columns": [
             { "data": "lot.lotNumber", "width": "30%" },
-            { "data": "privacyLevel", "width": "20%" },
-            { "data": "isArchive", "width": "20%" },
-            { "data": "lastModifiedBy", "width": "30%" },
-            { "data": "lastModifiedDate", "width": "30%" },
+            { "data": "applicationUser.fullName", "width": "20%" },
+            { "data": "isPrimary", "width": "20%" },
+            { "data": "startDate", "width": "30%" },
+            { "data": "endDate", "width": "30%" },
             {
                 "data": "id",
                 "render": function (data) {

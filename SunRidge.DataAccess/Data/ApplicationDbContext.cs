@@ -39,5 +39,6 @@ namespace Sunridge.DataAccess.Data
         public DbSet<ClaimLoss> ClaimLoss { get; set; }
         public DbSet<SuggestionComplaint> SuggestionComplaint { get; set; }
         public DbSet<ScheduledEvent> ScheduledEvent { get; set; }
+        public DbSet<FormSubmissions> FormSubmissions { get; set; }
     }
 }

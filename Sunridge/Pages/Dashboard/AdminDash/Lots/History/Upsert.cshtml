@@ -9,53 +9,67 @@
     <div class="container">
         <div class="row px-2 mx-2 backgroundWhite border">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @if (Model.LotHistObj.LotHistory.Id != 0)
+            @if (Model.LotHistObj.OwnerLot.Id != 0)
             {
-                <input type="hidden" asp-for="LotHistObj.LotHistory.Id" />
+                <input type="hidden" asp-for="LotHistObj.OwnerLot.Id" />
             }
 
             <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
-                <h2 class="text-primary">@(Model.LotHistObj.LotHistory.Id != 0 ? "Update" : "Create")Lot History</h2>
+                <h2 class="text-primary">@(Model.LotHistObj.OwnerLot.Id != 0 ? "Update" : "Create")Lot History</h2>
             </div>
             <div class="col-8 pt-3">
                 <div class="form-group row">
                     <div class="col-3">
-                        <label asp-for="LotHistObj.LotHistory.IsArchive"></label>
+                        <label asp-for="LotHistObj.OwnerLot.IsPrimary"></label>
                     </div>
                     <div class="col-9">
-                        <input class="form-control" asp-for="LotHistObj.LotHistory.IsArchive" />
-                        <span class="text-danger" asp-validation-for="LotHistObj.LotHistory.IsArchive"></span>
+                        <input class="form-control" asp-for="LotHistObj.OwnerLot.IsPrimary" />
+                        <span class="text-danger" asp-validation-for="LotHistObj.OwnerLot.IsPrimary"></span>
 
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-3">
-                        <label asp-for="LotHistObj.LotHistory.PrivacyLevel"></label>
+                        <label asp-for="LotHistObj.OwnerLot.StartDate"></label>
                     </div>
                     <div class="col-9">
-                        <input class="form-control" asp-for="LotHistObj.LotHistory.PrivacyLevel" />
-                        <span class="text-danger" asp-validation-for="LotHistObj.LotHistory.PrivacyLevel"></span>
+                        <input class="form-control" asp-for="LotHistObj.OwnerLot.StartDate" />
+                        <span class="text-danger" asp-validation-for="LotHistObj.OwnerLot.StartDate"></span>
 
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-3">
-                        <label asp-for="LotHistObj.LotHistory.LastModifiedBy"></label>
+                        <label asp-for="LotHistObj.OwnerLot.EndDate"></label>
                     </div>
                     <div class="col-9">
-                        <input class="form-control" asp-for="LotHistObj.LotHistory.LastModifiedBy" />
-                        <span class="text-danger" asp-validation-for="LotHistObj.LotHistory.LastModifiedBy"></span>
+                        <input class="form-control" asp-for="LotHistObj.OwnerLot.EndDate" />
+                        <span class="text-danger" asp-validation-for="LotHistObj.OwnerLot.EndDate"></span>
 
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-3">
-                        <label asp-for="LotHistObj.LotHistory.LotId"></label>
+                        <label asp-for="LotHistObj.OwnerLot.LotId"></label>
                     </div>
                     <div class="col-9">
-                        @Html.DropDownListFor(m => m.LotHistObj.LotHistory.LotId,
+                        @Html.DropDownListFor(m => m.LotHistObj.OwnerLot.LotId,
                        Model.LotHistObj.LotList,
                        "-Please select a Lot",
+                       new { @class = "form=control" })
+
+
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="LotHistObj.OwnerLot.ApplicationUserId"></label>
+                    </div>
+                    <div class="col-9">
+                        @Html.DropDownListFor(m => m.LotHistObj.OwnerLot.ApplicationUserId,
+                       Model.LotHistObj.UserList,
+                       "-Please select a User",
                        new { @class = "form=control" })
 
 
@@ -66,7 +80,7 @@
                     <div class="col-9 offset-3">
                         <div class="row">
                             <div class="col-6">
-                                @if (Model.LotHistObj.LotHistory.Id != 0)
+                                @if (Model.LotHistObj.OwnerLot.Id != 0)
                                 {
                                     <button type="submit" class="btn btn-primary form-control">Update</button>
                                 }
