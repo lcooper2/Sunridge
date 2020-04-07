@@ -33,6 +33,7 @@
     <Folder Include="wwwroot\Images\BlogImages\Uploads\" />
     <Folder Include="wwwroot\Images\BoardImages\" />
     <Folder Include="wwwroot\Images\LostAndFoundImages\" />
+    <Folder Include="wwwroot\Images\ClassifiedsImages\" />
   </ItemGroup>
 
 </Project>

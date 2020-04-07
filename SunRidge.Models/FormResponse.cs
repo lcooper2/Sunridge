@@ -30,8 +30,8 @@ namespace Sunridge.Models
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime SubmitDate { get; set; }
 
-        public string Description { get; set; } // suggestions, work in kind
-        public string Suggestion { get; set; } // suggestions
+        //public string Description { get; set; } // suggestions, work in kind
+        //public string Suggestion { get; set; } // suggestions
 
         //public string EquipmentUsed { get; set; } // work in kind
 
@@ -48,14 +48,19 @@ namespace Sunridge.Models
         [Display(Name = "Resolved by")]
         public string ResolveUser { get; set; }
 
+        [Display(Name = "FormSubmissions")]
+        public int FormSubmissionsId { get; set; }
+        [ForeignKey("FormSubmissionsId")]
+        public virtual FormSubmissions FormSubmissions { get; set; }
+
 
 
         // Nav properties
-       
+
         //public virtual ICollection<Comment> Comments { get; set; }
         //public virtual ICollection<File> Files { get; set; }
         //public virtual Lot Lot { get; set; }
-        //public virtual List<InKindWorkHours> InKindWorkHours { get; set; }
+        //public virtual ICollection<InKindWorkHours> InKindWorkHours { get; set; }
 
         // Calculated properties
         [Display(Name = "Form Type")]

@@ -1,4 +1,5 @@
-﻿using Sunridge.DataAccess.Data.Repository.IRepository;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,15 @@ namespace Sunridge.DataAccess.Data.Repository
         public ClassifiedCategoryRepository (ApplicationDbContext db) : base(db)
         {
             _db = db;
+        }
+
+        public IEnumerable<SelectListItem> GetCategoryListForDropDown()
+        {
+            return _db.ClassifiedCategory.Select(m => new SelectListItem()
+            {
+                Text = m.Description,
+                Value = m.Id.ToString()
+            });
         }
 
         public void Update(ClassifiedCategory classifiedCategory)

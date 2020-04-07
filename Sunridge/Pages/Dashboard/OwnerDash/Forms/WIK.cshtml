@@ -4,7 +4,7 @@
     ViewData["Title"] = "WIK";
 }
 
-    <h1>Work In Kind Hours form</h1>
+<h1>Work In Kind Hours form</h1>
 
 
 <form method="post" asp-action="Upsert">
@@ -64,3 +64,13 @@
         </div>
     </div>
 </form>
+
+@section Scripts {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+    </script>
+}

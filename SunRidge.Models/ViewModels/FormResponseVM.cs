@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Sunridge.Models.ViewModels
 {
-    class FormResponseVM
+    public class FormResponseVM
     {
         public FormResponse FormResponse { get; set; }
 
-        public IEnumerable<SelectListItem> WIKList { get; set; }
+        public IEnumerable<SelectListItem> FSList { get; set; }
 
     }
 }
