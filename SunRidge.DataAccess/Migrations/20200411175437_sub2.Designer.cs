@@ -10,8 +10,8 @@ using Sunridge.DataAccess.Data;
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200411175108_submissionrework")]
-    partial class submissionrework
+    [Migration("20200411175437_sub2")]
+    partial class sub2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

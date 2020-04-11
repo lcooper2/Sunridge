@@ -2,7 +2,7 @@
 
 namespace Sunridge.DataAccess.Migrations
 {
-    public partial class submissionrework : Migration
+    public partial class sub2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
