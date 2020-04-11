@@ -14,9 +14,9 @@
                 <header class="text-white text-center" id="bannerHeader">
                     <div id="carouselTextBox" class="container w-4 p-4">
                         <h1>@Html.DisplayFor(modelItem => Model.BannerList[0].Header)</h1>
-                        <p style="font-size: 18pt;">
-                            @Html.DisplayFor(modelItem => Model.BannerList[0].Body)
-                        </p>
+                        <div style="font-size: 18pt;">
+                            @Html.Raw(Model.BannerList[0].Body)
+                        </div>
                     </div>
                 </header>
             </div>
@@ -29,9 +29,9 @@
                         <header class="text-white text-center" id="bannerHeader">
                             <div id="carouselTextBox" class="container w-4 p-4">
                                 <h1>@Html.DisplayFor(modelItem => item.Header)</h1>
-                                <p style="font-size: 18pt;">
-                                    @Html.DisplayFor(modelItem => item.Body)
-                                </p>
+                                <div style="font-size: 18pt;">
+                                    @Html.Raw(item.Body)
+                                </div>
                             </div>
                         </header>
                     </div>
