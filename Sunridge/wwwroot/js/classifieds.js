@@ -19,24 +19,24 @@ function loadList() {
                     return moment(data).format('MMMM Do YYYY');
                 }
             },
-            //{ "data": "userId", "width": "15%" },
-            //{ "data": "classifiedCategoryId", "width": "15%" },
+            { "data": "applicationUser.fullName", "width": "15%" },
+            { "data": "classifiedCategory.description", "width": "15%" },
             { "data": "description", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                        <a href= "/Dashboard/OwnerDash/ClassifiedsList/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:75px;">
-                            <i class="far fa-edit"></i>Edit
+                        <a href= "/Dashboard/OwnerDash/ClassifiedsList/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:75px; font-size:75%;">
+                            <i class="far fa-edit"></i> Edit
                                 </a>
-                        <a href= "/Dashboard/OwnerDash/ClassifiedsList/images?id=${data}" class="btn btn-dark text-white" style="cursor:pointer; width:75px;">
-                            <i class="far fa-images"></i>Img 
+                        <a href= "/Dashboard/OwnerDash/ClassifiedsList/images?id=${data}" class="btn btn-dark text-white" style="cursor:pointer; width:75px; font-size:65%;">
+                            <i class="far fa-images"></i> Images 
                                 </a>
-                        <a href= "/Dashboard/OwnerDash/ClassifiedsList/details?id=${data}" class="btn btn-primary text-white" style="cursor:pointer; width:75px;">
-                            <i class="fas fa-history"></i>Info   
+                        <a href= "/Dashboard/OwnerDash/ClassifiedsList/details?id=${data}" class="btn btn-primary text-white" style="cursor:pointer; width:75px; font-size:70%;">
+                            <i class="fas fa-history"></i> Details 
                                 </a>
-                        <a class="btn btn-danger text-white" style="cursor:pointer; width:75px;" onclick=Delete('/api/classifieds/'+${data})>
-                            <i class="far fa-trash-alt"></i>Del
+                        <a class="btn btn-danger text-white" style="cursor:pointer; width:75px; font-size:75%;" onclick=Delete('/api/classifieds/'+${data})>
+                            <i class="far fa-trash-alt"></i> Delete
                         </a>
                             </div >`;
                 }, "width": "40%"
