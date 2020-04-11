@@ -47,10 +47,18 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             }
             if (FormResObj.Id == 0)
             {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+                FormResObj.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                 _unitOfWork.SuggestionComplaint.Add(FormResObj);
             }
             else
             {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+                FormResObj.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                 _unitOfWork.SuggestionComplaint.Update(FormResObj);
             }
             _unitOfWork.Save();

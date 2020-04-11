@@ -33,11 +33,11 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             if (claim != null)
             {
-                //FormResObj.ClaimLoss = _unitOfWork.ClaimLoss.GetAll(u => u.ApplicationUserId == claim.Value);
+                
                 if (id != null)
                 {
                     FormResObj.ClaimLoss = _unitOfWork.ClaimLoss.GetFirstOrDefault(u => u.Id == id);
-                    //FormResObj.FormResponse = _unitOfWork.FormResponse.GetFirstOrDefault(u => u.Id == id);
+                    FormResObj.ClaimLoss.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                     FormResObj.ClaimLoss.Type = "CL";
                     //FormResObj.FormResponse.SubmitDate = DateTime.Now;
                     FormResObj.ClaimLoss.ApplicationUserId = claim.Value;
@@ -58,11 +58,18 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             }
             if (FormResObj.ClaimLoss.Id == 0)
             {
-                FormResObj.ClaimLoss.Type = "CL";
+
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+                FormResObj.ClaimLoss.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
+                 FormResObj.ClaimLoss.Type = "CL";
                 _unitOfWork.ClaimLoss.Add(FormResObj.ClaimLoss);
             }
             else
             {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+                FormResObj.ClaimLoss.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                 FormResObj.ClaimLoss.Type = "CL";
                 _unitOfWork.ClaimLoss.Update(FormResObj.ClaimLoss);
             }

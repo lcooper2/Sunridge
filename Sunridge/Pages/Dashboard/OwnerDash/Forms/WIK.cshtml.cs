@@ -19,18 +19,21 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
         }
         [BindProperty]
         public Models.InKindWorkHours FormResObj { get; set; }
+
         public IActionResult OnGet(int? id)
         {
             FormResObj = new Models.InKindWorkHours();
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            FormResObj.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
             if (claim != null)
             {
-                FormResObj.ApplicationUser = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value);
+                //FormResObj.ApplicationUser = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value);
                 if (id != null)
                 {
                     FormResObj = _unitOfWork.InKindWorkHours.GetFirstOrDefault(u => u.Id == id);
-                    //FormResObj.FormResponse = _unitOfWork.FormResponse.GetFirstOrDefault(u => u.Id == id);
+                    FormResObj.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                     FormResObj.Type = "WIK";
                     //FormResObj.FormResponse.SubmitDate = DateTime.Now;
                     FormResObj.ApplicationUserId = claim.Value;
@@ -52,11 +55,19 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             if (FormResObj.Id == 0)
             {
                 FormResObj.Type = "WIK";
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+                FormResObj.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                 _unitOfWork.InKindWorkHours.Add(FormResObj);
             }
             else
             {
                 FormResObj.Type = "WIK";
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+                FormResObj.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                 _unitOfWork.InKindWorkHours.Update(FormResObj);
             }
             _unitOfWork.Save();
