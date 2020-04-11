@@ -18,10 +18,22 @@ namespace Sunridge.Models
         /*To port info of person who is filling */
         [Display(Name = "FormId")]
         public string FormId { get; set; }
-
+        [Display(Name = "ClaimLoss")]
+        public int? ClaimLossId{ get; set; }
 
         [NotMapped]
         [ForeignKey("ClaimLossId")]
         public virtual ClaimLoss ClaimLoss { get; set; }
+        [Display(Name = "SuggestionComplaint")]
+        public int? SuggestionComplaintId { get; set; }
+        [NotMapped]
+        [ForeignKey("SuggestionComplaintId")]
+        public virtual SuggestionComplaint SuggestionComplaint { get; set; }
+        [Display(Name = "InKindWorkHours")]
+        public int? InKindWorkHoursId { get; set; }
+        [NotMapped]
+        [ForeignKey("InKindWorkHoursId")]
+        public virtual InKindWorkHours InKindWorkHours { get; set; }
+
     }
 }
