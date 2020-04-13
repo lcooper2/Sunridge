@@ -105,8 +105,8 @@ namespace Sunridge.DataAccess.Migrations
                     LastName = table.Column<string>(nullable: false),
                     Phone = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    Image = table.Column<string>(nullable: true)
-                    //DisplayOrder = table.Column<int>(nullable: false)
+                    Image = table.Column<string>(nullable: true),
+                    DisplayOrder = table.Column<int>(nullable: false)
 
                 },
                 constraints: table =>

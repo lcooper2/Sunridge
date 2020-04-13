@@ -45,6 +45,34 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
             return Page();
         }
 
+        //public IActionResult OnPost() {
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Page();
+        //    }
+
+        //    if (LAFObj.Id == 0)// is a new Lost And found Object
+        //    {
+        //        LAFObj.ListedDate = DateTime.Now;
+        //        _unitOfWork.LostAndFound.Add(LAFObj);
+
+        //    }
+        //    else // edit 
+        //    {
+        //        if (LAFObj.Claimed == false)
+        //        {
+        //            LAFObj.ClaimedBy = null;
+        //        }
+        //        else if (LAFObj.Claimed == true) {
+        //            LAFObj.ClaimedDate = DateTime.Now;
+        //        }
+        //        _unitOfWork.LostAndFound.Update(LAFObj);
+        //    }
+
+        //    _unitOfWork.Save();
+        //    return RedirectToPage("./Index");
+
+        //}
 
         public IActionResult OnPost()
         {
