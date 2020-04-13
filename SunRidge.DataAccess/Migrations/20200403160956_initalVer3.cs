@@ -106,6 +106,8 @@ namespace Sunridge.DataAccess.Migrations
                     Phone = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true)
+                    //DisplayOrder = table.Column<int>(nullable: false)
+
                 },
                 constraints: table =>
                 {

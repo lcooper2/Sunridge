@@ -22,9 +22,9 @@
 
             <div class="col-9 pt-3">
 
-                <div class="form-group rox">
+                <div class="form-group row">
 
-                    <div class="col-3">
+                    <div class="col-2">
                         <label asp-for="BoardObj.Title"></label>
                     </div>
 
@@ -35,7 +35,7 @@
 
                 </div>
 
-                <div class="form-group rox">
+                <div class="form-group row">
                     <div class="col-2">
                         <label asp-for="BoardObj.FirstName"></label>
                     </div>
@@ -44,7 +44,7 @@
                         <input class="form-control" asp-for="BoardObj.FirstName" />
                         <span class="text-danger" asp-validation-for="BoardObj.FirstName"></span>
                     </div>
-                    <span class="text-danger" asp-validation-for="BoardObj.FirstName"></span>
+                    
 
 
                     <div class="col-2">
@@ -55,26 +55,26 @@
                         <input class="form-control" asp-for="BoardObj.LastName" />
                         <span class="text-danger" asp-validation-for="BoardObj.LastName"></span>
                     </div>
-                    <span class="text-danger" asp-validation-for="BoardObj.LastName"></span>
+                    
 
                 </div>
 
                 <div class="form-group row">
 
-                    <div class="col-3">
+                    <div class="col-2">
                         <label asp-for="BoardObj.Image"></label>
                     </div>
 
                     <div class="col-7">
+                        
                         <input type="file" class="form-control" name="files" id="files" />
-                        @*<span class="text-danger" asp-validation-for="BoardObj.Image"></span>*@
                     </div>
 
                 </div>
 
-                <div class="form-group rox">
+                <div class="form-group row">
 
-                    <div class="col-3">
+                    <div class="col-2">
                         <label asp-for="BoardObj.Phone"></label>
                     </div>
 
@@ -85,9 +85,9 @@
 
                 </div>
 
-                <div class="form-group rox">
+                <div class="form-group row">
 
-                    <div class="col-3">
+                    <div class="col-2">
                         <label asp-for="BoardObj.Email"></label>
                     </div>
 

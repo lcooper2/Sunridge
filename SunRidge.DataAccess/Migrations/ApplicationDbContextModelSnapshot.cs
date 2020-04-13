@@ -432,6 +432,9 @@ namespace Sunridge.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    //b.Property<int>("DisplayOrder")
+                    //   .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Board");
