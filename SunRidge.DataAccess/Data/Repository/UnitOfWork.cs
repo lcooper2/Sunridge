@@ -40,6 +40,7 @@ namespace Sunridge.DataAccess.Data.Repository
             SuggestionComplaint = new SuggestionComplaintRepository(_db);
             ScheduledEvent = new ScheduledEventRepository(_db);
             FormSubmissions = new FormSubmissionsRepository(_db);
+            NewsItem = new NewsItemRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -75,6 +76,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public ISuggestionComplaintRepository SuggestionComplaint { get; private set; }
         public IScheduledEventRepository ScheduledEvent { get; private set; }
         public IFormSubmissionsRepository FormSubmissions { get; private set; }
+        public INewsItemRepository NewsItem { get; private set; }
 
         public void Dispose()
         {
