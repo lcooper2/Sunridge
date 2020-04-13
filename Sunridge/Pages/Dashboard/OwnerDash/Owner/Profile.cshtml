@@ -36,7 +36,7 @@
                             <label asp-for="ApplicationUser.PhoneNumber"></label>
                             @if (Model.ApplicationUser.PhoneNumber != null)
                             {
-                                <b>: @Model.ApplicationUser.PhoneNumber</b>
+                                <b>: @String.Format("{0: (###) ###-####}", Convert.ToInt64(Model.ApplicationUser.PhoneNumber))</b>
                             }
                             else
                             {
@@ -83,7 +83,7 @@
                             <label asp-for="ApplicationUser.EmergencyContactPhone"></label>
                             @if (Model.ApplicationUser.EmergencyContactPhone != null)
                             {
-                                <b>: @Model.ApplicationUser.EmergencyContactPhone</b>
+                                <b>: @String.Format("{0: (###) ###-####}", Convert.ToInt64(Model.ApplicationUser.EmergencyContactPhone))</b>
                             }
                             else
                             {
@@ -112,7 +112,7 @@
 
                 </div>
 
-                
+
                 <div class="form-group row">
 
                     <div class="col-7 offset-3">
@@ -124,8 +124,8 @@
                             </div>
 
                             @*<div class="col-6">
-                                <a asp-page="./Index" class="btn btn-success form-control">Back To List</a>
-                            </div>*@
+                                    <a asp-page="./Index" class="btn btn-success form-control">Back To List</a>
+                                </div>*@
 
                         </div>
 
@@ -152,7 +152,7 @@
                         <div class="non-edit" style="display:block">
 
                             <label asp-for="ApplicationUser.UserName"></label>
-                            <input class="text-info" asp-for="ApplicationUser.UserName" />
+                            <input class="text-info" asp-for="ApplicationUser.UserName" disabled />
                         </div>
                     </div>
                 </div>
@@ -205,7 +205,7 @@
                             <table>
                                 <tr>
                                     <td>yes</td>
-                                    <td> <input type="radio" class="form-control" asp-for="ApplicationUser.ReceiveEmails" value="true"></td>
+                                    <td class="col-1"> <input type="radio" class="form-control" asp-for="ApplicationUser.ReceiveEmails" value="true"></td>
                                 </tr>
                                 <tr>
                                     <td>no </td>
@@ -215,7 +215,7 @@
                         </div>
                     </div>
                 </div>
-               
+
                 <br />
                 <div class="form-group row">
 
@@ -223,13 +223,11 @@
 
                         <div class="row">
 
-                            @*<div class="col-6">
-                                <button type="submit" class="btn btn-primary form-control">Update</button>
-                            </div>*@
+                            <div class="col-6">
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                </div>
 
-                            @*<div class="col-6">
-                                <a asp-page="./Index" class="btn btn-success form-control">Back To List</a>
-                            </div>*@
+                            
 
                         </div>
 

@@ -16,16 +16,16 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+       
 
         public ProfileModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            
             IUnitOfWork unitOfWork
             )
         {
             _userManager = userManager;
-            _signInManager = signInManager;
+          
             _unitOfWork = unitOfWork;
         }
 
@@ -65,15 +65,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
             }
 
 
-            //var userName = await _userManager.GetUserNameAsync(user);
-            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
-            //Username = userName;
-
-            //Input = new InputModel
-            //{
-            //    PhoneNumber = phoneNumber
-            //};
+            
         }
 
         public async Task<IActionResult> OnGet(string Id)
@@ -102,7 +94,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
             if (UserRole == true)
             {
                 OrginalRole = SD.AdminRole;
-                //_unitOfWork.ApplicationUser.Update(applicationUser);
+                
                 if (OrginalRole != Input.Role)
                 {
                     await _userManager.RemoveFromRoleAsync(applicationUser, SD.AdminRole);
@@ -119,8 +111,10 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
                 }
             }
 
-                
-                return RedirectToPage("./Index");
+            //_unitOfWork.ApplicationUser.Update(applicationUser);
+            //_unitOfWork.Save();
+
+            return RedirectToPage("./Index");
             }
         }
     }
