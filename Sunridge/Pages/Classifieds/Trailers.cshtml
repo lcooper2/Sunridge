@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-sm-6">
                         <h1>@item.ItemName - $@item.Price</h1>
-                        <p>@item.Description</p>
+                        <div>@Html.Raw(item.Description)</div>
                         @if (!String.IsNullOrEmpty(item.Email))
                         {
                             <h4>Email: <a href="mailto:@item.Email">@item.Email</a></h4>

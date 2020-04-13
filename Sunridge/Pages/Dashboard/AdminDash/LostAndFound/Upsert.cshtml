@@ -44,7 +44,6 @@
 
                     <div class="col-7">
                         <textarea class="form-control" asp-for="LAFObj.Discription" id="txtDesc" style="height:200px;"></textarea>
-
                     </div>
                 </div>
 
@@ -146,12 +145,10 @@
 
 @section Scripts {
     <script>
-        tinymce.init(
-            {
-                selector: 'textarea',
-                plugins: 'lists',
-                menubar: 'file edit format'
-            });
-
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
     </script>
 }
