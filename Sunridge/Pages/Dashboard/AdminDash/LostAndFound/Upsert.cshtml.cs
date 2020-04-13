@@ -31,7 +31,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
         public IActionResult OnGet(int? id)
         {
             LAFObj = new Models.LostAndFound();
-
+            
             if (id != null)// allows edit to be used
             {
                 LAFObj = _unitOfWork.LostAndFound.GetFirstOrDefault(s => s.Id == id);

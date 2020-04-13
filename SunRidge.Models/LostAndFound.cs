@@ -20,6 +20,10 @@ namespace Sunridge.Models
             ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
         public DateTime? ListedDate { get; set; }
 
+        public string ListerName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+
         public bool Claimed { get; set; }
         public string ClaimedBy { get; set; }
 
