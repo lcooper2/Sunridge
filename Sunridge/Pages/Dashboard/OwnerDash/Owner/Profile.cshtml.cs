@@ -27,19 +27,12 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Owner
             _signInManager = signInManager;
             _unitOfWork = unitOfWork;
         }
+
+        [BindProperty]
         public ApplicationUser ApplicationUser { get; set; }
         public string Username { get; set; }
 
 
-        [BindProperty]
-        public InputModel Input { get; set; }
-
-        public class InputModel
-        {
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
-        }
 
         private async Task LoadAsync(IdentityUser user)
         {
@@ -61,6 +54,27 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Owner
             return Page();
         }
 
-        
-    }
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            if(ApplicationUser.Id == null)
+            {
+                return Page();
+            }
+            else
+            {
+                _unitOfWork.ApplicationUser.Update(ApplicationUser);
+            }
+
+
+            _unitOfWork.Save();
+            return RedirectToPage("./Profile");
+        }
+    
+
+}
 }
