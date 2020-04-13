@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Sunridge.DataAccess.Migrations
 {
-    public partial class initalv4 : Migration
+    public partial class initalagain4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -630,13 +630,13 @@ namespace Sunridge.DataAccess.Migrations
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_BlogComment_BlogThread_BlogThreadId",
                         column: x => x.BlogThreadId,
                         principalTable: "BlogThread",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -658,28 +658,6 @@ namespace Sunridge.DataAccess.Migrations
                         principalTable: "ClassifiedListing",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Comment",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Content = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Private = table.Column<bool>(nullable: false),
-                    FormResponseId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comment", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Comment_FormResponse_FormResponseId",
-                        column: x => x.FormResponseId,
-                        principalTable: "FormResponse",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -862,11 +840,6 @@ namespace Sunridge.DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_FormResponseId",
-                table: "Comment",
-                column: "FormResponseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_File_LotHistoryId",
                 table: "File",
                 column: "LotHistoryId");
@@ -956,10 +929,10 @@ namespace Sunridge.DataAccess.Migrations
                 name: "ClassifiedImage");
 
             migrationBuilder.DropTable(
-                name: "Comment");
+                name: "File");
 
             migrationBuilder.DropTable(
-                name: "File");
+                name: "FormResponse");
 
             migrationBuilder.DropTable(
                 name: "InKindWorkHours");
@@ -995,10 +968,10 @@ namespace Sunridge.DataAccess.Migrations
                 name: "ClassifiedListing");
 
             migrationBuilder.DropTable(
-                name: "FormResponse");
+                name: "LotHistory");
 
             migrationBuilder.DropTable(
-                name: "LotHistory");
+                name: "FormSubmissions");
 
             migrationBuilder.DropTable(
                 name: "Key");
@@ -1014,9 +987,6 @@ namespace Sunridge.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "ClassifiedCategory");
-
-            migrationBuilder.DropTable(
-                name: "FormSubmissions");
 
             migrationBuilder.DropTable(
                 name: "Lot");

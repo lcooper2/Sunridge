@@ -555,32 +555,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("ClassifiedListing");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("FormResponseId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Private")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FormResponseId");
-
-                    b.ToTable("Comment");
-                });
-
             modelBuilder.Entity("Sunridge.Models.CommonAreaAsset", b =>
                 {
                     b.Property<int>("Id")
@@ -1207,13 +1181,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasOne("Sunridge.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Sunridge.Models.Comment", b =>
-                {
-                    b.HasOne("Sunridge.Models.FormResponse", "FormResponse")
-                        .WithMany()
-                        .HasForeignKey("FormResponseId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.File", b =>
