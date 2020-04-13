@@ -63,8 +63,8 @@ namespace Sunridge.Pages.Blog
             };
 
             string webRootPath = _webHostEnvironment.WebRootPath;
-            var uploadPath = Path.Combine(webRootPath, @"Images\BlogImages");
-            List<string> acceptableExtensions = new List<string>() { ".jpg", ".jpeg", ".png", ".gif" };
+            var uploadPath = Path.Combine(webRootPath, @"Images\BlogImages\Uploads");
+            List<string> acceptableExtensions = new List<string>() { ".jpg", ".jpeg", ".jfe", ".jfif", ".bmp", ".png", ".gif" };
 
             var files = HttpContext.Request.Form.Files;
             for (int i = 0; i < files.Count; i++)
@@ -79,7 +79,7 @@ namespace Sunridge.Pages.Blog
                 BlogImage image = new BlogImage()
                 {
                     BlogCommentId = blogComment.Id,
-                    ImgPath = @"\Images\BlogImages\" + fileName + extension
+                    ImgPath = @"\Images\BlogImages\Uploads\" + fileName + extension
                 };
                 blogComment.Images.Add(image);
             }            
@@ -87,13 +87,6 @@ namespace Sunridge.Pages.Blog
             _unitOfWork.BlogComment.Add(blogComment);
             _unitOfWork.Save();
 
-            return RedirectToPage("./Index");
-        }
-
-        public IActionResult OnPostDelete(int id)
-        {
-            _unitOfWork.BlogThread.DeleteThread(id);
-            _unitOfWork.Save();
             return RedirectToPage("./Index");
         }
 
@@ -113,6 +106,26 @@ namespace Sunridge.Pages.Blog
             _unitOfWork.BlogReply.Add(reply);
             _unitOfWork.Save();
             return RedirectToPage("./Index");
+        }
+
+        public bool UserHasLikedPost(int commentId)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var result = _unitOfWork.BlogLike.GetFirstOrDefault(c => c.ApplicationUserId == claim.Value && c.BlogCommentId == commentId);
+            return (result == null);
+        }
+
+        public string GetCurrentUserId()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            if(claim.Value == null) { return ""; }
+            return claim.Value;
+        }
+        public int GetNumLikes(int commentId)
+        {
+            return _unitOfWork.BlogLike.GetAll(l => l.BlogCommentId == commentId).Count();
         }
     }
 }

@@ -29,7 +29,6 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\Images\BlogImages\ProfilePictures\" />
     <Folder Include="wwwroot\Images\BlogImages\Uploads\" />
     <Folder Include="wwwroot\Images\BoardImages\" />
     <Folder Include="wwwroot\Images\LostAndFoundImages\" />

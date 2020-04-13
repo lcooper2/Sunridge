@@ -25,7 +25,7 @@ namespace Sunridge.Controllers
         }
 
         [HttpPost("{id}")]
-        public bool OnPostToggleLike(int id)
+        public void OnPostToggleLike(int id)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -33,12 +33,12 @@ namespace Sunridge.Controllers
             var userHasAlreadyLiked = _unitOfWork.BlogLike.GetFirstOrDefault
                 (bl => bl.BlogCommentId == id && bl.ApplicationUserId == claim.Value);
 
-            // Prevent a post from being liked multiple times
+            // Post has already been liked. Unlike it.
             if (userHasAlreadyLiked != null) 
             {
                 _unitOfWork.BlogLike.Remove(userHasAlreadyLiked);
                 _unitOfWork.Save();
-                return false;
+                return;
             }
 
             BlogLike like = new BlogLike()
@@ -49,13 +49,32 @@ namespace Sunridge.Controllers
 
             _unitOfWork.BlogLike.Add(like);
             _unitOfWork.Save();
-            return true; // Post was liked
+            return; // Post was liked
         }
 
-        //[HttpPost]
-        //public IActionResult OnPostComment(string comment, int threadId)
-        //{
-            
-        //}
+        [HttpDelete("{threadId}")]
+        [ActionName("Delete")]
+        public bool OnPostDelete(int threadId)
+        {
+            try
+            {
+                _unitOfWork.BlogThread.DeleteThread(threadId);
+                _unitOfWork.Save();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        [HttpGet("{commentId}")]
+        public bool HasLoggedInUserLikedPost(int commentId)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var result = _unitOfWork.BlogLike.GetFirstOrDefault(c => c.ApplicationUserId == claim.Value && c.BlogCommentId == commentId);
+            return (result == null);
+        }
     }
 }

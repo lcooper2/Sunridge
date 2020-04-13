@@ -1,27 +1,56 @@
-﻿function LikeThread(id) {
+﻿$(document).ready(function () {
+    tinyMCEInit();
+});
+
+function tinyMCEInit() {
+    tinymce.init(
+        {
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        }
+    );
+}
+
+function HasUserLikedPost(commentId) {
+    $.ajax({
+        url: "/api/blog/",
+        type: "GET",
+        data: { "commentId": commentId },
+        success: function (data) {
+            return data;
+        }
+    });
+}
+
+function LikeThread(id) {
     $.ajax({
         url: "/api/blog/" + id,
         type: "POST",
         data: { "id": id },
-        success: function (data) {
-            if (data == true) {
-                var likeSelector = "likeIcon(" + id + ")";
-                var likeIcon = document.getElementById(likeSelector);
-                if (likeIcon != null) {
-                    document.getElementById(likeSelector).classList.remove("fa-thumbs-down");
-                    document.getElementById(likeSelector).classList.add("fa-thumbs-up");
-                }
-            }
-            if (data == false) {
-                var likeSelector = "likeIcon(" + id + ")";
-                var likeIcon = document.getElementById(likeSelector);
-                if (likeIcon != null) {
-                    document.getElementById(likeSelector).classList.remove("fa-thumbs-up");
-                    document.getElementById(likeSelector).classList.add("fa-thumbs-down");
-                }
-            }
+        error: function (data) {
+            alert(data);
         }
     });
+    var likeSelector = "likeIcon(" + id + ")";
+    var likeIcon = document.getElementById(likeSelector);
+
+    if (likeIcon.classList.contains("far"))
+    {
+            document.getElementById(likeSelector).classList.remove("far");
+            document.getElementById(likeSelector).classList.add("fas");
+            document.getElementById(likeSelector).classList.remove("text-muted");
+            document.getElementById(likeSelector).classList.add("text-danger");
+    }
+    else
+    {
+            document.getElementById(likeSelector).classList.remove("fas");
+            document.getElementById(likeSelector).classList.add("far");
+            document.getElementById(likeSelector).classList.remove("text-danger");
+            document.getElementById(likeSelector).classList.add("text-muted");
+    }
+    likeIcon.parentElement.style.visibility = "hidden";
+    setTimeout(function () { likeIcon.parentElement.style.visibility = "visible"; }, 750);
 };
 
 function toggleReplyBox(commentId) {
@@ -84,4 +113,32 @@ function hideCommentBox(id) {
     var selector = "box(" + id + ")";
     var domElem = document.getElementById(selector);
     domElem.innerHTML = "";
+};
+
+function Delete(id) {
+    swal({
+        title: "Are you sure you want to delete this post?",
+        text: "You will not be able to restore the data!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    }).then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                type: 'DELETE',
+                url: "/api/blog/" + id,
+                data: { "threadId": id },
+                success: function (data) {
+                    if (data == true) {
+                        toastr.success(data.message);
+                        var cardSelector = "card(" + id + ")"
+                        document.getElementById(cardSelector).style.display = "none";
+                    }
+                    else {
+                        toastr.error(data.message);
+                    }
+                }
+            })
+        }
+    })
 };

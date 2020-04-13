@@ -1,5 +1,7 @@
-﻿using Sunridge.DataAccess.Data.Repository.IRepository;
+﻿using Microsoft.EntityFrameworkCore;
+using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
+using System.Threading.Tasks;
 
 namespace Sunridge.DataAccess.Data.Repository
 {
