@@ -49,7 +49,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Owner
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
+            
             await LoadAsync(user);
             return Page();
         }

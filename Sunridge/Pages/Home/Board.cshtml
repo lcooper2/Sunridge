@@ -7,7 +7,7 @@
         @foreach (var board in Model.BoardMembers)
         {
             <div class="col-lg-3 col-lx-3 col-md-6 pb-4" style="width:50%; padding: 1em;">
-                <div class="card " style="background-color:lightblue; box-shadow: 4px 4px #888888; border: 2px solid black; border-radius: 5px;">
+                <div class="card " style="background-color:lightblue; box-shadow: 4px 4px #888888; border: 2px solid black; border-radius: 5px; min-height:350px">
                     <img src="\@board.Image" class="card-img-top p-2 rounded " style="max-height:200px;" />
                     <div class="pl-2 pt-1 text-center"><h3 class="card-title " style="color: black; font-size: 16px "><b>@board.FullName<br />@board.Title</b></h3></div>
 

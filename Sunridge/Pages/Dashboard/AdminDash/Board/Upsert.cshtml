@@ -36,26 +36,39 @@
                 </div>
 
                 <div class="form-group row">
+
+                    <div class="col-2">
+                        <label asp-for="BoardObj.DisplayOrder"></label>
+                    </div>
+
+                    <div class="col-7">
+                        <input class="form-control" asp-for="BoardObj.DisplayOrder" />
+                        <span class="text-danger" asp-validation-for="BoardObj.DisplayOrder"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
                     <div class="col-2">
                         <label asp-for="BoardObj.FirstName"></label>
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-7">
                         <input class="form-control" asp-for="BoardObj.FirstName" />
                         <span class="text-danger" asp-validation-for="BoardObj.FirstName"></span>
                     </div>
-                    
 
-
+                </div>
+                <div class="form-group row">
                     <div class="col-2">
                         <label asp-for="BoardObj.LastName"></label>
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-7">
                         <input class="form-control" asp-for="BoardObj.LastName" />
                         <span class="text-danger" asp-validation-for="BoardObj.LastName"></span>
                     </div>
-                    
+
 
                 </div>
 
@@ -66,7 +79,7 @@
                     </div>
 
                     <div class="col-7">
-                        
+
                         <input type="file" class="form-control" name="files" id="files" />
                     </div>
 
@@ -97,11 +110,6 @@
                     </div>
 
                 </div>
-
-            </div>
-
-                
-
                 <div class="form-group row">
 
                     <div class="col-9 offset-3">
@@ -127,18 +135,24 @@
 
                     </div>
 
-                    @if (Model.BoardObj != null)
-                    {
-                        <div class="clo-4 p-4">
-                            <img src="\@Model.BoardObj.Image" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
 
-                        </div>
-                    }
                 </div>
             </div>
 
+
+
+            
+
         </div>
-    
+        @if (Model.BoardObj.Id != 0)
+        {
+            <div class="clo-4 p-4">
+                <img src="\@Model.BoardObj.Image" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
+
+            </div>
+        }
+    </div>
+   
 
 </form>
 
