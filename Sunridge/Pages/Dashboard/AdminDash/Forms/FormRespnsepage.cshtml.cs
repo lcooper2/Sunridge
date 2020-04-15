@@ -32,9 +32,10 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Forms
             {
                FSList = _unitOfWork.FormSubmissions.GetFormSubmissionsListForDropDown(),
                 
-
+               FormSubmissions = new Models.FormSubmissions(),
                 FormResponse = new Models.FormResponse()
             };
+            SubList = _unitOfWork.FormSubmissions.GetAll(null, null);
             if (id != null)
             {
                 FormResObj.FormResponse = _unitOfWork.FormResponse.GetFirstOrDefault(u => u.Id == id);
