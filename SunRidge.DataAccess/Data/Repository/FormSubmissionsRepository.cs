@@ -27,7 +27,6 @@ namespace Sunridge.DataAccess.Data.Repository
         public void Update(FormSubmissions FormSubmissions)
         {
             var obJFromDb = _db.FormSubmissions.FirstOrDefault(s => s.Id == FormSubmissions.Id);
-
             obJFromDb.SubmitDate = FormSubmissions.SubmitDate;
            // obJFromDb.FormType = FormSubmissions.FormType;
             obJFromDb.FormId = FormSubmissions.FormId;

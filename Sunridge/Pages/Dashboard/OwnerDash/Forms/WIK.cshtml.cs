@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
+using Sunridge.Models.ViewModels;
 
 namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
 {
@@ -18,25 +19,35 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
 
         }
         [BindProperty]
-        public Models.InKindWorkHours FormResObj { get; set; }
-
+        public WIKVM FormResObj { get; set; }
         public IActionResult OnGet(int? id)
         {
-            FormResObj = new Models.InKindWorkHours();
+            FormResObj = new WIKVM
+            {
+                InKindWorkHours = new Models.InKindWorkHours(),
+
+                FormSubmissions = new Models.FormSubmissions()
+            };
+            //FormResObj = new Models.InKindWorkHours();
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            FormResObj.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
+            FormResObj.InKindWorkHours.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
             if (claim != null)
             {
                 //FormResObj.ApplicationUser = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value);
                 if (id != null)
                 {
-                    FormResObj = _unitOfWork.InKindWorkHours.GetFirstOrDefault(u => u.Id == id);
-                    FormResObj.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
-                    FormResObj.Type = "WIK";
+                    FormResObj.InKindWorkHours = _unitOfWork.InKindWorkHours.GetFirstOrDefault(u => u.Id == id);
+                    FormResObj.InKindWorkHours.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
+                    FormResObj.InKindWorkHours.Type = "WIK";
+                    FormResObj.FormSubmissions.IsCl = false;
+                    FormResObj.FormSubmissions.IsSC = false;
+                    FormResObj.FormSubmissions.IsWik = true;
+                    FormResObj.FormSubmissions.SubmitDate = DateTime.Now;
+                    FormResObj.FormSubmissions.FormId = id.ToString();
                     //FormResObj.FormResponse.SubmitDate = DateTime.Now;
-                    FormResObj.ApplicationUserId = claim.Value;
+                    FormResObj.InKindWorkHours.ApplicationUserId = claim.Value;
                     if (FormResObj == null)
                     {
                         return NotFound();
@@ -52,23 +63,31 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             {
                 return Page();
             }
-            if (FormResObj.Id == 0)
+            if (FormResObj.InKindWorkHours.Id == 0)
             {
-                FormResObj.Type = "WIK";
+                FormResObj.InKindWorkHours.Type = "WIK";
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
                 var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-                FormResObj.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
-                _unitOfWork.InKindWorkHours.Add(FormResObj);
+                FormResObj.InKindWorkHours.Type = "WIK";
+                FormResObj.FormSubmissions.IsCl = false;
+                FormResObj.FormSubmissions.IsSC = false;
+                FormResObj.FormSubmissions.IsWik = true;
+                FormResObj.InKindWorkHours.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
+                _unitOfWork.InKindWorkHours.Add(FormResObj.InKindWorkHours);
+                _unitOfWork.FormSubmissions.Add(FormResObj.FormSubmissions);
             }
             else
             {
-                FormResObj.Type = "WIK";
+                FormResObj.InKindWorkHours.Type = "WIK";
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
                 var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-                FormResObj.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
-                _unitOfWork.InKindWorkHours.Update(FormResObj);
+                FormResObj.InKindWorkHours.Type = "WIK";
+                FormResObj.FormSubmissions.IsCl = false;
+                FormResObj.FormSubmissions.IsSC = false;
+                FormResObj.FormSubmissions.IsWik = true;
+                FormResObj.InKindWorkHours.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
+                _unitOfWork.InKindWorkHours.Update(FormResObj.InKindWorkHours);
+                _unitOfWork.FormSubmissions.Update(FormResObj.FormSubmissions);
             }
             _unitOfWork.Save();
             return RedirectToPage("./Index");

@@ -45,6 +45,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                     FormResObj.FormSubmissions.IsSC = false;
                     FormResObj.FormSubmissions.IsWik = false;
                     FormResObj.FormSubmissions.SubmitDate = DateTime.Now;
+                    FormResObj.FormSubmissions.FormId = id.ToString();
                     //FormResObj.FormResponse.SubmitDate = DateTime.Now;
                     FormResObj.ClaimLoss.ApplicationUserId = claim.Value;
                     if (FormResObj == null)
@@ -72,7 +73,9 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.FormSubmissions.IsCl = true;
                 FormResObj.FormSubmissions.IsSC = false;
                 FormResObj.FormSubmissions.IsWik = false;
+               // FormResObj.FormSubmissions.FormId = FormResObj.ClaimLoss.Id.ToString();
                 _unitOfWork.ClaimLoss.Add(FormResObj.ClaimLoss);
+                FormResObj.FormSubmissions.FormId = FormResObj.ClaimLoss.Id.ToString();
                 _unitOfWork.FormSubmissions.Add(FormResObj.FormSubmissions);
             }
             else
@@ -84,7 +87,9 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.FormSubmissions.IsCl = true;
                 FormResObj.FormSubmissions.IsSC = false;
                 FormResObj.FormSubmissions.IsWik = false;
+                
                 _unitOfWork.ClaimLoss.Update(FormResObj.ClaimLoss);
+                FormResObj.FormSubmissions.FormId = FormResObj.ClaimLoss.Id.ToString();
                 _unitOfWork.FormSubmissions.Update(FormResObj.FormSubmissions);
             }
             _unitOfWork.Save();
