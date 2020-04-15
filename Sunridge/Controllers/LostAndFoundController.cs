@@ -30,11 +30,13 @@ namespace Sunridge.Controllers
         {
             return Json(new { data = _unitOfWork.LostAndFound.GetAll() });
         }
-        //public async Task<IActionResult> GetForUser()
+
+        //public async Task<IActionResult> Get(int id)
         //{
         //    var user = await _userManager.GetUserAsync(User);
         //    return Json(new { data = _unitOfWork.LostAndFound.GetAll(x => x.UserId == user.Id) });
         //}
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

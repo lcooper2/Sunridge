@@ -29,7 +29,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Owner
         }
         [BindProperty]
         public ApplicationUser ApplicationUser { get; set; }
-        public string Username { get; set; }
+       
 
 
 
@@ -54,26 +54,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Owner
             return Page();
         }
 
-        public IActionResult OnPost()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            if (ApplicationUser.Id == null)
-            {
-                return Page();
-            }
-            else
-            {
-                _unitOfWork.ApplicationUser.Update(ApplicationUser);
-            }
-
-
-            _unitOfWork.Save();
-            return RedirectToPage("./Profile");
-        }
+     
 
 
     }

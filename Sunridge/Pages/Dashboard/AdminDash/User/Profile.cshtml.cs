@@ -89,30 +89,31 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
                 return Page();
             }
 
-            var UserRole = await _userManager.IsInRoleAsync(applicationUser, SD.AdminRole);
-            var st = applicationUser.Id;
-            if (UserRole == true)
-            {
-                OrginalRole = SD.AdminRole;
-                
-                if (OrginalRole != Input.Role)
-                {
-                    await _userManager.RemoveFromRoleAsync(applicationUser, SD.AdminRole);
-                    await _userManager.AddToRoleAsync(applicationUser, SD.Owner);
-                }
-            }
-            else
-            {
-                OrginalRole = SD.Owner;
-                if (OrginalRole != Input.Role)
-                {
-                    await _userManager.RemoveFromRoleAsync(applicationUser, SD.Owner);
-                    await _userManager.AddToRoleAsync(applicationUser, SD.AdminRole);
-                }
-            }
+            //var UserRole = await _userManager.IsInRoleAsync(applicationUser, SD.AdminRole);
+            //var st = applicationUser.Id;
+            //if (UserRole == true)
+            //{
+            //    OrginalRole = SD.AdminRole;
 
-            //_unitOfWork.ApplicationUser.Update(applicationUser);
-            //_unitOfWork.Save();
+            //    if (OrginalRole != Input.Role)
+            //    {
+            //        await _userManager.RemoveFromRoleAsync(applicationUser, SD.AdminRole);
+
+            //    }
+            //}
+            //else
+            //{
+            //    OrginalRole = SD.Owner;
+            //    if (OrginalRole != Input.Role)
+            //    {
+            //        await _userManager.AddToRoleAsync(applicationUser, SD.AdminRole);
+
+
+            //    }
+            //}
+
+            _unitOfWork.ApplicationUser.Update(applicationUser);
+            _unitOfWork.Save();
 
             return RedirectToPage("./Index");
             }
