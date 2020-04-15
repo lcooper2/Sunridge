@@ -26,7 +26,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Forms
             //FormList = _unitOfWork.FormResponse.GetAll(null, q => q.OrderBy(c => c.Resolved), null);
         public IActionResult OnGet(int? id)
         {
-            SubList = _unitOfWork.FormSubmissions.GetAll(null, q => q.OrderBy(c => c.FormType), null);
+            //SubList = _unitOfWork.FormSubmissions.GetAll(null, q => q.OrderBy(c => c.FormType), null);
             FormList = _unitOfWork.FormResponse.GetAll(null, null, "FormSubmissions");
             FormResObj = new FormResponseVM
             {

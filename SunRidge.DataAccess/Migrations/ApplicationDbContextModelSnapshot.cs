@@ -652,23 +652,20 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClaimLossId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FormId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FormType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsCl")
+                        .HasColumnType("bit");
 
-                    b.Property<int?>("InKindWorkHoursId")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsSC")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsWik")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("SubmitDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("SuggestionComplaintId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
