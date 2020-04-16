@@ -11,33 +11,13 @@ namespace Sunridge.Models
         [Key]
         public int Id { get; set; }
 
-        //was ownerID
-        //public Owner Owner { get; set; }
-       
-        /*
-         * SC: Suggestions and complaints
-         * WIK: Work in kind
-         * CL: Loss claim
-         * BR: Building request
-         */
         [Required]
         [StringLength(3, MinimumLength = 1)]
         public string FormType { get; set; }
 
-        //public int? LotId { get; set; } // work in kind
-
         [Display(Name = "Listing Date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime SubmitDate { get; set; }
-
-        //public string Description { get; set; } // suggestions, work in kind
-        //public string Suggestion { get; set; } // suggestions
-
-        //public string EquipmentUsed { get; set; } // work in kind
-
-        // Add an object to hold these?
-        //public int? Hours { get; set; } // work in kind
-        //public string Activity { get; set; } // work in kind 
 
         public String PrivacyLevel { get; set; }
         public bool Resolved { get; set; }
@@ -52,15 +32,6 @@ namespace Sunridge.Models
         public int FormSubmissionsId { get; set; }
         [ForeignKey("FormSubmissionsId")]
         public virtual FormSubmissions FormSubmissions { get; set; }
-
-
-
-        // Nav properties
-
-        //public virtual ICollection<Comment> Comments { get; set; }
-        //public virtual ICollection<File> Files { get; set; }
-        //public virtual Lot Lot { get; set; }
-        //public virtual ICollection<InKindWorkHours> InKindWorkHours { get; set; }
 
         // Calculated properties
         [Display(Name = "Form Type")]
@@ -83,7 +54,6 @@ namespace Sunridge.Models
                 }
             }
         }
-
         public string FormAction
         {
             get

@@ -31,11 +31,37 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Forms
             FormResObj = new FormResponseVM
             {
                FSList = _unitOfWork.FormSubmissions.GetFormSubmissionsListForDropDown(),
-                
                FormSubmissions = new Models.FormSubmissions(),
-                FormResponse = new Models.FormResponse()
+               FormResponse = new Models.FormResponse()
             };
             SubList = _unitOfWork.FormSubmissions.GetAll(null, null);
+           foreach(var submission in FormResObj.FSList)
+            {
+                //FormResObj.FormResponse = _unitOfWork.FormResponse.GetFirstOrDefault(u => u.Id == id);
+                FormResObj.FormResponse.FormSubmissionsId = FormResObj.FormSubmissions.Id;
+                FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;
+                FormResObj.FormResponse.SubmitDate = FormResObj.FormSubmissions.SubmitDate;
+                
+                if(FormResObj.FormResponse.ResolveDate == null )
+                {
+                    FormResObj.FormResponse.Resolved = false;
+                    FormResObj.FormResponse.PrivacyLevel = null;
+                    FormResObj.FormResponse.ResolveUser = null;
+                    if(FormResObj.FormSubmissions.IsCl == true)
+                    {
+                        FormResObj.FormResponse.ResolveUser = "CL";
+                    }
+                    if (FormResObj.FormSubmissions.IsSC == true)
+                    {
+                        FormResObj.FormResponse.ResolveUser = "SC";
+                    }
+                    if (FormResObj.FormSubmissions.IsWik == true)
+                    {
+                        FormResObj.FormResponse.ResolveUser = "WIK";
+                    }
+                }
+
+            }
             if (id != null)
             {
                 FormResObj.FormResponse = _unitOfWork.FormResponse.GetFirstOrDefault(u => u.Id == id);

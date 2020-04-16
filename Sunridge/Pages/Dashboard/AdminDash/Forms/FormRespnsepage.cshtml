@@ -31,27 +31,16 @@
                                             <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                         </tr>
                                     </thead>
-                                    @foreach (var form in Model.FormList)
+                                    @foreach (var form in Model.FormResObj.FSList)
                                     {
                                         <tr>
                                             <td>
-                                                <h4 class="btn-toolbar">@form.FormSubmissions.Id</h4>
+                                                <h4 class="btn-toolbar">@form.Value</h4>
                                             </td>
                                             <td>
-                                                @form.FormSubmissions.SubmitDate
+                                                @form.Text
                                             </td>
-                                            <td>
-                                                @form.PrivacyLevel
-                                            </td>
-                                            <td>
-                                                @form.Resolved
-                                            </td>
-                                            <td>
-                                                @form.ResolveDate
-                                            </td>
-                                            <td>
-                                                @form.ResolveUser
-                                            </td>
+                                           
                                             <td></td>
                                         </tr>
                                     }
