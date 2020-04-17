@@ -89,7 +89,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.FormSubmissions.FormId = FormResObj.ClaimLoss.Id;
                 
                 _unitOfWork.FormSubmissions.Add(FormResObj.FormSubmissions);
-                FormResObj.FormResponse.FormSubmissionsId = FormResObj.FormSubmissions.Id;
+                FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;
                 _unitOfWork.FormResponse.Add(FormResObj.FormResponse);
             }
             else
@@ -109,7 +109,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.FormSubmissions.FormId = FormResObj.ClaimLoss.Id;
        
                 _unitOfWork.FormSubmissions.Update(FormResObj.FormSubmissions);
-                FormResObj.FormResponse.FormSubmissionsId = FormResObj.FormSubmissions.Id;
+                FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;
                 _unitOfWork.FormResponse.Update(FormResObj.FormResponse);
             }
             _unitOfWork.Save();
