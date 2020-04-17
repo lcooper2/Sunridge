@@ -42,7 +42,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.FormSubmissions.IsSC = true;
                 FormResObj.FormSubmissions.IsWik = false;
                 FormResObj.FormSubmissions.SubmitDate = DateTime.Now;
-                FormResObj.FormSubmissions.FormId = id.ToString();
+                FormResObj.FormSubmissions.FormId = FormResObj.SuggestionComplaint.Id;
                 FormResObj.SuggestionComplaint.ApplicationUserId = claim.Value;
                 if (FormResObj == null)
                 {
@@ -69,7 +69,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.FormSubmissions.IsWik = false;
                 FormResObj.SuggestionComplaint.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                 _unitOfWork.SuggestionComplaint.Add(FormResObj.SuggestionComplaint);
-                FormResObj.FormSubmissions.FormId = FormResObj.SuggestionComplaint.ToString();
+                FormResObj.FormSubmissions.FormId = FormResObj.SuggestionComplaint.Id;
                 _unitOfWork.FormSubmissions.Add(FormResObj.FormSubmissions);
             }
             else
@@ -81,7 +81,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.FormSubmissions.IsWik = false;
                 FormResObj.SuggestionComplaint.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                 _unitOfWork.SuggestionComplaint.Update(FormResObj.SuggestionComplaint);
-                FormResObj.FormSubmissions.FormId = FormResObj.SuggestionComplaint.ToString();
+                FormResObj.FormSubmissions.FormId = FormResObj.SuggestionComplaint.Id;
                 _unitOfWork.FormSubmissions.Update(FormResObj.FormSubmissions);
             }
             _unitOfWork.Save();

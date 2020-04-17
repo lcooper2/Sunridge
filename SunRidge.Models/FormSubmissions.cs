@@ -15,7 +15,7 @@ namespace Sunridge.Models
 
         /*To port info of person who is filling */
         [Display(Name = "FormId")]
-        public string FormId { get; set; }
+        public int FormId { get; set; }
        
         public bool IsWik { get; set; }
 
