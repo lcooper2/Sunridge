@@ -27,6 +27,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             FormResObj = new SugComVM
             {
                 SuggestionComplaint = new Models.SuggestionComplaint(),
+                FormResponse = new Models.FormResponse(),
 
                 FormSubmissions = new Models.FormSubmissions()
             };
@@ -37,11 +38,15 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.SuggestionComplaint = _unitOfWork.SuggestionComplaint.GetFirstOrDefault(u => u.Id == id);
                 FormResObj.FormSubmissions = _unitOfWork.FormSubmissions.GetFirstOrDefault(u => u.Id == id);
                 FormResObj.SuggestionComplaint.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
-                //FormResObj.SuggestionComplaint.Type = "SC";
+                FormResObj.FormResponse.FormType = "SC";
                 FormResObj.FormSubmissions.IsCl = false;
                 FormResObj.FormSubmissions.IsSC = true;
                 FormResObj.FormSubmissions.IsWik = false;
                 FormResObj.FormSubmissions.SubmitDate = DateTime.Now;
+                FormResObj.FormResponse.SubmitDate = DateTime.Now;
+                FormResObj.FormResponse.Resolved = false;
+                FormResObj.FormResponse.ResolveUser = "None";
+                FormResObj.FormResponse.FormSubmissionsId = FormResObj.FormSubmissions.Id;
                 FormResObj.FormSubmissions.FormId = FormResObj.SuggestionComplaint.Id;
                 FormResObj.SuggestionComplaint.ApplicationUserId = claim.Value;
                 if (FormResObj == null)
@@ -63,26 +68,43 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             {
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
                 var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-                //FormResObj.SuggestionComplaint.Type = "SC";
+                FormResObj.FormResponse.FormType = "SC";
                 FormResObj.FormSubmissions.IsCl = false;
                 FormResObj.FormSubmissions.IsSC = true;
                 FormResObj.FormSubmissions.IsWik = false;
+                FormResObj.FormSubmissions.SubmitDate = DateTime.Now;
+                FormResObj.FormResponse.SubmitDate = DateTime.Now;
+                FormResObj.FormResponse.Resolved = false;
+                FormResObj.FormResponse.ResolveUser = "None";
+                FormResObj.FormResponse.FormSubmissionsId = FormResObj.FormSubmissions.Id;
+                FormResObj.FormSubmissions.FormId = FormResObj.SuggestionComplaint.Id;
                 FormResObj.SuggestionComplaint.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                 _unitOfWork.SuggestionComplaint.Add(FormResObj.SuggestionComplaint);
                 FormResObj.FormSubmissions.FormId = FormResObj.SuggestionComplaint.Id;
                 _unitOfWork.FormSubmissions.Add(FormResObj.FormSubmissions);
+                FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;
+                _unitOfWork.FormResponse.Add(FormResObj.FormResponse);
             }
             else
             {
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
                 var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+                FormResObj.FormResponse.FormType = "SC";
                 FormResObj.FormSubmissions.IsCl = false;
                 FormResObj.FormSubmissions.IsSC = true;
                 FormResObj.FormSubmissions.IsWik = false;
+                FormResObj.FormSubmissions.SubmitDate = DateTime.Now;
+                FormResObj.FormResponse.SubmitDate = DateTime.Now;
+                FormResObj.FormResponse.Resolved = false;
+                FormResObj.FormResponse.ResolveUser = "None";
+                FormResObj.FormResponse.FormSubmissionsId = FormResObj.FormSubmissions.Id;
+                FormResObj.FormSubmissions.FormId = FormResObj.SuggestionComplaint.Id;
                 FormResObj.SuggestionComplaint.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                 _unitOfWork.SuggestionComplaint.Update(FormResObj.SuggestionComplaint);
                 FormResObj.FormSubmissions.FormId = FormResObj.SuggestionComplaint.Id;
                 _unitOfWork.FormSubmissions.Update(FormResObj.FormSubmissions);
+                FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;
+                _unitOfWork.FormResponse.Update(FormResObj.FormResponse);
             }
             _unitOfWork.Save();
             return RedirectToPage("./Index");
