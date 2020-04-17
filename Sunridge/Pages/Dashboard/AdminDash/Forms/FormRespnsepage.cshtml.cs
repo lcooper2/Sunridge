@@ -45,7 +45,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Forms
                 if(FormResObj.FormResponse.ResolveDate == null )
                 {
                     FormResObj.FormResponse.Resolved = false;
-                    FormResObj.FormResponse.PrivacyLevel = null;
+                    //FormResObj.FormResponse.PrivacyLevel = null;
                     FormResObj.FormResponse.ResolveUser = null;
                     if(FormResObj.FormSubmissions.IsCl == true)
                     {

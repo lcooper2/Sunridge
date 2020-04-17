@@ -17,7 +17,12 @@
             {
                 <input type="hidden" asp-for="FormResObj.FormSubmissions.Id" />
             }
+            @if (Model.FormResObj.FormResponse.Id != 0)
+            {
+                <input type="hidden" asp-for="FormResObj.FormResponse.Id" />
+            }
             <input type="hidden" asp-for="FormResObj.FormSubmissions.IsCl" value="true" />
+            <input type="hidden" asp-for="FormResObj.FormResponse.Resolved" value="false" />
             <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
                 <h2 class="text-primary">@(Model.FormResObj.ClaimLoss.Id != 0 ? "Update" : "Create") Form</h2>
             </div>

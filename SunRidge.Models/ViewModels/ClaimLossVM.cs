@@ -14,5 +14,7 @@ namespace Sunridge.Models.ViewModels
 
         public FormSubmissions FormSubmissions { get; set; }
 
+        public FormResponse FormResponse { get; set; }
+
     }
 }
