@@ -77,7 +77,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
                 var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
                 FormResObj.ClaimLoss.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
-                 FormResObj.ClaimLoss.Type = "CL";
+                FormResObj.ClaimLoss.Type = "CL";
                 FormResObj.FormResponse.FormType = "CL";
                 FormResObj.FormSubmissions.IsCl = true;
                 FormResObj.FormSubmissions.IsSC = false;

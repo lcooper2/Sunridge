@@ -12,7 +12,6 @@ namespace Sunridge.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(3, MinimumLength = 1)]
         public string FormType { get; set; }
 
         [Display(Name = "Listing Date")]
@@ -33,45 +32,6 @@ namespace Sunridge.Models
         [ForeignKey("FormSubmissionsId")]
         public virtual FormSubmissions FormSubmissions { get; set; }
 
-        // Calculated properties
-        [Display(Name = "Form Type")]
-        public string FormTypeName
-        {
-            get
-            {
-                switch (FormType)
-                {
-                    case "SC":
-                        return "Suggestion / Complaint";
-                    case "WIK":
-                        return "Work in kind";
-                    case "CL":
-                        return "Loss claim";
-                    case "BR":
-                        return "Building request";
-                    default:
-                        return FormType;
-                }
-            }
-        }
-        public string FormAction
-        {
-            get
-            {
-                switch (FormType)
-                {
-                    case "SC":
-                        return "SuggestionComplaint";
-                    case "WIK":
-                        return "InKindWork";
-                    case "CL":
-                        return "Loss claim";
-                    case "BR":
-                        return "Building request";
-                    default:
-                        return FormType;
-                }
-            }
-        }
+        
     }
 }
