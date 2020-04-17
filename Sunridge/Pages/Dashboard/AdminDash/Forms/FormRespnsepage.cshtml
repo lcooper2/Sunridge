@@ -23,25 +23,36 @@
                                     <thead>
                                         <tr>
                                             <th><b>Form Type</b></th>
-                                            <th><b>Submit Date</b></th>
-                                            <th><b>Privacy</b></th>
+                                            <th><b>Submit Date</b></th>                            
                                             <th><b>Resolved</b></th>
                                             <th><b>Resolve Date</b></th>
                                             <th><b>User</b></th>
                                             <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                         </tr>
                                     </thead>
-                                    @foreach (var form in Model.FormResObj.FSList)
+                                    @foreach (var form in Model.FormList)
                                     {
+                                     
                                         <tr>
                                             <td>
-                                                <h4 class="btn-toolbar">@form.Value</h4>
+                                                <h4 class="btn-toolbar">@form.FormType</h4>
                                             </td>
                                             <td>
-                                                @form.Text
+                                                @form.SubmitDate
                                             </td>
-                                           
-                                            <td></td>
+
+                                            <td>@form.Resolved</td>
+
+                                            <td>@form.ResolveDate</td>
+                                            <td>@form.ResolveUser</td>
+                                            <td><div class="text-center">
+                                                <a href="/Dashboard/AdminDash/Forms/upsert?id=${@form.Id}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                                    <i class="far fa edit"></i> Edit
+                                                </a>
+                                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/forms/'+${data})>
+                                                    <i class="far fa-trash-alt"></i> Delete
+                                                </a>
+</div></td>
                                         </tr>
                                     }
                                 </table>

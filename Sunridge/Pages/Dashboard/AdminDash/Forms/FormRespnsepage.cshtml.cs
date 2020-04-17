@@ -16,6 +16,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Forms
 
         public IEnumerable<FormResponse> FormList { get; set; }
         public IEnumerable<FormSubmissions> SubList { get; set; }
+        public string value;
         public FormRespnsepageModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
