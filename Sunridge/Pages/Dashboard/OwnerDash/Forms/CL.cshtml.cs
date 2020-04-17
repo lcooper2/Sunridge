@@ -80,7 +80,6 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.FormSubmissions.IsCl = true;
                 FormResObj.FormSubmissions.IsSC = false;
                 FormResObj.FormSubmissions.IsWik = false;
-               
                 FormResObj.FormResponse.Resolved = false;
                 FormResObj.FormResponse.ResolveUser = "None";
                 // FormResObj.FormSubmissions.FormId = FormResObj.ClaimLoss.Id.ToString();
