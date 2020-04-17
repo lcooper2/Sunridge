@@ -26,6 +26,9 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             {
                 InKindWorkHours = new Models.InKindWorkHours(),
 
+                FormResponse = new Models.FormResponse(),
+
+
                 FormSubmissions = new Models.FormSubmissions()
             };
             //FormResObj = new Models.InKindWorkHours();
@@ -41,10 +44,15 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                     FormResObj.InKindWorkHours = _unitOfWork.InKindWorkHours.GetFirstOrDefault(u => u.Id == id);
                     FormResObj.InKindWorkHours.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                     FormResObj.InKindWorkHours.Type = "WIK";
+                    FormResObj.FormResponse.FormType = "WIK";
                     FormResObj.FormSubmissions.IsCl = false;
                     FormResObj.FormSubmissions.IsSC = false;
                     FormResObj.FormSubmissions.IsWik = true;
                     FormResObj.FormSubmissions.SubmitDate = DateTime.Now;
+                    FormResObj.FormResponse.SubmitDate = DateTime.Now;
+                    FormResObj.FormResponse.Resolved = false;
+                    FormResObj.FormResponse.ResolveUser = "None";
+                    FormResObj.FormResponse.FormSubmissionsId = FormResObj.FormSubmissions.Id;
                     FormResObj.FormSubmissions.FormId = FormResObj.InKindWorkHours.Id;
                     //FormResObj.FormResponse.SubmitDate = DateTime.Now;
                     FormResObj.InKindWorkHours.ApplicationUserId = claim.Value;
@@ -69,13 +77,22 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
                 var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
                 FormResObj.InKindWorkHours.Type = "WIK";
+                FormResObj.FormResponse.FormType = "WIK";
                 FormResObj.FormSubmissions.IsCl = false;
                 FormResObj.FormSubmissions.IsSC = false;
                 FormResObj.FormSubmissions.IsWik = true;
+                FormResObj.FormSubmissions.SubmitDate = DateTime.Now;
+                FormResObj.FormResponse.SubmitDate = DateTime.Now;
+                FormResObj.FormResponse.Resolved = false;
+                FormResObj.FormResponse.ResolveUser = "None";
+                FormResObj.FormResponse.FormSubmissionsId = FormResObj.FormSubmissions.Id;
+                FormResObj.FormSubmissions.FormId = FormResObj.InKindWorkHours.Id;
                 FormResObj.InKindWorkHours.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                 _unitOfWork.InKindWorkHours.Add(FormResObj.InKindWorkHours);
                 FormResObj.FormSubmissions.FormId = FormResObj.InKindWorkHours.Id;
                 _unitOfWork.FormSubmissions.Add(FormResObj.FormSubmissions);
+                FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;
+                _unitOfWork.FormResponse.Add(FormResObj.FormResponse);
             }
             else
             {
@@ -90,6 +107,8 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 _unitOfWork.InKindWorkHours.Update(FormResObj.InKindWorkHours);
                 FormResObj.FormSubmissions.FormId = FormResObj.InKindWorkHours.Id;
                 _unitOfWork.FormSubmissions.Update(FormResObj.FormSubmissions);
+                FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;
+                _unitOfWork.FormResponse.Update(FormResObj.FormResponse);
             }
             _unitOfWork.Save();
             return RedirectToPage("./Index");

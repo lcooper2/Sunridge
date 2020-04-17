@@ -8,5 +8,6 @@ namespace Sunridge.Models.ViewModels
     {
         public InKindWorkHours InKindWorkHours { get; set; }
         public FormSubmissions FormSubmissions { get; set; }
+        public FormResponse FormResponse { get; set; }
     }
 }
