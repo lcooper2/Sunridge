@@ -12,8 +12,8 @@ function loadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "fullName", "width": "30%" },
-            { "data": "userName", "width": "30%" },
+            { "data": "fullName", "width": "auto" },
+            { "data": "userName", "width": "auto" },
             {
                 "data": {
                     id: "id", lockoutEnd: "lockoutEnd"
@@ -25,23 +25,23 @@ function loadList() {
                         // user is currently locked out
 
                         return ` <div class="text-center">
-                        <a class="btn btn-danger text-white"onclick = "LockUnlock('${data.id}')"  style="cursor:pointer; width:100px;">
+                        <a class="btn btn-danger text-white"onclick = "LockUnlock('${data.id}')"  style="cursor:pointer; width:auto;">
                             <i class="fas fa-lock-open" ></i> Unlock
                         </a>
-                        <a href= "/Dashboard/AdminDash/User/Profile?id=${data.id}" class="btn btn-primary text-white" style="cursor:pointer; width:75px;">
+                        <a href= "/Dashboard/AdminDash/User/Profile?id=${data.id}" class="btn btn-primary text-white" style="cursor:pointer; width:auto;">
                             <i class="fas fa-history"></i>Info   
                         </a></div>`;
                     }
                     else {
                         return ` <div class="text-center">
-                        <a class="btn btn-success text-white"onclick = "LockUnlock('${data.id}')"  style="cursor:pointer; width:100px;">
+                        <a class="btn btn-success text-white"onclick = "LockUnlock('${data.id}')"  style="cursor:pointer; width:auto;">
                             <i class="fas fa-lock" ></i> Lock
                         </a>
-                        <a href= "/Dashboard/AdminDash/User/Profile?id=${data.id}" class="btn btn-primary text-white" style="cursor:pointer; width:75px;">
+                        <a href= "/Dashboard/AdminDash/User/Profile?id=${data.id}" class="btn btn-primary text-white" style="cursor:pointer; width:auto;">
                             <i class="fas fa-history"></i>Info   
                         </a></div>`;
                     }
-                }, "width": "40%"
+                }, "width": "auto"
             }
         ],
         "language": {

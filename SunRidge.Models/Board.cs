@@ -37,7 +37,6 @@ namespace Sunridge.Models
         [Display(Name = "Image")]
         public string Image { get; set; }
 
-       
 
         [Display(Name = "Display Order")]
         public int DisplayOrder { get; set; }

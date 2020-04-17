@@ -14,8 +14,17 @@ namespace Sunridge.Models
 
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
-        public bool IsMainImage { get; set; }
-        public string ImageURL { get; set; }
+        [Required]
+
+        public string Category { get; set; }
+
+        [Required(ErrorMessage = "Please type a title")]
+
+        public string Title { get; set; }
+
+        public int Year { get; set; }
+
+        public string Image { get; set; }
 
     }
 }

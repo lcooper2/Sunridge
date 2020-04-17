@@ -12,15 +12,7 @@
             <input type="hidden" asp-for="ApplicationUser.Id" />
             <div id="nonEdited" style="display:block">
 
-                <div class="form-group row border">
-                    <div class="col-9">
-                        <div class="non-edit" style="display:block">
-                            <label asp-for="ApplicationUser.UserName"></label><br />
-                            <b>@Model.ApplicationUser.UserName</b>
-                        </div>
 
-                    </div>
-                </div> 
 
                 <div class="form-group row border">
                     <div class="col-9">
@@ -28,6 +20,16 @@
                             <label asp-for="ApplicationUser.FullName"></label><br />
                             <b>@Model.ApplicationUser.FullName</b>
                         </div>
+                    </div>
+                </div> 
+
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+                            <label asp-for="ApplicationUser.UserName"></label><br />
+                            <b>@Model.ApplicationUser.UserName</b>
+                        </div>
+
                     </div>
                 </div>
 
@@ -47,7 +49,7 @@
                             <label asp-for="ApplicationUser.PhoneNumber"></label><br />
                             @if (Model.ApplicationUser.PhoneNumber != null)
                             {
-                                <b >@String.Format("{0: (###) ###-####}", Convert.ToInt64(Model.ApplicationUser.PhoneNumber))</b>
+                                <b>@String.Format("{0: (###) ###-####}", Convert.ToInt64(Model.ApplicationUser.PhoneNumber))</b>
                             }
                             else
                             {
@@ -94,7 +96,7 @@
                             <label asp-for="ApplicationUser.EmergencyContactPhone"></label><br />
                             @if (Model.ApplicationUser.EmergencyContactPhone != null)
                             {
-                                <b >@String.Format("{0: (###) ###-####}", Convert.ToInt64(Model.ApplicationUser.EmergencyContactPhone))</b>
+                                <b>@String.Format("{0: (###) ###-####}", Convert.ToInt64(Model.ApplicationUser.EmergencyContactPhone))</b>
                             }
                             else
                             {

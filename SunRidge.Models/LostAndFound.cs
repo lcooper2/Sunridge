@@ -11,9 +11,9 @@ namespace Sunridge.Models
         [Key]
         public int Id { get; set; }
 
-        public string UserId { get; set; }
-        [ForeignKey("UserId")]
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        //public string UserId { get; set; }
+        //[ForeignKey("UserId")]
+        //public virtual ApplicationUser ApplicationUser { get; set; }
 
         [Required]
         [Display(Name = "Item Name")]
