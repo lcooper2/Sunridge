@@ -8,7 +8,7 @@ namespace Sunridge.Models.ViewModels
     public class LotInventoryVM
     {
         public LotInventory LotInventory { get; set; }
-
+        public Lot Lot { get; set; }
         public List<Inventory> InventoryList { get; set; }
 
     }

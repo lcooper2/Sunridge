@@ -10,13 +10,17 @@ namespace Sunridge.Models
     {
         [Key]
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
         [Required]
 
-        public string Category { get; set; }
+        [Display(Name = "Photos Category")]
+        public int CategoryId { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public virtual UserPhotoCategory UserPhotoCategory { get; set; }
 
         [Required(ErrorMessage = "Please type a title")]
 

@@ -41,5 +41,9 @@ namespace Sunridge.DataAccess.Data
         public DbSet<ScheduledEvent> ScheduledEvent { get; set; }
         public DbSet<FormSubmissions> FormSubmissions { get; set; }
         public DbSet<NewsItem> NewsItem { get; set; }
+        public DbSet<UserPhotos> UserPhotos { get; set; }
+        public DbSet<UserPhotoCategory> UserPhotoCategory { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<LotInventory> LotInventory { get; set; }
     }
 }

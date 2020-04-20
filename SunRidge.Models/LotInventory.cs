@@ -9,7 +9,7 @@ namespace Sunridge.Models
    public class LotInventory
     {
         [Key]
-        public int LotInventoryId { get; set; }
+        public int Id { get; set; }
 
         public string Description { get; set; }
 
@@ -20,13 +20,15 @@ namespace Sunridge.Models
         public DateTime LastModifiedDate { get; set; }
 
         
-        public string LotId { get; set; }
+        public int LotId { get; set; }
         [ForeignKey("LotId")]
         public virtual Lot Lot { get; set; }
 
-        public string InventoryId { get; set; }
+        public int InventoryId { get; set; }
         [ForeignKey("InventoryId")]
         public virtual Inventory Inventory { get; set; }
+
+
 
 
     }

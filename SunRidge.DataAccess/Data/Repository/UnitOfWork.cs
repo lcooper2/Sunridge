@@ -41,6 +41,11 @@ namespace Sunridge.DataAccess.Data.Repository
             ScheduledEvent = new ScheduledEventRepository(_db);
             FormSubmissions = new FormSubmissionsRepository(_db);
             NewsItem = new NewsItemRepository(_db);
+            UserPhotoCategory = new UserPhotoCategoryRepository(_db);
+            UserPhotos = new UserPhotosRepository(_db);
+            LotInventory = new LotInventoryRepository(_db);
+            Inventory = new InventoryRepository(_db);
+
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -56,9 +61,9 @@ namespace Sunridge.DataAccess.Data.Repository
         public ILotHistoryRepository LotHistory { get; private set; }
 
         public IInKindWorkHoursRepository InKindWorkHours { get; private set; }
-        public IFormResponseRepository FormResponse {get; private set; }
+        public IFormResponseRepository FormResponse { get; private set; }
         public IFileRepository File { get; private set; }
-       // public ICommentRepository Comment { get; private set; }
+        // public ICommentRepository Comment { get; private set; }
         public IOwnerLotRepository OwnerLot { get; private set; }
         public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
         public IClassifiedListingRepository ClassifiedListing { get; private set; }
@@ -78,6 +83,10 @@ namespace Sunridge.DataAccess.Data.Repository
         public IFormSubmissionsRepository FormSubmissions { get; private set; }
         public INewsItemRepository NewsItem { get; private set; }
 
+        public IUserPhotoCategoryRepository UserPhotoCategory { get; }
+        public IUserPhotosRepository UserPhotos { get; }
+        public ILotInventoryRepository LotInventory { get; }
+        public IInventoryRepository Inventory { get; }
         public void Dispose()
         {
             //throw new NotImplementedException();

@@ -1,0 +1,27 @@
+﻿@page
+@model Sunridge.Pages.Dashboard.AdminDash.PhotosManager.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_DashboardLayout";
+}
+<h1>Photo Manager</h1>
+    <div class="row">
+        <!--Owner Row-->
+        <a asp-page="/Dashboard/AdminDash/PhotosManager/Photos/Index">
+            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white text-center">Users Photos</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-image"></i></p>
+
+                </div>
+            </div>
+        </a>
+        <a asp-page="/Dashboard/AdminDash/PhotosManager/PhotoCategory/Index">
+            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white text-center">Photo Categories</h5>
+                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-list"></i></p>
+
+                </div>
+            </div>
+        </a>
