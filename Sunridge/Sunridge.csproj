@@ -29,6 +29,7 @@
 
 
   <ItemGroup>
+    <Folder Include="wwwroot\docs\News\" />
     <Folder Include="wwwroot\Images\BlogImages\ProfilePictures\" />
     <Folder Include="wwwroot\Images\BlogImages\Uploads\" />
     <Folder Include="wwwroot\Images\BoardImages\" />
