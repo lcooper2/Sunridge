@@ -17,100 +17,46 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Events
     public class UpsertModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IWebHostEnvironment _hostingEnvironment;
-        private readonly UserManager<IdentityUser> _userManager;
 
-        public UpsertModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment
-            , UserManager<IdentityUser> userManager)
+        public UpsertModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _hostingEnvironment = hostingEnvironment;
-            _userManager = userManager;
         }
 
-        public ClassifiedListing Listing { get; set; }
-        public IEnumerable<SelectListItem> CategoryList { get; set; }
-        public ClassifiedImage Image { get; set; }
+        public ScheduledEvent Event { get; set; }
         public IActionResult OnGet(int? id)
         {
-            Listing = new ClassifiedListing
-            {
-                ItemName = "",
-                Description = "",
-                ClassifiedCategoryId = 1,
-                UserId = _userManager.GetUserId(User)
-            };
-            CategoryList = _unitOfWork.ClassifiedCategory.GetCategoryListForDropDown();
-            Image = new ClassifiedImage();
-
             if (id != null)
             {
-                Listing = _unitOfWork.ClassifiedListing.GetFirstOrDefault(s => s.Id == id);
-                if (Listing == null)
+                Event = _unitOfWork.ScheduledEvent.GetFirstOrDefault(s => s.Id == id);
+                if (Event == null)
                 {
                     return NotFound();
                 }
-
-                Image = _unitOfWork.ClassifiedImage.GetAll(u => u.IsMainImage == true).FirstOrDefault(c => c.ClassifiedListingId == Listing.Id);
-
+            } else
+            {
+                Event = new ScheduledEvent
+                {
+                    Subject = "",
+                    Start = DateTime.Now,
+                    End = DateTime.Now.AddHours(1),
+                    IsFullDay = false
+                };
             }
             return Page();
         }
 
         public IActionResult OnPost()
         {
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            var files = HttpContext.Request.Form.Files;
 
-            Listing.ListingDate = DateTime.Now;
-            Listing.UserId = _userManager.GetUserId(User);
-
-            if (Listing.Phone == null)
+            if (Event.Id == 0)
             {
-                Listing.Phone = _unitOfWork.ApplicationUser.GetFirstOrDefault(c => c.Id == Listing.UserId).Phone;
-            }
-
-            if (Listing.Email == null)
-            {
-                Listing.Email = _unitOfWork.ApplicationUser.GetFirstOrDefault(c => c.Id == Listing.UserId).Email;
-            }
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
-
-            if (Listing.Id == 0)
-            {
-                Listing.UserId = _userManager.GetUserId(User);
-                _unitOfWork.ClassifiedListing.Add(Listing);
+                _unitOfWork.ScheduledEvent.Add(Event);
                 _unitOfWork.Save();
-                //Now that the listing is in the DB, we can get its Id to match to a new
-                //classifiedimage obj
-                if (files.Count > 0)
-                {
-                    string fileName = Guid.NewGuid().ToString();
-                    var uploads = Path.Combine(webRootPath, @"Images\ClassifiedsImages\");
-                    var extension = Path.GetExtension(files[0].FileName);
-
-                    using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-
-                    {
-                        files[0].CopyTo(fileStream);
-                    }
-                    Image = new ClassifiedImage
-                    {
-                        ClassifiedListingId = _unitOfWork.ClassifiedListing.GetFirstOrDefault(u => u.ListingDate == Listing.ListingDate).Id,
-                        ImageURL = @"Images\ClassifiedsImages\" + fileName + extension,
-                        IsMainImage = true
-                    };
-
-                    _unitOfWork.ClassifiedImage.Add(Image);
-                }
             }
             else
             {
-                _unitOfWork.ClassifiedListing.Update(Listing);
+                _unitOfWork.ScheduledEvent.Update(Event);
             }
 
             _unitOfWork.Save();
