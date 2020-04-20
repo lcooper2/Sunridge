@@ -24,7 +24,7 @@ namespace Sunridge.DataAccess.Data.Repository
             InKindWorkHours = new InKindWorkHoursRepository(_db);
             FormResponse = new FormResponseRepository(_db);
             File = new FileRepository(_db);
-            Comment = new CommentRepository(_db);
+            //Comment = new CommentRepository(_db);
             OwnerLot = new OwnerLotRepository(_db);
             ClassifiedCategory = new ClassifiedCategoryRepository(_db);
             ClassifiedListing = new ClassifiedListingRepository(_db);
@@ -58,7 +58,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public IInKindWorkHoursRepository InKindWorkHours { get; private set; }
         public IFormResponseRepository FormResponse {get; private set; }
         public IFileRepository File { get; private set; }
-        public ICommentRepository Comment { get; private set; }
+       // public ICommentRepository Comment { get; private set; }
         public IOwnerLotRepository OwnerLot { get; private set; }
         public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
         public IClassifiedListingRepository ClassifiedListing { get; private set; }

@@ -10,8 +10,8 @@ using Sunridge.DataAccess.Data;
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200413183416_initalv4")]
-    partial class initalv4
+    [Migration("20200413190231_initalagain4")]
+    partial class initalagain4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -555,32 +555,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ClassifiedListing");
-                });
-
-            modelBuilder.Entity("Sunridge.Models.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("FormResponseId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Private")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FormResponseId");
-
-                    b.ToTable("Comment");
                 });
 
             modelBuilder.Entity("Sunridge.Models.CommonAreaAsset", b =>
@@ -1209,13 +1183,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasOne("Sunridge.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Sunridge.Models.Comment", b =>
-                {
-                    b.HasOne("Sunridge.Models.FormResponse", "FormResponse")
-                        .WithMany()
-                        .HasForeignKey("FormResponseId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.File", b =>

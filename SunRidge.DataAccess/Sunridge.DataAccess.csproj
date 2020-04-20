@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200415174239_BoardandLostFoundUpdate.cs" />
-    <Compile Remove="Migrations\20200415174239_BoardandLostFoundUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20200413183416_initalv4.cs" />
+    <Compile Remove="Migrations\20200413183416_initalv4.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

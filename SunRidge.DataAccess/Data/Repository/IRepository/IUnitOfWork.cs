@@ -19,7 +19,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IFormResponseRepository FormResponse { get ;}
         ILotHistoryRepository LotHistory { get; }
         IFileRepository File { get; }
-        ICommentRepository Comment { get; }
+        //ICommentRepository Comment { get; }
         IOwnerLotRepository OwnerLot { get; }
         IClassifiedCategoryRepository ClassifiedCategory { get; }
         IClassifiedListingRepository ClassifiedListing { get; }
