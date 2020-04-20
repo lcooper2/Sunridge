@@ -14,7 +14,7 @@ function loadList() {
         "columns": [
             { "data": "title", "width": "30%" },
             { "data": "userPhotoCategory.title", "width": "20%" },
-            { "data": "applicationUser.fullName", "width": "40%" },
+            { "data": "applicationUser.fullName", "width": "20%" },
             {
                 "data": "id",
                 "render": function (data) {
