@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Drawing;
+using System.Linq;
 
 namespace Sunridge.Utility
 {
     public class SD
     {
-       
         // these are the Two types of "Owner" roles
         public const string AdminRole = "AdminRole";
         public const string Owner = "Owner";

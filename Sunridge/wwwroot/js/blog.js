@@ -2,12 +2,24 @@
     tinyMCEInit();
 });
 
+var numPosts = 2;
+function showPosts(totalPosts) {
+    for (var i = (numPosts); i < (numPosts + numPosts); i++) {
+        var elem = document.getElementById(i);
+        elem.style.display = "block";
+    }
+    numPosts += numPosts;
+    if (numPosts >= totalPosts - 1) {
+        document.getElementById("showMore").style.display = "none";
+    }
+}
 function tinyMCEInit() {
     tinymce.init(
         {
             selector: 'textarea',
             plugins: 'lists',
-            menubar: 'file edit format'
+            menubar: 'file edit format',
+            entity_encoding: "raw"
         }
     );
 }
@@ -28,29 +40,39 @@ function LikeThread(id) {
         url: "/api/blog/" + id,
         type: "POST",
         data: { "id": id },
+        success: function (data) {
+            var likeSelector = "likeIcon(" + id + ")";
+            var likeIcon = document.getElementById(likeSelector);
+
+            if (likeIcon.classList.contains("far")) {
+                likeIcon.classList.remove("far");
+                likeIcon.classList.add("fas");
+                likeIcon.classList.remove("text-muted");
+                likeIcon.classList.add("text-danger");
+            }
+            else {
+                likeIcon.classList.remove("fas");
+                likeIcon.classList.add("far");
+                likeIcon.classList.remove("text-danger");
+                likeIcon.classList.add("text-muted");
+            }
+            likeIcon.parentElement.style.visibility = "hidden";
+            setTimeout(function () { likeIcon.parentElement.style.visibility = "visible"; }, 650);
+
+            var likeSpanSelector = "likeSpan(" + id + ")";
+            var likeSpan = document.getElementById(likeSpanSelector);
+            if (data != 0) {
+                likeSpan.innerHTML = data;
+            }
+            else {
+                likeSpan.innerHTML = "";
+            }
+        },
         error: function (data) {
             alert(data);
         }
     });
-    var likeSelector = "likeIcon(" + id + ")";
-    var likeIcon = document.getElementById(likeSelector);
 
-    if (likeIcon.classList.contains("far"))
-    {
-            document.getElementById(likeSelector).classList.remove("far");
-            document.getElementById(likeSelector).classList.add("fas");
-            document.getElementById(likeSelector).classList.remove("text-muted");
-            document.getElementById(likeSelector).classList.add("text-danger");
-    }
-    else
-    {
-            document.getElementById(likeSelector).classList.remove("fas");
-            document.getElementById(likeSelector).classList.add("far");
-            document.getElementById(likeSelector).classList.remove("text-danger");
-            document.getElementById(likeSelector).classList.add("text-muted");
-    }
-    likeIcon.parentElement.style.visibility = "hidden";
-    setTimeout(function () { likeIcon.parentElement.style.visibility = "visible"; }, 750);
 };
 
 function toggleReplyBox(commentId) {
@@ -75,7 +97,7 @@ function AddComment(threadId) {
 };
 
 function showComments(threadId) {
-    
+
     var commentSelector = "comments(" + threadId + ")";
     var buttonSelector = "showCommentsButton(" + threadId + ")";
     var iconSelector = "showCommentsIcon(" + threadId + ")";
@@ -107,7 +129,7 @@ function toggleCommentBox(id) {
     else {
         domElem.style.display = "none";
     }
-        };
+};
 
 function hideCommentBox(id) {
     var selector = "box(" + id + ")";
@@ -130,15 +152,41 @@ function Delete(id) {
                 data: { "threadId": id },
                 success: function (data) {
                     if (data == true) {
-                        toastr.success(data.message);
-                        var cardSelector = "card(" + id + ")"
+                        toastr.success("Post Successfully Deleted!");
+                        var cardSelector = "card(" + id + ")";
+                        var boxSelector = "box(" + id + ")";
+                        var commentsSelector = "comments(" + id + ")";
                         document.getElementById(cardSelector).style.display = "none";
+                        document.getElementById(boxSelector).style.display = "none";
+                        document.getElementById(commentsSelector).style.display = "none";
                     }
                     else {
-                        toastr.error(data.message);
+                        toastr.error("Failed to delete post. Please contact your administrator to get it removed.");
                     }
                 }
             })
         }
     })
+};
+
+function Modal(id) {
+    var modalSelector = "modal(" + id + ")";
+    var modal = document.getElementById(modalSelector);
+
+    var imageSelector = "img(" + id + ")";
+    var img = document.getElementById(imageSelector);
+
+    var modalImageSelector = "modalImage(" + id + ")";
+    var modalImg = document.getElementById(modalImageSelector);
+
+    img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+    }
+
+    var closeSelector = "close(" + id + ")";
+    var close = document.getElementById(closeSelector);
+    close.onclick = function () {
+        modal.style.display = "none";
+    }
 };

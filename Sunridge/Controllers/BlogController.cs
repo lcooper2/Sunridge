@@ -17,6 +17,7 @@ namespace Sunridge.Controllers
     {
         public readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        public int numPosts = 2;
 
         public BlogController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
         {
@@ -24,8 +25,15 @@ namespace Sunridge.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
+        [HttpPost]
+        public int IncNumPosts()
+        {
+            numPosts += numPosts;
+            return numPosts;
+        }
+
         [HttpPost("{id}")]
-        public void OnPostToggleLike(int id)
+        public int OnPostToggleLike(int id)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -38,7 +46,7 @@ namespace Sunridge.Controllers
             {
                 _unitOfWork.BlogLike.Remove(userHasAlreadyLiked);
                 _unitOfWork.Save();
-                return;
+                return GetNumLikes(id);
             }
 
             BlogLike like = new BlogLike()
@@ -49,7 +57,7 @@ namespace Sunridge.Controllers
 
             _unitOfWork.BlogLike.Add(like);
             _unitOfWork.Save();
-            return; // Post was liked
+            return GetNumLikes(id);
         }
 
         [HttpDelete("{threadId}")]
@@ -62,19 +70,16 @@ namespace Sunridge.Controllers
                 _unitOfWork.Save();
                 return true;
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 return false;
             }
         }
 
-        [HttpGet("{commentId}")]
-        public bool HasLoggedInUserLikedPost(int commentId)
+        public int GetNumLikes(int id)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            var result = _unitOfWork.BlogLike.GetFirstOrDefault(c => c.ApplicationUserId == claim.Value && c.BlogCommentId == commentId);
-            return (result == null);
+            return _unitOfWork.BlogLike.GetAll(l => l.BlogCommentId == id).Count();
         }
     }
 }

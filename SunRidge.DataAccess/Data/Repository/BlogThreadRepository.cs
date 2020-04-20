@@ -20,11 +20,10 @@ namespace Sunridge.DataAccess.Data.Repository
             _webHostEnvironment = webHostEnvironment;
         }
 
-        // Loads all related data for every thread in the given time span
-        public List<BlogThread> LoadAll(int numDays)
+        // Loads all related data for every thread
+        public List<BlogThread> LoadAll()
         {
-            var dateCutoff = DateTime.Now.AddDays(numDays).Date;
-            List<BlogThread> allThreads = _db.BlogThread.Where(t => t.WhenPosted.Date >= dateCutoff)
+            List<BlogThread> allThreads = _db.BlogThread
                         .Include(t => t.ApplicationUser)
                         .Include(t => t.BlogComments)
                             .ThenInclude(c => c.Images)
@@ -52,11 +51,11 @@ namespace Sunridge.DataAccess.Data.Repository
                                 .ToList();
 
             // Delete image files from the server
-            foreach(var thread in threads)
+            foreach (var thread in threads)
             {
-                foreach(var comment in thread.BlogComments)
+                foreach (var comment in thread.BlogComments)
                 {
-                    foreach(var img in comment.Images)
+                    foreach (var img in comment.Images)
                     {
                         var imgPath = Path.Combine(webRootPath, img.ImgPath.Trim('\\'));
                         if (System.IO.File.Exists(imgPath))
