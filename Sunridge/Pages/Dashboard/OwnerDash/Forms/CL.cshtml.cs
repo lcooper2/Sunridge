@@ -73,7 +73,6 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
             }
             if (FormResObj.ClaimLoss.Id == 0)
             {
-
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
                 var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
                 FormResObj.ClaimLoss.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
@@ -84,13 +83,13 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.FormSubmissions.IsWik = false;
                 FormResObj.FormResponse.Resolved = false;
                 FormResObj.FormResponse.ResolveUser = "None";
-                // FormResObj.FormSubmissions.FormId = FormResObj.ClaimLoss.Id.ToString();
-                _unitOfWork.ClaimLoss.Add(FormResObj.ClaimLoss);
                 FormResObj.FormSubmissions.FormId = FormResObj.ClaimLoss.Id;
+                _unitOfWork.ClaimLoss.Add(FormResObj.ClaimLoss);
                 
                 _unitOfWork.FormSubmissions.Add(FormResObj.FormSubmissions);
                 FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;
                 _unitOfWork.FormResponse.Add(FormResObj.FormResponse);
+
             }
             else
             {
@@ -105,8 +104,9 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 //FormResObj.FormResponse.SubmitDate = DateTime.Now;
                 FormResObj.FormResponse.Resolved = false;
                 FormResObj.FormResponse.ResolveUser = "None";
-                _unitOfWork.ClaimLoss.Update(FormResObj.ClaimLoss);
                 FormResObj.FormSubmissions.FormId = FormResObj.ClaimLoss.Id;
+                _unitOfWork.ClaimLoss.Update(FormResObj.ClaimLoss);
+               
        
                 _unitOfWork.FormSubmissions.Update(FormResObj.FormSubmissions);
                 FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;
