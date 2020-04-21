@@ -17,6 +17,7 @@ namespace Sunridge.Controllers
     {
         public readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        public int numPosts = 2;
 
         public BlogController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
         {
@@ -24,8 +25,15 @@ namespace Sunridge.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
+        [HttpPost]
+        public int IncNumPosts()
+        {
+            numPosts += numPosts;
+            return numPosts;
+        }
+
         [HttpPost("{id}")]
-        public bool OnPostToggleLike(int id)
+        public int OnPostToggleLike(int id)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -33,12 +41,12 @@ namespace Sunridge.Controllers
             var userHasAlreadyLiked = _unitOfWork.BlogLike.GetFirstOrDefault
                 (bl => bl.BlogCommentId == id && bl.ApplicationUserId == claim.Value);
 
-            // Prevent a post from being liked multiple times
+            // Post has already been liked. Unlike it.
             if (userHasAlreadyLiked != null) 
             {
                 _unitOfWork.BlogLike.Remove(userHasAlreadyLiked);
                 _unitOfWork.Save();
-                return false;
+                return GetNumLikes(id);
             }
 
             BlogLike like = new BlogLike()
@@ -49,13 +57,29 @@ namespace Sunridge.Controllers
 
             _unitOfWork.BlogLike.Add(like);
             _unitOfWork.Save();
-            return true; // Post was liked
+            return GetNumLikes(id);
         }
 
-        //[HttpPost]
-        //public IActionResult OnPostComment(string comment, int threadId)
-        //{
-            
-        //}
+        [HttpDelete("{threadId}")]
+        [ActionName("Delete")]
+        public bool OnPostDelete(int threadId)
+        {
+            try
+            {
+                _unitOfWork.BlogThread.DeleteThread(threadId);
+                _unitOfWork.Save();
+                return true;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return false;
+            }
+        }
+
+        public int GetNumLikes(int id)
+        {
+            return _unitOfWork.BlogLike.GetAll(l => l.BlogCommentId == id).Count();
+        }
     }
 }

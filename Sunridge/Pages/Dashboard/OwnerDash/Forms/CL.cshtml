@@ -24,6 +24,7 @@
             <input type="hidden" asp-for="FormResObj.FormSubmissions.IsCl" value="true" />
             <input type="hidden" asp-for="FormResObj.FormResponse.Resolved" value="false" />
             <input type="hidden" asp-for="FormResObj.FormResponse.FormType" value="CL" />
+            <input type="hidden" asp-for="FormResObj.FormResponse.ResolveUser" value="None" />
             <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
                 <h2 class="text-primary">@(Model.FormResObj.ClaimLoss.Id != 0 ? "Update" : "Create") Form</h2>
             </div>
@@ -45,16 +46,7 @@
                         <input class="form-control" asp-for="FormResObj.ClaimLoss.DateofIncident" />
                         <span class="text-danger" asp-validation-for="FormResObj.ClaimLoss.DateofIncident"></span>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="FormResObj.ClaimLoss.TimeofIncident">Time of Incident:</label>
-                    </div>
-                    <div class="col-9">
-                        <input class="form-control" asp-for="FormResObj.ClaimLoss.TimeofIncident" />
-                        <span class="text-danger" asp-validation-for="FormResObj.ClaimLoss.TimeofIncident"></span>
-                    </div>
-                </div>
+               
                 <!--add address stuff-->
                 <div class="form-group row">
                     <div class="col-3">

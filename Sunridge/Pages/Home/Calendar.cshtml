@@ -18,14 +18,14 @@
 </section>
 @if (User.IsInRole(SD.AdminRole))
 {
-    <a class="nav-link" asp-area="Admin" asp-controller="ScheduledEvents" asp-action="Index"><i class="far fa-edit"></i> Edit Events</a>
+    <a asp-page="../Dashboard/AdminDash/Events/Index/"><i class="far fa-edit"></i> Edit Events</a>
 }
 <!-- Calendar -->
 <section class="calendar text-center">
     <div class="container">
         <div id="calendar"></div>
-        <link type="text/html" href="https://unpkg.com/browse/fullcalendar@3.10.1/dist/fullcalendar.min.css" rel="stylesheet" />
-        <link type="text/html" href="https://unpkg.com/browse/fullcalendar@3.10.1/dist/fullcalendar.print.css" rel="stylesheet" media="print" />
+        <link href="~/lib/fullcalendar/fullcalendar.min.css" rel="stylesheet" />
+        <link href="~/lib/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print" />
 
         <div class="container"><button class="btn-primary mt-4"><a class="text-white" href="mailto:Webmaster@sunridge.info">Contact the Webmaster to publish a new event</a></button></div>
     </div>
@@ -54,8 +54,8 @@
 
 @section Scripts
     {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js"></script>"
+    <script src="~/lib/moment.js/moment.min.js"></script>
+    <script src="~/lib/fullcalendar/fullcalendar.min.js"></script>"
 
 
     <script>
@@ -125,7 +125,7 @@
             }
         })
         function editEvent() {
-            window.location.href = '/Admin/ScheduledEvents/Edit/' + selectedEvent;
+            window.location.href = '../Dashboard/AdminDash/Events/Upsert?id=' + selectedEvent;
         }
     </script>
 }

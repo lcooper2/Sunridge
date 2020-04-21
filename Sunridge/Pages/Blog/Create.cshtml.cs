@@ -58,7 +58,7 @@ namespace Sunridge.Pages.Blog
             };
 
             string webRootPath = _webHostEnvironment.WebRootPath;
-            var uploadPath = Path.Combine(webRootPath, @"Images\BlogImages");
+            var uploadPath = Path.Combine(webRootPath, @"Images\BlogImages\Uploads");
             List<string> acceptableExtensions = new List<string>() { ".jpg", ".jpeg", ".png", ".gif" };
 
             var files = HttpContext.Request.Form.Files;
@@ -73,7 +73,7 @@ namespace Sunridge.Pages.Blog
                 }
                 BlogImage image = new BlogImage() {
                     BlogCommentId = blogComment.Id,
-                    ImgPath = @"\Images\BlogImages\" + fileName + extension
+                    ImgPath = @"\Images\BlogImages\Uploads" + fileName + extension
                 };
                 blogComment.Images.Add(image);
             }

@@ -18,6 +18,8 @@ namespace Sunridge.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        public string ProfilePicture { get; set; }
+
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "N/A")]
         public string Occupation { get; set; }
 

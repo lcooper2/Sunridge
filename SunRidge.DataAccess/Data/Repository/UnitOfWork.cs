@@ -31,7 +31,7 @@ namespace Sunridge.DataAccess.Data.Repository
             ClassifiedImage = new ClassifiedImageRepository(_db);
             BlogThread = new BlogThreadRepository(_db, _webHostEnvironment);
             BlogComment = new BlogCommentRepository(_db);
-            BlogImage = new BlogImageRepository(_db);
+            BlogImage = new BlogImageRepository(_db, _webHostEnvironment);
             BlogLike = new BlogLikeRepository(_db);
             BlogReply = new BlogReplyRepository(_db);
             ClaimLoss = new ClaimLossRepository(_db);

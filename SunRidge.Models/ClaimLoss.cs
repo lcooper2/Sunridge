@@ -19,8 +19,6 @@ namespace Sunridge.Models
 
         public DateTime DateofIncident { get; set; }
 
-        public DateTime TimeofIncident { get; set; }
-
         /*To port info of person who is filling */
         [Display(Name = "Application User")]
         public string ApplicationUserId { get; set; }

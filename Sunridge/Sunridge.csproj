@@ -18,6 +18,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
 
@@ -30,6 +31,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\docs\News\" />
+    <Folder Include="Pages\Dashboard\OwnerDash\MyPhotos\" />
     <Folder Include="wwwroot\Images\BlogImages\ProfilePictures\" />
     <Folder Include="wwwroot\Images\BlogImages\Uploads\" />
     <Folder Include="wwwroot\Images\LostAndFoundImages\" />

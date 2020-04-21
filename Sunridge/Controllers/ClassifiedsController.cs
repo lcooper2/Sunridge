@@ -37,6 +37,10 @@ namespace Sunridge.Controllers
                 //item.ClassifiedCategoryId = CC.FirstOrDefault(c => c.Id == item.ClassifiedCategoryId).Description;
                 item.ApplicationUser = AU.FirstOrDefault(c => c.Id == item.UserId);
                 item.ClassifiedCategory = CC.FirstOrDefault(c => c.Id == item.ClassifiedCategoryId);
+                if (item.ClassifiedCategory.Description == "Other")
+                {
+                    item.ClassifiedCategory.Description = "Service";
+                }
             }
             return Json(new { data = _unitOfWork.ClassifiedListing.GetAll() });
         }

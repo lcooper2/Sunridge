@@ -41,6 +41,17 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.ClassifiedsList
                 UserId = _userManager.GetUserId(User)
             };
             CategoryList = _unitOfWork.ClassifiedCategory.GetCategoryListForDropDown();
+
+            if (CategoryList.Count() == 0)
+            {
+                _unitOfWork.ClassifiedCategory.Add(new ClassifiedCategory { Description = "Lots" });
+                _unitOfWork.ClassifiedCategory.Add(new ClassifiedCategory { Description = "Cabins" });
+                _unitOfWork.ClassifiedCategory.Add(new ClassifiedCategory { Description = "ATVs" });
+                _unitOfWork.ClassifiedCategory.Add(new ClassifiedCategory { Description = "Trailers" });
+                _unitOfWork.ClassifiedCategory.Add(new ClassifiedCategory { Description = "Service" });
+                _unitOfWork.Save();
+            }
+
             Image = new ClassifiedImage();
 
             if (id != null)
