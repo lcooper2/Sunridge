@@ -27,9 +27,9 @@ namespace Sunridge.Pages.Classifieds
             //if cabin doesn't exist in db
             if (categoryId == null)
             {
-                _unitOfWork.ClassifiedCategory.Add(new ClassifiedCategory { Description = "Cabin" });
+                _unitOfWork.ClassifiedCategory.Add(new ClassifiedCategory { Description = "Cabins" });
                 _unitOfWork.Save();
-                categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "Cabin");
+                categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "Cabins");
             }
 
             ClassifiedsObj = new ClassifiedsVM()
