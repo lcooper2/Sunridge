@@ -26,17 +26,25 @@ namespace Sunridge.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Get()
-        {
-            return Json(new { data = _unitOfWork.LostAndFound.GetAll() });
-        }
-
-        //public async Task<IActionResult> Get(int id)
+        //public IActionResult Get()
         //{
-        //    //var user = await _userManager.GetUserAsync(User);
-        //    //return Json(new { data = _unitOfWork.LostAndFound.GetAll(x => x.UserId == user.Id) });
         //    return Json(new { data = _unitOfWork.LostAndFound.GetAll() });
         //}
+
+        public async Task<IActionResult> Get(int id)
+        {
+            if (id == 0)
+            { 
+                return Json(new { data = _unitOfWork.LostAndFound.GetAll() }); 
+            }
+           else if (id == 1)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                return Json(new { data = _unitOfWork.LostAndFound.GetAll(x => x.UserId == user.Id) });
+            }
+
+            return Json(new { success = false, message = "Error while Getting" });
+        }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

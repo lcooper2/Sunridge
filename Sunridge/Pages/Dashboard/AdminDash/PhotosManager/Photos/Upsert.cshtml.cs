@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Sunridge.Pages.Dashboard.AdminDash.PhotosManager.Photos
 {
+    [Authorize(Roles = SD.AdminRole)]
     public class UpsertModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -123,7 +124,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.PhotosManager.Photos
                     userPhotosObj.UserPhotos.Image = objFromDb.Image;
 
                 }
-
+                
                 _unitOfWork.UserPhotos.Update(userPhotosObj.UserPhotos);
             }
 

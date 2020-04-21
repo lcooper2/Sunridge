@@ -1,0 +1,25 @@
+﻿@page
+@model Sunridge.PhotoGalleryModel
+@{
+    ViewData["Title"] = "PhotoGallery";
+}
+
+<h1>Photo Gallery</h1>
+@if (Model.userPhotosList.Count() > 0)
+{
+    @foreach (var photos in Model.userPhotosList)
+    {
+        <div class="col-lg-3 col-lx-3 col-md-6 pb-4" style="width:50%; padding: 1em;">
+            <div class="card " style="min-height:225px">
+                <img src="\@photos.Image" class="card-img-top p-2 rounded " style="max-height:200px;min-height:200px" />
+                <div class="pl-2 pt-1 text-center">
+                    <h3 class="card-title " style="color: black;font-size: 16px">
+                        @photos.Title<br />
+                        @*@photos.ApplicationUser.FullName*@
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+    }
+}
