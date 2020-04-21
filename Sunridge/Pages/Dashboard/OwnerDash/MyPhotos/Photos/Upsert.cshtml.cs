@@ -1,42 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
+using Sunridge.DataAccess.Data.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Sunridge.DataAccess.Data.Repository.IRepository;
+using Microsoft.AspNetCore.Hosting;
+using Sunridge.Models.ViewModels;
+using System.IO;
+using Microsoft.AspNetCore.Authorization;
 using Sunridge.Utility;
+using Microsoft.AspNetCore.Identity;
 
-namespace Sunridge.Pages.Dashboard.AdminDash.Board
+namespace Sunridge.Pages.Dashboard.OwnerDash.MyPhotos.Photos
 {
-    [Authorize(Roles = SD.AdminRole)]
+    [Authorize(Roles = SD.Owner)]
     public class UpsertModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public UpsertModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
+        public UpsertModel(UserManager<IdentityUser> userManager, IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
         {
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;
+            _userManager = userManager;
         }
 
         [BindProperty]
-        public Models.Board BoardObj { get; set; }
-
-
+        public UserPhotosVM userPhotosObj { get; set; }
 
         public IActionResult OnGet(int? id)
         {
-            BoardObj = new Models.Board();
-
-            if (id != null)// allows edit to be used
+            userPhotosObj = new UserPhotosVM()
             {
-                BoardObj = _unitOfWork.Board.GetFirstOrDefault(s => s.Id == id);
-                if (BoardObj == null) // catches the exception if it can not find the Board object
+                CategoryList =_unitOfWork.UserPhotoCategory.GetCategoryListForDropDown(),
+
+                UserPhotos = new Models.UserPhotos()
+            };
+
+
+            if (id != null)// edit
+            {
+                userPhotosObj.UserPhotos = _unitOfWork.UserPhotos.GetFirstOrDefault(u => u.Id == id);
+                if (userPhotosObj == null)
                 {
                     return NotFound();
                 }
@@ -44,25 +52,27 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Board
             return Page();
         }
 
-        public IActionResult OnPost()
+
+        public async Task<IActionResult> OnPost()
         {
             // Find the root path
             string webRootPath = _hostingEnvironment.WebRootPath;
             // grab the file(s)
             var files = HttpContext.Request.Form.Files;
-
-
+            string images = userPhotosObj.UserPhotos.Image;
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            if (BoardObj.Id == 0) // checking to see if it is a new Board member
+
+            if (userPhotosObj.UserPhotos.Id == 0)
             {
+
                 // rename the file user submited
                 string fileName = Guid.NewGuid().ToString();
 
                 // upload to path
-                var uploads = Path.Combine(webRootPath, @"Images\BoardImages");
+                var uploads = Path.Combine(webRootPath, @"Images\UsersPhotoGallery");
 
                 // preserve our extentions
                 var extension = Path.GetExtension(files[0].FileName);
@@ -73,19 +83,24 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Board
                     files[0].CopyTo(fileStream);
                 }
 
-                BoardObj.Image = @"Images\BoardImages\" + fileName + extension;
-                _unitOfWork.Board.Add(BoardObj);
+                userPhotosObj.UserPhotos.Image = @"Images\UsersPhotoGallery\" + fileName + extension;
+                var user = await _userManager.GetUserAsync(User);
+                userPhotosObj.UserPhotos.UserId = user.Id;
+                _unitOfWork.UserPhotos.Add(userPhotosObj.UserPhotos);
             }
-            else // if is not then it is an existing object that is being edit and updated
+            else // edit 
             {
-                var objFromDb = _unitOfWork.Board.Get(BoardObj.Id);
-
+                var objFromDb = _unitOfWork.UserPhotos.Get(userPhotosObj.UserPhotos.Id);
+                // any file submitted with post
                 if (files.Count > 0)
                 {
+                    // rename the file user submited
                     string fileName = Guid.NewGuid().ToString();
 
-                    var uploads = Path.Combine(webRootPath, @"Images\BoardImages");
+                    // upload to path
+                    var uploads = Path.Combine(webRootPath, @"Images\UsersPhotoGallery");
 
+                    // preserve our extentions
                     var extension = Path.GetExtension(files[0].FileName);
 
                     var imagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
@@ -96,19 +111,21 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Board
                     }
 
                     using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+
                     {
                         files[0].CopyTo(fileStream);
                     }
 
-                    BoardObj.Image = @"Images\BoardImages\" + fileName + extension;
+                    userPhotosObj.UserPhotos.Image = @"Images\UsersPhotoGallery\" + fileName + extension;
 
                 }
                 else
                 {
-                    BoardObj.Image = objFromDb.Image;
-                }
+                    userPhotosObj.UserPhotos.Image = objFromDb.Image;
 
-                _unitOfWork.Board.Update(BoardObj);
+                }
+                
+                _unitOfWork.UserPhotos.Update(userPhotosObj.UserPhotos);
             }
 
             _unitOfWork.Save();

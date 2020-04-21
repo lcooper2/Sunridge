@@ -9,7 +9,7 @@ function loadList() {
         "ajax": {
             "url": "/api/lostandfound/",
             "type": "GET",
-            "data": { id: 0},
+            "data": { id: 1},
             "datatype": "json"
         },
         "columns": [

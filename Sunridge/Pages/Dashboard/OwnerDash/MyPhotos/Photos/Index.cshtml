@@ -1,26 +1,22 @@
 ﻿@page
-@model Sunridge.Pages.Dashboard.OwnerDash.LostAndFound.IndexModel
-@{
-    ViewData["Title"] = "Lost and Found";
-    Layout = "_DashboardLayout";
-}
+@model Sunridge.Pages.Dashboard.OwnerDash.MyPhotos.Photos.IndexModel
+
 <div class="border backgroundwhite container">
     <div class="row">
         <div class="col-6">
-            <h2 class="text-primary">Lost and Found List</h2>
+            <h2 class="text-primary">Photo Lists</h2>
         </div>
         <div class="col-6 text-right">
             <a asp-page="Upsert" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Create New</a>
         </div>
     </div>
-    <br />
-    <br />
+    <br /><br />
     <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>Item Name</th>
-                <th>Date Listed</th>
-                <th>Clamed</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Creator</th>
                 <th></th>
             </tr>
         </thead>
@@ -28,5 +24,5 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/lostandfounduser.js"></script>
+    <script src="~/js/myphotos.js"></script>
 }

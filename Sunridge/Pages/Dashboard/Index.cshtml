@@ -1,154 +1,184 @@
 ﻿@page
 @model Sunridge.Pages.Dashboard.IndexModel
+@using Sunridge.Utility
 @{
     ViewData["Title"] = "Index";
     Layout = "_DashboardLayout";
 }
+@*@if (User.IsInRole(SD.Owner))
+{*@
+    <h1>Owner Portal</h1>
+    <div class="container">
+        <div class="row">
+            <!--Owner Row-->
+            <a asp-page="/Dashboard/OwnerDash/Owner/Profile">
+                <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                    <div class="card-body">
+                        <h5 class="card-title text-white text-center">Your info</h5>
+                        <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-user"></i></p>
 
-<h1>Owner Portal</h1>
-<div class="container">
-    <div class="row">
-        <!--Owner Row-->
-        <a asp-page="/Dashboard/OwnerDash/Owner/Profile">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Your info</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-user"></i></p>
-
+                    </div>
                 </div>
-            </div>
-        </a>
-        <a asp-page="/Dashboard/OwnerDash/Forms/Index">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Forms</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-paperclip"></i></p>
+            </a>
+            <a asp-page="/Dashboard/OwnerDash/Forms/Index">
+                <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                    <div class="card-body">
+                        <h5 class="card-title text-white text-center">Forms</h5>
+                        <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-paperclip"></i></p>
 
+                    </div>
                 </div>
-            </div>
-        </a>
-        <a asp-page="/Dashboard/OwnerDash/Forms">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Blog Post</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-thumbtack"></i></p>
+            </a>
+            <a asp-page="/Dashboard/OwnerDash/Forms">
+                <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                    <div class="card-body">
+                        <h5 class="card-title text-white text-center">Blog Post</h5>
+                        <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-thumbtack"></i></p>
 
+                    </div>
                 </div>
-            </div>
-        </a>
-        <a asp-page="/Dashboard/OwnerDash/ClassifiedsList/Index">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Classifieds</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-clipboard-list"></i></p>
+            </a>
+            <a asp-page="/Dashboard/OwnerDash/ClassifiedsList/Index">
+                <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                    <div class="card-body">
+                        <h5 class="card-title text-white text-center">Classifieds</h5>
+                        <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-clipboard-list"></i></p>
 
+                    </div>
                 </div>
+            </a>
+            <a asp-page="/Dashboard/OwnerDash/LostAndFound/Index">
+                <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                    <div class="card-body">
+                        <h5 class="card-title text-white text-center">Lost and Found</h5>
+                        <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-list"></i></p>
+
+                    </div>
+                </div>
+            </a>
+            <a asp-page="/Dashboard/OwnerDash/MyPhotos/Photos/Index">
+                <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                    <div class="card-body">
+                        <h5 class="card-title text-white text-center">Photo Manager</h5>
+                        <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-image" style=""></i></p>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        @if (User.IsInRole(SD.AdminRole))
+        {
+            <h2>Admin Tools</h2>
+            <div class="row pt-2">
+                <!--Admin Row-->
+                <a asp-page="/Dashboard/AdminDash/Board/Index">
+                    <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                        <div class="card-body">
+                            <h5 class="card-title text-white text-center">Board Members</h5>
+                            <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-users" style=""></i></p>
+
+                        </div>
+                    </div>
+                </a>
+                <a asp-page="/Dashboard/AdminDash/Key/Key">
+                    <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                        <div class="card-body">
+                            <h5 class="card-title text-white text-center">Keys</h5>
+                            <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-key"></i></p>
+                        </div>
+                    </div>
+                </a>
+                <a asp-page="/Dashboard/AdminDash/Forms/FormRespnsepage">
+                    <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                        <div class="card-body">
+                            <h5 class="card-title text-white text-center">Resolve Forms</h5>
+                            <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-clipboard-check"></i></p>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </a>
+            <div class="row pt-2">
+                <!--Admin Row-->
+                <a asp-page="/Dashboard/AdminDash/Lots/Index">
+                    <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                        <div class="card-body">
+                            <h5 class="card-title text-white text-center">Lots</h5>
+                            <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-tree"></i></p>
+
+                        </div>
+                    </div>
+                </a>
+                <a asp-page="/Dashboard/AdminDash/Banner/Index">
+                    <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                        <div class="card-body">
+                            <h5 class="card-title text-white text-center">Banner</h5>
+                            <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-images"></i></p>
+
+                        </div>
+                    </div>
+                </a>
+
+                <a asp-page="/Dashboard/AdminDash/LostAndFound/Index">
+                    <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                        <div class="card-body">
+                            <h5 class="card-title text-white text-center">Lost and Found</h5>
+                            <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-list"></i></p>
+
+                        </div>
+                    </div>
+                </a>
+                <a asp-page="/Dashboard/AdminDash/CommonArea/Index">
+                    <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                        <div class="card-body">
+                            <h5 class="card-title text-white text-center">Commmon Area Asset</h5>
+                            <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-basketball-ball"></i></p>
+
+                        </div>
+                    </div>
+                </a>
+                <a asp-page="/Dashboard/AdminDash/User/Index">
+                    <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                        <div class="card-body">
+                            <h5 class="card-title text-white text-center">Users</h5>
+                            <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-users" style=""></i></p>
+
+                        </div>
+                    </div>
+                </a>
+                <a asp-page="/Dashboard/AdminDash/News/Index">
+                    <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                        <div class="card-body">
+                            <h5 class="card-title text-white text-center">News</h5>
+                            <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-newspaper" style=""></i></p>
+
+                        </div>
+                    </div>
+                </a>
+                <a asp-page="/Dashboard/AdminDash/Events/Index">
+                    <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                        <div class="card-body">
+                            <h5 class="card-title text-white text-center">Events</h5>
+                            <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-table" style=""></i></p>
+
+                        </div>
+                    </div>
+                </a>
+                <a asp-page="/Dashboard/AdminDash/PhotosManager/Index">
+                    <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                        <div class="card-body">
+                            <h5 class="card-title text-white text-center">Photo Manager</h5>
+                            <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-image" style=""></i></p>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
     </div>
-    <h2>Admin Tools</h2>
-    <div class="row pt-2">
-        <!--Admin Row-->
-        <a asp-page="/Dashboard/AdminDash/Board/Index">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Board Members</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-users" style=""></i></p>
-
-                </div>
-            </div>
-        </a>
-        <a asp-page="/Dashboard/AdminDash/Key/Key">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Keys</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-key"></i></p>
-                </div>
-            </div>
-        </a>
-        <a asp-page="/Dashboard/AdminDash/Forms/FormRespnsepage">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Resolve Forms</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-clipboard-check"></i></p>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="row pt-2">
-        <!--Admin Row-->
-        <a asp-page="/Dashboard/AdminDash/Lots/Index">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Lots</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-tree"></i></p>
-
-                </div>
-            </div>
-        </a>
-        <a asp-page="/Dashboard/AdminDash/Banner/Index">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Banner</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-images"></i></p>
-
-                </div>
-            </div>
-        </a>
-        <a asp-page="/Dashboard/AdminDash/LostAndFound/Index">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Lost and Found</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-list"></i></p>
-
-                </div>
-            </div>
-        </a>
-        <a asp-page="/Dashboard/AdminDash/CommonArea/Index">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Commmon Area Asset</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-basketball-ball"></i></p>
-
-                </div>
-            </div>
-        </a>
-        <a asp-page="/Dashboard/AdminDash/User/Index">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Users</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-users" style=""></i></p>
-
-                </div>
-            </div>
-        </a>
-        <a asp-page="/Dashboard/AdminDash/News/Index">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">News</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-newspaper" style=""></i></p>
-
-                </div>
-            </div>
-        </a>
-        <a asp-page="/Dashboard/AdminDash/Events/Index">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Events</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-table" style=""></i></p>
-
-                </div>
-            </div>
-        </a>
-        <a asp-page="/Dashboard/AdminDash/PhotosManager/Index">
-            <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
-                <div class="card-body">
-                    <h5 class="card-title text-white text-center">Photo Manager</h5>
-                    <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-image" style=""></i></p>
-
-                </div>
-            </div>
-        </a>
-    </div>
+@*}
+else 
+{<div>
+    <h1 class="danger">Access Denied</h1>
 </div>
-
+ }*@

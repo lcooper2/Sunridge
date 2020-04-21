@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.Utility;
 
-namespace Sunridge.Pages.Dashboard.OwnerDash.LostAndFound
+namespace Sunridge.Pages.Dashboard.OwnerDash.MyPhotos.Photos
 {
     [Authorize(Roles = SD.Owner)]
     public class IndexModel : PageModel

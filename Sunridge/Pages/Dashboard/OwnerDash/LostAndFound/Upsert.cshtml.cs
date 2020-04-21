@@ -12,9 +12,9 @@ using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
 using Sunridge.Utility;
 
-namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
+namespace Sunridge.Pages.Dashboard.OwnerDash.LostAndFound
 {
-    [Authorize(Roles = SD.AdminRole)]
+    [Authorize(Roles = SD.Owner)]
     public class UpsertModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;

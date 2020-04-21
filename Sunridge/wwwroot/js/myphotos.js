@@ -4,26 +4,26 @@ $(document).ready(function () {
     loadList();
 });
 
-function loadList() { 
+function loadList() {
     dataTable = $('#DT_load').DataTable({
         "ajax": {
-            "url": "/api/lostandfound/",
+            "url": "/api/userphotos/",
             "type": "GET",
-            "data": { id: 0},
+            "data": { id: 1 },
             "datatype": "json"
         },
         "columns": [
-            { "data": "itemName", "width": "20%" },
-            { "data": "listedDate", "width": "30%" },
-            { "data": "claimed", "width": "20%" },
+            { "data": "title", "width": "30%" },
+            { "data": "userPhotoCategory.title", "width": "20%" },
+            { "data": "applicationUser.fullName", "width": "20%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                        <a href="/Dashboard/AdminDash/LostAndFound/Upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                        <a href="/Dashboard/AdminDash/PhotosManager/photos/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                             <i class="far fa-edit"></i> Edit
                         </a>
-                         <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/LostAndFound/'+${data})>
+                         <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/userphotos/'+${data})>
                             <i class="far fa-trash-alt"></i> Delete
                         </a>
                    </div>`;
