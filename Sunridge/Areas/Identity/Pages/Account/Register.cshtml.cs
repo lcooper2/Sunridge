@@ -101,7 +101,8 @@ namespace Sunridge.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    Birthday = Input.Birthday
+                    Birthday = Input.Birthday,
+                    ProfilePicture = @"Images\BlogImages\ProfilePictures\default.jpg"
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
