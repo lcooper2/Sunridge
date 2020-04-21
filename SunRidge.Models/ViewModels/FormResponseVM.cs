@@ -11,5 +11,7 @@ namespace Sunridge.Models.ViewModels
 
         public IEnumerable<SelectListItem> FSList { get; set; }
 
+        public FormSubmissions FormSubmissions { get; set; }
+
     }
 }

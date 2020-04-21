@@ -1,0 +1,140 @@
+﻿@page
+@model Sunridge.Pages.Dashboard.AdminDash.Events.UpsertModel
+@using Sunridge.Utility
+@{
+    ViewData["Title"] = "Events";
+    Layout = "_DashboardLayout";
+}
+<form method="post" asp-action="Upsert">
+
+    <div class="container">
+        <div class="row backgroundWhite border ">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.Event.Id != 0)
+            {
+                <input type="hidden" asp-for="Event.Id" />
+            }
+
+            <div class="col-12 px-3" style="border-bottom: 2px solid; border-color: black">
+                <h2 class="text-primary">@(Model.Event.Id != 0 ? "Update" : "Create") Event </h2>
+            </div>
+
+
+
+            <div class="col-8 pt-3">
+
+                <div class="form-group row">
+
+                    <div class="col-md-3">
+                        <label asp-for="Event.Subject"></label>
+                    </div>
+
+                    <div class="col-md-9">
+                        <input class="form-control" asp-for="Event.Subject" />
+                        <span class="text-danger" asp-validation-for="Event.Subject"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label asp-for="Event.Description"></label>
+                    </div>
+                    <div class="col-md-9">
+                        <textarea class="form-control" asp-for="Event.Description" id="txtDesc" style="height:200px;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label asp-for="Event.Location"></label>
+                    </div>
+
+                    <div class="col-md-9">
+                        <input class="form-control" asp-for="Event.Location" />
+                        <span class="text-danger" asp-validation-for="Event.Location"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label asp-for="Event.Start"></label>
+                    </div>
+
+                    <div class="col-md-9">
+                        <input type="datetime-local" value="" class="form-control" asp-for="Event.Start" />
+                        <span class="text-danger" asp-validation-for="Event.Start"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label asp-for="Event.End"></label>
+                    </div>
+
+                    <div class="col-md-9">
+                        <input type="datetime-local" value="" class="form-control" asp-for="Event.End" />
+                        <span class="text-danger" asp-validation-for="Event.End"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label asp-for="Event.IsFullDay"></label>
+                    </div>
+
+                    <div class="col-md-9">
+                        <input class="form-check" asp-for="Event.IsFullDay" />
+                        <span class="text-danger" asp-validation-for="Event.IsFullDay"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+
+                    <div class="col-9 offset-3">
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                @if (Model.Event.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                                }
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
+
+
+@section Scripts {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+    </script>
+}

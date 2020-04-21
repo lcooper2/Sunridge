@@ -11,29 +11,40 @@
     <div class="container">
         <div class="row px-2 mx-2 backgroundWhite border">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @if (Model.FormResObj.Id != 0)
+            @if (Model.FormResObj.SuggestionComplaint.Id != 0)
             {
-                <input type="hidden" asp-for="FormResObj.Id" />
+                <input type="hidden" asp-for="FormResObj.SuggestionComplaint.Id" />
             }
+            @if (Model.FormResObj.FormSubmissions.Id != 0)
+            {
+                <input type="hidden" asp-for="FormResObj.FormSubmissions.Id" />
+            }
+            @if (Model.FormResObj.FormResponse.Id != 0)
+            {
+                <input type="hidden" asp-for="FormResObj.FormResponse.Id" />
+            }
+            <input type="hidden" asp-for="FormResObj.FormSubmissions.IsSC" value="true" />
+            <input type="hidden" asp-for="FormResObj.FormResponse.Resolved" value="false" />
+            <input type="hidden" asp-for="FormResObj.FormResponse.FormType" value="SC" />
             <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
-                <h2 class="text-primary">@(Model.FormResObj.Id != 0 ? "Update" : "Create") Form</h2>
+                <h2 class="text-primary">@(Model.FormResObj.SuggestionComplaint.Id != 0 ? "Update" : "Create") Form</h2>
             </div>
             <div class="col-8 pt-3">
                 <div class="form-group row">
                     <div class="col-3">
-                        <label asp-for="FormResObj.Suggestion">Suggestion on how to correct the problem/make improvement:</label>
+                        <label asp-for="FormResObj.SuggestionComplaint.Suggestion">Suggestion on how to correct the problem/make improvement:</label>
                     </div>
                     <div class="col-9">
-                        <textarea class="form-control" asp-for="FormResObj.Suggestion" id="txtDesc" style="height:200px;"></textarea>
+                        <textarea class="form-control" asp-for="FormResObj.SuggestionComplaint.Suggestion" id="txtDesc" style="height:200px;"></textarea>
 
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-3">
-                        <label asp-for="FormResObj.Complaint">Description of incident/problem/improvement:</label>
+                        <label asp-for="FormResObj.SuggestionComplaint.Complaint">Description of incident/problem/improvement:</label>
                     </div>
                     <div class="col-9">
-                        <textarea class="form-control" asp-for="FormResObj.Complaint" id="txtDesc" style="height:200px;"></textarea>
+                        <textarea class="form-control" asp-for="FormResObj.SuggestionComplaint.Complaint" id="txtDesc" style="height:200px;"></textarea>
 
                     </div>
                 </div>
@@ -41,7 +52,7 @@
                     <div class="col-9 offset-3">
                         <div class="row">
                             <div class="col-6">
-                                <button type="submit" class="btn btn-primary form-control">@(Model.FormResObj.Id != 0 ? "Update" : "Create")</button>
+                                <button type="submit" class="btn btn-primary form-control">@(Model.FormResObj.SuggestionComplaint.Id != 0 ? "Update" : "Create")</button>
                             </div>
                             <div class="col-6">
                                 <a asp-page="/OwnerDash/Forms/Index" class="btn btn-success form-control">Back to Forms</a>
