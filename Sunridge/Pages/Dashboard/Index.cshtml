@@ -5,9 +5,9 @@
     ViewData["Title"] = "Index";
     Layout = "_DashboardLayout";
 }
-@if (User.IsInRole(SD.Owner))
-{
-    <h1>Welcome To Your Dashboard</h1>
+@*@if (User.IsInRole(SD.Owner))
+{*@
+    <h1>Owner Portal</h1>
     <div class="container">
         <div class="row">
             <!--Owner Row-->
@@ -176,9 +176,9 @@
             </div>
         }
     </div>
-}
+@*}
 else 
 {<div>
     <h1 class="danger">Access Denied</h1>
 </div>
- }
+ }*@
