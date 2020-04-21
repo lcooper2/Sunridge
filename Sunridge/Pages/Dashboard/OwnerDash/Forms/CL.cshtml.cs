@@ -49,7 +49,7 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                     FormResObj.FormSubmissions.IsSC = false;
                     FormResObj.FormSubmissions.IsWik = false;
                     FormResObj.FormSubmissions.SubmitDate = DateTime.Now;
-                    FormResObj.FormResponse.SubmitDate = DateTime.Now;
+                    //FormResObj.FormResponse.SubmitDate = DateTime.Now;
                     FormResObj.FormResponse.Resolved = false;
                     FormResObj.FormResponse.ResolveUser = "None";
                     FormResObj.FormResponse.FormSubmissionsId = FormResObj.FormSubmissions.Id;

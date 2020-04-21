@@ -41,7 +41,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Forms
                 //FormResObj.FormResponse = _unitOfWork.FormResponse.GetFirstOrDefault(u => u.Id == id);
                 FormResObj.FormResponse.FormSubmissionsId = FormResObj.FormSubmissions.Id;
                 FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;
-                FormResObj.FormResponse.SubmitDate = FormResObj.FormSubmissions.SubmitDate;
+                //FormResObj.FormResponse.SubmitDate = FormResObj.FormSubmissions.SubmitDate;
                 
                 if(FormResObj.FormResponse.ResolveDate == null )
                 {

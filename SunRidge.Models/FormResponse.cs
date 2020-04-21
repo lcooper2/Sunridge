@@ -14,9 +14,6 @@ namespace Sunridge.Models
         [Required]
         public string FormType { get; set; }
 
-        [Display(Name = "Listing Date")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTime SubmitDate { get; set; }
 
         //public String PrivacyLevel { get; set; }
         public bool Resolved { get; set; }
@@ -25,7 +22,7 @@ namespace Sunridge.Models
         public DateTime? ResolveDate { get; set; }
 
         [Display(Name = "Resolved by")]
-        public string? ResolveUser { get; set; }
+        public string ResolveUser { get; set; }
 
         [Display(Name = "FormSubmissions")]
         public int FormSubmissionsId { get; set; }
