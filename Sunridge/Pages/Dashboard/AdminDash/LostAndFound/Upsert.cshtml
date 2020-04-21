@@ -18,12 +18,12 @@
             }
 
             <div class="col-10 px-3" style="border-bottom: 2px solid; border-color: black">
-                <h2 class="text-primary">@(Model.LAFObj.Id != 0 ? "Update" : "Create") Board Member </h2>
+                <h2 class="text-primary">@(Model.LAFObj.Id != 0 ? "Update" : "Create") Lost and Found </h2>
             </div>
 
             <div class="col-9 pt-3">
 
-                <div class="form-group rox">
+                <div class="form-group row">
 
                     <div class="col-3">
                         <label asp-for="LAFObj.ItemName"></label>
@@ -36,15 +36,16 @@
 
                 </div>
 
+
+
                 <div class="form-group row ">
 
                     <div class="col-3">
-                        <label asp-for="LAFObj.Discription"></label>
+                        <label >Description</label>
                     </div>
 
                     <div class="col-7">
                         <textarea class="form-control" asp-for="LAFObj.Discription" id="txtDesc" style="height:200px;"></textarea>
-
                     </div>
                 </div>
 
@@ -61,6 +62,51 @@
 
                 </div>
 
+                <div class="border">
+                    <label>LISTER'S</label>
+                    <br />
+
+                    <div class="form-group row">
+
+                        <div class="col-3">
+                            <label> Name </label>
+                        </div>
+
+                        <div class="col-7">
+                            <input class="form-control" asp-for="LAFObj.ListerName" />
+                            <span class="text-danger" asp-validation-for="LAFObj.ListerName"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-3">
+                            <label> Phone Number</label>
+                        </div>
+
+                        <div class="col-7">
+                            <input class="form-control" asp-for="LAFObj.PhoneNumber" />
+                            <span class="text-danger" asp-validation-for="LAFObj.PhoneNumber"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-3">
+                            <label>Email</label>
+                        </div>
+
+                        <div class="col-7">
+                            <input class="form-control" asp-for="LAFObj.Email" />
+                            <span class="text-danger" asp-validation-for="LAFObj.Email"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <br/>
                 <div class="form-group row border">
                     <div class="col-3">
                         <label asp-for="LAFObj.Claimed"></label>
@@ -69,7 +115,7 @@
                         <table>
                             <tr>
                                 <td>True</td>
-                                <td> <input type="radio" class="form-control" asp-for="LAFObj.Claimed" value="True" onclick="unhide()"></td>
+                                <td class="col-1"> <input type="radio" class="form-control" asp-for="LAFObj.Claimed" value="True" onclick="unhide()"></td>
                             </tr>
                             <tr>
                                 <td>False</td>
@@ -80,6 +126,8 @@
                     </div>
 
                 </div>
+
+
 
                 <div class="form-group row" id="Claimed" style="display:none">
                     <div class="col-3">
@@ -146,12 +194,10 @@
 
 @section Scripts {
     <script>
-        tinymce.init(
-            {
-                selector: 'textarea',
-                plugins: 'lists',
-                menubar: 'file edit format'
-            });
-
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
     </script>
 }

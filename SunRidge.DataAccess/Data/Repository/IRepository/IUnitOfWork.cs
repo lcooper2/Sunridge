@@ -16,10 +16,10 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         ILotRepository Lot { get; }
         IBoardRepository Board { get; }
         IInKindWorkHoursRepository InKindWorkHours { get; }
-        IFormResponseRepository FormResponse { get ;}
+        IFormResponseRepository FormResponse { get; }
         ILotHistoryRepository LotHistory { get; }
         IFileRepository File { get; }
-        ICommentRepository Comment { get; }
+        //ICommentRepository Comment { get; }
         IOwnerLotRepository OwnerLot { get; }
         IClassifiedCategoryRepository ClassifiedCategory { get; }
         IClassifiedListingRepository ClassifiedListing { get; }
@@ -36,6 +36,12 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         ISuggestionComplaintRepository SuggestionComplaint { get; }
         IScheduledEventRepository ScheduledEvent { get; }
         IFormSubmissionsRepository FormSubmissions { get; }
+        IUserPhotoCategoryRepository UserPhotoCategory { get; }
+        IUserPhotosRepository UserPhotos { get; }
+        ILotInventoryRepository LotInventory { get; }
+        IInventoryRepository Inventory { get; }
+
+        INewsItemRepository NewsItem { get; }
         void Save();
     }
 }

@@ -19,7 +19,9 @@ namespace Sunridge.Models
         [Required]
         public int Year { get; set; }
 
+        [Display(Name = "File Name")]
         public string FileName { get; set; }
+        [Display(Name = "File Path")]
         public string FilePath { get; set; }
     }
 }

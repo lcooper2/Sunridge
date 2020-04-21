@@ -13,15 +13,14 @@ namespace Sunridge.Models
 
         public DateTime SubmitDate { get; set;}
 
-        public string FormType { get; set; }
-
         /*To port info of person who is filling */
         [Display(Name = "FormId")]
-        public string FormId { get; set; }
+        public int FormId { get; set; }
+       
+        public bool IsWik { get; set; }
 
+        public bool IsCl { get; set; }
 
-        [NotMapped]
-        [ForeignKey("ClaimLossId")]
-        public virtual ClaimLoss ClaimLoss { get; set; }
+        public bool IsSC { get; set; }
     }
 }

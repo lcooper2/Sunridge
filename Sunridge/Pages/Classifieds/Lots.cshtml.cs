@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
+using Sunridge.Models;
 using Sunridge.Models.ViewModels;
 
 namespace Sunridge.Pages.Classifieds
@@ -21,11 +22,19 @@ namespace Sunridge.Pages.Classifieds
         public ClassifiedsVM ClassifiedsObj { get; set; }
         public void OnGet()
         {
-            var categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "Lot").Id;
+            var categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "Lots");
+
+            //if lot doesn't exist in db
+            if (categoryId == null)
+            {
+                _unitOfWork.ClassifiedCategory.Add(new ClassifiedCategory { Description = "Lots" });
+                _unitOfWork.Save();
+                categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "Lots");
+            }
 
             ClassifiedsObj = new ClassifiedsVM()
             {
-                ClassifiedsList = _unitOfWork.ClassifiedListing.GetAll(c => c.ClassifiedCategoryId == categoryId).ToList()
+                ClassifiedsList = _unitOfWork.ClassifiedListing.GetAll(c => c.ClassifiedCategoryId == categoryId.Id).ToList()
             };
 
             foreach (var item in ClassifiedsObj.ClassifiedsList)

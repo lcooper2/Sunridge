@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<IdentityUser> SignInManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -15,7 +16,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
                 @*<a class="navbar-brand" asp-area="" asp-page="/Index">Sunridge</a>*@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -38,7 +39,7 @@
                                 <a class="dropdown-item text-black" asp-page="/Classifieds/Cabins">Cabins</a>
                                 <a class="dropdown-item text-black" asp-page="/Classifieds/Trailers">Trailers</a>
                                 <a class="dropdown-item text-black" asp-page="/Classifieds/ATV">ATVs</a>
-                                <a class="dropdown-item text-black" asp-page="/Classifieds/Others">Other Services</a>
+                                <a class="dropdown-item text-black" asp-page="/Classifieds/Others">Services</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -61,12 +62,12 @@
                         <li>
                             <a class="nav-link text-dark" asp-area="" asp-page="/Home/LostFound">Lost & Found</a>
                         </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Blog/Index">Blog</a>
-                        </li>
-                        @*<li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                            </li>*@
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Blog/Index">Blog</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

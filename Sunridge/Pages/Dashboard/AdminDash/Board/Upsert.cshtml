@@ -22,123 +22,139 @@
 
             <div class="col-9 pt-3">
 
-                <div class="form-group rox">
+                <div class="form-group row">
 
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="BoardObj.Title"></label>
                     </div>
 
-                    <div class="col-7">
+                    <div class="col-md-5">
                         <input class="form-control" asp-for="BoardObj.Title" />
                         <span class="text-danger" asp-validation-for="BoardObj.Title"></span>
                     </div>
 
                 </div>
 
-                <div class="form-group rox">
+                <div class="form-group row">
+
                     <div class="col-2">
+                        <label asp-for="BoardObj.DisplayOrder"></label>
+                    </div>
+
+                    <div class="col-7">
+                        <input class="form-control" asp-for="BoardObj.DisplayOrder" />
+                        <span class="text-danger" asp-validation-for="BoardObj.DisplayOrder"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3">
                         <label asp-for="BoardObj.FirstName"></label>
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-md-5">
                         <input class="form-control" asp-for="BoardObj.FirstName" />
                         <span class="text-danger" asp-validation-for="BoardObj.FirstName"></span>
                     </div>
-                    <span class="text-danger" asp-validation-for="BoardObj.FirstName"></span>
+                </div>
 
-
-                    <div class="col-2">
+                <div class="form-group row">
+                    <div class="col-md-3">
                         <label asp-for="BoardObj.LastName"></label>
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-md-5">
                         <input class="form-control" asp-for="BoardObj.LastName" />
                         <span class="text-danger" asp-validation-for="BoardObj.LastName"></span>
                     </div>
-                    <span class="text-danger" asp-validation-for="BoardObj.LastName"></span>
-
-                </div>
-
-                <div class="form-group row">
-
-                    <div class="col-3">
-                        <label asp-for="BoardObj.Image"></label>
                     </div>
 
-                    <div class="col-7">
-                        <input type="file" class="form-control" name="files" id="files" />
-                        @*<span class="text-danger" asp-validation-for="BoardObj.Image"></span>*@
-                    </div>
 
-                </div>
 
-                <div class="form-group rox">
+                    <div class="form-group row">
 
-                    <div class="col-3">
-                        <label asp-for="BoardObj.Phone"></label>
-                    </div>
+                        <div class="col-md-3">
+                            <label asp-for="BoardObj.Image"></label>
+                        </div>
 
-                    <div class="col-7">
-                        <input class="form-control" asp-for="BoardObj.Phone" />
-                        <span class="text-danger" asp-validation-for="BoardObj.Phone"></span>
-                    </div>
+                        <div class="col-md-5">
 
-                </div>
-
-                <div class="form-group rox">
-
-                    <div class="col-3">
-                        <label asp-for="BoardObj.Email"></label>
-                    </div>
-
-                    <div class="col-7">
-                        <input class="form-control" asp-for="BoardObj.Email" />
-                        <span class="text-danger" asp-validation-for="BoardObj.Email"></span>
-                    </div>
-
-                </div>
-
-            </div>
-
-                
-
-                <div class="form-group row">
-
-                    <div class="col-9 offset-3">
-
-                        <div class="row">
-
-                            <div class="col-6">
-                                @if (Model.BoardObj.Id != 0)
-                                {
-                                    <button type="submit" class="btn btn-primary form-control">Update</button>
-                                }
-                                else
-                                {
-                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
-                                }
-
-                            </div>
-
-                            <div class="col-6">
-                                <a asp-page="./Index" class="btn btn-success form-control">BackToList</a>
-                            </div>
+                            <input type="file" class="form-control" name="files" id="files" />
                         </div>
 
                     </div>
 
-                    @if (Model.BoardObj != null)
-                    {
-                        <div class="clo-4 p-4">
-                            <img src="\@Model.BoardObj.Image" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
+                    <div class="form-group row">
+
+                        <div class="col-md-3">
+                            <label asp-for="BoardObj.Phone"></label>
+                        </div>
+
+                        <div class="col-md-5">
+                            <input class="form-control" asp-for="BoardObj.Phone" />
+                            <span class="text-danger" asp-validation-for="BoardObj.Phone"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md-3">
+                            <label asp-for="BoardObj.Email"></label>
+                        </div>
+
+                        <div class="col-md-5">
+                            <input class="form-control" asp-for="BoardObj.Email" />
+                            <span class="text-danger" asp-validation-for="BoardObj.Email"></span>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group row">
+
+                        <div class="col-9 offset-3">
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    @if (Model.BoardObj.Id != 0)
+                                    {
+                                        <button type="submit" class="btn btn-primary form-control">Update</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                                    }
+
+                                </div>
+
+                                <div class="col-md-3">
+                                    <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+                                </div>
+                            </div>
 
                         </div>
-                    }
-                </div>
-            </div>
+                    </div>
+
+
+
+            
 
         </div>
-    
+        @if (Model.BoardObj.Id != 0)
+        {
+            <div class="clo-4 p-4">
+                <img src="\@Model.BoardObj.Image" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
+
+            </div>
+        }
+    </div>
+   
 
 </form>
 

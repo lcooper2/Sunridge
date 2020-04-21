@@ -10,6 +10,11 @@ namespace Sunridge.Models
     {
         [Key]
         public int Id { get; set; }
+
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
         [Required]
         [Display(Name = "Item Name")]
         public string ItemName { get; set; }
@@ -19,6 +24,10 @@ namespace Sunridge.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}",
             ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
         public DateTime? ListedDate { get; set; }
+
+        public string ListerName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
 
         public bool Claimed { get; set; }
         public string ClaimedBy { get; set; }

@@ -22,11 +22,19 @@ namespace Sunridge.Pages.Classifieds
         public ClassifiedsVM ClassifiedsObj { get; set; }
         public void OnGet()
         {
-            var categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "ATV").Id;
+            var categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "ATVs");
+
+            //if ATV doesn't exist in db
+            if (categoryId == null)
+            {
+                _unitOfWork.ClassifiedCategory.Add(new ClassifiedCategory { Description = "ATVs" });
+                _unitOfWork.Save();
+                categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "ATVs");
+            }
 
             ClassifiedsObj = new ClassifiedsVM()
             {
-                ClassifiedsList = _unitOfWork.ClassifiedListing.GetAll(c => c.ClassifiedCategoryId == categoryId).ToList()
+                ClassifiedsList = _unitOfWork.ClassifiedListing.GetAll(c => c.ClassifiedCategoryId == categoryId.Id).ToList()
             };
 
             foreach (var item in ClassifiedsObj.ClassifiedsList)

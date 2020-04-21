@@ -10,6 +10,7 @@ namespace Sunridge.Models
     {
         [Key]
         public int Id { get; set; }
+
         public string Suggestion { get; set; }
 
         public string Complaint { get; set; }

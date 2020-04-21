@@ -16,6 +16,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Forms
 
         public IEnumerable<FormResponse> FormList { get; set; }
         public IEnumerable<FormSubmissions> SubList { get; set; }
+        public string value;
         public FormRespnsepageModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -26,15 +27,42 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Forms
             //FormList = _unitOfWork.FormResponse.GetAll(null, q => q.OrderBy(c => c.Resolved), null);
         public IActionResult OnGet(int? id)
         {
-            SubList = _unitOfWork.FormSubmissions.GetAll(null, q => q.OrderBy(c => c.FormType), null);
+            //SubList = _unitOfWork.FormSubmissions.GetAll(null, q => q.OrderBy(c => c.FormType), null);
             FormList = _unitOfWork.FormResponse.GetAll(null, null, "FormSubmissions");
             FormResObj = new FormResponseVM
             {
                FSList = _unitOfWork.FormSubmissions.GetFormSubmissionsListForDropDown(),
-                
-
-                FormResponse = new Models.FormResponse()
+               FormSubmissions = new Models.FormSubmissions(),
+               FormResponse = new Models.FormResponse()
             };
+            SubList = _unitOfWork.FormSubmissions.GetAll(null, null);
+           foreach(var submission in FormResObj.FSList)
+            {
+                //FormResObj.FormResponse = _unitOfWork.FormResponse.GetFirstOrDefault(u => u.Id == id);
+                FormResObj.FormResponse.FormSubmissionsId = FormResObj.FormSubmissions.Id;
+                FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;
+                FormResObj.FormResponse.SubmitDate = FormResObj.FormSubmissions.SubmitDate;
+                
+                if(FormResObj.FormResponse.ResolveDate == null )
+                {
+                    FormResObj.FormResponse.Resolved = false;
+                    //FormResObj.FormResponse.PrivacyLevel = null;
+                    FormResObj.FormResponse.ResolveUser = null;
+                    if(FormResObj.FormSubmissions.IsCl == true)
+                    {
+                        FormResObj.FormResponse.ResolveUser = "CL";
+                    }
+                    if (FormResObj.FormSubmissions.IsSC == true)
+                    {
+                        FormResObj.FormResponse.ResolveUser = "SC";
+                    }
+                    if (FormResObj.FormSubmissions.IsWik == true)
+                    {
+                        FormResObj.FormResponse.ResolveUser = "WIK";
+                    }
+                }
+
+            }
             if (id != null)
             {
                 FormResObj.FormResponse = _unitOfWork.FormResponse.GetFirstOrDefault(u => u.Id == id);
