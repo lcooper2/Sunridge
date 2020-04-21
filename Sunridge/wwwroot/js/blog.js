@@ -6,7 +6,10 @@ var numPosts = 2;
 function showPosts(totalPosts) {
     for (var i = (numPosts); i < (numPosts + numPosts); i++) {
         var elem = document.getElementById(i);
-        elem.style.display = "block";
+        if (elem != null) {
+            elem.style.display = "block";
+        }
+        
     }
     numPosts += numPosts;
     if (numPosts >= totalPosts - 1) {
@@ -35,12 +38,33 @@ function HasUserLikedPost(commentId) {
     });
 }
 
+// This method actually toggles the like button. We will immediately update
+// the button color and text so as to immediately respond to the user. After
+// recieving the like count back from the controller, update the like count.
+// If we have any issues with the db, revert the changes. After clicking, the
+// button is set to disabled for 1 second. Function checks at the beginning
+// if the button is disabled and returns if it is so as to prevent spamming.
+// Theres probably a better way to do this but I hardly know javascript so...
 function LikeThread(id) {
+    var likeSelector = "likeIcon(" + id + ")";
+    var likeIcon = document.getElementById(likeSelector);
+    if (likeIcon.hasAttribute("disabled")) { return;}
     $.ajax({
         url: "/api/blog/" + id,
         type: "POST",
         data: { "id": id },
         success: function (data) {
+            // Woohoo :)
+            var likeSpanSelector = "likeSpan(" + id + ")";
+            var likeSpan = document.getElementById(likeSpanSelector);
+            if (data != 0) {
+                likeSpan.innerHTML = data;
+            }
+            else {
+                likeSpan.innerHTML = "";
+            }
+        },
+        error: function (data) {
             var likeSelector = "likeIcon(" + id + ")";
             var likeIcon = document.getElementById(likeSelector);
 
@@ -56,23 +80,26 @@ function LikeThread(id) {
                 likeIcon.classList.remove("text-danger");
                 likeIcon.classList.add("text-muted");
             }
-            likeIcon.parentElement.style.visibility = "hidden";
-            setTimeout(function () { likeIcon.parentElement.style.visibility = "visible"; }, 650);
-
-            var likeSpanSelector = "likeSpan(" + id + ")";
-            var likeSpan = document.getElementById(likeSpanSelector);
-            if (data != 0) {
-                likeSpan.innerHTML = data;
-            }
-            else {
-                likeSpan.innerHTML = "";
-            }
-        },
-        error: function (data) {
-            alert(data);
         }
     });
 
+
+    if (likeIcon.classList.contains("far")) {
+        likeIcon.classList.remove("far");
+        likeIcon.classList.add("fas");
+        likeIcon.classList.remove("text-muted");
+        likeIcon.classList.add("text-danger");
+    }
+    else {
+        likeIcon.classList.remove("fas");
+        likeIcon.classList.add("far");
+        likeIcon.classList.remove("text-danger");
+        likeIcon.classList.add("text-muted");
+    }
+    likeIcon.setAttribute("disabled", "true");
+    setTimeout(function () { likeIcon.removeAttribute("disabled"); }, 1000);
+
+    
 };
 
 function toggleReplyBox(commentId) {

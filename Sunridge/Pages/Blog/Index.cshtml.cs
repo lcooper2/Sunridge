@@ -68,15 +68,12 @@ namespace Sunridge.Pages.Blog
 
         public IActionResult OnPostComment(int threadId)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            if (claim == null) { return RedirectToPage("Blog"); }
             var selector = "textarea(" + threadId.ToString() + ")";
             var comment = Request.Form[selector];
 
             BlogComment blogComment = new BlogComment()
             {
-                ApplicationUserId = claim.Value,
+                ApplicationUserId = GetCurrentUserId(), 
                 BlogThreadId = threadId,
                 BlogCommentText = comment,
                 WhenPosted = DateTime.Now,
@@ -119,6 +116,11 @@ namespace Sunridge.Pages.Blog
             return claim.Value;
         }
 
+        // This method attempts to extract EXIF orientation data from
+        // an image. If a Bitmap cannot be created with the supplied path
+        // then it returns -1. If there is EXIF orientation data, it is
+        // returned. Otherwise, the length and width of the image are used
+        // to artifically assign it a number to be used for orientation
         public int GetImageEXIFOrientation(string imgPath)
         {
             var webRootPath = _webHostEnvironment.WebRootPath;
@@ -155,7 +157,10 @@ namespace Sunridge.Pages.Blog
             }
         }
 
-        public List<string> GetImageLayout(List<BlogImage> images)
+        // This method tries to determine the layout for each image in 
+        //a list of images and generates an html tag with the appropriate 
+        //class marking it as either landscape or portrait.
+        public List<string> AssignImageLayouts(List<BlogImage> images)
         {
             List<int> layouts = new List<int>();
             for (int i = 0; i < images.Count(); i++)
@@ -194,8 +199,11 @@ namespace Sunridge.Pages.Blog
                         break;
                 }
             }
-            imgTags.Sort();
-            return imgTags;
+            // This is to ensure all portrait images are displayed first, and then landscape.
+            List<string> landscape = imgTags.Where(tag => tag.Contains("landscape")).ToList();
+            List<string> portrait = imgTags.Where(tag => tag.Contains("portrait")).ToList();
+            portrait.AddRange(landscape);
+            return portrait;
         }
     }
 }

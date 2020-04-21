@@ -61,12 +61,11 @@
                 <p class="card-text">@Html.Raw(@thread.BlogComments[0].BlogCommentText)</p>
                 <div class="container-fluid">
                     <div class="row">
-                        @{var imgTags = Model.GetImageLayout(@thread.BlogComments[0].Images); }
-                        @for (int i = 0; i < thread.BlogComments[0].Images.Count(); i++)
+                        @{var imgTags = Model.AssignImageLayouts(@thread.BlogComments[0].Images); }
+                        @for (int i = 0; i < imgTags.Count(); i++)
                         {
-
+                            // Render the string that represents an image tag and create and hide a modal containing the image
                             @Html.Raw(imgTags[i]);
-                            //<img src="@thread.BlogComments[0].Images[i].ImgPath" class="myImg" id="img(@thread.BlogComments[0].Images[i].Id)" onclick="Modal(@thread.BlogComments[0].Images[i].Id)" style="width:50%; height:auto; max-height:500px;" />
                             <div id="modal(@thread.BlogComments[0].Images[i].Id)" class="modal">
                                 <span class="close" id="close(@thread.BlogComments[0].Images[i].Id)">&times;</span>
                                 <img class="modal-content" id="modalImage(@thread.BlogComments[0].Images[i].Id)">
@@ -128,7 +127,7 @@
                         <div class="row ml-1 mr-1">
                             @foreach (var img in comment.Images)
                             {
-                                <img class="commentPhoto border img-fluid" src="@img.ImgPath" style="display: inline;" /><span>&nbsp;</span>
+                                <img class="commentPhoto border img-fluid" src="@img.ImgPath" style="display: inline;" />
                             }
                         </div>
 
@@ -189,7 +188,7 @@
                         </div>
                         <br />
                         <div class="row">
-                            <input name="commentImages(@thread.Id)" id="commentImages(@thread.Id)" type="file" multiple="multiple" class="offset-1" />
+                            <input name="commentImages(@thread.Id)" id="commentImages(@thread.Id)" type="file" class="offset-1" />
                         </div>
                         <br />
                         <div class='row mb-3'>
@@ -204,8 +203,9 @@
                 </div>
             </div>
         </div>
+        <br />
     </div>
-    <br />
+
     #endregion
     @postNumber = postNumber + 1;
 }

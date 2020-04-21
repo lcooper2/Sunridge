@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Security.Claims;
-using ImageMagick;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
-using Sunridge.Pages.Blog;
-using Sunridge.Utility;
 
 namespace Sunridge.Pages.Blog
 {
@@ -19,7 +14,6 @@ namespace Sunridge.Pages.Blog
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private const int exifOrientationID = 0x112; //274
 
         public CreateModel(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
@@ -82,10 +76,6 @@ namespace Sunridge.Pages.Blog
                     ImgPath = @"\Images\BlogImages\" + fileName + extension
                 };
                 blogComment.Images.Add(image);
-                //ImageOptimizer optimizer = new ImageOptimizer();
-                //var fileToCompress = new FileInfo(webRootPath + image.ImgPath);
-                //optimizer.Compress(fileToCompress);
-                
             }
             BlogThread.BlogComments.Add(blogComment);
             _unitOfWork.BlogThread.Add(BlogThread);

@@ -26,6 +26,8 @@ namespace Sunridge.DataAccess.Data.Repository
             List<BlogThread> allThreads = _db.BlogThread
                         .Include(t => t.ApplicationUser)
                         .Include(t => t.BlogComments)
+                            .ThenInclude(c => c.ApplicationUser)
+                        .Include(t => t.BlogComments)
                             .ThenInclude(c => c.Images)
                         .Include(t => t.BlogComments)
                             .ThenInclude(c => c.Likes)
