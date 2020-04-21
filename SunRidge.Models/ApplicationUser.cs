@@ -53,6 +53,8 @@ namespace Sunridge.Models
         public string LastModifiedBy { get; set; }
         public DateTime LastModifiedDate { get; set; }
 
+        [NotMapped]
+        public List<UserPhotos> Images { get; set; }
 
         //[Display(Name = "Address")]
         //public int AddressId { get; set; }
@@ -80,5 +82,7 @@ namespace Sunridge.Models
                 return $"{FirstName} {LastName}";
             }
         }
+
+        
     }
 }

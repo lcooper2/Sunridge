@@ -95,7 +95,8 @@ namespace Sunridge.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { 
+                var user = new ApplicationUser
+                {
                     UserName = Input.Email,
                     Email = Input.Email,
                     FirstName = Input.FirstName,
@@ -117,9 +118,14 @@ namespace Sunridge.Areas.Identity.Pages.Account
 
                     //add user to role
                     if (Input.IsAdmin)
+                    {
                         await _userManager.AddToRoleAsync(user, SD.AdminRole);
-                    else
                         await _userManager.AddToRoleAsync(user, SD.Owner);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.Owner);
+                    }
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

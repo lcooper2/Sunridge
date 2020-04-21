@@ -32,7 +32,7 @@
 
                                     <!--Slides-->
 
-                                    <div class="carousel-inner" role="listbox" style="  border: 2px solid black;  box-shadow: 4px 4px #888888;">
+                                    <div class="carousel-inner rounded" role="listbox" style="  border: 2px solid black;  box-shadow: 4px 4px #888888;">
 
                                         @foreach (var image in item.Images)
 
@@ -42,9 +42,9 @@
 
                                             {
 
-                                                <div class="carousel-item active">
+                                                <div class="carousel-item active rounded ">
 
-                                                    <img id="itemImage" class="d-block w-100" src="\@image.ImageURL">
+                                                    <img id="itemImage" class="d-block w-100" style="max-height:300px;" src="\@image.ImageURL">
 
                                                 </div>
 
@@ -54,9 +54,9 @@
 
                                             {
 
-                                                <div class="carousel-item">
+                                                <div class="carousel-item rounded">
 
-                                                    <img id="itemImage" class="d-block w-100" src="\@image.ImageURL">
+                                                    <img id="itemImage" class="d-block w-100" style="max-height:300px;" src="\@image.ImageURL">
 
                                                 </div>
 
@@ -81,7 +81,7 @@
 
                                     <a class="carousel-control-next" href="#carousel-thumb_@item.Id" role="button" data-slide="next">
 
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="carousel-control-next-icon " aria-hidden="true"></span>
 
                                         <span class="sr-only">Next</span>
 
@@ -89,7 +89,7 @@
 
                                     <!--/.Controls-->
 
-                                    <ol id="thumbnailBar" class="carousel-indicators list-inline visible-sm-block hidden-xs-block visible-md-block visible-lg-block">
+                                    <ol id="thumbnailBar" class="carousel-indicators rounded list-inline visible-sm-block hidden-xs-block visible-md-block visible-lg-block">
 
                                         @for (var imgIndex = 0; imgIndex < item.Images.Count; imgIndex++)
 
@@ -103,7 +103,7 @@
 
                                                 <li data-target="#carousel-thumb_@item.Id" data-slide-to="@imgIndex" class="active list-inline-item">
 
-                                                    <img id="thumbnail" class="img-fluid" src="\@image.ImageURL" style=" border: 1px solid black;">
+                                                    <img id="thumbnail" class="rounded img-fluid" src="\@image.ImageURL" style=" border: 1px solid black;">
 
                                                 </li>
 
@@ -115,7 +115,7 @@
 
                                                 <li data-target="#carousel-thumb_@item.Id" data-slide-to="@imgIndex" class="list-inline-item">
 
-                                                    <img id="thumbnail" class="img-fluid" src="\@image.ImageURL" style=" border: 1px solid black;">
+                                                    <img id="thumbnail" class="img-fluid rounded" src="\@image.ImageURL" style=" border: 1px solid black;">
 
                                                 </li>
 
@@ -135,11 +135,15 @@
 
                         </div>
 
-                        <div class="col-sm-6 " style="background-color:lightblue; border: 1px solid black; box-shadow: 3px 4px #888888;">
+                        <div class="col-sm-6 rounded " style="background-color:#303067; box-shadow: 3px 3px #5e5e5f; border: 1px solid black; max-height:300px; ">
 
-                            <h1 class="text-left">Item Name : @item.ItemName</h1>
+                            <h1 class="text-left text-white">Item Name : @item.ItemName</h1>
 
-                            <p class="text-left"><b>Item Description And Contact Information :</b><br /> @Html.Raw(item.Discription)</p>
+                           
+                            <p class="text-left "style="color:white!important"><b>Item Description:</b>@Html.Raw(item.Discription)</p>
+                            <br/>
+                            <p class="text-left text-white"><b>Phone Number:</b><br /> @String.Format("{0: (###) ###-####}", Convert.ToInt64(item.PhoneNumber))</p>
+                            <p style="color:white; font-size:14px; text-align:left"><b>Email:</b><br /><a href="mailto: @item.Email"> @item.Email</a></p>
 
 
                         </div>
