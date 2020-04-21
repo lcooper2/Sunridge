@@ -26,11 +26,11 @@
 
                 <div class="form-group row">
 
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="Listing.ItemName"></label>
                     </div>
 
-                    <div class="col-9">
+                    <div class="col-md-9">
                         <input class="form-control" asp-for="Listing.ItemName" />
                         <span class="text-danger" asp-validation-for="Listing.ItemName"></span>
                     </div>
@@ -38,11 +38,11 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="Listing.ClassifiedCategoryId">Listing Category</label>
                     </div>
 
-                    <div class="col-9">
+                    <div class="col-md-9">
                         @Html.DropDownListFor(m => m.Listing.ClassifiedCategoryId,
                         Model.CategoryList,
                         new { @class = "form-control" })
@@ -51,42 +51,42 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="Listing.Price"></label>
                     </div>
 
-                    <div class="col-9">
+                    <div class="col-md-9">
                         <input class="form-control" asp-for="Listing.Price" />
                         <span class="text-danger" asp-validation-for="Listing.Price"></span>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="Listing.Description"></label>
                     </div>
-                    <div class="col-9">
+                    <div class="col-md-9">
                         <textarea class="form-control" asp-for="Listing.Description" id="txtDesc" style="height:200px;"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="Listing.Phone"></label>
                     </div>
 
-                    <div class="col-9">
+                    <div class="col-md-9">
                         <input class="form-control" asp-for="Listing.Phone" />
                         <span class="text-danger" asp-validation-for="Listing.Phone"></span>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="Listing.Email"></label>
                     </div>
 
-                    <div class="col-9">
+                    <div class="col-md-9">
                         <input class="form-control" asp-for="Listing.Email" />
                         <span class="text-danger" asp-validation-for="Listing.Email"></span>
                     </div>
@@ -96,11 +96,11 @@
                 {
                     <div class="form-group row">
 
-                        <div class="col-3">
+                        <div class="col-md-3">
                             <label asp-for="Image.ImageURL">Add Image</label>
                         </div>
 
-                        <div class="col-9">
+                        <div class="col-md-9">
                             <input type="file" class="form-control" name="files" id="files" />
                         </div>
 
@@ -114,7 +114,7 @@
 
                         <div class="row">
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 @if (Model.Listing.Id != 0)
                                 {
                                     <button type="submit" class="btn btn-primary form-control">Update</button>
@@ -126,7 +126,7 @@
 
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
                             </div>
                         </div>
