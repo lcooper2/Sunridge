@@ -1,0 +1,139 @@
+﻿@page
+@model Sunridge.Pages.Dashboard.AdminDash.News.UpsertModel
+@using Sunridge.Utility
+@{
+    ViewData["Title"] = "News";
+    Layout = "_DashboardLayout";
+}
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
+    <div class="container">
+        <div class="row backgroundWhite border ">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.Item.NewsItemId != 0)
+            {
+                <input type="hidden" asp-for="Item.NewsItemId" />
+            }
+
+            <div class="col-12 px-3" style="border-bottom: 2px solid; border-color: black">
+                <h2 class="text-primary">@(Model.Item.NewsItemId != 0 ? "Update" : "Create") News Item </h2>
+            </div>
+
+
+
+            <div class="col-8 pt-3">
+
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Item.Year">Year</label>
+                    </div>
+
+                    <div class="col-9">
+                        @Html.DropDownListFor(m => m.Item.Year,
+                        Model.YearList,
+                        new { @class = "form-control" })
+                        <span class="text-danger" asp-validation-for="Item.Year"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Item.Header"></label>
+                    </div>
+
+                    <div class="col-9">
+                        <input class="form-control" asp-for="Item.Header" />
+                        <span class="text-danger" asp-validation-for="Item.Header"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+
+                    <div class="col-3">
+                        <label asp-for="Item.Content"></label>
+                    </div>
+
+                    <div class="col-7">
+                        <textarea class="form-control" asp-for="Item.Content" id="txtDesc" style="height:200px;"></textarea>
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+
+                    <div class="col-3">
+                        <label asp-for="Item.FileName">Add File</label>
+                    </div>
+
+                    <div class="col-9">
+                        <input type="file" class="form-control" name="files" id="files" />
+                    </div>
+
+                </div>
+
+                @if (Model.Item.NewsItemId != 0)
+                {
+                    if (Model.Item.FilePath != null)
+                    {
+                        <div class="form-group row">
+                            <div class="col-3"></div>
+                            <div class="col-9">
+                                <a href="~/@Model.Item.FilePath">@Model.Item.FileName</a>
+                            </div>
+                        </div>
+                    }
+                }
+
+
+                <div class="form-group row">
+
+                    <div class="col-9 offset-3">
+
+                        <div class="row">
+
+                            <div class="col-6">
+                                @if (Model.Item.NewsItemId != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                                }
+
+                            </div>
+
+                            <div class="col-6">
+                                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            
+
+        </div>
+    </div>
+
+
+</form>
+
+
+@section Scripts {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+    </script>
+}

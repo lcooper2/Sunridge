@@ -41,6 +41,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         ILotInventoryRepository LotInventory { get; }
         IInventoryRepository Inventory { get; }
 
+        INewsItemRepository NewsItem { get; }
         void Save();
     }
 }
