@@ -22,7 +22,7 @@ namespace Sunridge.Pages.Classifieds
         public ClassifiedsVM ClassifiedsObj { get; set; }
         public void OnGet()
         {
-            var categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "Cabin");
+            var categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "Cabins");
 
             //if cabin doesn't exist in db
             if (categoryId == null)

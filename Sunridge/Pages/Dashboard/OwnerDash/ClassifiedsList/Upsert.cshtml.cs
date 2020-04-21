@@ -100,27 +100,66 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.ClassifiedsList
                 //classifiedimage obj
                 if (files.Count > 0)
                 {
-                    string fileName = Guid.NewGuid().ToString();
-                    var uploads = Path.Combine(webRootPath, @"Images\ClassifiedsImages\");
-                    var extension = Path.GetExtension(files[0].FileName);
-
-                    using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-
+                    foreach (var image in files)
                     {
-                        files[0].CopyTo(fileStream);
+                        string fileName = Guid.NewGuid().ToString();
+                        var uploads = Path.Combine(webRootPath, @"Images\ClassifiedsImages\");
+                        var extension = Path.GetExtension(image.FileName);
+
+                        using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+
+                        {
+                            image.CopyTo(fileStream);
+                        }
+                        if (image == files[0])
+                        {
+                            Image = new ClassifiedImage
+                            {
+                                ClassifiedListingId = _unitOfWork.ClassifiedListing.GetFirstOrDefault(u => u.ListingDate == Listing.ListingDate).Id,
+                                ImageURL = @"Images\ClassifiedsImages\" + fileName + extension,
+                                IsMainImage = true
+                            };
+                        }
+                        else
+                        {
+                            Image = new ClassifiedImage
+                            {
+                                ClassifiedListingId = _unitOfWork.ClassifiedListing.GetFirstOrDefault(u => u.ListingDate == Listing.ListingDate).Id,
+                                ImageURL = @"Images\ClassifiedsImages\" + fileName + extension,
+                                IsMainImage = false
+                            };
+                        }
+
+                        _unitOfWork.ClassifiedImage.Add(Image);
                     }
-                    Image = new ClassifiedImage
-                    {
-                        ClassifiedListingId = _unitOfWork.ClassifiedListing.GetFirstOrDefault(u => u.ListingDate == Listing.ListingDate).Id,
-                        ImageURL = @"Images\ClassifiedsImages\" + fileName + extension,
-                        IsMainImage = true
-                    };
-
-                    _unitOfWork.ClassifiedImage.Add(Image);
                 }
             }
             else
             {
+                if (files.Count > 0)
+                {
+                    foreach (var image in files)
+                    {
+                        string fileName = Guid.NewGuid().ToString();
+                        var uploads = Path.Combine(webRootPath, @"Images\ClassifiedsImages\");
+                        var extension = Path.GetExtension(image.FileName);
+
+                        using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+
+                        {
+                            image.CopyTo(fileStream);
+                        }
+
+                        Image = new ClassifiedImage
+                        {
+                            ClassifiedListingId = _unitOfWork.ClassifiedListing.GetFirstOrDefault(u => u.ListingDate == Listing.ListingDate).Id,
+                            ImageURL = @"Images\ClassifiedsImages\" + fileName + extension,
+                            IsMainImage = false
+                        };
+
+                        _unitOfWork.ClassifiedImage.Add(Image);
+                    }
+                }
                 _unitOfWork.ClassifiedListing.Update(Listing);
             }
 
