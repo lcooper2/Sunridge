@@ -16,16 +16,16 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+       
 
         public ProfileModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            
             IUnitOfWork unitOfWork
             )
         {
             _userManager = userManager;
-            _signInManager = signInManager;
+          
             _unitOfWork = unitOfWork;
         }
 
@@ -65,15 +65,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
             }
 
 
-            //var userName = await _userManager.GetUserNameAsync(user);
-            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
-            //Username = userName;
-
-            //Input = new InputModel
-            //{
-            //    PhoneNumber = phoneNumber
-            //};
+            
         }
 
         public async Task<IActionResult> OnGet(string Id)
@@ -97,16 +89,17 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
                 return Page();
             }
 
-            var UserRole = await _userManager.IsInRoleAsync(applicationUser, SD.AdminRole);
-            var st = applicationUser.Id;
-            if (UserRole == true)
+            var user = await _userManager.FindByIdAsync(applicationUser.Id);
+
+
+            if (await _userManager.IsInRoleAsync(applicationUser, SD.AdminRole))
             {
                 OrginalRole = SD.AdminRole;
-                //_unitOfWork.ApplicationUser.Update(applicationUser);
+
                 if (OrginalRole != Input.Role)
                 {
-                    await _userManager.RemoveFromRoleAsync(applicationUser, SD.AdminRole);
-                    await _userManager.AddToRoleAsync(applicationUser, SD.Owner);
+                    await _userManager.RemoveFromRoleAsync(user, SD.AdminRole);
+
                 }
             }
             else
@@ -114,13 +107,16 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
                 OrginalRole = SD.Owner;
                 if (OrginalRole != Input.Role)
                 {
-                    await _userManager.RemoveFromRoleAsync(applicationUser, SD.Owner);
-                    await _userManager.AddToRoleAsync(applicationUser, SD.AdminRole);
+                    await _userManager.AddToRoleAsync(user, SD.AdminRole);
+
+
                 }
             }
 
-                
-                return RedirectToPage("./Index");
+            _unitOfWork.ApplicationUser.Update(applicationUser);
+            _unitOfWork.Save();
+
+            return RedirectToPage("./Index");
             }
         }
     }

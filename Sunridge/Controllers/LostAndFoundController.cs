@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 
@@ -15,18 +16,28 @@ namespace Sunridge.Controllers
     public class LostAndFoundController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public LostAndFoundController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
+        public LostAndFoundController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment, UserManager<IdentityUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;
+            _userManager = userManager;
         }
 
         public IActionResult Get()
         {
             return Json(new { data = _unitOfWork.LostAndFound.GetAll() });
         }
+
+        //public async Task<IActionResult> Get(int id)
+        //{
+        //    //var user = await _userManager.GetUserAsync(User);
+        //    //return Json(new { data = _unitOfWork.LostAndFound.GetAll(x => x.UserId == user.Id) });
+        //    return Json(new { data = _unitOfWork.LostAndFound.GetAll() });
+        //}
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

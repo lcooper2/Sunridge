@@ -27,6 +27,7 @@ namespace Sunridge.DataAccess.Data.Repository
             }
             objFromDB.Phone = board.Phone;
             objFromDB.Email = board.Email;
+            objFromDB.DisplayOrder = board.DisplayOrder;
             objFromDB.FirstName = board.FirstName;
             objFromDB.LastName = board.LastName;
             

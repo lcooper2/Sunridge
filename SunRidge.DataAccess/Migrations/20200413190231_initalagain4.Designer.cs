@@ -10,8 +10,8 @@ using Sunridge.DataAccess.Data;
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200406052843_EventCalendar")]
-    partial class EventCalendar
+    [Migration("20200413190231_initalagain4")]
+    partial class initalagain4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -413,6 +413,9 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -425,6 +428,9 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
@@ -551,32 +557,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("ClassifiedListing");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("FormResponseId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Private")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FormResponseId");
-
-                    b.ToTable("Comment");
-                });
-
             modelBuilder.Entity("Sunridge.Models.CommonAreaAsset", b =>
                 {
                     b.Property<int>("Id")
@@ -637,6 +617,9 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("FormSubmissionsId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FormType")
                         .IsRequired()
                         .HasColumnType("nvarchar(3)")
@@ -659,7 +642,30 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FormSubmissionsId");
+
                     b.ToTable("FormResponse");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.FormSubmissions", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FormId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FormType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SubmitDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FormSubmissions");
                 });
 
             modelBuilder.Entity("Sunridge.Models.InKindWorkHours", b =>
@@ -762,12 +768,21 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<string>("Discription")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ItemName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ListedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("ListerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -882,6 +897,36 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Maintenance");
                 });
 
+            modelBuilder.Entity("Sunridge.Models.NewsItem", b =>
+                {
+                    b.Property<int>("NewsItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Header")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("NewsItemId");
+
+                    b.ToTable("NewsItem");
+                });
+
             modelBuilder.Entity("Sunridge.Models.OwnerLot", b =>
                 {
                     b.Property<int>("Id")
@@ -945,6 +990,27 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ScheduledEvent");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.SuggestionComplaint", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Complaint")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Suggestion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SuggestionComplaint");
                 });
 
             modelBuilder.Entity("Sunridge.Models.ApplicationUser", b =>
@@ -1119,18 +1185,20 @@ namespace Sunridge.DataAccess.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.Comment", b =>
-                {
-                    b.HasOne("Sunridge.Models.FormResponse", "FormResponse")
-                        .WithMany()
-                        .HasForeignKey("FormResponseId");
-                });
-
             modelBuilder.Entity("Sunridge.Models.File", b =>
                 {
                     b.HasOne("Sunridge.Models.LotHistory", "LotHistory")
                         .WithMany("Files")
                         .HasForeignKey("LotHistoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Sunridge.Models.FormResponse", b =>
+                {
+                    b.HasOne("Sunridge.Models.FormSubmissions", "FormSubmissions")
+                        .WithMany()
+                        .HasForeignKey("FormSubmissionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

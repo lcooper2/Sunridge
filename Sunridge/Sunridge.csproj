@@ -22,19 +22,21 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\Sunridge.DataAccess\Sunridge.DataAccess.csproj" />
+    <ProjectReference Include="..\SunRidge.DataAccess\Sunridge.DataAccess.csproj" />
     <ProjectReference Include="..\Sunridge.Models\Sunridge.Models.csproj" />
     <ProjectReference Include="..\Sunridge.Utility\Sunridge.Utility.csproj" />
   </ItemGroup>
 
 
   <ItemGroup>
+    <Folder Include="Pages\Dashboard\OwnerDash\MyPhotos\" />
     <Folder Include="wwwroot\Images\BlogImages\ProfilePictures\" />
     <Folder Include="wwwroot\Images\BlogImages\Uploads\" />
-    <Folder Include="wwwroot\Images\BoardImages\" />
     <Folder Include="wwwroot\Images\LostAndFoundImages\" />
     <Folder Include="wwwroot\Images\ClassifiedsImages\" />
     <Folder Include="wwwroot\Images\BannerImages\" />
+    <Folder Include="wwwroot\Images\BoardImages\" />
+    <Folder Include="wwwroot\Images\UsersPhotoGallery\" />
   </ItemGroup>
 
 </Project>

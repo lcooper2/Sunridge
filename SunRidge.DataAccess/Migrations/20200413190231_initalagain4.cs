@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Sunridge.DataAccess.Migrations
 {
-    public partial class initalVer3 : Migration
+    public partial class initalagain4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -105,9 +105,9 @@ namespace Sunridge.DataAccess.Migrations
                     LastName = table.Column<string>(nullable: false),
                     Phone = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    Image = table.Column<string>(nullable: true)
-                    
-
+                    Image = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    DisplayOrder = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -146,23 +146,35 @@ namespace Sunridge.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FormResponse",
+                name: "CommonAreaAssets",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FormType = table.Column<string>(maxLength: 3, nullable: false),
-                    SubmitDate = table.Column<DateTime>(nullable: false),
+                    AssetName = table.Column<string>(nullable: true),
+                    PurchasePrice = table.Column<float>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    Suggestion = table.Column<string>(nullable: true),
-                    PrivacyLevel = table.Column<string>(nullable: true),
-                    Resolved = table.Column<bool>(nullable: false),
-                    ResolveDate = table.Column<DateTime>(nullable: true),
-                    ResolveUser = table.Column<string>(nullable: true)
+                    Status = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FormResponse", x => x.Id);
+                    table.PrimaryKey("PK_CommonAreaAssets", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FormSubmissions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SubmitDate = table.Column<DateTime>(nullable: false),
+                    FormType = table.Column<string>(nullable: true),
+                    FormId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FormSubmissions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,6 +217,9 @@ namespace Sunridge.DataAccess.Migrations
                     ItemName = table.Column<string>(nullable: false),
                     Discription = table.Column<string>(nullable: true),
                     ListedDate = table.Column<DateTime>(nullable: true),
+                    ListerName = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
                     Claimed = table.Column<bool>(nullable: false),
                     ClaimedBy = table.Column<string>(nullable: true),
                     ClaimedDate = table.Column<DateTime>(nullable: true)
@@ -212,6 +227,57 @@ namespace Sunridge.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LostAndFound", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NewsItem",
+                columns: table => new
+                {
+                    NewsItemId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Header = table.Column<string>(maxLength: 50, nullable: false),
+                    Content = table.Column<string>(nullable: false),
+                    Year = table.Column<int>(nullable: false),
+                    FileName = table.Column<string>(nullable: true),
+                    FilePath = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewsItem", x => x.NewsItemId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ScheduledEvent",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Subject = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    Start = table.Column<DateTime>(nullable: false),
+                    End = table.Column<DateTime>(nullable: true),
+                    IsFullDay = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ScheduledEvent", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SuggestionComplaint",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Suggestion = table.Column<string>(nullable: true),
+                    Complaint = table.Column<string>(nullable: true),
+                    ApplicationUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SuggestionComplaint", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -375,6 +441,8 @@ namespace Sunridge.DataAccess.Migrations
                     ItemName = table.Column<string>(maxLength: 75, nullable: false),
                     Price = table.Column<float>(nullable: false),
                     Description = table.Column<string>(maxLength: 1000, nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
                     ListingDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -395,25 +463,49 @@ namespace Sunridge.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comment",
+                name: "Maintenance",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Content = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Private = table.Column<bool>(nullable: false),
-                    FormResponseId = table.Column<int>(nullable: true)
+                    CommonAreaAssetId = table.Column<int>(nullable: false),
+                    Cost = table.Column<float>(nullable: false),
+                    DateCompleted = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comment", x => x.Id);
+                    table.PrimaryKey("PK_Maintenance", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comment_FormResponse_FormResponseId",
-                        column: x => x.FormResponseId,
-                        principalTable: "FormResponse",
+                        name: "FK_Maintenance_CommonAreaAssets_CommonAreaAssetId",
+                        column: x => x.CommonAreaAssetId,
+                        principalTable: "CommonAreaAssets",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FormResponse",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FormType = table.Column<string>(maxLength: 3, nullable: false),
+                    SubmitDate = table.Column<DateTime>(nullable: false),
+                    PrivacyLevel = table.Column<string>(nullable: true),
+                    Resolved = table.Column<bool>(nullable: false),
+                    ResolveDate = table.Column<DateTime>(nullable: true),
+                    ResolveUser = table.Column<string>(nullable: true),
+                    FormSubmissionsId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FormResponse", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FormResponse_FormSubmissions_FormSubmissionsId",
+                        column: x => x.FormSubmissionsId,
+                        principalTable: "FormSubmissions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -534,17 +626,17 @@ namespace Sunridge.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_BlogComment", x => x.Id);
                     table.ForeignKey(
-                    name: "FK_BlogComment_AspNetUsers_ApplicationUserId",
-                    column: x => x.ApplicationUserId,
-                    principalTable: "AspNetUsers",
-                    principalColumn: "Id",
-                    onDelete: ReferentialAction.NoAction);
+                        name: "FK_BlogComment_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                    name: "FK_BlogComment_BlogThread_BlogThreadId",
-                    column: x => x.BlogThreadId,
-                    principalTable: "BlogThread",
-                    principalColumn: "Id",
-                    onDelete: ReferentialAction.NoAction);
+                        name: "FK_BlogComment_BlogThread_BlogThreadId",
+                        column: x => x.BlogThreadId,
+                        principalTable: "BlogThread",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -748,14 +840,14 @@ namespace Sunridge.DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_FormResponseId",
-                table: "Comment",
-                column: "FormResponseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_File_LotHistoryId",
                 table: "File",
                 column: "LotHistoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FormResponse_FormSubmissionsId",
+                table: "FormResponse",
+                column: "FormSubmissionsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_KeyHistory_KeyId",
@@ -781,6 +873,11 @@ namespace Sunridge.DataAccess.Migrations
                 name: "IX_LotHistory_LotId",
                 table: "LotHistory",
                 column: "LotId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Maintenance_CommonAreaAssetId",
+                table: "Maintenance",
+                column: "CommonAreaAssetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OwnerLot_ApplicationUserId",
@@ -832,10 +929,10 @@ namespace Sunridge.DataAccess.Migrations
                 name: "ClassifiedImage");
 
             migrationBuilder.DropTable(
-                name: "Comment");
+                name: "File");
 
             migrationBuilder.DropTable(
-                name: "File");
+                name: "FormResponse");
 
             migrationBuilder.DropTable(
                 name: "InKindWorkHours");
@@ -847,7 +944,19 @@ namespace Sunridge.DataAccess.Migrations
                 name: "LostAndFoundImage");
 
             migrationBuilder.DropTable(
+                name: "Maintenance");
+
+            migrationBuilder.DropTable(
+                name: "NewsItem");
+
+            migrationBuilder.DropTable(
                 name: "OwnerLot");
+
+            migrationBuilder.DropTable(
+                name: "ScheduledEvent");
+
+            migrationBuilder.DropTable(
+                name: "SuggestionComplaint");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -859,16 +968,19 @@ namespace Sunridge.DataAccess.Migrations
                 name: "ClassifiedListing");
 
             migrationBuilder.DropTable(
-                name: "FormResponse");
+                name: "LotHistory");
 
             migrationBuilder.DropTable(
-                name: "LotHistory");
+                name: "FormSubmissions");
 
             migrationBuilder.DropTable(
                 name: "Key");
 
             migrationBuilder.DropTable(
                 name: "LostAndFound");
+
+            migrationBuilder.DropTable(
+                name: "CommonAreaAssets");
 
             migrationBuilder.DropTable(
                 name: "BlogThread");

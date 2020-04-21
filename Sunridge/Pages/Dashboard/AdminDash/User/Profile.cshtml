@@ -15,8 +15,8 @@
                 <div class="form-group row border">
                     <div class="col-9">
                         <div style="display:block">
-                            <label asp-for="applicationUser.FullName"></label>
-                            <b>: @Model.applicationUser.FullName</b>
+                            <label asp-for="applicationUser.FullName"></label><br />
+                            <b>@Model.applicationUser.FullName</b>
                         </div>
                     </div>
                 </div>
@@ -24,8 +24,8 @@
                 <div class="form-group row border">
                     <div class="col-9">
                         <div class="non-edit" style="display:block">
-                            <label asp-for="applicationUser.UserName"></label>
-                            <b>: @Model.applicationUser.UserName</b>
+                            <label asp-for="applicationUser.UserName"></label><br />
+                            <b>@Model.applicationUser.UserName</b>
                         </div>
 
                     </div>
@@ -34,14 +34,24 @@
                 <div class="form-group row border">
                     <div class="col-9">
                         <div class="non-edit" style="display:block">
-                            <label asp-for="applicationUser.PhoneNumber"></label>
+                            <label asp-for="applicationUser.Email"></label><br />
+                            <b>@Model.applicationUser.Email</b>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group row border">
+                    <div class="col-9">
+                        <div class="non-edit" style="display:block">
+                            <label asp-for="applicationUser.PhoneNumber"></label><br />
                             @if (Model.applicationUser.PhoneNumber != null)
                             {
-                                <b>: @String.Format("{0: (###) ###-####}", Convert.ToInt64(Model.applicationUser.PhoneNumber))</b>
+                                <b>@String.Format("{0: (###) ###-####}", Convert.ToInt64(Model.applicationUser.PhoneNumber))</b>
                             }
                             else
                             {
-                                <b class="text-danger">: No Phone Number Listed</b>
+                                <b class="text-danger">No Phone Number Listed</b>
                             }
                         </div>
 
@@ -52,8 +62,8 @@
                 <div class="form-group row border">
                     <div class="col-9">
                         <div class="non-edit" style="display:block">
-                            <label asp-for="applicationUser.Birthday"></label>
-                            <b>: @Model.applicationUser.Birthday</b>
+                            <label asp-for="applicationUser.Birthday"></label><br />
+                            <b>@Model.applicationUser.Birthday</b>
                         </div>
 
                     </div>
@@ -63,14 +73,14 @@
                     <div class="col-9">
                         <div class="non-edit" style="display:block">
 
-                            <label asp-for="applicationUser.EmergencyContactName"></label>
+                            <label asp-for="applicationUser.EmergencyContactName"></label><br />
                             @if (Model.applicationUser.EmergencyContactName != null)
                             {
-                                <b>: @Model.applicationUser.EmergencyContactName</b>
+                                <b>@Model.applicationUser.EmergencyContactName</b>
                             }
                             else
                             {
-                                <b class="text-danger">: No Emergency Contact Listed</b>
+                                <b class="text-danger">No Emergency Contact Listed</b>
                             }
 
                         </div>
@@ -81,14 +91,14 @@
                 <div class="form-group row border">
                     <div class="col-9">
                         <div class="non-edit" style="display:block">
-                            <label asp-for="applicationUser.EmergencyContactPhone"></label>
+                            <label asp-for="applicationUser.EmergencyContactPhone"></label><br />
                             @if (Model.applicationUser.EmergencyContactPhone != null)
                             {
-                        <b>: @String.Format("{0: (###) ###-####}", Convert.ToInt64(Model.applicationUser.EmergencyContactPhone))</b>
+                                <b>@String.Format("{0: (###) ###-####}", Convert.ToInt64(Model.applicationUser.EmergencyContactPhone))</b>
                             }
                             else
                             {
-                                <b class="text-danger">: No Emergency Contact Listed</b>
+                                <b class="text-danger">No Emergency Contact Listed</b>
                             }
 
                         </div>
@@ -99,14 +109,14 @@
                 <div class="form-group row border">
                     <div class="col-9">
                         <div class="non-edit" style="display:block">
-                            <label asp-for="applicationUser.ReceiveEmails"></label>
+                            <label asp-for="applicationUser.ReceiveEmails"></label><br />
                             @if (Model.applicationUser.ReceiveEmails != null)
                             {
-                                <b>: @Model.applicationUser.ReceiveEmails</b>
+                                <b>@Model.applicationUser.ReceiveEmails</b>
                             }
                             else
                             {
-                                <b class="text-danger">: Not Selected</b>
+                                <b class="text-danger">Not Selected</b>
                             }
                         </div>
                     </div>
@@ -116,8 +126,8 @@
                 <div class="form-group row border">
                     <div class="col-7">
 
-                        <label>Current Role: </label>
-                        <b class="text-center text-info">: @Model.Input.Role</b>
+                        <label>Current Role: </label><br />
+                        <b class="text-center text-info"> @Model.Input.Role</b>
 
                     </div>
                 </div>
@@ -128,7 +138,7 @@
                         <div class="row">
 
                             <div class="col-6">
-                                <b onclick="Edit();" class="btn btn-warning ">Edit</b>
+                                <b onclick="Edit(); "  class="btn btn-warning ">Edit</b>
                             </div>
 
                             <div class="col-6">
@@ -142,137 +152,119 @@
                 </div>
             </div>
             @* Edited display *@
-            <div id="Edit" style="display:none">
-                <div class="form-group row border">
-                    <div class="col-9">
-
-                        <div style="display:block">
-                            <label asp-for="applicationUser.FirstName"></label>
-                            <input class="text-info" asp-for="applicationUser.FirstName" /><br />
-                            <label asp-for="applicationUser.LastName"></label>
-                            <input class="text-info" asp-for="applicationUser.LastName" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group row border">
-                    <div class="col-9">
-                        <div class="non-edit" style="display:block">
-
-                            <label asp-for="applicationUser.UserName"></label>
-                            <input class="text-info" asp-for="applicationUser.UserName" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group row border">
-                    <div class="col-9">
-                        <div class="non-edit" style="display:block">
-
-                            <label asp-for="applicationUser.PhoneNumber"></label>
-                            <input class="text-info" asp-for="applicationUser.PhoneNumber" />
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="form-group row border">
-                    <div class="col-9">
-                        <div class="non-edit" style="display:block">
-
-                            <label asp-for="applicationUser.Birthday"></label>
-                            <input class="text-info" asp-for="applicationUser.Birthday" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group row border">
-                    <div class="col-9">
-                        <div class="non-edit" style="display:block">
+        <div id="Edit" style="display:none">
 
 
-                            <label asp-for="applicationUser.EmergencyContactName"></label>
-                            <input class="text-info" asp-for="applicationUser.EmergencyContactName" />
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row border">
-                    <div class="col-9">
-                        <div class="non-edit" style="display:block">
-
-                            <label asp-for="applicationUser.EmergencyContactPhone"></label>
-                            <input class="text-info" asp-for="applicationUser.EmergencyContactPhone" />
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row border">
-                    <div class="col-4">
-                        <div class="non-edit" style="display:block">
-
-                            <label asp-for="applicationUser.ReceiveEmails"></label>
-                            <table>
-                                <tr>
-                                    <td>yes</td>
-                                    <td class="col-1"> <input type="radio" class="form-control" asp-for="applicationUser.ReceiveEmails" value="true"></td>
-                                </tr>
-                                <tr>
-                                    <td>no </td>
-                                    <td><input type="radio" class="form-control" asp-for="applicationUser.ReceiveEmails" value="false" /></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row border">
-                    <div class="col-7">
-
-                        <label>Current Role: </label>
-                        <b class="text-center text-info">: @Model.Input.Role</b>
-
-                    </div>
-                </div>
-
-                <div class="row col-7">
-                    <b class="btn btn-primary" onclick="Togglehide();">Click to Select Role</b>
-                </div>
-
-                <div class="form-group row border" id="ChangeRole" style="display:none">
-                    <div class="col-4">
-                        <label>Select Role:</label>
-                        <table>
-                            <tr>
-                                <td>@SD.AdminRole: </td>
-                                <td class="col-1"> <input type="radio" class="form-control" asp-for="Input.Role" value="@SD.AdminRole"></td>
-                            </tr>
-                            <tr>
-                                <td>@SD.Owner: </td>
-                                <td><input type="radio" class="form-control" asp-for="Input.Role" value="@SD.Owner" /></td>
-                            </tr>
-                        </table>
-
-                    </div>
-                </div>
-                <br />
-                <div class="form-group row">
-
-                    <div class="col-7 offset-3">
-
-                        <div class="row">
-
-                            <div class="col-6">
-                                    <button type="submit" class="btn btn-primary form-control">Update</button>
-                                </div>
-
-                            <div class="col-6">
-                                <a asp-page="./Index" class="btn btn-success form-control">Back To List</a>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.FirstName"></label>
+                <input asp-for="applicationUser.FirstName" class="form-control" />
+                <span asp-validation-for="applicationUser.FirstName" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.LastName"></label>
+                <input asp-for="applicationUser.LastName" class="form-control" />
+                <span asp-validation-for="applicationUser.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.UserName"></label>
+                <input asp-for="applicationUser.UserName" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.Email"></label>
+                <input asp-for="applicationUser.Email" class="form-control" />
+                <span asp-validation-for="applicationUser.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.PhoneNumber"></label>
+                <input asp-for="applicationUser.PhoneNumber" class="form-control" />
+                <span asp-validation-for="applicationUser.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.Birthday"></label>
+                <input asp-for="applicationUser.Birthday" class="form-control" />
+                <span asp-validation-for="applicationUser.Birthday" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.Occupation"></label>
+                <input asp-for="applicationUser.Occupation" class="form-control" />
+                <span asp-validation-for="applicationUser.Occupation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.EmergencyContactName"></label>
+                <input asp-for="applicationUser.EmergencyContactName" class="form-control" />
+                <span asp-validation-for="applicationUser.EmergencyContactName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.EmergencyContactPhone"></label>
+                <input asp-for="applicationUser.EmergencyContactPhone" class="form-control" />
+                <span asp-validation-for="applicationUser.EmergencyContactPhone" class="text-danger"></span>
+            </div>
+            <div class="row col-7">
+                <b class="btn btn-primary" onclick="TogglehideEmail();">Click to Select Email status</b>
+            </div>
+            <div class="form-group" id="ChangeReciveEmails" style="display:none">
+                <label asp-for="applicationUser.ReceiveEmails"></label>
+                <table>
+                    <tr>
+                        <td style="min-width:100px">yes</td>
+                        <td class="col-1"> <input type="radio" class="form-control" asp-for="applicationUser.ReceiveEmails" value="true"></td>
+                    </tr>
+                    <tr>
+                        <td>no </td>
+                        <td><input type="radio" class="form-control" asp-for="applicationUser.ReceiveEmails" value="false" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="form-group ">
+
+
+
+
+
+            </div>
+
+            <div class="row col-7">
+                <b class="btn btn-primary" onclick="Togglehide();">Click to Select Role</b>
+            </div>
+
+            <div class="form-group" id="ChangeRole" style="display:none">
+
+                <label>Select Role:</label>
+                <table>
+                    <tr>
+                        <td style="min-width:100px">@SD.AdminRole: </td>
+                        <td class="col-1"> <input type="radio" class="form-control" asp-for="Input.Role" value="@SD.AdminRole"></td>
+                    </tr>
+                    <tr>
+                        <td>@SD.Owner: </td>
+                        <td><input type="radio" class="form-control" asp-for="Input.Role" value="@SD.Owner" /></td>
+                    </tr>
+                </table>
+
+
+            </div>
+            <br />
+            <div class="form-group row">
+
+                <div class="col-7 offset-3">
+
+                    <div class="row">
+
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary form-control">Update</button>
+                        </div>
+
+                        <div class="col-6">
+                            <a asp-page="./Index" class="btn btn-success form-control">Back To List</a>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
         </form>
     </div>
 </div>
@@ -280,6 +272,15 @@
 <script>
     function Togglehide() {
         var x = document.getElementById("ChangeRole");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        }
+        else {
+            x.style.display = "block";
+        }
+    }
+    function TogglehideEmail() {
+        var x = document.getElementById("ChangeReciveEmails");
         if (x.style.display === "block") {
             x.style.display = "none";
         }

@@ -24,7 +24,7 @@ namespace Sunridge.DataAccess.Data
         public DbSet<InKindWorkHours> InKindWorkHours { get; set; }
         public DbSet<FormResponse> FormResponse { get; set; }
         public DbSet<File> File { get; set; }
-        public DbSet<Comment> Comment { get; set; }
+       // public DbSet<Comment> Comment { get; set; }
         public DbSet<OwnerLot> OwnerLot { get; set; }
         public DbSet<CommonAreaAsset> CommonAreaAssets { get; set; }
         public DbSet<ClassifiedListing> ClassifiedListing { get; set; }
@@ -41,5 +41,9 @@ namespace Sunridge.DataAccess.Data
         public DbSet<ScheduledEvent> ScheduledEvent { get; set; }
         public DbSet<FormSubmissions> FormSubmissions { get; set; }
         public DbSet<NewsItem> NewsItem { get; set; }
+        public DbSet<UserPhotos> UserPhotos { get; set; }
+        public DbSet<UserPhotoCategory> UserPhotoCategory { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<LotInventory> LotInventory { get; set; }
     }
 }
