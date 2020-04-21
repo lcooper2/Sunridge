@@ -22,14 +22,14 @@ namespace Sunridge.Pages.Classifieds
         public ClassifiedsVM ClassifiedsObj { get; set; }
         public void OnGet()
         {
-            var categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "Other Services");
+            var categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "Services");
 
-            //if Other Services doesn't exist in db
+            //if Services doesn't exist in db
             if (categoryId == null)
             {
-                _unitOfWork.ClassifiedCategory.Add(new ClassifiedCategory { Description = "Other Services" });
+                _unitOfWork.ClassifiedCategory.Add(new ClassifiedCategory { Description = "Services" });
                 _unitOfWork.Save();
-                categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "Other Services");
+                categoryId = _unitOfWork.ClassifiedCategory.GetFirstOrDefault(c => c.Description == "Services");
             }
 
             ClassifiedsObj = new ClassifiedsVM()
