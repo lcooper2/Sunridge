@@ -37,12 +37,14 @@ namespace Sunridge.Controllers
                 //item.ClassifiedCategoryId = CC.FirstOrDefault(c => c.Id == item.ClassifiedCategoryId).Description;
                 item.ApplicationUser = AU.FirstOrDefault(c => c.Id == item.UserId);
                 item.ClassifiedCategory = CC.FirstOrDefault(c => c.Id == item.ClassifiedCategoryId);
-                if (item.ClassifiedCategory.Description == "Other")
-                {
-                    item.ClassifiedCategory.Description = "Service";
-                }
             }
-            return Json(new { data = _unitOfWork.ClassifiedListing.GetAll() });
+            if (User.IsInRole(SD.AdminRole))
+            {
+                return Json(new { data = _unitOfWork.ClassifiedListing.GetAll() });
+            } else
+            {
+                return Json(new { data = _unitOfWork.ClassifiedListing.GetAll().Where(c => c.UserId == User.Claims.FirstOrDefault().Value) });
+            }
         }
 
 

@@ -12,6 +12,7 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             _db = db;
             _webHostEnvironment = webHostEnvironment;
+            Address = new AddressRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
             Banner = new BannerRepository(_db);
             LostAndFound = new LostAndFoundRepository(_db);
