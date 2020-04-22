@@ -20,7 +20,8 @@ namespace Sunridge.Models
         //public String PrivacyLevel { get; set; }
         public bool Resolved { get; set; }
         [Display(Name = "Resolve Date")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? ResolveDate { get; set; }
 
         [Display(Name = "Resolved by")]

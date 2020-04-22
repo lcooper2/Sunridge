@@ -19,8 +19,13 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             var obJFromDb = _db.FormResponse.FirstOrDefault(s => s.Id == FormResponse.Id);
 
-            _db.FormResponse.Update(obJFromDb);
-
+            obJFromDb.FormType = FormResponse.FormType;
+            obJFromDb.FormDisplay = FormResponse.FormDisplay;
+            obJFromDb.Resolved = FormResponse.Resolved;
+            obJFromDb.ResolveDate = FormResponse.ResolveDate;
+            obJFromDb.ResolveUser = FormResponse.ResolveUser;
+            obJFromDb.FormSubmissionsId = FormResponse.FormSubmissionsId;
+            obJFromDb.FormSubmissions = FormResponse.FormSubmissions;
             _db.SaveChanges();
 
 

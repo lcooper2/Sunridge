@@ -27,9 +27,12 @@ namespace Sunridge
 
         [BindProperty]
         public ClassifiedListing ClassifiedListing { get; set; }
+        [BindProperty]
+        public String singleImage { get; set; }
 
-        public IActionResult OnGet(int? id)
+        public IActionResult OnGet(int? id, string singleimage)
         {
+            singleImage = singleimage;
             if (id == null)
             {
                 return NotFound();
@@ -60,6 +63,19 @@ namespace Sunridge
         {
             string webRootPath = _hostingEnvironment.WebRootPath;
             var files = HttpContext.Request.Form.Files;
+
+            int count = 0;
+            foreach (var item in ClassifiedListing.Images)
+            {
+                if (item.IsMainImage == true)
+                {
+                    count++;
+                }
+            }
+            if (count > 1)
+            {
+                return RedirectToPage("Images", new { id = Id, singleimage = "1" });
+            }
 
             if (files.Count > 0)
             {
