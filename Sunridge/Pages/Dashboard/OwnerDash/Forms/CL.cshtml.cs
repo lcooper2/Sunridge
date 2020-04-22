@@ -83,9 +83,14 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.FormSubmissions.IsWik = false;
                 FormResObj.FormResponse.Resolved = false;
                 FormResObj.FormResponse.ResolveUser = "None";
-                FormResObj.FormSubmissions.FormId = FormResObj.ClaimLoss.Id;
-                _unitOfWork.ClaimLoss.Add(FormResObj.ClaimLoss);
+
+
                 
+                _unitOfWork.ClaimLoss.Add(FormResObj.ClaimLoss);
+
+                _unitOfWork.Save();
+
+                FormResObj.FormSubmissions.FormId = FormResObj.ClaimLoss.Id;
                 _unitOfWork.FormSubmissions.Add(FormResObj.FormSubmissions);
                 FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;
                 _unitOfWork.FormResponse.Add(FormResObj.FormResponse);
