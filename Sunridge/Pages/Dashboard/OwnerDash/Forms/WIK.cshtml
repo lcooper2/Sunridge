@@ -37,7 +37,7 @@
                         <label asp-for="FormResObj.InKindWorkHours.Activity">Describe Activity (List what you did):</label>
                     </div>
                     <div class="col-9">
-                        <textarea class="form-control" asp-for="FormResObj.InKindWorkHours.Activity" id="txtDesc" style="height:200px;"></textarea>
+                        <textarea class="form-control" asp-for="FormResObj.InKindWorkHours.Activity" id="txtDesc" style="height:200px;">@Html.Raw("text")</textarea>
 
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                         <label asp-for="FormResObj.InKindWorkHours.Equipment">Describe Equipment used :</label>
                     </div>
                     <div class="col-9">
-                        <textarea class="form-control" asp-for="FormResObj.InKindWorkHours.Equipment" id="txtDesc" style="height:200px;"></textarea>
+                        <textarea class="form-control" asp-for="FormResObj.InKindWorkHours.Equipment" id="txtDesc" style="height:200px;">@Html.Raw("text")</textarea>
 
                     </div>
                 </div>
@@ -79,11 +79,5 @@
 </form>
 
 @section Scripts {
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'lists',
-            menubar: 'file edit format'
-        });
-    </script>
+    <script>tinymce.init({ forced_root_block: "", selector: 'textarea' });</script>
 }
