@@ -13,5 +13,9 @@ namespace Sunridge.Models.ViewModels
 
         public FormSubmissions FormSubmissions { get; set; }
 
+        public ClaimLoss ClaimLoss { get; set; }
+        public InKindWorkHours InKindWorkHours { get; set; }
+        public SuggestionComplaint SuggestionComplaint { get; set; }
+
     }
 }
