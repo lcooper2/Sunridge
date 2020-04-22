@@ -106,12 +106,41 @@
                         <label asp-for="LotObj.Lot.LastModifiedBy"></label>
                     </div>
                     <div class="col-9">
-                        <input class="form-control" asp-for="LotObj.Lot.LastModifiedBy"  />
+                        <input class="form-control" asp-for="LotObj.Lot.LastModifiedBy" />
                         <span class="text-danger" asp-validation-for="LotObj.Lot.LastModifiedBy"></span>
 
                     </div>
                 </div>
-   
+                <div class="col-3">
+                    <label >Lot Inventory</label>
+                </div>
+                @foreach (var item in Model.InList)
+                {
+                    @if (Model.LotInVm.InventoryList != null)
+
+                    {
+                        @if (Model.LotInVm.InventoryList.Contains(item.Id))
+
+                        {
+                            @*<input type="checkbox" class="form-control" asp-for="Input.Role" value="@item.Id">*@
+                            <input name="LotInVm.InventoryList" type="checkbox" value="@item.Id" checked />
+
+                        }
+                        else
+                        {
+                            <input name="LotInVm.InventoryList" type="checkbox" value="@item.Id" />
+
+                        }
+                    }
+                    else
+                    {
+                        <input name="LotInVm.InventoryList" type="checkbox" value="@item.Id" />
+
+                    }
+                    <label class="control-label">@item.Description</label>
+                }
+
+
                 <div class="form-group row">
                     <div class="col-9 offset-3">
                         <div class="row">
@@ -123,7 +152,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
