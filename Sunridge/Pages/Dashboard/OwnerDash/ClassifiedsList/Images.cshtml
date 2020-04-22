@@ -4,6 +4,12 @@
 <h4>Edit Images for Listing</h4>
 <hr />
 <div class="row">
+    @if (Model.singleImage != null)
+    {
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script>toastr.error("Only select one image as the main image.");</script>
+    }
     <div class="col-md-12">
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
