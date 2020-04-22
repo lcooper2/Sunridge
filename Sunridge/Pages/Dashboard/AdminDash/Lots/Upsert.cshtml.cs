@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
+using Sunridge.Models;
+using Sunridge.Models.ViewModels;
 
 namespace Sunridge.Pages.Dashboard.AdminDash.Lots
 {
@@ -16,17 +18,28 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Lots
                 _unitOfWork = unitOfWork;
             }
             [BindProperty]
-            public Models.Lot LotObj { get; set; }
+            public LotAddressVM LotObj { get; set; }
             //public Models.Address AddressObj { get; set; }
             public IActionResult OnGet(int? id)
             {
-                LotObj = new Models.Lot();
+                LotObj = new LotAddressVM
+                { 
+                    Lot = new Models.Lot(),
+                    Address = new Models.Address()
+                };
                 if (id != null)
                 {
-                    LotObj = _unitOfWork.Lot.GetFirstOrDefault(u => u.Id == id);
-                    LotObj.LastModifiedDate = DateTime.Now;
-                    LotObj.Address = _unitOfWork.Address.GetFirstOrDefault(u => u.Id == id);
+                
+                LotObj.Lot = _unitOfWork.Lot.GetFirstOrDefault(u => u.Id == id);
+                LotObj.Address.Id = LotObj.Lot.AddressId;
+                LotObj.Address = _unitOfWork.Address.GetFirstOrDefault(u => u.Id == LotObj.Address.Id);
+                LotObj.Lot.Address = LotObj.Address;
+               
+                
+                    LotObj.Lot.LastModifiedDate = DateTime.Now;
+                   
                     LotObj.Address.LastModifiedDate = DateTime.Now;
+                    LotObj.Address.LastModifiedBy = "None";
                     if (LotObj == null)
                         {
                             return NotFound();
@@ -41,22 +54,22 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Lots
                 {
                     return Page();
                 }
-                if (LotObj.Id == 0)
+                if (LotObj.Lot.Id == 0)
                 {
-                    _unitOfWork.Lot.Add(LotObj);
-                    //if(AddressObj.Id == 0)
-                    //{
-                      //  _unitOfWork.Address.Add(AddressObj);
-                    //}
+                
+                _unitOfWork.Address.Add(LotObj.Address);
+                LotObj.Lot.Address = LotObj.Address;
+                _unitOfWork.Lot.Add(LotObj.Lot);
+                    
+                   
                 }
-                //if (AddressObj.Id == 0)
-                //{
-                  //  _unitOfWork.Address.Add(AddressObj);
-                //}
                 else
                 {
-                    _unitOfWork.Lot.Update(LotObj);
-                     //_unitOfWork.Address.Update(AddressObj);
+                
+                _unitOfWork.Address.Update(LotObj.Address);
+                LotObj.Lot.AddressId = LotObj.Address.Id;
+                _unitOfWork.Lot.Update(LotObj.Lot);
+                  
                 }
                 _unitOfWork.Save();
                 return RedirectToPage("./Index");
