@@ -12,10 +12,28 @@
                 {
                     <input type="hidden" asp-for="FormResObj.FormResponse.Id" />
                 }
+                @if (Model.FormResObj.FormResponse.FormSubmissionsId != 0)
+                {
+                    <input type="hidden" asp-for="FormResObj.FormResponse.FormSubmissionsId" />
+                }
+                <input type="hidden" asp-for="FormResObj.FormResponse.FormSubmissions" value="@Model.FormResObj.FormSubmissions" />
                 <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
                     <h2 class="text-primary">@(Model.FormResObj.FormResponse.Id != 0 ? "Update" : "Create") Serial</h2>
                 </div>
                 <div class="col-8 pt-3">
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="FormResObj.FormResponse.FormType"></label>
+                        </div>
+                        <div class="col-9">
+                            <p>
+                                @Html.DisplayFor(c => Model.FormResObj.FormResponse.FormType)
+                            </p>
+                            <input type="hidden" asp-for="FormResObj.FormResponse.FormType" value="@Model.FormResObj.FormResponse.FormType" />
+
+
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <div class="col-3">
                             <label asp-for="FormResObj.FormResponse.Resolved"></label>
@@ -36,7 +54,31 @@
 
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="FormResObj.FormResponse.ResolveUser"></label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" asp-for="FormResObj.FormResponse.ResolveUser" />
+                            <span class="text-danger" asp-validation-for="FormResObj.FormResponse.ResolveUser"></span>
 
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="FormResObj.FormResponse.FormDisplay"></label>
+                        </div>
+                        <div class="col-9">
+                            <p>
+                                @Html.DisplayFor(c => Model.FormResObj.FormResponse.FormDisplay)
+                                <input type="hidden" asp-for="FormResObj.FormResponse.FormDisplay" value="@Model.FormResObj.FormResponse.FormDisplay" />
+
+
+                            </p>
+
+
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <div class="col-9 offset-3">
                             <div class="row">

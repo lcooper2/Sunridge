@@ -46,13 +46,12 @@
                                             <td>@form.ResolveDate</td>
                                             <td>@form.ResolveUser</td>
                                             <td><div class="text-center">
-                                                <a href="/Dashboard/AdminDash/Forms/upsert?id=${@form.Id}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                                <a asp-page="/Dashboard/AdminDash/Forms/upsert" asp-route-id="@form.Id" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                                     <i class="far fa edit"></i> Edit
                                                 </a>
-                                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/forms/'+${data})>
-                                                    <i class="far fa-trash-alt"></i> Delete
-                                                </a>
-</div></td>
+                                                
+                                                </div>
+                                            </td>
                                         </tr>
                                     }
                                 </table>
