@@ -11,6 +11,14 @@ function loadList() {
             "type": "GET",
             "datatype": "json"
         },
+        "rowReorder": {
+            "selector": 'td:nth-child(2)'
+        },
+        "responsive": true,
+        "columnDefs": [
+            { orderable: true, className: 'tr', targets: '0' },
+            { orderable: false, targets: '_all'}
+        ],
         "columns": [
             { "data": "itemName", "width": "15%" },
             { "data": "price", "width": "15%" },

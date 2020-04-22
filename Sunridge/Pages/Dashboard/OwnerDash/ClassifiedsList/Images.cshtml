@@ -13,7 +13,7 @@
                 <input type="hidden" asp-for="@Model.ClassifiedListing.Images[i].ClassifiedListingId" />
                 <input type="hidden" asp-for="@Model.ClassifiedListing.Images[i].ImageURL" />
                 <div class="form-group">
-                    <img src="~/@Model.ClassifiedListing.Images[i].ImageURL" />
+                    <img class="img-fluid" src="~/@Model.ClassifiedListing.Images[i].ImageURL" />
                 </div>
                 <div class="row">
                     <div class="form-group form-check pl-5">

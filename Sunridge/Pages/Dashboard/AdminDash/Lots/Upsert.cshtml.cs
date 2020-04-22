@@ -84,10 +84,10 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Lots
             {
 
                 _unitOfWork.Address.Add(LotObj.Address);
-                LotObj.Lot.Address = LotObj.Address;
+                _unitOfWork.Save();
+                LotObj.Lot.AddressId = LotObj.Address.Id;
                 _unitOfWork.Lot.Add(LotObj.Lot);
-
-
+                _unitOfWork.Save();
             }
             else
             {
