@@ -76,10 +76,15 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 //FormResObj.FormResponse.SubmitDate = DateTime.Now;
                 FormResObj.FormResponse.Resolved = false;
                 FormResObj.FormResponse.ResolveUser = "None";
+
+
                 FormResObj.FormResponse.FormSubmissionsId = FormResObj.FormSubmissions.Id;
                 FormResObj.FormSubmissions.FormId = FormResObj.SuggestionComplaint.Id;
                 FormResObj.SuggestionComplaint.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                 _unitOfWork.SuggestionComplaint.Add(FormResObj.SuggestionComplaint);
+
+                _unitOfWork.Save();
+
                 FormResObj.FormSubmissions.FormId = FormResObj.SuggestionComplaint.Id;
                 _unitOfWork.FormSubmissions.Add(FormResObj.FormSubmissions);
                 FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;

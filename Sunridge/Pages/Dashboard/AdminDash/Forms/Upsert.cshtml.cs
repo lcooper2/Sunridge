@@ -23,6 +23,9 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Forms
             FormResObj = new FormResponseVM
             {
                 FormResponse = new Models.FormResponse(),
+                ClaimLoss = new Models.ClaimLoss(),
+                SuggestionComplaint = new Models.SuggestionComplaint(),
+                InKindWorkHours = new Models.InKindWorkHours(),
 
                 FormSubmissions = new Models.FormSubmissions()
             };
@@ -30,6 +33,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Forms
             {
                 FormResObj.FormResponse = _unitOfWork.FormResponse.GetFirstOrDefault(u => u.Id == id);
                 FormResObj.FormSubmissions = _unitOfWork.FormSubmissions.GetFirstOrDefault(u => u.Id == id);
+
                 if (FormResObj == null)
                 {
                     return NotFound();

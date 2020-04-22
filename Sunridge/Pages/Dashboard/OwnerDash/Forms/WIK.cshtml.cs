@@ -89,6 +89,9 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.FormSubmissions.FormId = FormResObj.InKindWorkHours.Id;
                 FormResObj.InKindWorkHours.ApplicationUserId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value).Id;
                 _unitOfWork.InKindWorkHours.Add(FormResObj.InKindWorkHours);
+
+                _unitOfWork.Save();
+
                 FormResObj.FormSubmissions.FormId = FormResObj.InKindWorkHours.Id;
                 _unitOfWork.FormSubmissions.Add(FormResObj.FormSubmissions);
                 FormResObj.FormResponse.FormSubmissions = FormResObj.FormSubmissions;

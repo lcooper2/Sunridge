@@ -14,6 +14,8 @@ namespace Sunridge.Models
         [Required]
         public string FormType { get; set; }
 
+        public string? FormDisplay { get; set; }
+
 
         //public String PrivacyLevel { get; set; }
         public bool Resolved { get; set; }
