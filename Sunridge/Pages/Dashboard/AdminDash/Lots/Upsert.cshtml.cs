@@ -36,13 +36,14 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Lots
 
 
             InList = _unitOfWork.Inventory.GetAll().ToList();
-            LotInVm = new LotInventoryVM() {
+            LotInVm = new LotInventoryVM()
+            {
                 LotId = new int(),
                 InventoryList = new List<int>()
-            
+
             };
-                
-                
+
+
 
             if (id != null)
             {
@@ -96,15 +97,18 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Lots
                 LotObj.Lot.AddressId = LotObj.Address.Id;
                 _unitOfWork.Lot.Update(LotObj.Lot);
 
-            }
-           
                 var list = _unitOfWork.LotInventory.GetAll(u => u.LotId == LotObj.Lot.Id);
-                foreach(var item in list)
+                if (list != null)
                 {
-                    _unitOfWork.LotInventory.Remove(item);
+                    foreach (var item in list)
+                    {
+                        _unitOfWork.LotInventory.Remove(item);
 
+                    }
                 }
+            }
 
+           
             if (LotInVm.InventoryList != null)
             {
                 foreach (var item in LotInVm.InventoryList)
@@ -117,7 +121,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Lots
                     _unitOfWork.LotInventory.Add(LotInItem);
                 }
             }
-                    _unitOfWork.Save();
+            _unitOfWork.Save();
             return RedirectToPage("./Index");
         }
     }

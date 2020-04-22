@@ -13,15 +13,15 @@
             {
                 <input type="hidden" asp-for="LotObj.Lot.Id" />
             }
-            <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
+            <div class="col-10 px-3" style="border-bottom:1px solid #325d88">
                 <h2 class="text-primary">@(Model.LotObj.Lot.Id != 0 ? "Update" : "Create") Serial</h2>
             </div>
-            <div class="col-8 pt-3">
+            <div class="col-9 pt-3">
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="LotObj.Lot.LotNumber"></label>
                     </div>
-                    <div class="col-9">
+                    <div class="col-md-5">
                         <input class="form-control" asp-for="LotObj.Lot.LotNumber" />
                         <span class="text-danger" asp-validation-for="LotObj.Lot.LotNumber"></span>
 
@@ -32,115 +32,131 @@
                     <input type="hidden" asp-for="LotObj.Address.Id" />
                 }
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="LotObj.Address.StreetAddress"></label>
                     </div>
-                    <div class="col-9">
+                    <div class="col-md-5">
                         <input class="form-control" asp-for="LotObj.Address.StreetAddress" />
                         <span class="text-danger" asp-validation-for="LotObj.Address.StreetAddress"></span>
 
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="LotObj.Address.Apartment"></label>
                     </div>
-                    <div class="col-9">
+                    <div class="col-md-5">
                         <input class="form-control" asp-for="LotObj.Address.Apartment" />
                         <span class="text-danger" asp-validation-for="LotObj.Address.Apartment"></span>
 
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="LotObj.Address.City"></label>
                     </div>
-                    <div class="col-9">
+                    <div class="col-md-5">
                         <input class="form-control" asp-for="LotObj.Address.City" />
                         <span class="text-danger" asp-validation-for="LotObj.Address.City"></span>
 
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="LotObj.Address.State"></label>
                     </div>
-                    <div class="col-9">
+                    <div class="col-md-5">
                         <input class="form-control" asp-for="LotObj.Address.State" />
                         <span class="text-danger" asp-validation-for="LotObj.Address.State"></span>
 
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="LotObj.Address.Zip"></label>
                     </div>
-                    <div class="col-9">
+                    <div class="col-md-5">
                         <input class="form-control" asp-for="LotObj.Address.Zip" />
                         <span class="text-danger" asp-validation-for="LotObj.Address.Zip"></span>
 
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="LotObj.Lot.TaxId"></label>
                     </div>
-                    <div class="col-9">
+                    <div class="col-md-5">
                         <input class="form-control" asp-for="LotObj.Lot.TaxId" />
                         <span class="text-danger" asp-validation-for="LotObj.Lot.TaxId"></span>
 
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="LotObj.Lot.IsArchive"></label>
                     </div>
-                    <div class="col-9">
-                        <input class="form-control" asp-for="LotObj.Lot.IsArchive" />
-                        <span class="text-danger" asp-validation-for="LotObj.Lot.IsArchive"></span>
+                    <div class="col-md-5">
+                        <input class="form-control" asp-for="LotObj.Lot.IsArchive"  type="checkbox"  data-toggle="toggle" data-on="True" data-off="False"/>
+                        <span class="text-danger" asp-validation-for="LotObj.Lot.IsArchive" ></span>
 
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <label asp-for="LotObj.Lot.LastModifiedBy"></label>
                     </div>
-                    <div class="col-9">
+                    <div class="col-md-5">
                         <input class="form-control" asp-for="LotObj.Lot.LastModifiedBy" />
                         <span class="text-danger" asp-validation-for="LotObj.Lot.LastModifiedBy"></span>
 
                     </div>
                 </div>
-                <div class="col-3">
-                    <label >Lot Inventory</label>
+
+                <div class="form-group row col-3">
+                    <label>Lot Inventory</label>
                 </div>
-                @foreach (var item in Model.InList)
-                {
-                    @if (Model.LotInVm.InventoryList != null)
+                <div class="form-group">
 
+                    @if (Model.InList != null)
                     {
-                        @if (Model.LotInVm.InventoryList.Contains(item.Id))
-
+                        @foreach (var item in Model.InList)
                         {
-                            @*<input type="checkbox" class="form-control" asp-for="Input.Role" value="@item.Id">*@
-                            <input name="LotInVm.InventoryList" type="checkbox" value="@item.Id" checked />
-
-                        }
-                        else
-                        {
-                            <input name="LotInVm.InventoryList" type="checkbox" value="@item.Id" />
-
+                            <div class="form-group row">
+                                @if (Model.LotInVm.InventoryList != null)
+                                {
+                                    @if (Model.LotInVm.InventoryList.Contains(item.Id))
+                                    {
+                                        <div class="col-md-3">
+                                            <label class="control-label">@item.Description</label>
+                                        </div>
+                                        <div class="col-md-5 ">
+                                            <input class="form-control" name="LotInVm.InventoryList" type="checkbox" value="@item.Id" checked data-toggle="toggle" data-on="Add" data-off="Remove" />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-3">
+                                            <label class="control-label">@item.Description</label>
+                                        </div>
+                                        <div class="col-md-5 ">
+                                            <input class="form-control" name="LotInVm.InventoryList" type="checkbox" value="@item.Id"  data-toggle="toggle" data-on="Add" data-off="Remove" />
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="col-md-3">
+                                        <label class="control-label">@item.Description</label>
+                                    </div>
+                                    <div class="col-md-5 ">
+                                        <input class="form-control" name="LotInVm.InventoryList" type="checkbox" value="@item.Id"   data-toggle="toggle" data-on="Add" data-off="Remove"/>
+                                    </div>
+                                }
+                            </div>
                         }
                     }
-                    else
-                    {
-                        <input name="LotInVm.InventoryList" type="checkbox" value="@item.Id" />
 
-                    }
-                    <label class="control-label">@item.Description</label>
-                }
-
-
+                </div>
                 <div class="form-group row">
                     <div class="col-9 offset-3">
                         <div class="row">

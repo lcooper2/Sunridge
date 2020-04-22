@@ -5,21 +5,83 @@
 }
 
 <h1>Photo Gallery</h1>
-@if (Model.userPhotosList.Count() > 0)
-{
-    @foreach (var photos in Model.userPhotosList)
+@*@if (Model.pgVMList != null)
     {
-        <div class="col-lg-3 col-lx-3 col-md-6 pb-4" style="width:50%; padding: 1em;">
-            <div class="card " style="min-height:225px">
-                <img src="\@photos.Image" class="card-img-top p-2 rounded " style="max-height:200px;min-height:200px" />
-                <div class="pl-2 pt-1 text-center">
-                    <h3 class="card-title " style="color: black;font-size: 16px">
-                        @photos.Title<br />
-                        @*@photos.ApplicationUser.FullName*@
-                    </h3>
+        @foreach (var photos in Model.pgVMList)
+        {
+            <div class="col-lg-3 col-lx-3 col-md-6 pb-4 rounded" style=" width:50%; padding: 1em;">
+                <div class="card " style=" background-color:#e6e6ff; min-height:225px">
+                    <img src="\@photos.userPhotos.Image" class="card-img-top p-2 rounded " style="max-height:200px;min-height:200px" />
+                    <div class="pl-2 pt-1 text-center">
+                        <h3 class="card-title " style="color: black;font-size: 16px">
+                            @photos.userPhotos.Title<br /><br />
+                            By @photos.userName
+                        </h3>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    }
+        }
+    }*@
+
+@*@if (Model.pgVMList != null)
+    {
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="7000">
+            <div class="carousel-inner">
+
+
+                <div class="carousel-item active" style="min-height:400px">
+                    <img class="masthead9 bg-primary" src="\@Html.DisplayFor(modelItem => Model.pgVMList[0].userPhotos.Image)" />
+                    <div class="carousel-caption">
+                        <h3>@Html.DisplayFor(modelItem => Model.pgVMList[0].userPhotos.Title)</h3>
+                        <p>By @Html.DisplayFor(modelItem => @Model.pgVMList[0].userName)</p>
+                    </div>
+
+                </div>
+                @foreach (var photos in Model.pgVMList)
+                {
+                    @if (photos.userPhotos.Id != Model.pgVMList[0].userPhotos.Id)
+                    {
+                        <div class="carousel-item " style="min-height:400px">
+                            <img class="masthead9 bg-primary" src="\@Html.DisplayFor(modelItem => photos.userPhotos.Image)" />
+                            <div class="carousel-caption">
+                                <h3>@Html.DisplayFor(modelItem => photos.userPhotos.Title)</h3>
+                                <p>By @Html.DisplayFor(modelItem => photos.userName)</p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    }*@
+@if (Model.pgVMList != null)
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var photos in Model.pgVMList)
+            {
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <a href="\@Html.DisplayFor(modelItem => photos.userPhotos.Image)" target="_blank">
+                            <img src="\@Html.DisplayFor(modelItem => photos.userPhotos.Image)"  style="min-height:300px; width:100%">
+                            <div class="caption">
+                                <h3>@Html.DisplayFor(modelItem => photos.userPhotos.Title)</h3>
+                                <p>By @Html.DisplayFor(modelItem => photos.userName)</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
 }

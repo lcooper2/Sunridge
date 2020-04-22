@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
+using Sunridge.Models.ViewModels;
 
 namespace Sunridge
 {
@@ -17,13 +18,27 @@ namespace Sunridge
         {
             _unitOfWork = unitOfWork;
         }
-        public IEnumerable<UserPhotos> userPhotosList { get; set; }
-
-
+        public List<UserPhotos> userPhotosList { get; set; }
+        [BindProperty]
+        public List<PhotosGalleryVM> pgVMList { get; set; }
 
         public void OnGet(int id)
         {
-            userPhotosList = _unitOfWork.UserPhotos.GetAll(u => u.CategoryId == id);
+            userPhotosList = new List<UserPhotos>();
+            userPhotosList = _unitOfWork.UserPhotos.GetAll(u => u.CategoryId == id).ToList();
+
+            pgVMList = new List<PhotosGalleryVM>();
+            foreach (var item in userPhotosList) {
+                var user = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == item.UserId);
+                PhotosGalleryVM pgVMItem = new PhotosGalleryVM()
+                {
+                    userPhotos = item,
+                    userName = user.FullName
+                };
+                pgVMList.Add(pgVMItem);
+            }
+
+
         }
 
 
