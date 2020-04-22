@@ -4,11 +4,12 @@ $(document).ready(function () {
     loadList();
 });
 
-function loadList() {
+function loadList() { 
     dataTable = $('#DT_load').DataTable({
         "ajax": {
             "url": "/api/lostandfound/",
             "type": "GET",
+            "data": { id: 0},
             "datatype": "json"
         },
         "columns": [

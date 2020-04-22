@@ -1,0 +1,204 @@
+﻿@page
+@model Sunridge.Pages.Dashboard.OwnerDash.LostAndFound.UpsertModel
+@using Sunridge.Utility
+@{
+    ViewData["Title"] = "Lost And Found";
+    Layout = "_DashboardLayout";
+}
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
+    <div class="container">
+        <div class="row px-2 mx-2 bg-white border ">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.LAFObj.Id != 0)
+            {
+                <input type="hidden" asp-for="LAFObj.Id" />
+                <input type="hidden" asp-for="LAFObj.UserId" /> 
+            }
+
+            <div class="col-10 px-3" style="border-bottom: 2px solid; border-color: black">
+                <h2 class="text-primary">@(Model.LAFObj.Id != 0 ? "Update" : "Create") Lost and Found </h2>
+            </div>
+
+            <div class="col-9 pt-3">
+
+                <div class="form-group row">
+
+                    <div class="col-3">
+                        <label asp-for="LAFObj.ItemName"></label>
+                    </div>
+
+                    <div class="col-7">
+                        <input class="form-control" asp-for="LAFObj.ItemName" />
+                        <span class="text-danger" asp-validation-for="LAFObj.ItemName"></span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group row ">
+
+                    <div class="col-3">
+                        <label >Description</label>
+                    </div>
+
+                    <div class="col-7">
+                        <textarea class="form-control" asp-for="LAFObj.Discription" id="txtDesc" style="height:200px;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+
+                    <div class="col-3">
+                        <label asp-for="LAFObj.Images"></label>
+                    </div>
+
+                    <div class="col-7">
+                        <input type="file" class="form-control" name="files" id="files" multiple />
+
+                    </div>
+
+                </div>
+
+                <div class="border">
+                    <label>LISTER'S</label>
+                    <br />
+
+                    <div class="form-group row">
+
+                        <div class="col-3">
+                            <label> Name </label>
+                        </div>
+
+                        <div class="col-7">
+                            <input class="form-control" asp-for="LAFObj.ListerName" />
+                            <span class="text-danger" asp-validation-for="LAFObj.ListerName"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-3">
+                            <label> Phone Number</label>
+                        </div>
+
+                        <div class="col-7">
+                            <input class="form-control" asp-for="LAFObj.PhoneNumber" />
+                            <span class="text-danger" asp-validation-for="LAFObj.PhoneNumber"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-3">
+                            <label>Email</label>
+                        </div>
+
+                        <div class="col-7">
+                            <input class="form-control" asp-for="LAFObj.Email" />
+                            <span class="text-danger" asp-validation-for="LAFObj.Email"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <br/>
+                <div class="form-group row border">
+                    <div class="col-3">
+                        <label asp-for="LAFObj.Claimed"></label>
+                    </div>
+                    <div class="col-7">
+                        <table>
+                            <tr>
+                                <td>True</td>
+                                <td class="col-1"> <input type="radio" class="form-control" asp-for="LAFObj.Claimed" value="True" onclick="unhide()"></td>
+                            </tr>
+                            <tr>
+                                <td>False</td>
+                                <td><input type="radio" class="form-control" asp-for="LAFObj.Claimed" value="False" onclick="hide()" /></td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group row" id="Claimed" style="display:none">
+                    <div class="col-3">
+                        <label asp-for="LAFObj.ClaimedBy"></label>
+                    </div>
+
+                    <div class="col-7">
+                        <input class="form-control" asp-for="LAFObj.ClaimedBy" />
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+
+                    <div class="col-9 offset-3">
+
+                        <div class="row">
+
+                            <div class="col-6">
+                                @if (Model.LAFObj.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                                }
+
+                            </div>
+
+                            <div class="col-6">
+                                <a asp-page="./Index" class="btn btn-success form-control">BackToList</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</form>
+
+
+<script>
+    function hide() {
+        var x = document.getElementById("Claimed");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        }
+    }
+    function unhide() {
+        var x = document.getElementById("Claimed");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        }
+    }
+</script>
+
+@section Scripts {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+    </script>
+}
