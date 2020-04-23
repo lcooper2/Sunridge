@@ -8,12 +8,17 @@
 
 <h4>Unresolved Forms</h4>
 <div class="container container-fluid bg-light p-5">
+    @if (Model.FormResObj.FormResponse.Resolved.Equals(false))
+    {
 
         @if ((Model.FormList.Count() > 0))
         {
 
             <div class="row container pb-3 backgroundWhite">
-                <div class="col-sm-6">
+                <div class="col-12">
+                    <div class="col-12">
+                        <div class="row my-3">
+                            <div class="col-lg-3 col-xl-3 col-md-6 pb-4">
                                 <table id="DT_Load" class="table table-striped table-bordered" style="width:100%;">
                                     <thead>
                                         <tr>
@@ -25,7 +30,7 @@
                                             <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                         </tr>
                                     </thead>
-                                    @foreach (var form in Model.FormList.Where(c => c.Resolved == false))
+                                    @foreach (var form in Model.FormList)
                                     {
 
                                         <tr>
@@ -54,55 +59,51 @@
                             </div>
 
                         </div>
+                    </div>
 
+                </div>
+            </div>
         }
 
+    }
 </div>
 
 <h4>Resolved Forms</h4>
 <div class="container container-fluid bg-light p-5">
+    @if (Model.FormResObj.FormResponse.Resolved.Equals(true))
+    {
 
         @if ((Model.FormList.Count() > 0))
         {
             <div class="row container pb-3 backgroundWhite">
-                <div class="col-sm-6">
-                            <table id="DT_Load" class="table table-striped table-bordered" style="width:100%;">
-                                <thead>
-                                    <tr>
-                                        <th><b>Form Type</b></th>
-                                        <th><b>Submit Date</b></th>
-                                        <th><b>Resolved</b></th>
-                                        <th><b>Resolve Date</b></th>
-                                        <th><b>User</b></th>
-                                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                @foreach (var form in Model.FormList.Where(c => c.Resolved == true))
-                                {
-                                    <tr>
-                                        <td>
-                                            <h4 class="btn-toolbar">@form.FormType</h4>
-                                        </td>
-                                        <td>
-                                            @form.FormSubmissions.SubmitDate
-                                        </td>
+                <div class="col-12">
+                    <div class="col-12">
+                        <div class="row my-3">
+                            @foreach (var form in Model.FormList)
+                            {
+                                <div class="col-lg-3 col-xl-3 col-md-6 pb-4">
 
-                                        <td>@form.Resolved</td>
+                                    <table id="DT_Load" class="table table-striped table-bordered" style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th><b>@form.FormSubmissions.Id</b></th>
+                                                <th><b>@form.FormSubmissions.SubmitDate</b></th>
+                                                
+                                                <th><b>@form.Resolved</b></th>
+                                                <th><b>@form.ResolveDate</b></th>
+                                                <th><b>@form.ResolveUser</b></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
 
-                                        <td>@form.ResolveDate</td>
-                                        <td>@form.ResolveUser</td>
-                                        <td>
-                                            <div class="text-center">
-                                                <a asp-page="/Dashboard/AdminDash/Forms/upsert" asp-route-id="@form.Id" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
-                                                    <i class="far fa edit"></i> Edit
-                                                </a>
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                            </table>
+                                </div>
+                            }
                         </div>
                     </div>
+
+                </div>
+            </div>
         }
+    }
 </div>
