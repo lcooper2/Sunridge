@@ -11,6 +11,10 @@ function loadList() {
             "type": "GET",
             "datatype": "json"
         },
+        "rowReorder": {
+            "selector": 'td:nth-child(3)'
+        },
+        "responsive": true,
         "columns": [
             { "data": "commonAreaAsset.assetName", "width": "30%" },
             { "data": "cost", "width": "20%" },
@@ -32,7 +36,8 @@ function loadList() {
         "language": {
             "emptyTable": "no data found."
         },
-        "width": "100%"
+        "width": "100%",
+
     });
 }
 
@@ -62,3 +67,4 @@ function Delete(url) {
     });
 }
 
+   
