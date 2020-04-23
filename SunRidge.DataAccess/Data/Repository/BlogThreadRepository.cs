@@ -33,6 +33,7 @@ namespace Sunridge.DataAccess.Data.Repository
                             .ThenInclude(c => c.Likes)
                         .Include(t => t.BlogComments)
                             .ThenInclude(c => c.Replies)
+                                .ThenInclude(r => r.ApplicationUser)
                                 .ToList();
             return allThreads;
         }

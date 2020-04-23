@@ -40,6 +40,11 @@ namespace Sunridge.DataAccess.Data.Repository
             personFromDB.EmergencyContactPhone = applicationUser.EmergencyContactPhone;
             personFromDB.ReceiveEmails = applicationUser.ReceiveEmails;
             personFromDB.IsArchive = applicationUser.IsArchive;
+            if(applicationUser.ProfilePicture != null)
+            {
+                personFromDB.ProfilePicture = applicationUser.ProfilePicture;
+            }
+            
 
             _db.SaveChanges();
 

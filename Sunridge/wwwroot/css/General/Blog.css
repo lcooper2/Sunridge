@@ -89,6 +89,10 @@ body {
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 991px) {
+    .rounded-circle {
+        height: 60px;
+        width: 60px;
+    }
     .modal-content {
         width: 100%;
     }
@@ -104,6 +108,10 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
+    .rounded-circle {
+        height:50px;
+        width:50px;
+    }
     .myImg.portrait {
         height: auto;
         width: 25%;
@@ -118,6 +126,10 @@ body {
 
 
 @media only screen and (min-width: 992px) {
+    .rounded-circle {
+        height: 75px;
+        width: 75px;
+    }
     .modal-content {
         max-height:750px;
         width: auto;

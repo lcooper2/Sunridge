@@ -63,12 +63,9 @@
                         <li>
                             <a class="nav-link text-dark" asp-area="" asp-page="/Home/LostFound">Lost & Found</a>
                         </li>
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <li>
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Blog/Index">Blog</a>
-                            </li>
-                        }
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Blog/Index">Blog</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Home/Photos/PhotosSelector">Photos</a>
                         </li>
@@ -124,6 +121,7 @@
     <script src="https://cdn.tiny.cloud/1/64cmedbz0kjehxdfz62fr8zri5cycgitcs7xuhok3ti9vd2i/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/rowreorder/1.2.6/js/dataTables.rowReorder.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/y42r7ijrw063pfdcmzqxfymgva1zbgbmi0y7xilnz07x61zh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
