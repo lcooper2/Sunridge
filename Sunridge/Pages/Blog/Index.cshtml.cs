@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
+using TinifyAPI;
 
 namespace Sunridge.Pages.Blog
 {
@@ -20,7 +21,7 @@ namespace Sunridge.Pages.Blog
         private readonly IWebHostEnvironment _webHostEnvironment;
         public string CurrentAppUserId;
         public int totalPosts;
-        public int numPosts = 2; // Default number of posts to show. Must match number in blog.js
+        public int numPosts = 10; // Default number of posts to show. Must match number in blog.js
 
         public IndexModel(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
@@ -46,12 +47,15 @@ namespace Sunridge.Pages.Blog
             var comment = Request.Form[selector];
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var user = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value);
 
             BlogReply reply = new BlogReply()
             {
                 BlogCommentId = id,
                 ReplyText = comment,
                 WhenPosted = DateTime.Now,
+                ApplicationUserId = claim.Value,
+                ApplicationUser = user
             };
             _unitOfWork.BlogReply.Add(reply);
             _unitOfWork.Save();
@@ -100,6 +104,8 @@ namespace Sunridge.Pages.Blog
                     ImgPath = @"\Images\BlogImages\Uploads\" + fileName + extension
                 };
                 blogComment.Images.Add(image);
+                // Compress the uploaded image
+                Compress(image.ImgPath);
             }
 
             _unitOfWork.BlogComment.Add(blogComment);
@@ -190,11 +196,11 @@ namespace Sunridge.Pages.Blog
                         var tag6 = "<img src=" + "'" + images[i].ImgPath + "'" + " onclick='Modal(" + images[i].Id + ")'" + "class='myImg portrait embed-responsive-4by3 m1' id='img(" + images[i].Id + ")'" + " />";
                         imgTags.Add(tag6);
                         break;
-                    case 8:
+                    case 8: // You held your phone upside down
                         var tag8 = "<img src=" + "'" + images[i].ImgPath + "'" + " onclick='Modal(" + images[i].Id + ")'" + "class='myImg portrait embed-responsive-4by3 m1' id='img(" + images[i].Id + ")'" + " />";
                         imgTags.Add(tag8);
                         break;
-                    case -1:
+                    case -1: // No image found
                         imgTags.Add("");
                         break;
                 }
@@ -204,6 +210,16 @@ namespace Sunridge.Pages.Blog
             List<string> portrait = imgTags.Where(tag => tag.Contains("portrait")).ToList();
             portrait.AddRange(landscape);
             return portrait;
+        }
+
+        public async void Compress(string imagePath)
+        {
+            var pathToImage = _webHostEnvironment.WebRootPath + imagePath;
+            Tinify.Key = "Sqx3cZlxJQjDfB4S5KhNcn8DZKrwKPQV";
+
+            // From and to file paths are the same so that the stored image will be overwritten with the compressed one
+            var source = Tinify.FromFile(pathToImage);
+            await source.ToFile(pathToImage);
         }
     }
 }

@@ -17,14 +17,25 @@
     <br />
 </div>
 
-<div class="row">
-    <div class="col-12 text-center">
-        <hr />
-        <h5 class="text-center">Do you have something you'd like to share?</h5>
-        <a class="btn btn-info btn-lg text-center" href="Blog/Create"><i class="fas fa-pencil-alt"></i> Post Your Comment</a>
-        <hr />
+<div class="row border-top border-bottom p-3">
+
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="text-center">Create a post or upload a profile picture</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 float-right">
+                <a class="btn btn-info btn-lg float-right" href="Blog/Create"><i class="fas fa-pencil-alt"></i> Post</a>
+            </div>
+            <div class="col-6 float-left">
+                <a class="btn btn-info btn-lg float-left" href="Blog/ProfilePic"><i class="fas fa-camera"></i> Profile</a>
+            </div>
+        </div>
     </div>
 </div>
+
 <br />
 
 @{var postNumber = 0; }
@@ -40,23 +51,25 @@
     <div id="@postNumber" @hide>
         <div class="card promoting-card shadow" id="card(@thread.Id)">
             <div class="card-body d-flex flex-row no-gutters row-no-gutter">
-                <div class="col-2">
-                    <img src="~/Images/BlogImages/ProfilePictures/LoganCircle.png" class="rounded-circle mr-3" height="50px" width="50px" alt="avatar">
-                </div>
-                <div class="col-8">
-                    <div class="">
-                        <h4 class="card-title font-weight-bold mb-2">@thread.ApplicationUser.FullName</h4>
-                        <p class="card-text"><i class="far fa-clock pr-2"></i>@thread.WhenPosted.Date.ToShortDateString() at @thread.WhenPosted.ToString(@"h\:mm\ tt")</p>
+                <div class="col-12">
+                    <div class="float-left px-2">
+                        <img src="@thread.ApplicationUser.ProfilePicture" class="rounded-circle mr-3" alt="avatar">
+                    </div>
+                    <div class="float-left">
+                        <div class="">
+                            <h5 class="card-title font-weight-bold mb-2">@thread.ApplicationUser.FullName</h5>
+                            <p class="card-text"><i class="far fa-clock pr-2"></i>@thread.WhenPosted.Date.ToShortDateString() at @thread.WhenPosted.ToString(@"h\:mm\ tt")</p>
+                        </div>
+                    </div>
+                    <div class="float-right">
+                        @if (User.IsInRole(SD.AdminRole) || thread.ApplicationUserId == Model.GetCurrentUserId())
+                        {
+                            <button onclick="Delete(@thread.Id)" style="border:none;background:none;" class="btn bg-white float-right"><i class="fas fa-window-close fa-pull-right text-danger  fa-2x"></i></button>
+                        }
                     </div>
                 </div>
-                <div class="col-2">
-                    @if (User.IsInRole(SD.AdminRole) || thread.ApplicationUserId == Model.GetCurrentUserId())
-                    {
-                        <button onclick="Delete(@thread.Id)" class="btn bg-white float-right"><i class="fas fa-window-close fa-pull-right text-danger  fa-2x"></i></button>
-                    }
-                </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="margin-top:-20px;">
 
                 <p class="card-text">@Html.Raw(@thread.BlogComments[0].BlogCommentText)</p>
                 <div class="container-fluid">
@@ -76,8 +89,8 @@
                     </div>
                 </div>
                 @{
-                    var comCount = (thread.BlogComments.Count() - 1).ToString();
-                    var likeCount = thread.BlogComments[0].Likes.Count().ToString();
+                    var comCountPost = (thread.BlogComments.Count() - 1).ToString();
+                    var likeCountPost = thread.BlogComments[0].Likes.Count() == 0 ? "" : thread.BlogComments[0].Likes.Count().ToString();
 
                 }
                 <div class="row border-top border-bottom py-1 mx-1 mt-2">
@@ -87,21 +100,21 @@
                     <div class="col-6 text-center">
                         @if (Model.UserHasLikedPost(thread.BlogComments[0].Id) == true)
                         {
-                            <button class="btn text-muted"><span id="likeSpan(@thread.BlogComments[0].Id)">@likeCount&nbsp;</span><i id="likeIcon(@thread.BlogComments[0].Id)" class="fas fa-heart text-danger text-center p-1 my-1 mr-3" onclick="LikeThread(@thread.BlogComments[0].Id)"> Like </i></button>
+                            <button class="btn text-muted"><span id="likeSpan(@thread.BlogComments[0].Id)">@likeCountPost&nbsp;</span><i id="likeIcon(@thread.BlogComments[0].Id)" class="fas fa-heart text-danger text-center p-1 my-1 mr-3" onclick="LikeThread(@thread.BlogComments[0].Id)"> Like </i></button>
                         }
                         else
                         {
-                            <button class="btn text-muted"><span id="likeSpan(@thread.BlogComments[0].Id)">@likeCount&nbsp;</span><i id="likeIcon(@thread.BlogComments[0].Id)" class="far fa-heart text-muted text-center p-1 my-1 mr-3" onclick="LikeThread(@thread.BlogComments[0].Id)"> Like</i></button>
+                            <button class="btn text-muted"><span id="likeSpan(@thread.BlogComments[0].Id)">@likeCountPost&nbsp;</span><i id="likeIcon(@thread.BlogComments[0].Id)" class="far fa-heart text-muted text-center p-1 my-1 mr-3" onclick="LikeThread(@thread.BlogComments[0].Id)"> Like</i></button>
                         }
                     </div>
                 </div>
             </div>
-
+            @{ var comCount = thread.BlogComments.Count() - 1;}
             @if (thread.BlogComments.Count > 1)
             {
                 <div class="row">
                     <div class="col-6" style="margin-left: 10px">
-                        <button id="showCommentsButton(@thread.Id)" class="btn bg-white text-muted pull-left float-left mb-1" onclick="showComments(@thread.Id)"><span>View @comCount Comment(s) </span><i id="showCommentsIcon(@thread.Id)" class="fas fa-arrow-down text-muted"></i></button>
+                        <button id="showCommentsButton(@thread.Id)" class="btn bg-white text-muted pull-left float-left mb-1" onclick="showComments(@thread.Id, @comCount)"><span>View @comCount Comment(s) </span><i id="showCommentsIcon(@thread.Id)" class="fas fa-arrow-down text-muted"></i></button>
                     </div>
                 </div>
             }
@@ -113,64 +126,149 @@
                 @foreach (var comment in thread.BlogComments)
                 {
                     @if (comment.Equals(thread.BlogComments[0])) { continue; }
-                    <div class="row ml-1">
-                        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" class="rounded-circle mr-3" height="25px" width="25px" alt="avatar">
-                        <div>
-                            <span class="card-title font-weight-bold mb-2"><strong>@comment.ApplicationUser.FullName</strong></span>
+                    #region OldCard
+                    @*<div class="row ml-1 pt-3">
+                            <img src="@comment.ApplicationUser.ProfilePicture" class="rounded-circle mr-3" alt="avatar">
+                            <div>
+                                <span class="card-title font-weight-bold mb-2"><strong>@comment.ApplicationUser.FullName</strong></span>
 
-                            <p class="card-text"><i class="far fa-clock pr-2"></i>@comment.WhenPosted.ToShortTimeString()</p>
-                            <p>@Html.Raw(@comment.BlogCommentText)</p>
+                                <p class="card-text"><i class="far fa-clock pr-2"></i>@comment.WhenPosted.ToShortTimeString()</p>
+                                <p>@Html.Raw(@comment.BlogCommentText)</p>
+                            </div>
                         </div>
-                    </div>
-                    @if (comment.Images.Count > 0)
-                    {
-                        <div class="row ml-1 mr-1">
-                            @foreach (var img in comment.Images)
+
+
+                            var commentImages = Model.AssignImageLayouts(comment.Images);
+                        <div class="ml-5">
+                            @for (int i = 0; i < commentImages.Count(); i++)
                             {
-                                <img class="commentPhoto border img-fluid" src="@img.ImgPath" style="display: inline;" />
+                                // Render the string that represents an image tag and create and hide a modal containing the image
+                            @Html.Raw(commentImages[i]);
+                            <div id="modal(@comment.Images[i].Id)" class="modal">
+                                <span class="close" id="close(@comment.Images[i].Id)">&times;</span>
+                                <img class="modal-content" id="modalImage(@comment.Images[i].Id)">
+                                <div id="caption"></div>
+                            </div>
                             }
                         </div>
+                            var likeCountCom = comment.Likes.Count() == 0 ? "" : comment.Likes.Count().ToString();
 
-                    }
-                    <div class="ml-4">
-                        @if (Model.UserHasLikedPost(comment.Id) == true)
-                        {
-                            <button class="btn bg-white"><i class="fas fa-heart text-danger" id="likeIcon(@comment.Id)" onclick="LikeThread(@comment.Id)"> Like </i></button>
-                        }
-                        else
-                        {
-                            <button class="btn bg-white"><i class="far fa-heart text-muted" id="likeIcon(@comment.Id)" onclick="LikeThread(@comment.Id)"> Like </i></button>
-                        }
-                        <button class="btn bg-white" onclick="toggleReplyBox(@comment.Id)"><i class="far fa-comment text-muted"> Reply</i></button>
-                    </div>
+                        <div class="ml-5">
 
-                    <div class="row offset-3 mx-1" id="reply(@comment.Id)" style="display: none;">
-                        <div class="col-sm-12"><i class="fas fa-pencil-alt"> Reply</i></div>
-                        <form method="post">
-                            <div class="col-12"><textarea id="reply(@comment.Id)" name="reply(@comment.Id)" style="width:100%; height:100px"></textarea></div>
-                            <div class="col-12"><button type="submit" asp-page-handler="Reply" asp-route-id="@comment.Id" class="btn btn-info">Post</button> <button class="btn btn-danger">Cancel</button></div>
-                        </form>
-                    </div>
-                    @foreach (var reply in comment.Replies)
-                    {
-                        <div class="row p-1 mb-1 offset-1">
-                            <div class="col-12">
-                                <div class="col-2">
-                                    <img src="~/Images/BlogImages/ProfilePictures/LoganCircle.png" class="rounded-circle mr-3" height="25px" width="25px" alt="avatar">
-                                </div>
-                                <div class="col-9">
-                                    <div>
-                                        <span class="mb-2 font-weight-bold">Reply App User Name</span>
-                                        <p class="card-text"><i class="far fa-clock pr-2"></i>@reply.WhenPosted.Date.ToShortDateString() at @reply.WhenPosted.ToString(@"h\:mm\ tt")</p>
+                            @if (Model.UserHasLikedPost(comment.Id) == true)
+                            {
+                            <button class="btn bg-white"><span id="likeCommentSpan(@comment.Id)">@likeCountCom&nbsp;</span><i class="fas fa-heart text-danger" id="likeCommentIcon(@comment.Id)" onclick="LikeComment(@comment.Id)"> Like </i></button>
+                            }
+                            else
+                            {
+                            <button class="btn bg-white"><span id="likeCommentSpan(@comment.Id)">@likeCountCom&nbsp;</span><i class="far fa-heart text-muted" id="likeCommentIcon(@comment.Id)" onclick="LikeComment(@comment.Id)"> Like </i></button>
+                            }
+                            <button class="btn bg-white" onclick="toggleReplyBox(@comment.Id)"><i class="far fa-comment text-muted"> Reply</i></button>
+                        </div>
+                        <div class="row offset-3 mx-1" id="reply(@comment.Id)" style="display: none;">
+                            <div class="col-sm-12"><i class="fas fa-pencil-alt"> Reply</i></div>
+                            <form method="post">
+                                <div class="col-12"><textarea id="reply(@comment.Id)" name="reply(@comment.Id)" style="width:100%; height:100px"></textarea></div>
+                                <div class="col-12"><button type="submit" asp-page-handler="Reply" asp-route-id="@comment.Id" class="btn btn-info">Post</button> <button class="btn btn-danger">Cancel</button></div>
+                            </form>
+                        </div>*@
+                    #endregion
+                    #region NewCard
+                    <div class="container-fluid pl-3">
+                        <div class="card promoting-card shadow">
+                            <div class="card-body row">
+                                <div class="col-12">
+                                    <div class="float-left">
+                                        <img src="@comment.ApplicationUser.ProfilePicture" class="rounded-circle mr-3" alt="avatar">
+                                    </div>
+                                    <div class="float-left">
+                                        <div class="">
+                                            <h5 class="card-title font-weight-bold mb-2">@comment.ApplicationUser.FullName</h5>
+                                            <p class="card-text"><i class="far fa-clock pr-2"></i>@comment.WhenPosted.Date.ToShortDateString() at @comment.WhenPosted.ToString(@"h\:mm\ tt")</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <br />
+                            <div class="card-body" style="margin-top:-20px;">
+                                <p class="card-text ml-4">@Html.Raw(@comment.BlogCommentText)</p>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            @{var commentImages = Model.AssignImageLayouts(comment.Images); }
+                                            @for (int i = 0; i < commentImages.Count(); i++)
+                                            {
+                                                // Render the string that represents an image tag and create and hide a modal containing the image
+                                                @Html.Raw(commentImages[i]);
+                                                <div id="modal(@comment.Images[i].Id)" class="modal">
+                                                    <span class="close" id="close(@comment.Images[i].Id)">&times;</span>
+                                                    <img class="modal-content" id="modalImage(@comment.Images[i].Id)">
+                                                    <div id="caption"></div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row border-top border-bottom py-1 mt-2">
+                                    <div class="col-6 text-center">
+                                        <button class="btn text-muted" onclick="toggleReplyBox(@comment.Id)"><i class="far fa-comment-alt text-muted text-center p-1 my-1"> Reply</i></button>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        @{var likeCountCom = comment.Likes.Count() == 0 ? "" : comment.Likes.Count().ToString(); }
+                                        @if (Model.UserHasLikedPost(comment.Id) == true)
+                                        {
+                                            <button class="btn bg-white"><span id="likeCommentSpan(@comment.Id)">@likeCountCom&nbsp;</span><i class="fas fa-heart text-danger" id="likeCommentIcon(@comment.Id)" onclick="LikeComment(@comment.Id)"> Like </i></button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn bg-white"><span id="likeCommentSpan(@comment.Id)">@likeCountCom&nbsp;</span><i class="far fa-heart text-muted" id="likeCommentIcon(@comment.Id)" onclick="LikeComment(@comment.Id)"> Like </i></button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row offset-3 mx-1 pb-2" id="reply(@comment.Id)" style="display: none;">
+                                <div class="col-sm-12"><i class="fas fa-pencil-alt"> Reply</i></div>
+                                <form method="post">
+                                    <div class="col-12"><textarea id="reply(@comment.Id)" name="reply(@comment.Id)" style="width:100%; height:100px"></textarea></div>
+                                    <div class="col-12"><button type="submit" asp-page-handler="Reply" asp-route-id="@comment.Id" class="btn btn-info">Post</button> <button class="btn btn-danger">Cancel</button></div>
+                                </form>
+                            </div>
+                            @if (comment.Replies.Count > 0)
+                            {
+                            <div class="row pl-3 pt-1">
+                                <div class="col-3">
+                                    <button class="btn bg-white text-muted" id="toggleReplies(@comment.Id)" onclick="toggleReplies(@comment.Id)">View Replies <i class="fa fa-arrow-down"></i></button>
+                                </div>
+                            </div>
+                            }
                         </div>
-                        <div class="row p-1 mb-1 offset-1">
-                            <div class="col-12">
-                                <div class="col-9">
-                                    <p>@Html.Raw(@reply.ReplyText)</p>
+                    </div>
+                    #endregion
+                    foreach (var reply in comment.Replies)
+                    {
+                        <div class="container-fluid pl-5 commentReplies(@comment.Id)" style="display:none" >
+                            <div class="card promoting-card shadow">
+                                <div class="row p-1 my-2 offset-1">
+                                    <div class="col-12">
+                                        <div class="float-left">
+                                            <img src="@reply.ApplicationUser.ProfilePicture" class="rounded-circle mr-3" height="25px" width="25px" alt="avatar">
+                                        </div>
+                                        <div class="float-left">
+                                            <div>
+                                                <span class="mb-2 font-weight-bold">@reply.ApplicationUser.FullName</span>
+                                                <p class="card-text"><i class="far fa-clock pr-2"></i>@reply.WhenPosted.Date.ToShortDateString() at @reply.WhenPosted.ToString(@"h\:mm\ tt")</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>
+                                <div class="row p-1 mb-1 offset-1">
+                                    <div class="col-12">
+                                        <div class="col-9">
+                                            <p>@Html.Raw(@reply.ReplyText)</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -209,12 +307,15 @@
     #endregion
     @postNumber = postNumber + 1;
 }
-
+@if (Model.BlogThreads.Count() > 0)
+{
 <div class="row">
     <div class="col-12 text-center">
         <button class="btn btn-info text-center" id="showMore" onclick="showPosts(@Model.totalPosts)">Show More</button>
     </div>
 </div>
+}
+<br />
 
 @section Scripts {
     <script src="~/js/blog.js"></script>

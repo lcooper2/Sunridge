@@ -2,7 +2,7 @@
     tinyMCEInit();
 });
 
-var numPosts = 2;
+var numPosts = 10;
 function showPosts(totalPosts) {
     for (var i = (numPosts); i < (numPosts + numPosts); i++) {
         var elem = document.getElementById(i);
@@ -98,9 +98,62 @@ function LikeThread(id) {
     }
     likeIcon.setAttribute("disabled", "true");
     setTimeout(function () { likeIcon.removeAttribute("disabled"); }, 1000);
-
-    
 };
+
+function LikeComment(id) {
+    var likeSelector = "likeCommentIcon(" + id + ")";
+    var likeIcon = document.getElementById(likeSelector);
+    if (likeIcon.hasAttribute("disabled")) { return; }
+    $.ajax({
+        url: "/api/blog/" + id,
+        type: "POST",
+        data: { "id": id },
+        success: function (data) {
+            // Woohoo :)
+            var likeSpanSelector = "likeCommentSpan(" + id + ")";
+            var likeSpan = document.getElementById(likeSpanSelector);
+            if (data != 0) {
+                likeSpan.innerHTML = data;
+            }
+            else {
+                likeSpan.innerHTML = "";
+            }
+        },
+        error: function (data) {
+            var likeSelector = "likeCommentIcon(" + id + ")";
+            var likeIcon = document.getElementById(likeSelector);
+
+            if (likeIcon.classList.contains("far")) {
+                likeIcon.classList.remove("far");
+                likeIcon.classList.add("fas");
+                likeIcon.classList.remove("text-muted");
+                likeIcon.classList.add("text-danger");
+            }
+            else {
+                likeIcon.classList.remove("fas");
+                likeIcon.classList.add("far");
+                likeIcon.classList.remove("text-danger");
+                likeIcon.classList.add("text-muted");
+            }
+        }
+    });
+
+
+    if (likeIcon.classList.contains("far")) {
+        likeIcon.classList.remove("far");
+        likeIcon.classList.add("fas");
+        likeIcon.classList.remove("text-muted");
+        likeIcon.classList.add("text-danger");
+    }
+    else {
+        likeIcon.classList.remove("fas");
+        likeIcon.classList.add("far");
+        likeIcon.classList.remove("text-danger");
+        likeIcon.classList.add("text-muted");
+    }
+    likeIcon.setAttribute("disabled", "true");
+    setTimeout(function () { likeIcon.removeAttribute("disabled"); }, 1000);
+}
 
 function toggleReplyBox(commentId) {
     var selector = "reply(" + commentId + ")";
@@ -110,6 +163,30 @@ function toggleReplyBox(commentId) {
     }
     else {
         domElem.style.display = "none";
+    }
+}
+
+function toggleReplies(commentId) {
+    var selector = "commentReplies(" + commentId + ")";
+    var domElem = document.getElementsByClassName(selector);
+    for (var i = 0; i < domElem.length; i++) {
+        if (domElem[i].style.display == "none" || domElem[i].style.display == "") {
+            domElem[i].style.display = "block";
+        }
+        else {
+            domElem[i].style.display = "none";
+        }
+    }
+
+    var selector = "toggleReplies(" + commentId + ")";
+    var domElem = document.getElementById(selector);
+    if (domElem.innerHTML.indexOf("View") != -1) {
+        domElem.innerHTML = "Hide Replies <i class='fa fa-arrow-up'></i>";
+        return;
+    }
+    if (domElem.innerHTML.indexOf("Hide") != -1) {
+        domElem.innerHTML = "View Replies <i class='fa fa-arrow-down'></i>";
+        return;
     }
 }
 
@@ -123,7 +200,7 @@ function AddComment(threadId) {
     });
 };
 
-function showComments(threadId) {
+function showComments(threadId, numComments) {
 
     var commentSelector = "comments(" + threadId + ")";
     var buttonSelector = "showCommentsButton(" + threadId + ")";
@@ -132,7 +209,7 @@ function showComments(threadId) {
     if (document.getElementById(commentSelector).style.display == "none" || document.getElementById(commentSelector).style.display == "") {
         document.getElementById(commentSelector).style.display = "block";
 
-        document.getElementById(buttonSelector).firstChild.textContent = "Hide Comments ";
+        document.getElementById(buttonSelector).firstChild.textContent = "Hide Comment(s) ";
 
         document.getElementById(iconSelector).classList.remove("fa-arrow-down");
         document.getElementById(iconSelector).classList.add("fa-arrow-up");
@@ -140,7 +217,7 @@ function showComments(threadId) {
     else {
         document.getElementById(commentSelector).style.display = "none";
 
-        document.getElementById(buttonSelector).firstChild.textContent = "View Comments ";
+        document.getElementById(buttonSelector).firstChild.textContent = "View " + numComments + " Comment(s) ";
 
         document.getElementById(iconSelector).classList.remove("fa-arrow-up");
         document.getElementById(iconSelector).classList.add("fa-arrow-down");

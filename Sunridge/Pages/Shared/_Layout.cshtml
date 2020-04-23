@@ -62,12 +62,10 @@
                         <li>
                             <a class="nav-link text-dark" asp-area="" asp-page="/Home/LostFound">Lost & Found</a>
                         </li>
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <li>
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Blog/Index">Blog</a>
-                            </li>
-                        }
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Blog/Index">Blog</a>
+                        </li>
+
                     </ul>
                 </div>
             </div>

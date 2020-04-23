@@ -19,6 +19,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+    <PackageReference Include="Tinify" Version="1.5.2" />
   </ItemGroup>
 
 
@@ -32,7 +33,6 @@
   <ItemGroup>
     <Folder Include="wwwroot\docs\News\" />
     <Folder Include="Pages\Dashboard\OwnerDash\MyPhotos\" />
-    <Folder Include="wwwroot\Images\BlogImages\Uploads\" />
     <Folder Include="wwwroot\Images\LostAndFoundImages\" />
     <Folder Include="wwwroot\Images\ClassifiedsImages\" />
     <Folder Include="wwwroot\Images\BannerImages\" />
