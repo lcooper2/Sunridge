@@ -2,6 +2,7 @@
 @model Sunridge.Pages.Dashboard.OwnerDash.Forms.CLModel
 @{
     ViewData["Title"] = "CL";
+    Layout = "_DashboardLayout";
 }
 
 <h1>Claim Loss</h1>
@@ -34,7 +35,7 @@
                         <label asp-for="FormResObj.ClaimLoss.isAttorney">Are you filing as an Attorney:</label>
                     </div>
                     <div class="col-9">
-                        <input class="form-control" asp-for="FormResObj.ClaimLoss.isAttorney" />
+                        <input class="form-control" asp-for="FormResObj.ClaimLoss.isAttorney"  type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" data-offstyle="danger"/>
                         <span class="text-danger" asp-validation-for="FormResObj.ClaimLoss.isAttorney"></span>
                     </div>
                 </div>

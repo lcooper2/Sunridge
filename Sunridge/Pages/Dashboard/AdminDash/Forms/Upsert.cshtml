@@ -2,6 +2,7 @@
 @model Sunridge.Pages.Dashboard.AdminDash.Forms.UpsertModel
 @{
     ViewData["Title"] = "Upsert";
+    Layout = "_DashboardLayout";
 }
 
     <form method="post" asp-action="Upsert">
@@ -39,7 +40,7 @@
                             <label asp-for="FormResObj.FormResponse.Resolved"></label>
                         </div>
                         <div class="col-9">
-                            <input class="form-control" asp-for="FormResObj.FormResponse.Resolved" />
+                            <input class="form-control" asp-for="FormResObj.FormResponse.Resolved" type="checkbox" data-toggle="toggle" data-on="True" data-off="False" data-offstyle="danger"/>
                             <span class="text-danger" asp-validation-for="FormResObj.FormResponse.Resolved"></span>
 
                         </div>
