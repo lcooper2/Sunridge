@@ -12,6 +12,10 @@ function loadList() {
             "data": { id: 1},
             "datatype": "json"
         },
+        "rowReorder": {
+            "selector": 'td:nth-child(3)'
+        },
+        "responsive": true,
         "columns": [
             { "data": "itemName", "width": "20%" },
             { "data": "listedDate", "width": "30%" },
@@ -20,7 +24,7 @@ function loadList() {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                        <a href="/Dashboard/AdminDash/LostAndFound/Upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                        <a href="/Dashboard/OwnerDash/LostAndFound/Upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                             <i class="far fa-edit"></i> Edit
                         </a>
                          <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/LostAndFound/'+${data})>

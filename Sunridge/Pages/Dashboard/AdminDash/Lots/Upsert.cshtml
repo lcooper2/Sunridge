@@ -96,7 +96,7 @@
                         <label asp-for="LotObj.Lot.IsArchive"></label>
                     </div>
                     <div class="col-md-5">
-                        <input class="form-control" asp-for="LotObj.Lot.IsArchive"  type="checkbox"  data-toggle="toggle" data-on="True" data-off="False"/>
+                        <input class="form-control" asp-for="LotObj.Lot.IsArchive"  type="checkbox"  data-toggle="toggle" data-on="True" data-off="False" data-offstyle="danger"/>
                         <span class="text-danger" asp-validation-for="LotObj.Lot.IsArchive" ></span>
 
                     </div>
@@ -130,7 +130,7 @@
                                             <label class="control-label">@item.Description</label>
                                         </div>
                                         <div class="col-md-5 ">
-                                            <input class="form-control" name="LotInVm.InventoryList" type="checkbox" value="@item.Id" checked data-toggle="toggle" data-on="Add" data-off="Remove" />
+                                            <input class="form-control" name="LotInVm.InventoryList" type="checkbox" value="@item.Id" checked data-toggle="toggle" data-on="Add" data-off="Remove" data-offstyle="danger"/>
                                         </div>
                                     }
                                     else
@@ -139,7 +139,7 @@
                                             <label class="control-label">@item.Description</label>
                                         </div>
                                         <div class="col-md-5 ">
-                                            <input class="form-control" name="LotInVm.InventoryList" type="checkbox" value="@item.Id"  data-toggle="toggle" data-on="Add" data-off="Remove" />
+                                            <input class="form-control" name="LotInVm.InventoryList" type="checkbox" value="@item.Id"  data-toggle="toggle" data-on="Add" data-off="Remove" data-offstyle="danger"/>
                                         </div>
                                     }
                                 }
@@ -149,7 +149,7 @@
                                         <label class="control-label">@item.Description</label>
                                     </div>
                                     <div class="col-md-5 ">
-                                        <input class="form-control" name="LotInVm.InventoryList" type="checkbox" value="@item.Id"   data-toggle="toggle" data-on="Add" data-off="Remove"/>
+                                        <input class="form-control" name="LotInVm.InventoryList" type="checkbox" value="@item.Id"   data-toggle="toggle" data-on="Add" data-off="Remove" data-offstyle="danger"/>
                                     </div>
                                 }
                             </div>

@@ -12,6 +12,10 @@ function loadList() {
             "data": { id: 0},
             "datatype": "json"
         },
+        "rowReorder": {
+            "selector": 'td:nth-child(3)'
+        },
+        "responsive": true,
         "columns": [
             { "data": "itemName", "width": "20%" },
             { "data": "listedDate", "width": "30%" },

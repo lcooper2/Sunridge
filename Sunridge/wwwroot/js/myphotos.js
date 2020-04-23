@@ -12,6 +12,10 @@ function loadList() {
             "data": { id: 1 },
             "datatype": "json"
         },
+        "rowReorder": {
+            "selector": 'td:nth-child(3)'
+        },
+        "responsive": true,
         "columns": [
             { "data": "title", "width": "30%" },
             { "data": "userPhotoCategory.title", "width": "20%" },
