@@ -83,9 +83,9 @@ namespace Sunridge.Pages.Dashboard.OwnerDash.Forms
                 FormResObj.FormSubmissions.IsWik = false;
                 FormResObj.FormResponse.Resolved = false;
                 FormResObj.FormResponse.ResolveUser = "None";
+                FormResObj.FormSubmissions.SubmitDate = DateTime.Now;
 
 
-                
                 _unitOfWork.ClaimLoss.Add(FormResObj.ClaimLoss);
 
                 _unitOfWork.Save();

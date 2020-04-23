@@ -11,6 +11,10 @@ function loadList() {
             "type": "GET",
             "datatype": "json"
         },
+        "rowReorder": {
+            "selector": 'td:nth-child(3)'
+        },
+        "responsive": true,
         "columns": [
             { "data": "fullSerial", "width": "40%" },
             { "data": "year", "width": "20%" },
@@ -22,9 +26,7 @@ function loadList() {
                         <a href= "/Dashboard/AdminDash/Key/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                             <i class="far fa edit"></i> Edit   
                                 </a>
-                        <a href= "/Dashboard/AdminDash/Key/History/History" class="btn btn-primary text-white" style="cursor:pointer; width:100px;">
-                            <i class="fas fa-history"></i> History   
-                                </a>
+                        
                         <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/key/'+${data})>
                             <i class="far fa-trash-alt"></i> Delete
                         </a>
