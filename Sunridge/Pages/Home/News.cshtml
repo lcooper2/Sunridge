@@ -16,66 +16,66 @@
 
 <section class="m-5">
     <div class="container">
-        <h1 class="mb-4">News History</h1>
+        <h1 class="col-12 px-3" style="border-bottom:1px solid #325d88">News History</h1>
         <div id="accordion">
             @if (Model.News.Count > 0)
             {
                 @foreach (var item in Model.Years)
                 {
-            <div class="card">
-                <div class="card-header" id="heading-@item.ToString()">
-                    <h5 class="mb-0">
+                    <div class="card">
+                        <div class="card-header" id="heading-@item.ToString()">
+                            <h5 class="mb-0">
 
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse-@item.ToString()" aria-expanded="false" aria-controls="collapse-@item.ToString()">
-                            @item.ToString()
-                        </button>
-                    </h5>
-                </div>
-                @if (Model.searchString == null)
-                {
-                    <div id="collapse-@item.ToString()" class="collapse" aria-labelledby="heading-@item.ToString()" data-parent="#accordion">
-                        <div class="card-body">
-                            @foreach (var news in Model.News)
-                            {
-                                @if (news.Year == item)
-                                {
-                                    <hr class="mt-5 mb-5">
-                                    <h2>@Html.DisplayFor(m => news.Header)</h2>
-                                    @Html.Raw(news.Content)
-                                    @if (news.FilePath != null)
-                                    {
-                                        <div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
-                                            <a class="lightbox" href="../@news.FilePath" target="_blank">@news.FileName</a>
-                                        </div>
-                                    }
-                                }
-                            }
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse-@item.ToString()" aria-expanded="false" aria-controls="collapse-@item.ToString()">
+                                    @item.ToString()
+                                </button>
+                            </h5>
                         </div>
-                    </div>
-                }
-                else
-                {
-                    <div id="collapse-@item.ToString()" class="" aria-labelledby="heading-@item.ToString()" data-parent="#accordion">
-                        <div class="card-body">
-                            @foreach (var news in Model.News)
-                            {
-                                @if (news.Year == item)
-                                {
-                                    <hr class="mt-5 mb-5">
-                                    <h2>@Html.DisplayFor(m => news.Header)</h2>
-                                    @Html.Raw(news.Content)
-                                    @if (news.FilePath != null)
+                        @if (Model.searchString == null)
+                        {
+                            <div id="collapse-@item.ToString()" class="collapse" aria-labelledby="heading-@item.ToString()" data-parent="#accordion">
+                                <div class="card-body">
+                                    @foreach (var news in Model.News)
                                     {
-                                        <div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
-                                            <a class="lightbox" href="../@news.FilePath" target="_blank">@news.FileName</a>
-                                        </div>
+                                        @if (news.Year == item)
+                                        {
+                                            <hr class="mt-5 mb-5">
+                                            <h2>@Html.DisplayFor(m => news.Header)</h2>
+                                            @Html.Raw(news.Content)
+                                            @if (news.FilePath != null)
+                                            {
+                                                <div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
+                                                    <a class="lightbox" href="../@news.FilePath" target="_blank">@news.FileName</a>
+                                                </div>
+                                            }
+                                        }
                                     }
-                                }
-                            }
-                        </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="collapse-@item.ToString()" class="" aria-labelledby="heading-@item.ToString()" data-parent="#accordion">
+                                <div class="card-body">
+                                    @foreach (var news in Model.News)
+                                    {
+                                        @if (news.Year == item)
+                                        {
+                                            <hr class="mt-5 mb-5">
+                                            <h2>@Html.DisplayFor(m => news.Header)</h2>
+                                            @Html.Raw(news.Content)
+                                            @if (news.FilePath != null)
+                                            {
+                                                <div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
+                                                    <a class="lightbox" href="../@news.FilePath" target="_blank">@news.FileName</a>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
                     </div>
-                }
-            </div>
                 }
             }
 

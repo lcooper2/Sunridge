@@ -64,7 +64,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Lots
                 }
                 var list = _unitOfWork.LotInventory.GetAll(u => u.LotId == id).ToList();
                 LotInVm.LotId = LotObj.Lot.Id;
-                if (list.Count != 0)
+                if (list!= null)
                 {
                     foreach (var item in list)
                     {
