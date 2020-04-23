@@ -12,8 +12,11 @@ namespace Sunridge.Models
         public int Id { get; set; }
         
         public bool IsPrimary { get; set; }
-
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime StartDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? EndDate { get; set; }
 
         // Nav properties
