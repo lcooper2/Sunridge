@@ -22,7 +22,7 @@ namespace Sunridge.DataAccess.Data.Repository
 
             obJFromDb.isAttorney = claimLoss.isAttorney;
             obJFromDb.DateofIncident = claimLoss.DateofIncident;
-            obJFromDb.TimeofIncident = claimLoss.TimeofIncident;
+            //obJFromDb.TimeofIncident = claimLoss.TimeofIncident;
             obJFromDb.Type = claimLoss.Type;
             obJFromDb.ApplicationUserId = claimLoss.ApplicationUserId;
             obJFromDb.ApplicationUser = claimLoss.ApplicationUser;

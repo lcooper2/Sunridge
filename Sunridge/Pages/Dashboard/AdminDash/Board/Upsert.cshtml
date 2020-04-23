@@ -37,11 +37,11 @@
 
                 <div class="form-group row">
 
-                    <div class="col-2">
+                    <div class="col-3">
                         <label asp-for="BoardObj.DisplayOrder"></label>
                     </div>
 
-                    <div class="col-7">
+                    <div class="col-5">
                         <input class="form-control" asp-for="BoardObj.DisplayOrder" />
                         <span class="text-danger" asp-validation-for="BoardObj.DisplayOrder"></span>
                     </div>
@@ -68,93 +68,96 @@
                         <input class="form-control" asp-for="BoardObj.LastName" />
                         <span class="text-danger" asp-validation-for="BoardObj.LastName"></span>
                     </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label asp-for="BoardObj.Lot"></label>
                     </div>
 
+                    <div class="col-md-5">
+                        <input class="form-control" asp-for="BoardObj.Lot" />
+                        <span class="text-danger" asp-validation-for="BoardObj.Lot"></span>
+                    </div>
+                </div>
 
 
-                    <div class="form-group row">
 
-                        <div class="col-md-3">
-                            <label asp-for="BoardObj.Image"></label>
-                        </div>
+                <div class="form-group row">
 
-                        <div class="col-md-5">
-
-                            <input type="file" class="form-control" name="files" id="files" />
-                        </div>
-
+                    <div class="col-md-3">
+                        <label asp-for="BoardObj.Image"></label>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="col-md-5">
 
-                        <div class="col-md-3">
-                            <label asp-for="BoardObj.Phone"></label>
-                        </div>
-
-                        <div class="col-md-5">
-                            <input class="form-control" asp-for="BoardObj.Phone" />
-                            <span class="text-danger" asp-validation-for="BoardObj.Phone"></span>
-                        </div>
-
+                        <input type="file" class="form-control" name="files" id="files" />
                     </div>
 
-                    <div class="form-group row">
+                </div>
 
-                        <div class="col-md-3">
-                            <label asp-for="BoardObj.Email"></label>
-                        </div>
+                <div class="form-group row">
 
-                        <div class="col-md-5">
-                            <input class="form-control" asp-for="BoardObj.Email" />
-                            <span class="text-danger" asp-validation-for="BoardObj.Email"></span>
-                        </div>
-
+                    <div class="col-md-3">
+                        <label asp-for="BoardObj.Phone"></label>
                     </div>
 
+                    <div class="col-md-5">
+                        <input class="form-control" asp-for="BoardObj.Phone" />
+                        <span class="text-danger" asp-validation-for="BoardObj.Phone"></span>
+                    </div>
 
+                </div>
 
+                <div class="form-group row">
 
+                    <div class="col-md-3">
+                        <label asp-for="BoardObj.Email"></label>
+                    </div>
 
-                    <div class="form-group row">
+                    <div class="col-md-5">
+                        <input class="form-control" asp-for="BoardObj.Email" />
+                        <span class="text-danger" asp-validation-for="BoardObj.Email"></span>
+                    </div>
 
-                        <div class="col-9 offset-3">
+                </div>
 
-                            <div class="row">
+                <div class="form-group row">
 
-                                <div class="col-md-3">
-                                    @if (Model.BoardObj.Id != 0)
-                                    {
-                                        <button type="submit" class="btn btn-primary form-control">Update</button>
-                                    }
-                                    else
-                                    {
-                                        <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
-                                    }
+                    <div class="col-9 offset-3">
 
-                                </div>
+                        <div class="row">
 
-                                <div class="col-md-3">
-                                    <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
-                                </div>
+                            <div class="col-md-3">
+                                @if (Model.BoardObj.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                                }
+
                             </div>
 
+                            <div class="col-md-3">
+                                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
                         </div>
+
                     </div>
-
-
-
-            
-
-        </div>
-        @if (Model.BoardObj.Id != 0)
-        {
-            <div class="clo-4 p-4">
-                <img src="\@Model.BoardObj.Image" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
-
+                </div>
             </div>
-        }
-    </div>
-   
+
+            @if (Model.BoardObj.Id != 0)
+            {
+                <div class="clo-4 p-4">
+                    <img src="\@Model.BoardObj.Image" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
+
+                </div>
+            }
+        </div>
+
 
 </form>
 

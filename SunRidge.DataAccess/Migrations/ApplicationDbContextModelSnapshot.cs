@@ -434,6 +434,9 @@ namespace Sunridge.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Lot")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
@@ -460,9 +463,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateofIncident")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("TimeofIncident")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Type")
@@ -618,6 +618,9 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("FormDisplay")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("FormSubmissionsId")
                         .HasColumnType("int");
 
@@ -633,9 +636,6 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.Property<bool>("Resolved")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime>("SubmitDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

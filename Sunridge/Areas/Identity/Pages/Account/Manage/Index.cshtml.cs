@@ -30,17 +30,21 @@ namespace Sunridge.Areas.Identity.Pages.Account.Manage
         [BindProperty]
         public ApplicationUser appUser { get; set; }
 
+        [BindProperty]
+        public bool receiveEmail { get; set; }
+
         [TempData]
         public string StatusMessage { get; set; }
-
-
-        
 
         private async Task LoadAsync(IdentityUser user)
         {
             var applicationUser = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Id == user.Id);
 
             appUser = applicationUser;
+
+                receiveEmail = false;
+            if (appUser.ReceiveEmails == true)
+                receiveEmail = true;
 
         }
 
@@ -58,8 +62,7 @@ namespace Sunridge.Areas.Identity.Pages.Account.Manage
       
         public  IActionResult OnPost()
         {
-            var fn = appUser.FirstName;
-            var ln = appUser.LastName;
+
 
             if (!ModelState.IsValid)
             {
@@ -72,6 +75,14 @@ namespace Sunridge.Areas.Identity.Pages.Account.Manage
             }
             else
             {
+                if (receiveEmail == true)
+                {
+                    appUser.ReceiveEmails = true;
+                }
+                else
+                {
+                    appUser.ReceiveEmails = false;
+                }
                 _unitOfWork.ApplicationUser.Update(appUser);
             }
 

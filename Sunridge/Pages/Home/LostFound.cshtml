@@ -3,160 +3,82 @@
 @{
     ViewData["Title"] = "LostFound";
 }
+    <h1 class="col-12 px-3" style="border-bottom:1px solid #325d88">Lost And Found</h1>
 @if (Model.itemList.Count() > 0)
 {
-
     <section class="testimonials text-center">
-
-
-
         @foreach (var item in Model.itemList)
         {
-
-
             <div class="container mb-5">
-
                 <hr>
-
                 <div class="container container-fluid bg-light p-5">
-
                     <div class="row">
-
                         <div class="col-sm-6">
-
                             <div id="box" class="container">
-
                                 <!--Carousel Wrapper-->
-
                                 <div id="carousel-thumb_@item.Id" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
-
                                     <!--Slides-->
-
-                                    <div class="carousel-inner rounded" role="listbox" style="  border: 2px solid black;  box-shadow: 4px 4px #888888;">
-
+                                    <div class="carousel-inner rounded" role="listbox" style="  border: 2px solid black;">
                                         @foreach (var image in item.Images)
-
                                         {
-
                                             if (image.IsMainImage)
-
                                             {
-
                                                 <div class="carousel-item active rounded ">
-
-                                                    <img id="itemImage" class="d-block w-100" style="max-height:300px;" src="\@image.ImageURL">
-
+                                                    <img id="itemImage" class="d-block w-100" style="max-height:300px;"  src="\@image.ImageURL">
                                                 </div>
-
                                             }
-
                                             else
-
                                             {
-
                                                 <div class="carousel-item rounded">
-
                                                     <img id="itemImage" class="d-block w-100" style="max-height:300px;" src="\@image.ImageURL">
-
                                                 </div>
-
                                             }
-
-
-
                                         }
-
                                     </div>
-
                                     <!--/.Slides-->
                                     <!--Controls-->
-
                                     <a class="carousel-control-prev" href="#carousel-thumb_@item.Id" role="button" data-slide="prev">
-
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-
                                         <span class="sr-only">Previous</span>
-
                                     </a>
-
                                     <a class="carousel-control-next" href="#carousel-thumb_@item.Id" role="button" data-slide="next">
-
                                         <span class="carousel-control-next-icon " aria-hidden="true"></span>
-
                                         <span class="sr-only">Next</span>
-
                                     </a>
-
                                     <!--/.Controls-->
-
                                     <ol id="thumbnailBar" class="carousel-indicators rounded list-inline visible-sm-block hidden-xs-block visible-md-block visible-lg-block">
-
                                         @for (var imgIndex = 0; imgIndex < item.Images.Count; imgIndex++)
-
                                         {
-
                                             var image = item.Images[imgIndex];
-
                                             if (image.IsMainImage)
-
                                             {
-
                                                 <li data-target="#carousel-thumb_@item.Id" data-slide-to="@imgIndex" class="active list-inline-item">
-
-                                                    <img id="thumbnail" class="rounded img-fluid" src="\@image.ImageURL" style=" border: 1px solid black;">
-
+                                                    <img id="thumbnail" class="rounded img-fluid " src="\@image.ImageURL" style=" border: 1px solid black;">
                                                 </li>
-
                                             }
-
                                             else
-
                                             {
-
                                                 <li data-target="#carousel-thumb_@item.Id" data-slide-to="@imgIndex" class="list-inline-item">
-
                                                     <img id="thumbnail" class="img-fluid rounded" src="\@image.ImageURL" style=" border: 1px solid black;">
-
                                                 </li>
-
                                             }
-
-
-
                                         }
-
                                     </ol>
-
                                 </div>
-
                                 <!--/.Carousel Wrapper-->
-
                             </div>
-
                         </div>
-
-                        <div class="col-sm-6 rounded " style="background-color:#303067; box-shadow: 3px 3px #5e5e5f; border: 1px solid black; max-height:300px; ">
-
-                            <h1 class="text-left text-white">Item Name : @item.ItemName</h1>
-
-                           
-                            <p class="text-left "style="color:white!important"><b>Item Description:</b>@Html.Raw(item.Discription)</p>
+                        <div class="col-sm-6 rounded " style="background-color:#e6e6ff; border: 1px solid black; max-height:300px; ">
+                            <h1 class="text-left text-black">Item Name : @item.ItemName</h1>                          
+                            <p class="text-left "style="color:black!important"><b>Item Description:</b>@Html.Raw(item.Discription)</p>
                             <br/>
-                            <p class="text-left text-white"><b>Phone Number:</b><br /> @String.Format("{0: (###) ###-####}", Convert.ToInt64(item.PhoneNumber))</p>
-                            <p style="color:white; font-size:14px; text-align:left"><b>Email:</b><br /><a href="mailto: @item.Email"> @item.Email</a></p>
-
-
+                            <p class="text-left text-black"><b>Phone Number:</b><br /> @String.Format("{0: (###) ###-####}", Convert.ToInt64(item.PhoneNumber))</p>
+                            <p style="color:black; font-size:14px; text-align:left"><b>Email:</b><br /><a href="mailto: @item.Email"> @item.Email</a></p>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         }
-
     </section>
-
 } 
 

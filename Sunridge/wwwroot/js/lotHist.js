@@ -11,6 +11,10 @@ function loadList() {
             "type": "GET",
             "datatype": "json"
         },
+        "rowReorder": {
+            "selector": 'td:nth-child(3)'
+        },
+        "responsive": true,
         "columns": [
             { "data": "lot.lotNumber", "width": "30%" },
             { "data": "applicationUser.fullName", "width": "20%" },

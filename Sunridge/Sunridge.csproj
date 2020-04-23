@@ -33,6 +33,8 @@
   <ItemGroup>
     <Folder Include="wwwroot\docs\News\" />
     <Folder Include="Pages\Dashboard\OwnerDash\MyPhotos\" />
+    <Folder Include="wwwroot\Images\BlogImages\ProfilePictures\" />
+    <Folder Include="wwwroot\Images\BlogImages\Uploads\" />
     <Folder Include="wwwroot\Images\LostAndFoundImages\" />
     <Folder Include="wwwroot\Images\ClassifiedsImages\" />
     <Folder Include="wwwroot\Images\BannerImages\" />

@@ -1,0 +1,22 @@
+﻿@page
+@model Sunridge.PhotosSelectorModel
+    <div class="container">
+        <div class="row">
+        @foreach (var category in Model.CategoryList)
+        {
+
+            <!--Owner Row-->
+            <a asp-page="PhotoGallery" asp-route-id="@category.Id">
+                <div class="card m-1" style="width: 18rem; background-color:cadetblue;">
+                    <div class="card-body">
+                        <h5 class="card-title text-white text-center">@category.Title</h5>
+                        <p class="card-text text-white text-center" style="font-size:xx-large;"><i class="fas fa-images"></i></p>
+
+                    </div>
+                </div>
+            </a>
+
+        }
+        </div>
+    </div>
+

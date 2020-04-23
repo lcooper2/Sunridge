@@ -16,20 +16,31 @@ namespace Sunridge.Controllers
     [ApiController]
     public class UserPhotosController : Controller
     {
-        public readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IWebHostEnvironment _hostingEnvironment;
-        //private readonly UserManager<IdentityUser> _userManager;
 
-        public UserPhotosController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
+        public UserPhotosController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment, UserManager<IdentityUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;
-            //_userManager = userManager;
+            _userManager = userManager;
         }
 
-        public IActionResult Get()
+      
+        public async Task<IActionResult> Get(int id)
         {
-            return Json(new { data = _unitOfWork.UserPhotos.GetAll(null, null, "UserPhotoCategory,ApplicationUser") });
+            if (id == 0)
+            {
+                return Json(new { data = _unitOfWork.UserPhotos.GetAll(null, null, "UserPhotoCategory,ApplicationUser") });
+            }
+            else if (id == 1)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                return Json(new { data = _unitOfWork.UserPhotos.GetAll(x => x.UserId == user.Id, null, "UserPhotoCategory,ApplicationUser") });
+            }
+
+            return Json(new { success = false, message = "Error while Getting" });
         }
 
 

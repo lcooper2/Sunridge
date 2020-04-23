@@ -3,23 +3,29 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
+using Sunridge.Utility;
 
 namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
 {
+    [Authorize(Roles = SD.AdminRole)]
     public class UpsertModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public UpsertModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
+        public UpsertModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment, UserManager<IdentityUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;
+            _userManager = userManager;
         }
 
 
@@ -46,7 +52,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
         }
 
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             // Find the root path
             string webRootPath = _hostingEnvironment.WebRootPath;
@@ -62,7 +68,9 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
 
                 // rename the file user submited
                 LAFObj.ListedDate = DateTime.Now;
-                _unitOfWork.LostAndFound.Add(LAFObj);
+                var user = await _userManager.GetUserAsync(User);
+                LAFObj.UserId = user.Id;
+               _unitOfWork.LostAndFound.Add(LAFObj);
                 _unitOfWork.Save();
 
                 // upload to path
@@ -101,7 +109,7 @@ namespace Sunridge.Pages.Dashboard.AdminDash.LostAndFound
                     };
 
 
-
+                   
 
                     _unitOfWork.LostAndFoundImage.Add(image);
                 }

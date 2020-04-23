@@ -23,7 +23,7 @@
                         <label asp-for="LotHistObj.OwnerLot.IsPrimary"></label>
                     </div>
                     <div class="col-9">
-                        <input class="form-control" asp-for="LotHistObj.OwnerLot.IsPrimary" />
+                        <input class="form-control" asp-for="LotHistObj.OwnerLot.IsPrimary" type="checkbox" data-toggle="toggle" data-on="True" data-off="False" data-offstyle="danger" />
                         <span class="text-danger" asp-validation-for="LotHistObj.OwnerLot.IsPrimary"></span>
 
                     </div>
@@ -90,7 +90,7 @@
                                 }
                             </div>
                             <div class="col-6">
-                                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+                                <a asp-page="./History" class="btn btn-success form-control">Back to List</a>
                             </div>
                         </div>
                     </div>

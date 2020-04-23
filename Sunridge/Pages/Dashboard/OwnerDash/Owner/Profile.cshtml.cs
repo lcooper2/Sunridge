@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
+using Sunridge.Utility;
 
 namespace Sunridge.Pages.Dashboard.OwnerDash.Owner
 {
+    [Authorize(Roles = SD.Owner)]
     public partial class ProfileModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;

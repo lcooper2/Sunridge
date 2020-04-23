@@ -88,7 +88,7 @@
                         }
                         @if (!String.IsNullOrEmpty(item.Phone))
                         {
-                            <h4>Phone: @item.Phone</h4>
+                            <h4>Phone: @item.Phone.Substring(0, 3)-@item.Phone.Substring(3, 3)-@item.Phone.Substring(6, 4)</h4>
                         }
                     </div>
                 </div>

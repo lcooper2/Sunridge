@@ -27,6 +27,7 @@
             <input type="hidden" asp-for="FormResObj.FormSubmissions.IsWik" value="true" />
             <input type="hidden" asp-for="FormResObj.FormResponse.Resolved" value="false" />
             <input type="hidden" asp-for="FormResObj.FormResponse.FormType" value="WIK" />
+            <input type="hidden" asp-for="FormResObj.FormResponse.ResolveUser" value="None" />
             <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
                 <h2 class="text-primary">@(Model.FormResObj.InKindWorkHours.Id != 0 ? "Update" : "Create") Form</h2>
             </div>
@@ -36,7 +37,7 @@
                         <label asp-for="FormResObj.InKindWorkHours.Activity">Describe Activity (List what you did):</label>
                     </div>
                     <div class="col-9">
-                        <textarea class="form-control" asp-for="FormResObj.InKindWorkHours.Activity" id="txtDesc" style="height:200px;"></textarea>
+                        <textarea class="form-control" asp-for="FormResObj.InKindWorkHours.Activity" id="txtDesc" style="height:200px;">@Html.Raw("text")</textarea>
 
                     </div>
                 </div>
@@ -45,7 +46,7 @@
                         <label asp-for="FormResObj.InKindWorkHours.Equipment">Describe Equipment used :</label>
                     </div>
                     <div class="col-9">
-                        <textarea class="form-control" asp-for="FormResObj.InKindWorkHours.Equipment" id="txtDesc" style="height:200px;"></textarea>
+                        <textarea class="form-control" asp-for="FormResObj.InKindWorkHours.Equipment" id="txtDesc" style="height:200px;">@Html.Raw("text")</textarea>
 
                     </div>
                 </div>
@@ -67,7 +68,7 @@
                                 <button type="submit" class="btn btn-primary form-control">@(Model.FormResObj.InKindWorkHours.Id != 0 ? "Update" : "Create")</button>
                             </div>
                             <div class="col-6">
-                                <a asp-page="/OwnerDash/Forms/Index" class="btn btn-success form-control">Back to Forms</a>
+                                <a asp-page="Index" class="btn btn-success form-control">Back to Forms</a>
                             </div>
                         </div>
                     </div>
@@ -78,11 +79,5 @@
 </form>
 
 @section Scripts {
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'lists',
-            menubar: 'file edit format'
-        });
-    </script>
+    <script>tinymce.init({ forced_root_block: "", selector: 'textarea' });</script>
 }

@@ -9,8 +9,13 @@ function loadList() {
         "ajax": {
             "url": "/api/userphotos/",
             "type": "GET",
+            "data": { id: 0 },
             "datatype": "json"
         },
+        "rowReorder": {
+            "selector": 'td:nth-child(3)'
+        },
+        "responsive": true,
         "columns": [
             { "data": "title", "width": "30%" },
             { "data": "userPhotoCategory.title", "width": "20%" },

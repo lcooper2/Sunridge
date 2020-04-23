@@ -3,22 +3,32 @@
 @{
     ViewData["Title"] = "Board Members";
 }
-    <div class="row container pb-3 backgroundWhite">
-        @foreach (var board in Model.BoardMembers)
-        {
-            <div class="col-lg-3 col-lx-3 col-md-6 pb-4" style="width:50%; padding: 1em;">
-                <div class="card " style="background-color:#303067; box-shadow: 3px 3px #5e5e5f; min-height:350px">
-                    <img src="\@board.Image" class="card-img-top p-2 rounded " style="max-height:200px;min-height:200px" />
-                    <div class="pl-2 pt-1 text-center"><h3 class="card-title " style="color: white;
-        font-size: 16px
-    ">@board.FullName<br />@board.Title</h3></div>
-
-                    <div class="pl-3 pt-1 text-center card-body ">
-                        <p style="color:white; font-size:12px">Email:<a style ="color:white"href="mailto: @board.Email"> @board.Email</a></p>
-                        <p style="color:white; font-size:12px">Phone: @String.Format("{0: (###) ###-####}", Convert.ToInt64(board.Phone))</p>
-                    </div>
-                    
+<h1 class="col-12 px-3" style="border-bottom:1px solid #325d88">Board Members</h1>
+<div class="row container pb-3 backgroundWhite">
+    @foreach (var board in Model.BoardMembers)
+    {
+        <div class="col-lg-3 col-lx-3 col-md-6 pb-4" style="width:50%; padding: 1em;">
+            <div class="card" style="background-color:#e6e6ff; min-height:350px; max-height:350px ">
+                <h3 class="text-md-center text-Black">@board.Title</h3>
+                <img src="\@board.Image" class="card-img-top p-2 rounded" style="max-height:200px; min-height:200px" />
+                <div class="pl-2 text-center">
+                    <h3 class="card-title " style="color: Black;font-size: 16px">
+                        @board.FullName
+                    </h3>
                 </div>
+
+                <div class="pl-3 pt-1 text-center card-body">
+                    @if (board.Lot != null) {
+                        <div>Lot: @board.Lot <br /></div>
+                    }
+                    <a style="font-size: 12px" href="mailto: @board.Email"> @board.Email</a>
+                    <p style="color:Black; font-size:12px">Phone: @String.Format("{0: (###) ###-####}", Convert.ToInt64(board.Phone))</p>
+                </div>
+
             </div>
-        }
         </div>
+    }
+</div>
+@*background-color:#303067; box-shadow: 3px 3px #5e5e5f;
+    style="color:Black"
+    *@

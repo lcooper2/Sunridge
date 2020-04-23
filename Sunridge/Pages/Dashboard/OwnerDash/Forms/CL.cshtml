@@ -2,6 +2,7 @@
 @model Sunridge.Pages.Dashboard.OwnerDash.Forms.CLModel
 @{
     ViewData["Title"] = "CL";
+    Layout = "_DashboardLayout";
 }
 
 <h1>Claim Loss</h1>
@@ -24,6 +25,7 @@
             <input type="hidden" asp-for="FormResObj.FormSubmissions.IsCl" value="true" />
             <input type="hidden" asp-for="FormResObj.FormResponse.Resolved" value="false" />
             <input type="hidden" asp-for="FormResObj.FormResponse.FormType" value="CL" />
+            <input type="hidden" asp-for="FormResObj.FormResponse.ResolveUser" value="None" />
             <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
                 <h2 class="text-primary">@(Model.FormResObj.ClaimLoss.Id != 0 ? "Update" : "Create") Form</h2>
             </div>
@@ -33,7 +35,7 @@
                         <label asp-for="FormResObj.ClaimLoss.isAttorney">Are you filing as an Attorney:</label>
                     </div>
                     <div class="col-9">
-                        <input class="form-control" asp-for="FormResObj.ClaimLoss.isAttorney" />
+                        <input class="form-control" asp-for="FormResObj.ClaimLoss.isAttorney"  type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" data-offstyle="danger"/>
                         <span class="text-danger" asp-validation-for="FormResObj.ClaimLoss.isAttorney"></span>
                     </div>
                 </div>
@@ -45,16 +47,7 @@
                         <input class="form-control" asp-for="FormResObj.ClaimLoss.DateofIncident" />
                         <span class="text-danger" asp-validation-for="FormResObj.ClaimLoss.DateofIncident"></span>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="FormResObj.ClaimLoss.TimeofIncident">Time of Incident:</label>
-                    </div>
-                    <div class="col-9">
-                        <input class="form-control" asp-for="FormResObj.ClaimLoss.TimeofIncident" />
-                        <span class="text-danger" asp-validation-for="FormResObj.ClaimLoss.TimeofIncident"></span>
-                    </div>
-                </div>
+               
                 <!--add address stuff-->
                 <div class="form-group row">
                     <div class="col-3">
@@ -73,7 +66,7 @@
                                 <button type="submit" class="btn btn-primary form-control">@(Model.FormResObj.ClaimLoss.Id != 0 ? "Update" : "Create")</button>
                             </div>
                             <div class="col-6">
-                                <a asp-page="/OwnerDash/Forms/Index" class="btn btn-success form-control">Back to Forms</a>
+                                <a asp-page="Index" class="btn btn-success form-control">Back to Forms</a>
                             </div>
                         </div>
                     </div>

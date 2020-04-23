@@ -16,10 +16,9 @@ namespace Sunridge.Models
 
         //public string? AttorneyInfo { get; set; }
         public string Type { get; set; }
-
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DateofIncident { get; set; }
-
-        public DateTime TimeofIncident { get; set; }
 
         /*To port info of person who is filling */
         [Display(Name = "Application User")]

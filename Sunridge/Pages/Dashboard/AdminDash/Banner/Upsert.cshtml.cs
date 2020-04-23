@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
-
+using Sunridge.Utility;
 
 namespace Sunridge.Pages.Dashboard.AdminDash.Banner
 {
+    [Authorize(Roles = SD.AdminRole)]
     public class UpsertModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -25,6 +27,8 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Banner
         [BindProperty]
         public Models.Banner BannerObj { get; set; }
 
+        [BindProperty]
+        public bool IsActive { get; set; }
 
 
         public IActionResult OnGet(int? id)
@@ -39,6 +43,9 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Banner
                     return NotFound();
                 }
             }
+            IsActive = false;
+            if (BannerObj.Status.Equals(SD.StatusActive))
+                IsActive = true;
             return Page();
         }
 
@@ -71,6 +78,13 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Banner
                 }
 
                 BannerObj.Image = @"Images\BannerImages\" + fileName + extension;
+                if (IsActive == true)
+                {
+                    BannerObj.Status = SD.StatusActive;
+                 }else
+                {
+                    BannerObj.Status = SD.StatusInactive;
+                }
                 _unitOfWork.Banner.Add(BannerObj);
             }
             else // if is not then it is an existing object that is being edit and updated
@@ -105,9 +119,18 @@ namespace Sunridge.Pages.Dashboard.AdminDash.Banner
                     BannerObj.Image = objFromDb.Image;
                 }
 
+                if (IsActive == true)
+                {
+                    BannerObj.Status = SD.StatusActive;
+                }
+                else
+                {
+                    BannerObj.Status = SD.StatusInactive;
+                }
+
                 _unitOfWork.Banner.Update(BannerObj);
             }
-
+            
             _unitOfWork.Save();
             return RedirectToPage("./Index");
         }
