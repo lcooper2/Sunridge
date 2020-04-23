@@ -41,7 +41,10 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
         {
 
             public string Role { get; set; }
+            public bool makeAdmin { get; set; }
+            public bool ReceiveEmail { get; set; }
         }
+
 
         private async Task LoadAsync()
         {
@@ -52,18 +55,27 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
             {
                 Input = new InputModel
                 {
-                    Role = SD.AdminRole
-
+                    Role = SD.AdminRole,
+                    makeAdmin = true,
+                    ReceiveEmail = false
+                    
                 };
+                
             }
             else
             {
                 Input = new InputModel
                 {
-                    Role = SD.Owner
+                    Role = SD.Owner,
+                    makeAdmin = false,
+                    ReceiveEmail = false
                 };
             }
 
+           
+                if (applicationUser.ReceiveEmails == true)
+                    Input.ReceiveEmail = true;
+          
 
             
         }
@@ -90,7 +102,14 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
             }
 
             var user = await _userManager.FindByIdAsync(applicationUser.Id);
-
+            if (Input.makeAdmin == true)
+            {
+                Input.Role = SD.AdminRole;
+            }
+            else
+            {
+                Input.Role = SD.Owner;
+            }
 
             if (await _userManager.IsInRoleAsync(applicationUser, SD.AdminRole))
             {
@@ -112,6 +131,15 @@ namespace Sunridge.Pages.Dashboard.AdminDash.User
 
                 }
             }
+            if(Input.ReceiveEmail == true)
+            {
+                applicationUser.ReceiveEmails = true;
+            }
+            else
+            {
+                applicationUser.ReceiveEmails = false;
+            }
+           
 
             _unitOfWork.ApplicationUser.Update(applicationUser);
             _unitOfWork.Save();

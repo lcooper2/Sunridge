@@ -1,5 +1,9 @@
 ﻿@page
 @using Sunridge.Utility
+@{
+    ViewData["Title"] = "User Manager";
+    Layout = "_DashboardLayout";
+}
 @if (User.IsInRole(SD.AdminRole))
 {
 

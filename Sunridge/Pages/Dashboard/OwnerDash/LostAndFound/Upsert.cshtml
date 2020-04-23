@@ -42,7 +42,7 @@
                 <div class="form-group row ">
 
                     <div class="col-3">
-                        <label >Description</label>
+                        <label>Description</label>
                     </div>
 
                     <div class="col-7">
@@ -107,25 +107,16 @@
                     </div>
 
                 </div>
-                <br/>
-                <div class="form-group row border">
-                    <div class="col-3">
+                <br />
+                <div class="form-group row">
+                    <div class="col-md-3">
                         <label asp-for="LAFObj.Claimed"></label>
                     </div>
-                    <div class="col-7">
-                        <table>
-                            <tr>
-                                <td>True</td>
-                                <td class="col-1"> <input type="radio" class="form-control" asp-for="LAFObj.Claimed" value="True" onclick="unhide()"></td>
-                            </tr>
-                            <tr>
-                                <td>False</td>
-                                <td><input type="radio" class="form-control" asp-for="LAFObj.Claimed" value="False" onclick="hide()" /></td>
-                            </tr>
-                        </table>
+                    <div class="col-md-6">
+                        <input class="form-control" asp-for="LAFObj.Claimed" type="checkbox" data-toggle="toggle" data-on="True" data-off="False" data-offstyle="warning" data-width="100" />
+                        <span class="text-danger" asp-validation-for="LAFObj.Claimed"></span>
 
                     </div>
-
                 </div>
 
 

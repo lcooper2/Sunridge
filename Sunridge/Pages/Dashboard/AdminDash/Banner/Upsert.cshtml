@@ -59,20 +59,19 @@
                     </div>
 
                 </div>
-
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <label asp-for="BannerObj.Status"></label>
+                        <label>Set Banner Status To</label>
                     </div>
+                    <div class="col-md-6">
+                        <input class="form-control" asp-for="IsActive" type="checkbox" data-toggle="toggle" data-on="@SD.StatusActive" data-off="@SD.StatusInactive" data-offstyle="danger" data-width="100" />
+                        <span class="text-danger" asp-validation-for="IsActive"></span>
 
-                    <div class="col-md-9">
-                        <input type="radio" class="form-control" asp-for="BannerObj.Status" value="@SD.StatusActive"> @SD.StatusActive
-                        <input type="radio" class="form-control" asp-for="BannerObj.Status" value="@SD.StatusInactive" /> @SD.StatusInactive
                     </div>
-                    <span class="text-danger" asp-validation-for="BannerObj.Status"></span>
-
                 </div>
-            
+
+                <input type="hidden" class="form-control" asp-for="BannerObj.Status" value="@SD.StatusActive"/>
+ 
                 <div class="form-group row">
 
                     <div class="col-9 offset-3">
