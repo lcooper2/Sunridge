@@ -116,17 +116,10 @@ namespace Sunridge.Areas.Identity.Pages.Account
                     {
                         await _roleManager.CreateAsync(new IdentityRole(SD.Owner));
                     }
+                    
+                    //Add user to Owner role upon registration
+                    await _userManager.AddToRoleAsync(user, SD.Owner);
 
-                    //add user to role
-                    if (Input.IsAdmin)
-                    {
-                        await _userManager.AddToRoleAsync(user, SD.AdminRole);
-                        await _userManager.AddToRoleAsync(user, SD.Owner);
-                    }
-                    else
-                    {
-                        await _userManager.AddToRoleAsync(user, SD.Owner);
-                    }
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
