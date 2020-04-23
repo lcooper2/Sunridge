@@ -23,7 +23,7 @@
                                     <thead>
                                         <tr>
                                             <th><b>Form Type</b></th>
-                                            <th><b>Submit Date</b></th>                            
+                                            <th><b>Submit Date</b></th>
                                             <th><b>Resolved</b></th>
                                             <th><b>Resolve Date</b></th>
                                             <th><b>User</b></th>
@@ -45,11 +45,12 @@
 
                                             <td>@form.ResolveDate</td>
                                             <td>@form.ResolveUser</td>
-                                            <td><div class="text-center">
-                                                <a asp-page="/Dashboard/AdminDash/Forms/upsert" asp-route-id="@form.Id" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
-                                                    <i class="far fa edit"></i> Edit
-                                                </a>
-                                                
+                                            <td>
+                                                <div class="text-center">
+                                                    <a asp-page="/Dashboard/AdminDash/Forms/upsert" asp-route-id="@form.Id" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                                        <i class="far fa edit"></i> Edit
+                                                    </a>
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -88,7 +89,7 @@
                                             <tr>
                                                 <th><b>@form.FormSubmissions.Id</b></th>
                                                 <th><b>@form.FormSubmissions.SubmitDate</b></th>
-                                                
+
                                                 <th><b>@form.Resolved</b></th>
                                                 <th><b>@form.ResolveDate</b></th>
                                                 <th><b>@form.ResolveUser</b></th>
@@ -107,3 +108,8 @@
         }
     }
 </div>
+@section Scripts{
+   
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/rowreorder/1.2.6/js/dataTables.rowReorder.min.js"></script>
+}

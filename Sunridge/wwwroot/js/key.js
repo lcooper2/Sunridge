@@ -11,6 +11,10 @@ function loadList() {
             "type": "GET",
             "datatype": "json"
         },
+        "rowReorder": {
+            "selector": 'td:nth-child(3)'
+        },
+        "responsive": true,
         "columns": [
             { "data": "fullSerial", "width": "40%" },
             { "data": "year", "width": "20%" },
