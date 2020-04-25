@@ -7,8 +7,10 @@
 @using Sunridge.Models
 
 <head>
-    <link href="~/css/General/Blog.css" rel="stylesheet" type="text/css" />
+    <link rel="Stylesheet" href="~/css/General/Blog.css" type="text/css" />
 </head>
+
+
 
 <div>
     <br />
@@ -74,15 +76,23 @@
                 <p class="card-text">@Html.Raw(@thread.BlogComments[0].BlogCommentText)</p>
                 <div class="container-fluid">
                     <div class="row">
-                        @{var imgTags = Model.AssignImageLayouts(@thread.BlogComments[0].Images); }
-                        @for (int i = 0; i < imgTags.Count(); i++)
+                        @{var imgTags = Model.GetImageClassTags(@thread.BlogComments[0].Images); }
+                        @{var blogImages = thread.BlogComments[0].Images.OrderBy(i => i.Id).ToList();}
+                        @for (int i = 0; i < blogImages.Count(); i++)
                         {
-                            // Render the string that represents an image tag and create and hide a modal containing the image
-                            @Html.Raw(imgTags[i]);
-                            <div id="modal(@thread.BlogComments[0].Images[i].Id)" class="modal">
-                                <span class="close" id="close(@thread.BlogComments[0].Images[i].Id)">&times;</span>
-                                <img class="modal-content" id="modalImage(@thread.BlogComments[0].Images[i].Id)">
-                                <div id="caption"></div>
+                            <img class="lazy myImg" style="margin:1px;" id="img(@blogImages[i].Id)" src="~/Images/BlogImages/loading.gif" data-src="@blogImages[i].ImgPath" onclick="Modal(@blogImages[i].Id)"/>
+                            if (imgTags[i] == "landscape")
+                            {
+                                <script>document.getElementById("img(" + @blogImages[i].Id + ")").classList.add("landscape")</script>
+                            }
+                            else
+                            {
+                                <script>document.getElementById("img(" + @blogImages[i].Id + ")").classList.add("portrait")</script>
+                            }
+
+                            <div id="modal(@blogImages[i].Id)" class="modal">
+                                <span class="close" id="close(@blogImages[i].Id)">&times;</span>
+                                <img class="modal-content" id="modalImage(@blogImages[i].Id)">
                             </div>
                         }
 
@@ -126,53 +136,6 @@
                 @foreach (var comment in thread.BlogComments)
                 {
                     @if (comment.Equals(thread.BlogComments[0])) { continue; }
-                    #region OldCard
-                    @*<div class="row ml-1 pt-3">
-                            <img src="@comment.ApplicationUser.ProfilePicture" class="rounded-circle mr-3" alt="avatar">
-                            <div>
-                                <span class="card-title font-weight-bold mb-2"><strong>@comment.ApplicationUser.FullName</strong></span>
-
-                                <p class="card-text"><i class="far fa-clock pr-2"></i>@comment.WhenPosted.ToShortTimeString()</p>
-                                <p>@Html.Raw(@comment.BlogCommentText)</p>
-                            </div>
-                        </div>
-
-
-                            var commentImages = Model.AssignImageLayouts(comment.Images);
-                        <div class="ml-5">
-                            @for (int i = 0; i < commentImages.Count(); i++)
-                            {
-                                // Render the string that represents an image tag and create and hide a modal containing the image
-                            @Html.Raw(commentImages[i]);
-                            <div id="modal(@comment.Images[i].Id)" class="modal">
-                                <span class="close" id="close(@comment.Images[i].Id)">&times;</span>
-                                <img class="modal-content" id="modalImage(@comment.Images[i].Id)">
-                                <div id="caption"></div>
-                            </div>
-                            }
-                        </div>
-                            var likeCountCom = comment.Likes.Count() == 0 ? "" : comment.Likes.Count().ToString();
-
-                        <div class="ml-5">
-
-                            @if (Model.UserHasLikedPost(comment.Id) == true)
-                            {
-                            <button class="btn bg-white"><span id="likeCommentSpan(@comment.Id)">@likeCountCom&nbsp;</span><i class="fas fa-heart text-danger" id="likeCommentIcon(@comment.Id)" onclick="LikeComment(@comment.Id)"> Like </i></button>
-                            }
-                            else
-                            {
-                            <button class="btn bg-white"><span id="likeCommentSpan(@comment.Id)">@likeCountCom&nbsp;</span><i class="far fa-heart text-muted" id="likeCommentIcon(@comment.Id)" onclick="LikeComment(@comment.Id)"> Like </i></button>
-                            }
-                            <button class="btn bg-white" onclick="toggleReplyBox(@comment.Id)"><i class="far fa-comment text-muted"> Reply</i></button>
-                        </div>
-                        <div class="row offset-3 mx-1" id="reply(@comment.Id)" style="display: none;">
-                            <div class="col-sm-12"><i class="fas fa-pencil-alt"> Reply</i></div>
-                            <form method="post">
-                                <div class="col-12"><textarea id="reply(@comment.Id)" name="reply(@comment.Id)" style="width:100%; height:100px"></textarea></div>
-                                <div class="col-12"><button type="submit" asp-page-handler="Reply" asp-route-id="@comment.Id" class="btn btn-info">Post</button> <button class="btn btn-danger">Cancel</button></div>
-                            </form>
-                        </div>*@
-                    #endregion
                     #region NewCard
                     <div class="container-fluid pl-3">
                         <div class="card promoting-card shadow">
@@ -194,7 +157,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-12">
-                                            @{var commentImages = Model.AssignImageLayouts(comment.Images); }
+                                            @{var commentImages = Model.GetImageClassTags(comment.Images); }
                                             @for (int i = 0; i < commentImages.Count(); i++)
                                             {
                                                 // Render the string that represents an image tag and create and hide a modal containing the image
@@ -236,18 +199,18 @@
                             </div>
                             @if (comment.Replies.Count > 0)
                             {
-                            <div class="row pl-3 pt-1">
-                                <div class="col-3">
-                                    <button class="btn bg-white text-muted" id="toggleReplies(@comment.Id)" onclick="toggleReplies(@comment.Id)">View Replies <i class="fa fa-arrow-down"></i></button>
+                                <div class="row pl-3 pt-1">
+                                    <div class="col-3">
+                                        <button class="btn bg-white text-muted" id="toggleReplies(@comment.Id)" onclick="toggleReplies(@comment.Id)">View Replies <i class="fa fa-arrow-down"></i></button>
+                                    </div>
                                 </div>
-                            </div>
                             }
                         </div>
                     </div>
                     #endregion
                     foreach (var reply in comment.Replies)
                     {
-                        <div class="container-fluid pl-5 commentReplies(@comment.Id)" style="display:none" >
+                        <div class="container-fluid pl-5 commentReplies(@comment.Id)" style="display:none">
                             <div class="card promoting-card shadow">
                                 <div class="row p-1 my-2 offset-1">
                                     <div class="col-12">
@@ -309,15 +272,16 @@
 }
 @if (Model.BlogThreads.Count() > 0)
 {
-<div class="row">
-    <div class="col-12 text-center">
-        <button class="btn btn-info text-center" id="showMore" onclick="showPosts(@Model.totalPosts)">Show More</button>
+    <div class="row">
+        <div class="col-12 text-center">
+            <button class="btn btn-info text-center" id="showMore" onclick="showPosts(@Model.totalPosts)">Show More</button>
+        </div>
     </div>
-</div>
 }
 <br />
 
 @section Scripts {
     <script src="~/js/blog.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/yall.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", yall);</script>
 }

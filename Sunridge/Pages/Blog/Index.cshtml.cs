@@ -77,7 +77,7 @@ namespace Sunridge.Pages.Blog
 
             BlogComment blogComment = new BlogComment()
             {
-                ApplicationUserId = GetCurrentUserId(), 
+                ApplicationUserId = GetCurrentUserId(),
                 BlogThreadId = threadId,
                 BlogCommentText = comment,
                 WhenPosted = DateTime.Now,
@@ -89,6 +89,7 @@ namespace Sunridge.Pages.Blog
             List<string> acceptableExtensions = new List<string>() { ".jpg", ".jpeg", ".jfe", ".jfif", ".bmp", ".png", ".gif" };
 
             var files = HttpContext.Request.Form.Files;
+            List<string> imgList = new List<string>();
             for (int i = 0; i < files.Count; i++)
             {
                 string fileName = Guid.NewGuid().ToString();
@@ -96,21 +97,27 @@ namespace Sunridge.Pages.Blog
                 if (!acceptableExtensions.Contains(extension.ToLower())) { continue; } // Rudimentary security
                 using (var filestream = new FileStream(Path.Combine(uploadPath, fileName + extension), FileMode.Create))
                 {
-                    files[i].CopyTo(filestream);
+                    if (files[i].Length < 5242880 && files[i].Length > 250000)
+                    {
+                        files[i].CopyTo(filestream);
+                        BlogImage image = new BlogImage()
+                        {
+                            BlogCommentId = blogComment.Id,
+                            ImgPath = @"\Images\BlogImages\Uploads\" + fileName + extension
+                        };
+                        blogComment.Images.Add(image);
+                        imgList.Add(image.ImgPath);
+                    }
                 }
-                BlogImage image = new BlogImage()
-                {
-                    BlogCommentId = blogComment.Id,
-                    ImgPath = @"\Images\BlogImages\Uploads\" + fileName + extension
-                };
-                blogComment.Images.Add(image);
-                // Compress the uploaded image
-                Compress(image.ImgPath);
             }
-
+            // For some reason, there are fewer issues with compressing images
+            // in this loop than when I do it in the one above.
+            foreach (var img in imgList)
+            {
+                Compress(img);
+            }
             _unitOfWork.BlogComment.Add(blogComment);
             _unitOfWork.Save();
-
             return RedirectToPage("./Index");
         }
 
@@ -122,94 +129,39 @@ namespace Sunridge.Pages.Blog
             return claim.Value;
         }
 
-        // This method attempts to extract EXIF orientation data from
-        // an image. If a Bitmap cannot be created with the supplied path
-        // then it returns -1. If there is EXIF orientation data, it is
-        // returned. Otherwise, the length and width of the image are used
-        // to artifically assign it a number to be used for orientation
-        public int GetImageEXIFOrientation(string imgPath)
+        public string AssignClassTag(string imgPath)
         {
             var webRootPath = _webHostEnvironment.WebRootPath;
-            int exifOrientationID = 0x112; //274
-            int val = 0;
+            var orientation = "";
             try
             {
-                Image img = new Bitmap(webRootPath + imgPath);
-                img.Dispose();
+                using (Image image = new Bitmap(webRootPath + imgPath))
+                {
+                    if (image.Width > image.Height) { orientation = "landscape"; } // Lanscape
+                    else { orientation = "portrait"; } // Portrait
+                }
+                return orientation;
             }
             catch
             {
-                return -1; // Failed to create image with given path
+                return ""; // Failed to create image with given path
             }
-            using (Image image = new Bitmap(webRootPath + imgPath))
-            {
-                try
-                {
-                    var prop = image.GetPropertyItem(exifOrientationID);
-                    val = BitConverter.ToUInt16(prop.Value, 0);
-                    if (val == 0)
-                    {
-                        if (image.Width > image.Height) { val = 1; } // Lanscape
-                        else { val = 6; } // Portrait
-                    }
-                    return val;
-                }
-                catch // No exif data
-                {
-                    if (image.Width > image.Height) { val = 1; } // Lanscape
-                    else { val = 6; } // Portrait
-                    return val;
-                }
-            }
+            
         }
 
         // This method tries to determine the layout for each image in 
-        //a list of images and generates an html tag with the appropriate 
-        //class marking it as either landscape or portrait.
-        public List<string> AssignImageLayouts(List<BlogImage> images)
+        // a list of images and generates an html tag with the appropriate 
+        // class marking it as either landscape or portrait.
+        public List<string> GetImageClassTags(List<BlogImage> images)
         {
-            List<int> layouts = new List<int>();
+            images = images.OrderBy(i => i.Id).ToList();
+            List<string> tags = new List<string>();
             for (int i = 0; i < images.Count(); i++)
             {
-                // If image has EXIF orientation info, add it to our list.
-                var orient = GetImageEXIFOrientation(images[i].ImgPath); // After changes will always return a value
-                layouts.Add(orient);
+                var orient = AssignClassTag(images[i].ImgPath);
+                tags.Add(orient);
             }
-
-            List<string> imgTags = new List<string>();
-
-            for (int i = 0; i < layouts.Count(); i++)
-            {
-                switch (layouts[i])
-                {
-                    case 1: // Landscape
-                        var tag1 = "<img src=" + "'" + images[i].ImgPath + "'" + " onclick='Modal(" + images[i].Id + ")'" + "class='myImg landscape embed-responsive-4by3 m1' id='img(" + images[i].Id + ")'" +  " />";
-                        imgTags.Add(tag1);
-                        break;
-
-                    case 3: // Lanscape other way
-                        var tag3 = "<img src=" + "'" + images[i].ImgPath + "'" + " onclick='Modal(" + images[i].Id + ")'" + "class='myImg landscape embed-responsive-4by3 m1' id='img(" + images[i].Id + ")'" + " />";
-                        imgTags.Add(tag3);
-                        break;
-
-                    case 6: // Portrait
-                        var tag6 = "<img src=" + "'" + images[i].ImgPath + "'" + " onclick='Modal(" + images[i].Id + ")'" + "class='myImg portrait embed-responsive-4by3 m1' id='img(" + images[i].Id + ")'" + " />";
-                        imgTags.Add(tag6);
-                        break;
-                    case 8: // You held your phone upside down
-                        var tag8 = "<img src=" + "'" + images[i].ImgPath + "'" + " onclick='Modal(" + images[i].Id + ")'" + "class='myImg portrait embed-responsive-4by3 m1' id='img(" + images[i].Id + ")'" + " />";
-                        imgTags.Add(tag8);
-                        break;
-                    case -1: // No image found
-                        imgTags.Add("");
-                        break;
-                }
-            }
-            // This is to ensure all portrait images are displayed first, and then landscape.
-            List<string> landscape = imgTags.Where(tag => tag.Contains("landscape")).ToList();
-            List<string> portrait = imgTags.Where(tag => tag.Contains("portrait")).ToList();
-            portrait.AddRange(landscape);
-            return portrait;
+            return tags;
         }
 
         public async void Compress(string imagePath)
@@ -217,9 +169,20 @@ namespace Sunridge.Pages.Blog
             var pathToImage = _webHostEnvironment.WebRootPath + imagePath;
             Tinify.Key = "Sqx3cZlxJQjDfB4S5KhNcn8DZKrwKPQV";
 
-            // From and to file paths are the same so that the stored image will be overwritten with the compressed one
-            var source = Tinify.FromFile(pathToImage);
-            await source.ToFile(pathToImage);
+            try
+            {
+                var source = Tinify.FromFile(pathToImage);
+                var resized = source.Resize(new
+                {
+                    method = "scale",
+                    height = 750
+                });
+                await resized.ToFile(pathToImage);
+            }
+            catch
+            {
+                // Intentionally do nothing. Image just doesn't get compressed.
+            }
         }
     }
 }

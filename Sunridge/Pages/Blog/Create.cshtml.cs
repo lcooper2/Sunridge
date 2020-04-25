@@ -65,39 +65,68 @@ namespace Sunridge.Pages.Blog
             List<string> acceptableExtensions = new List<string>() { ".jpg", ".jpeg", ".jfe", ".jfif", ".bmp", ".png", ".gif" };
 
             var files = HttpContext.Request.Form.Files;
-            if(files.Count == 0 && BlogComment.BlogCommentText == null) { return Page(); }
-            for(int i = 0; i < files.Count; i++)
+            if (files.Count == 0 && BlogComment.BlogCommentText == null) { return Page(); }
+            List<string> imgList = new List<string>();
+            for (int i = 0; i < files.Count; i++)
             {
                 string fileName = Guid.NewGuid().ToString();
                 var extension = Path.GetExtension(files[i].FileName);
-                if(!acceptableExtensions.Contains(extension.ToLower())) { continue; } // Rudimentary security
+                if (!acceptableExtensions.Contains(extension.ToLower())) { continue; } // Rudimentary security
                 using (var filestream = new FileStream(Path.Combine(uploadPath, fileName + extension), FileMode.Create))
                 {
-                    files[i].CopyTo(filestream);
-                }
-                BlogImage image = new BlogImage() {
-                    BlogCommentId = blogComment.Id,
-                    ImgPath = @"\Images\BlogImages\Uploads\" + fileName + extension
-                };
-                blogComment.Images.Add(image);
+                    if (files[i].Length < 5242880 && files[i].Length > 250000)
+                    {
+                        files[i].CopyTo(filestream);
+                        BlogImage image = new BlogImage()
+                        {
+                            BlogCommentId = blogComment.Id,
+                            ImgPath = @"\Images\BlogImages\Uploads\" + fileName + extension
+                        };
+                        blogComment.Images.Add(image);
 
-                // Compress the image so the page loads faster and takes up less space
-                Compress(image.ImgPath);
+                        imgList.Add(image.ImgPath);
+                        BlogThread.BlogComments.Add(blogComment);
+                        _unitOfWork.BlogThread.Add(BlogThread);
+                    }
+                }
             }
-            BlogThread.BlogComments.Add(blogComment);
-            _unitOfWork.BlogThread.Add(BlogThread);
+            // For some reason, there are fewer issues with compressing images
+            // in this loop than when I do it in the one above.
+            foreach(var img in imgList)
+            {
+                Compress(img);
+            }
             _unitOfWork.Save();
             return RedirectToPage("./Index");
         }
 
+        // This method makes use of the TinyPNG API to compress and resize
+        // user uploaded images to save bandwidth and increase page load speeds.
+        // The original user upload is overwritten with the compressed file.
+        // This seems to destroy EXIF orientation data
         public async void Compress(string imagePath)
         {
             var pathToImage = _webHostEnvironment.WebRootPath + imagePath;
             Tinify.Key = "Sqx3cZlxJQjDfB4S5KhNcn8DZKrwKPQV";
 
-            // From and to file paths are the same so that the stored image will be overwritten with the compressed one
-            var source = Tinify.FromFile(pathToImage);
-            await source.ToFile(pathToImage);
+            try
+            {
+                // From and to file paths are the same so that the stored image 
+                // will be overwritten with the compressed one.
+                // Free tier gets 500 compressions per month
+                var source = Tinify.FromFile(pathToImage);
+                var resized = source.Resize(new
+                {
+                    method = "scale",
+                    height = 700
+                });
+                await resized.ToFile(pathToImage);
+            }
+            catch
+            {
+                Console.WriteLine("AAAHHHH");
+                // Intentionally do nothing. Image just doesn't get compressed.
+            }
         }
     }
 }

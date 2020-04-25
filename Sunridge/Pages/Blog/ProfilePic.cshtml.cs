@@ -38,6 +38,7 @@ namespace Sunridge.Pages.Blog
             List<string> acceptableExtensions = new List<string>() { ".jpg", ".jpeg", ".jfe", ".jfif", ".bmp", ".png", ".gif" };
 
             var files = HttpContext.Request.Form.Files;
+            List<string> imgList = new List<string>();
             for (int i = 0; i < files.Count; i++)
             {
                 string fileName = Guid.NewGuid().ToString();
@@ -45,24 +46,32 @@ namespace Sunridge.Pages.Blog
                 if (!acceptableExtensions.Contains(extension.ToLower())) { continue; } // Rudimentary security
                 using (var filestream = new FileStream(Path.Combine(uploadPath, fileName + extension), FileMode.Create))
                 {
-                    files[i].CopyTo(filestream);
-                }
-                var claimsIdentity = (ClaimsIdentity)User.Identity;
-                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-                var currentUser = _unitOfWork.ApplicationUser.Get(claim.Value);
+                    if (files[i].Length < 5242880 && files[i].Length > 250000)
+                    {
+                        files[i].CopyTo(filestream);
+                        var claimsIdentity = (ClaimsIdentity)User.Identity;
+                        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+                        var currentUser = _unitOfWork.ApplicationUser.Get(claim.Value);
 
-                // Delete the old profile picture off the server
-                var imgPath = Path.Combine(webRootPath, currentUser.ProfilePicture.Trim('\\'));
-                if (System.IO.File.Exists(imgPath))
-                {
-                    System.IO.File.Delete(imgPath);
+                        // Delete the old profile picture off the server
+                        var imgPath = Path.Combine(webRootPath, currentUser.ProfilePicture.Trim('\\'));
+                        if (System.IO.File.Exists(imgPath))
+                        {
+                            System.IO.File.Delete(imgPath);
+                        }
+                        
+                        currentUser.ProfilePicture = @"\Images\BlogImages\ProfilePictures\" + fileName + extension;
+                        imgList.Add(currentUser.ProfilePicture);
+                        _unitOfWork.ApplicationUser.Update(currentUser);
+                        _unitOfWork.Save();
+                    }
+                    else
+                    {
+                        return Page();
+                    }
                 }
-
-                currentUser.ProfilePicture = @"\Images\BlogImages\ProfilePictures\" + fileName + extension;
-                Compress(currentUser.ProfilePicture);
-                _unitOfWork.ApplicationUser.Update(currentUser);
-                _unitOfWork.Save();
             }
+            foreach(var img in imgList) { Compress(img); }
             return RedirectToPage("./Index");
         }
 
@@ -71,9 +80,23 @@ namespace Sunridge.Pages.Blog
             var pathToImage = _webHostEnvironment.WebRootPath + imagePath;
             Tinify.Key = "Sqx3cZlxJQjDfB4S5KhNcn8DZKrwKPQV";
 
-            // From and to file paths are the same so that the stored image will be overwritten with the compressed one
-            var source = Tinify.FromFile(pathToImage);
-            await source.ToFile(pathToImage);
+            try
+            {
+                // From and to file paths are the same so that the stored image will be overwritten with the compressed one
+                var source = Tinify.FromFile(pathToImage);
+                var resized = source.Resize(new
+                {
+                    method = "cover", // Finds the most important part of the image
+                    height = 100,
+                    width = 100
+                });
+                await resized.ToFile(pathToImage);
+            }
+            catch
+            {
+                Console.WriteLine("AAGGHH");
+                // Intentionally do nothing. Image just doesn't get compressed.
+            }
         }
     }
 }
